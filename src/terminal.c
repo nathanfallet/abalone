@@ -3,7 +3,7 @@
 #include <string.h>
 #include "terminal.h"
 
-#define couleur(param) printf("\033[%sm",param)
+#define color(param) printf("\033[%sm",param)
 
 // Fonctions internes
 
@@ -29,20 +29,20 @@ int display(PGame game){
             switch (game->board[i][j]) {
                 case Black:
 
-                    couleur("31" );
+                    color("31" );
                     printf("⬤ ");
 
-                    couleur("00");
+                    color("00");
                     break;
                 case White:
 
-                    couleur("34" );
+                    color("34" );
                     printf("⬤ ");
-                    couleur("00");
+                    color("00");
                     break;
                 default:
 
-                    couleur("00");
+                    color("00");
                     printf("  ");
                     break;
             }
@@ -50,11 +50,11 @@ int display(PGame game){
         printf("|\n");
         printf("   +-------------------------------+ \n");
     }
-    couleur("31");
+    color("31");
     printf("         Black   ");
-    couleur("34");
+    color("34");
     printf("         White   ");
-    couleur("00");
+    color("00");
     printf("\n");
     return 0;
 }
@@ -74,7 +74,7 @@ void terminal_update_intern(PGame game, Cell me, State state, int affichage) {
             printf("Le joueur White a gagné !\n");
             return;
         case Out_of_time:
-            printf("Temps dépassé !\n");
+            printf("Temps écoulé !\n");
             return;
         default:
             break;
@@ -90,10 +90,10 @@ void terminal_update_intern(PGame game, Cell me, State state, int affichage) {
 
 // Fonctions publiques
 
-void terminal_init(Cell owner, void (*actualiser_adversaire)(PGame game, Cell me, State state)){
+void terminal_init(Cell owner, void (*refresh_opponent)(PGame game, Cell me, State state)){
     PGame game = new_game(owner);
-    game->actualiser = terminal_update;
-    game->actualiser_adversaire = actualiser_adversaire;
+    game->refresh = terminal_update;
+    game->refresh_opponent = refresh_opponent;
 
     game_start(game);
 }

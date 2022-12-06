@@ -24,17 +24,17 @@ int score_move_cmp(void *sm1, void *sm2){
 int compute_score(Move move,Cell me, Cell board[ROWS][COLS]){
     move_apply(move,me,clone_board(board),1);
     // Count the number of pawns
-    int pion_me = 0;
-    int pion_opponent = 0;
+    int pawn_me = 0;
+    int pawn_opponent = 0;
     for(int i = 0; i<ROWS; i++){
         //Compte le nombre de pions dans la partie
         for(int j = 0; j<ROWS; j++){
-            if(board[i][j] == me) pion_me += 1;
-            if(board[i][j] == inversion(me)) pion_opponent += 1;
+            if(board[i][j] == me) pawn_me += 1;
+            if(board[i][j] == inversion(me)) pawn_opponent += 1;
         }
     }
-    if(pion_me < PION_TOT) return -1;
-    if(pion_opponent < PION_TOT) return 1;
+    if(pawn_me < PAWN_TOT) return -1;
+    if(pawn_opponent < PAWN_TOT) return 1;
 
     return 0;
 }

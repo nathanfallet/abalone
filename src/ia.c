@@ -45,10 +45,10 @@ Move minimax(Cell me, Cell board[ROWS][COLS]){
 
 // Implémentation des fonctions de base pour intéragir avec le jeu
 
-void ia_init(Cell owner, void (*actualiser_adversaire)(PGame game, Cell me, State state)) {
+void ia_init(Cell owner, void (*refresh_opponent)(PGame game, Cell me, State state)) {
     PGame game = new_game(owner);
-    game->actualiser = ia_update;
-    game->actualiser_adversaire = actualiser_adversaire;
+    game->refresh = ia_update;
+    game->refresh_opponent = refresh_opponent;
 
     game_start(game);
 }

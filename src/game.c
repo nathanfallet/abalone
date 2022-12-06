@@ -29,9 +29,10 @@ PGame new_game(Cell owner) {
     game->start = time(NULL);
     game->owner = owner;
     game->playing = Black;
+    game->has_last_move = 0;
     game->last_move = (Move){0,0,0,0};
-    game->actualiser = NULL;
-    game->actualiser_adversaire = NULL;
+    game->refresh = NULL;
+    game->refresh_opponent = NULL;
 
     return game;
 }
@@ -46,24 +47,25 @@ void game_turn(PGame game, Move move) {
 
     // Actualiser le joueur
     game->playing = inversion(game->playing);
+    game->has_last_move = 1;
     game->last_move = move;
 
     // On emet
     State state = game_state(game);
-    if (game->actualiser != NULL) {
-        game->actualiser(game, game->owner, state);
+    if (game->refresh != NULL) {
+        game->refresh(game, game->owner, state);
     }
-    if (game->actualiser_adversaire != NULL) {
-        game->actualiser_adversaire(game, inversion(game->owner), state);
+    if (game->refresh_opponent != NULL) {
+        game->refresh_opponent(game, inversion(game->owner), state);
     }
 }
 
 void game_start(PGame game) {
-    if (game->actualiser != NULL) {
-        game->actualiser(game, game->owner, In_progress);
+    if (game->refresh != NULL) {
+        game->refresh(game, game->owner, In_progress);
     }
-    if (game->actualiser_adversaire != NULL) {
-        game->actualiser_adversaire(game, inversion(game->owner), In_progress);
+    if (game->refresh_opponent != NULL) {
+        game->refresh_opponent(game, inversion(game->owner), In_progress);
     }
 }
 
@@ -76,17 +78,17 @@ State game_state(PGame game){
     }
 
     // Count the number of pawns
-    int pion_noir = 0;
-    int pion_blanc = 0;
+    int pawn_black = 0;
+    int pawn_white = 0;
     for(int i = 0; i<ROWS; i++){
         //Compte le nombre de pions dans la partie
         for(int j = 0; j<COLS; j++){
-            if(game->board[i][j] == Black) pion_noir += 1;
-            if(game->board[i][j] == White) pion_blanc += 1;
+            if(game->board[i][j] == Black) pawn_black += 1;
+            if(game->board[i][j] == White) pawn_white += 1;
         }
     }
-    if(pion_noir < PION_TOT) return Win_white;
-    if(pion_blanc < PION_TOT) return Win_black;
+    if(pawn_black < PAWN_TOT) return Win_white;
+    if(pawn_white < PAWN_TOT) return Win_black;
 
     return In_progress;
 }

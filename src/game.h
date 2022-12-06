@@ -22,11 +22,12 @@ typedef struct game_t {
 	Cell playing;
 
 	// Dernier coup joué
+	int has_last_move;
 	Move last_move;
 
 	// Callback pour actualiser les joueurs
-	void (*actualiser)(struct game_t *game, Cell me, State state);
-	void (*actualiser_adversaire)(struct game_t *game, Cell me, State state);
+	void (*refresh)(struct game_t *game, Cell me, State state);
+	void (*refresh_opponent)(struct game_t *game, Cell me, State state);
 } Game;
 typedef Game* PGame;
 

@@ -8,7 +8,7 @@
 #include "cell.h"
 #include "move.h"
 
-void gui_init(Cell owner, void (*actualiser_adversaire)(PGame game, Cell me, State state));
+void gui_init(Cell owner, void (*refresh_opponent)(PGame game, Cell me, State state));
 void gui_update(PGame game, Cell me, State state);
 
 #endif

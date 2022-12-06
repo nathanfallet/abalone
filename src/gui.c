@@ -159,11 +159,29 @@ gboolean gui_update_grid() {
 
     // On actualise aussi les labels
     gtk_label_set_text(GTK_LABEL(label_me), g_strdup_printf("Vous êtes : %s", last_me == Black ? "Noir" : "Blanc"));
-    gtk_label_set_text(GTK_LABEL(label_playing), g_strdup_printf("Au tour de : %s", last_game->playing == Black ? "Noir" : "Blanc"));
-    gtk_label_set_text(GTK_LABEL(label_move), g_strdup_printf("Dernier coup : %s", move_to_string(last_game->last_move)));
+    switch (last_state) {
+        case In_progress:
+            gtk_label_set_text(GTK_LABEL(label_playing), g_strdup_printf("Au tour de : %s", last_game->playing == Black ? "Noir" : "Blanc"));
+            break;
+        case Win_black:
+            gtk_label_set_text(GTK_LABEL(label_playing), g_strdup_printf("Le gagnant est : Noir"));
+            break;
+        case Win_white:
+            gtk_label_set_text(GTK_LABEL(label_playing), g_strdup_printf("Le gagnant est : Blanc"));
+            break;
+        case Out_of_time:
+            gtk_label_set_text(GTK_LABEL(label_playing), g_strdup_printf("Temps écoulé !"));
+            break;
+    }
+    if (last_game->has_last_move) {
+        gtk_label_set_text(GTK_LABEL(label_move), g_strdup_printf("Dernier coup : %s", move_to_string(last_game->last_move)));
+    }
 
     // Si c'est mon tour
-    gtk_widget_set_sensitive(button, last_game->playing == last_me ? TRUE : FALSE);
+    gtk_widget_set_sensitive(
+        button,
+        last_game->playing == last_me && last_state == In_progress ? TRUE : FALSE
+    );
 
     // C'est updated, on dit qu'on s'arrête là (sinon ça update à l'infini)
     return FALSE;
@@ -171,15 +189,15 @@ gboolean gui_update_grid() {
 
 // Fonctions publiques
 
-void gui_init(Cell owner, void (*actualiser_adversaire)(PGame game, Cell me, State state)) {
+void gui_init(Cell owner, void (*refresh_opponent)(PGame game, Cell me, State state)) {
     /*
     * Fonction d'initialisation de l'interface
     */
 
     // Initialisation de la partie
     PGame game = new_game(owner);
-    game->actualiser = gui_update;
-    game->actualiser_adversaire = actualiser_adversaire;
+    game->refresh = gui_update;
+    game->refresh_opponent = refresh_opponent;
 
     // Initialisation de GTK
     gui_init_window();

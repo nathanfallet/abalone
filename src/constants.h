@@ -14,6 +14,6 @@
 /* reset colors */
 #define reset "\e[0m"
 
-#define PION_TOT 14
+#define PAWN_TOT 14
 
 #endif

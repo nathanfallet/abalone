@@ -8,7 +8,7 @@
 #include "cell.h"
 #include "state.h"
 
-void terminal_init(Cell owner, void (*actualiser_adversaire)(PGame game, Cell me, State state));
+void terminal_init(Cell owner, void (*refresh_opponent)(PGame game, Cell me, State state));
 void terminal_update(PGame game, Cell me, State state);
 void terminal_update_no_print(PGame game, Cell me, State state);
 
