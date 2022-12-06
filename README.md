@@ -7,7 +7,7 @@
 ## Install GTK3
 
 ```bash
-apt install gtk+3 # Linux
+apt install libgtk-3-dev # Linux
 brew install gtk+3 # macOS
 ```
 
