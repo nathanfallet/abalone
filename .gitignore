@@ -1,0 +1,7 @@
+.svn
+.vscode
+.DS_Store
+build
+*.gcov
+abalone
+abalone_tests
