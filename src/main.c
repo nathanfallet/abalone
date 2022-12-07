@@ -37,10 +37,10 @@ int main(int argc, char* argv[]){
             }
             break;
         case 's':
-            network_init(Black, default_init, NULL, atoi(argv[2]));
+            network_init(White, default_init, NULL, atoi(argv[2]));
             break;
         case 'c':
-            network_init(White, default_init, strtok(argv[2], ":"), atoi(strtok(NULL, ":")));
+            network_init(Black, default_init, strtok(argv[2], ":"), atoi(strtok(NULL, ":")));
             break;
         default:
             print_help();
