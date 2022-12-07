@@ -4,7 +4,6 @@
 #include "constants.h"
 #include "board.h"
 #include "cell.h"
-#include "list.h"
 
 typedef unsigned short Move;
 

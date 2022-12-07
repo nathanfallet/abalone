@@ -13,6 +13,10 @@ It also apply turns and send updates to other modules.
 
 An enum for a cell of the board (black, white, empty)
 
+## Board
+
+A struct representing a board.
+
 ## State
 
 An enum representing the computed state of the game (in progress, someone won, or timeout)
@@ -38,7 +42,3 @@ A module to manage a game viewed by the IA (initialize, handle updates, and calc
 ## Network
 
 A module to manage a game via network (initialize, handle updates, and send/receive data by socket)
-
-## List
-
-A simple lib to make lists in C.

@@ -3,24 +3,27 @@
 #include "move.h"
 #include "cell.h"
 
-ScoredMove *score_move_new(Move move, Move root, int score){
-    ScoredMove *score_move = malloc(sizeof(ScoredMove));
-    score_move->move=move;
-    score_move->root=root;
-    score_move->score=score;
-    return score_move;
+ScoredMove scored_move_new(Move move, Move root, int score){
+    return move | (root << 16) | (((ScoredMove) score) << 32);
 }
 
-//fonction de comparaison des scores, return la différence des scores
-int score_move_cmp(void *sm1, void *sm2){
-    return ((ScoredMove*)sm1)->score-((ScoredMove*)sm2)->score;
+Move scored_move_move(ScoredMove scored_move) {
+    return scored_move & 0xffff;
+}
+
+Move scored_move_root(ScoredMove scored_move) {
+    return (scored_move >> 16) & 0xffff;
+}
+
+int scored_move_score(ScoredMove scored_move) {
+    return (int) (scored_move >> 32);
 }
 
 //fonction qui servira à calculer le score d'un mouvement /!\ Non faite !
 //si le mouvement est gagnant, return 1
 //si le mouvement est perdant (suicide), return -1
 //sinon, si le mouvement n'implique pas directement la victoire ou la défaite du joueur, return 0
-int compute_score(Move move,Cell me, Board board){
+int scored_move_compute(Move move, Cell me, Board board) {
     Board copy;
     board_clone(board, copy);
     move_apply(move,me,copy,1);

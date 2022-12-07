@@ -6,20 +6,21 @@
 
 // Algorithme minimax. Il retourne une décision (move) et prend en compte le joueur qui joue ainsi que le board actuel
 
-ScoredMove *compare(Cell me, Board board, Move root, int profondeur, int max, int threshold) {
+ScoredMove compare(Cell me, Board board, Move root, int profondeur, int max, int threshold) {
     // Retourne le move avec le score le plus élevé/faible
     // On calcul le score si la profondeur atteint 0,
     // sinon on garde le plus grand/petit score des enfants
     
     Move moves[MOVE_LIST_SIZE];
     move_available(me, board, moves);
-    ScoredMove *move_selected = NULL;
 
+    ScoredMove move_selected = MOVE_NONE;
     Move move = MOVE_NONE;
+
     int i = 0;
     while ((move = moves[i]) != MOVE_NONE) {
         // Itération des moves possibles
-        ScoredMove *sc;
+        ScoredMove sc = MOVE_NONE;
 
         // Cas de la profondeur
         if (profondeur > 0) {
@@ -29,41 +30,45 @@ ScoredMove *compare(Cell me, Board board, Move root, int profondeur, int max, in
             if (move_apply(move, me, copy, 1)) {
                 sc = compare(cell_opposite(me), copy, move, profondeur - 1, max == 0, threshold);
                 if (root != MOVE_NONE) {
-                    sc->root = root;
+                    sc = scored_move_new(
+                        scored_move_move(sc),
+                        root,
+                        scored_move_score(sc)
+                    );
                 }
             }
         } else {
             // On a atteint la profondeur max, on calcule le score
-            sc = score_move_new(
+            sc = scored_move_new(
                 move,
                 root != MOVE_NONE ? root : move,
-                compute_score(move, me, board)
+                scored_move_compute(move, me, board)
             );
         }
 
         // Check pour la sélection du move
-        if (sc != NULL && (
-            move_selected == NULL ||
-            (max ? sc->score > move_selected->score : sc->score < move_selected->score) ||
-            (sc->score = move_selected->score && rand() % 2)
+        if (sc != MOVE_NONE && (
+            move_selected == MOVE_NONE ||
+            (max ? scored_move_score(sc) > scored_move_score(move_selected) : scored_move_score(sc) < scored_move_score(move_selected)) ||
+            (scored_move_score(sc) == scored_move_score(move_selected) && rand() % 8 == 0)
         )) {
-            move_selected=sc;
+            move_selected = sc;
         }
 
         // Move suivant
         i++;
     }
 
-    if (move_selected == NULL) {
+    if (move_selected == MOVE_NONE) {
         // Move par défaut (pour éviter les erreurs)
-        return score_move_new(root, root, 0);
+        return scored_move_new(root, root, 0);
     }
     return move_selected;
 }
 
 Move minimax(Cell me, Board board, int profondeur) {
-    ScoredMove *move = compare(me, board, MOVE_NONE, profondeur, 1, 0);
-    return move->root;
+    ScoredMove move = compare(me, board, MOVE_NONE, profondeur, 1, 0);
+    return scored_move_root(move);
 }
 
 // Implémentation des fonctions de base pour intéragir avec le jeu
