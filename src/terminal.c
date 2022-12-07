@@ -26,22 +26,18 @@ int display(PGame game){
         printf(" %c ",alpha[i]);
         for (int j=0; j<8 ; j++){
             printf("| ");
-            switch (game->board[i][j]) {
-                case Black:
-
+            switch (board_get_cell(game->board, i, j)) {
+                case CELL_BLACK:
                     color("31" );
                     printf("⬤ ");
-
                     color("00");
                     break;
-                case White:
-
+                case CELL_WHITE:
                     color("34" );
                     printf("⬤ ");
                     color("00");
                     break;
                 default:
-
                     color("00");
                     printf("  ");
                     break;

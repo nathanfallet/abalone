@@ -47,18 +47,18 @@ char *move_to_string(Move move) {
 // Lecture et écriture d'une case de manière safe
 // (on vérifie que les coordonnées sont valides sinon on ignore)
 
-Cell read_cell(int x, int y, Cell board[ROWS][COLS]) {
-    if (x < 0 || x >= ROWS || y < 0 || y >= COLS) {
-        return Empty;
+Cell read_cell(int x, int y, Board board) {
+    if (x < 0 || x >= BOARD_SIZE || y < 0 || y >= BOARD_SIZE) {
+        return CELL_EMPTY;
     }
-    return board[x][y];
+    return board_get_cell(board, x, y);
 }
 
-void write_cell(int x, int y, Cell value, Cell board[ROWS][COLS]) {
-    if (x < 0 || x >= ROWS || y < 0 || y >= COLS) {
+void write_cell(int x, int y, Cell value, Board board) {
+    if (x < 0 || x >= BOARD_SIZE || y < 0 || y >= BOARD_SIZE) {
         return;
     }
-    board[x][y] = value;
+    board_set_cell(board, x, y, value);
 }
 
 // Fonction utile
@@ -75,27 +75,27 @@ int sign(int x) {
 
 // Check et application d'un mouvement sur le board
 
-int move_line_one(Move move, Cell me, Cell board[ROWS][COLS], int apply) {
+int move_line_one(Move move, Cell me, Board board, int apply) {
     // On vérifie que la case de départ contient bien un pion de la bonne couleur
     if (read_cell(move.fromLine, move.fromColumn, board) != me) {
         return 0;
     }
 
     // On vérifie que la case d'arrivée est vide
-    if (read_cell(move.toLine, move.toColumn, board) != Empty) {
+    if (read_cell(move.toLine, move.toColumn, board) != CELL_EMPTY) {
         return 0;
     }
 
     // On déplace le pion
     if (apply) {
         write_cell(move.toLine, move.toColumn, me, board);
-        write_cell(move.fromLine, move.fromColumn, Empty, board);
+        write_cell(move.fromLine, move.fromColumn, CELL_EMPTY, board);
     }
 
     return 1;
 }
 
-int move_line_two(Move move, Cell me, Cell board[ROWS][COLS], int apply) {
+int move_line_two(Move move, Cell me, Board board, int apply) {
     // On vérifie que la case de départ contient bien un pion de la bonne couleur
     if (read_cell(move.fromLine, move.fromColumn, board) != me) {
         return 0;
@@ -108,29 +108,29 @@ int move_line_two(Move move, Cell me, Cell board[ROWS][COLS], int apply) {
 
     // Deux cas pour la case d'arrivée
     Cell arrivee = read_cell(move.toLine, move.toColumn, board);
-    if (arrivee == Empty) {
+    if (arrivee == CELL_EMPTY) {
         // On déplace le pion
         if (apply) {
             write_cell(move.toLine, move.toColumn, me, board);
-            write_cell(move.fromLine, move.fromColumn, Empty, board);
+            write_cell(move.fromLine, move.fromColumn, CELL_EMPTY, board);
         }
         return 1;
     }
-    if (arrivee == inversion(me)) {
+    if (arrivee == cell_opposite(me)) {
         int toLine2 = move.toLine + sign(move.toLine - move.fromLine);
         int toColumn2 = move.toColumn + sign(move.toColumn - move.fromColumn);
         Cell arrivee2 = read_cell(toLine2, toColumn2, board);
 
         // On vérifie que la case d'arrivée est vide
-        if (arrivee2 != Empty) {
+        if (arrivee2 != CELL_EMPTY) {
             return 0;
         }
 
         // On déplace les pions
         if (apply) {
-            write_cell(toLine2, toColumn2, inversion(me), board);
+            write_cell(toLine2, toColumn2, cell_opposite(me), board);
             write_cell(move.toLine, move.toColumn, me, board);
-            write_cell(move.fromLine, move.fromColumn, Empty, board);
+            write_cell(move.fromLine, move.fromColumn, CELL_EMPTY, board);
         }
         return 1;
     }
@@ -138,7 +138,7 @@ int move_line_two(Move move, Cell me, Cell board[ROWS][COLS], int apply) {
     return 0;
 }
 
-int move_line_three(Move move, Cell me, Cell board[ROWS][COLS], int apply) {
+int move_line_three(Move move, Cell me, Board board, int apply) {
     // On vérifie que la case de départ contient bien un pion de la bonne couleur
     if (read_cell(move.fromLine, move.fromColumn, board) != me) {
         return 0;
@@ -154,46 +154,46 @@ int move_line_three(Move move, Cell me, Cell board[ROWS][COLS], int apply) {
 
     // Deux cas pour la case d'arrivée
     Cell arrivee = read_cell(move.toLine, move.toColumn, board);
-    if (arrivee == Empty) {
+    if (arrivee == CELL_EMPTY) {
         // On déplace le pion
         if (apply) {
             write_cell(move.toLine, move.toColumn, me, board);
-            write_cell(move.fromLine, move.fromColumn, Empty, board);
+            write_cell(move.fromLine, move.fromColumn, CELL_EMPTY, board);
         }
         return 1;
     }
-    if (arrivee == inversion(me)) {
+    if (arrivee == cell_opposite(me)) {
         int toLine2 = move.toLine + sign(move.toLine - move.fromLine);
         int toColumn2 = move.toColumn + sign(move.toColumn - move.fromColumn);
         Cell arrivee2 = read_cell(toLine2, toColumn2, board);
 
-        if (arrivee2 == Empty) {
+        if (arrivee2 == CELL_EMPTY) {
             // On déplace le pion
             if (apply) {
-                write_cell(toLine2, toColumn2, inversion(me), board);
+                write_cell(toLine2, toColumn2, cell_opposite(me), board);
                 write_cell(move.toLine, move.toColumn, me, board);
-                write_cell(move.fromLine, move.fromColumn, Empty, board);
+                write_cell(move.fromLine, move.fromColumn, CELL_EMPTY, board);
             }
             return 1;
         }
-        if (arrivee2 == inversion(me)) {
+        if (arrivee2 == cell_opposite(me)) {
             int toLine3 = move.toLine + 2*sign(move.toLine - move.fromLine);
             int toColumn3 = move.toColumn + 2*sign(move.toColumn - move.fromColumn);
             Cell arrivee3 = read_cell(toLine3, toColumn3, board);
 
             // On vérifie que la case d'arrivée est vide
-            if (arrivee3 != Empty) {
+            if (arrivee3 != CELL_EMPTY) {
                 return 0;
             }
 
             // On déplace les pions
             if (apply) {
-                write_cell(toLine3, toColumn3, inversion(me), board);
-                write_cell(toLine2, toColumn2, inversion(me), board);
+                write_cell(toLine3, toColumn3, cell_opposite(me), board);
+                write_cell(toLine2, toColumn2, cell_opposite(me), board);
                 write_cell(move.toLine, move.toColumn, me, board);
                 write_cell(move.fromLine + sign(move.toLine - move.fromLine), move.fromColumn + sign(move.toColumn - move.fromColumn), me, board);
                 write_cell(move.fromLine + 2*sign(move.toLine - move.fromLine), move.fromColumn + 2*sign(move.toColumn - move.fromColumn), me, board);
-                write_cell(move.fromLine, move.fromColumn, Empty, board);
+                write_cell(move.fromLine, move.fromColumn, CELL_EMPTY, board);
             }
             return 1;
         }
@@ -202,36 +202,36 @@ int move_line_three(Move move, Cell me, Cell board[ROWS][COLS], int apply) {
     return 0;
 }
 
-int move_lateral_two(Move move, Cell me, Cell board[ROWS][COLS], int apply) {
+int move_lateral_two(Move move, Cell me, Board board, int apply) {
     // On vérifie que la case de départ contient bien un pion de la bonne couleur
     if (read_cell(move.fromLine, move.fromColumn, board) != me) {
         return 0;
     }
 
     // On vérifie que la case d'arrivée est vide
-    if (read_cell(move.toLine, move.toColumn, board) != Empty) {
+    if (read_cell(move.toLine, move.toColumn, board) != CELL_EMPTY) {
         return 0;
     }
 
     // On vérifie que les cases intermédiaires sont bonnes
     Cell intermediare1 = read_cell(move.fromLine, move.toColumn, board);
     Cell intermediare2 = read_cell(move.toLine, move.fromColumn, board);
-    if (intermediare1 == Empty && intermediare2 == me) {
+    if (intermediare1 == CELL_EMPTY && intermediare2 == me) {
         // On déplace les pions (on les échange quoi)
         if (apply) {
             write_cell(move.toLine, move.toColumn, me, board);
-            write_cell(move.fromLine, move.fromColumn, Empty, board);
+            write_cell(move.fromLine, move.fromColumn, CELL_EMPTY, board);
             write_cell(move.fromLine, move.toColumn, me, board);
-            write_cell(move.toLine, move.fromColumn, Empty, board);
+            write_cell(move.toLine, move.fromColumn, CELL_EMPTY, board);
         }
         return 1;
     }
-    if (intermediare1 == me && intermediare2 == Empty) {
+    if (intermediare1 == me && intermediare2 == CELL_EMPTY) {
         // On déplace les pions (on les échange quoi)
         if (apply) {
             write_cell(move.toLine, move.toColumn, me, board);
-            write_cell(move.fromLine, move.fromColumn, Empty, board);
-            write_cell(move.fromLine, move.toColumn, Empty, board);
+            write_cell(move.fromLine, move.fromColumn, CELL_EMPTY, board);
+            write_cell(move.fromLine, move.toColumn, CELL_EMPTY, board);
             write_cell(move.toLine, move.fromColumn, me, board);
         }
         return 1;
@@ -240,14 +240,14 @@ int move_lateral_two(Move move, Cell me, Cell board[ROWS][COLS], int apply) {
     return 0;
 }
 
-int move_lateral_three(Move move, Cell me, Cell board[ROWS][COLS], int apply) {
+int move_lateral_three(Move move, Cell me, Board board, int apply) {
     // On vérifie que la case de départ contient bien un pion de la bonne couleur
     if (read_cell(move.fromLine, move.fromColumn, board) != me) {
         return 0;
     }
 
     // On vérifie que la case d'arrivée est vide
-    if (read_cell(move.toLine, move.toColumn, board) != Empty) {
+    if (read_cell(move.toLine, move.toColumn, board) != CELL_EMPTY) {
         return 0;
     }
 
@@ -257,40 +257,40 @@ int move_lateral_three(Move move, Cell me, Cell board[ROWS][COLS], int apply) {
     int dx = abs(move.toColumn - move.fromColumn);
     int dy = abs(move.toLine - move.fromLine);
 
-    if (dy == 2 && intermediare1 == Empty && intermediare2 == me) {
+    if (dy == 2 && intermediare1 == CELL_EMPTY && intermediare2 == me) {
         // On check les pions du milieu (on sait qu'on a des pions alignés verticalement)
         Cell milieu1 = read_cell(move.fromLine + sign(move.toLine - move.fromLine), move.fromColumn, board);
         Cell milieu2 = read_cell(move.fromLine + sign(move.toLine - move.fromLine), move.toColumn, board);
-        if (milieu1 != me || milieu2 != Empty) {
+        if (milieu1 != me || milieu2 != CELL_EMPTY) {
             return 0;
         }
 
         // On déplace les pions (on les échange quoi)
         if (apply) {
             write_cell(move.toLine, move.toColumn, me, board);
-            write_cell(move.fromLine, move.fromColumn, Empty, board);
+            write_cell(move.fromLine, move.fromColumn, CELL_EMPTY, board);
             write_cell(move.fromLine, move.toColumn, me, board);
-            write_cell(move.toLine, move.fromColumn, Empty, board);
-            write_cell(move.fromLine + sign(move.toLine - move.fromLine), move.fromColumn, Empty, board);
+            write_cell(move.toLine, move.fromColumn, CELL_EMPTY, board);
+            write_cell(move.fromLine + sign(move.toLine - move.fromLine), move.fromColumn, CELL_EMPTY, board);
             write_cell(move.fromLine + sign(move.toLine - move.fromLine), move.toColumn, me, board);
         }
         return 1;
     }
-    if (dx == 2 && intermediare1 == me && intermediare2 == Empty) {
+    if (dx == 2 && intermediare1 == me && intermediare2 == CELL_EMPTY) {
         // On check les pions du milieu (on sait qu'on a des pions alignés horizontalement)
         Cell milieu1 = read_cell(move.fromLine, move.fromColumn + sign(move.toColumn - move.fromColumn), board);
         Cell milieu2 = read_cell(move.toLine, move.fromColumn + sign(move.toColumn - move.fromColumn), board);
-        if (milieu1 != me || milieu2 != Empty) {
+        if (milieu1 != me || milieu2 != CELL_EMPTY) {
             return 0;
         }
 
         // On déplace les pions (on les échange quoi)
         if (apply) {
             write_cell(move.toLine, move.toColumn, me, board);
-            write_cell(move.fromLine, move.fromColumn, Empty, board);
-            write_cell(move.fromLine, move.toColumn, Empty, board);
+            write_cell(move.fromLine, move.fromColumn, CELL_EMPTY, board);
+            write_cell(move.fromLine, move.toColumn, CELL_EMPTY, board);
             write_cell(move.toLine, move.fromColumn, me, board);
-            write_cell(move.fromLine, move.fromColumn + sign(move.toColumn - move.fromColumn), Empty, board);
+            write_cell(move.fromLine, move.fromColumn + sign(move.toColumn - move.fromColumn), CELL_EMPTY, board);
             write_cell(move.toLine, move.fromColumn + sign(move.toColumn - move.fromColumn), me, board);
         }
         return 1;
@@ -301,7 +301,7 @@ int move_lateral_three(Move move, Cell me, Cell board[ROWS][COLS], int apply) {
 
 // Aiguillage
 
-int move_apply(Move move, Cell me, Cell board[ROWS][COLS], int apply) {
+int move_apply(Move move, Cell me, Board board, int apply) {
     // Aguillage du déplacement selon sa catégorie
     int dx = abs(move.toColumn - move.fromColumn);
     int dy = abs(move.toLine - move.fromLine);
@@ -332,19 +332,19 @@ int move_apply(Move move, Cell me, Cell board[ROWS][COLS], int apply) {
 
 // Coups disponibles
 
-List *move_available(Cell me, Cell board[ROWS][COLS]) {
+List *move_available(Cell me, Board board) {
     // Liste le nombre de déplacement possible        
     List *list = list_init();
     
-    for(int line = 0; line < ROWS; line++) {
-        for(int col=0; col<COLS; col++) {
+    for(int line = 0; line < BOARD_SIZE; line++) {
+        for(int col=0; col<BOARD_SIZE; col++) {
             // déplacement pion solo
             // on vérifie si la case a droite est libre
-            if (col < COLS - 1 && move_line_one((Move){line, col, line, col+1}, me, board, 0)) {
+            if (col < BOARD_SIZE - 1 && move_line_one((Move){line, col, line, col+1}, me, board, 0)) {
                 list_insere(move_create(line, col, line, col+1), list_taille(list)+1, list);
             }
             // on vérifie si la case en bas est libre
-            if (line < ROWS - 1 && move_line_one((Move){line, col, line+1, col}, me, board, 0)) {
+            if (line < BOARD_SIZE - 1 && move_line_one((Move){line, col, line+1, col}, me, board, 0)) {
                 list_insere(move_create(line, col, line+1, col), list_taille(list)+1, list);
             }
             // on vérifie si la case en gauche est libre
@@ -359,11 +359,11 @@ List *move_available(Cell me, Cell board[ROWS][COLS]) {
             // déplacement 2 pions
             // en ligne
             // on vérifie si le déplacement en ligne 2 pions vers la droite (libre ou pion ennemi)
-            if (col < COLS - 2 && move_line_two((Move){line, col, line, col+2}, me, board, 0)) {
+            if (col < BOARD_SIZE - 2 && move_line_two((Move){line, col, line, col+2}, me, board, 0)) {
                 list_insere(move_create(line, col, line, col+2), list_taille(list)+1, list);
             }
             // on vérifie si le déplacement en ligne 2 pions vers le bas
-            if (line < ROWS - 2 && move_line_two((Move){line, col, line+2, col}, me, board, 0)) {
+            if (line < BOARD_SIZE - 2 && move_line_two((Move){line, col, line+2, col}, me, board, 0)) {
                 list_insere(move_create(line, col, line+2, col), list_taille(list)+1, list);
             }
             // on vérifie si le déplacement en ligne 2 pions vers la gauche
@@ -376,30 +376,30 @@ List *move_available(Cell me, Cell board[ROWS][COLS]) {
             }
             // latéralle
             // on vérifie si le déplacement en ligne 2 pions horizontale vers le haut
-            if (col < COLS - 1 && line > 0 && move_lateral_two((Move){line, col, line-1, col+1}, me, board, 0)) {
+            if (col < BOARD_SIZE - 1 && line > 0 && move_lateral_two((Move){line, col, line-1, col+1}, me, board, 0)) {
                 list_insere(move_create(line, col, line-1, col+1), list_taille(list)+1, list);
             }
             // on vérifie si le déplacement en ligne 2 pions horizontale vers le bas
-            if (col < COLS - 1 && line < ROWS - 1 && move_lateral_two((Move){line, col, line+1, col+1}, me, board, 0)) {
+            if (col < BOARD_SIZE - 1 && line < BOARD_SIZE - 1 && move_lateral_two((Move){line, col, line+1, col+1}, me, board, 0)) {
                 list_insere(move_create(line, col, line+1, col+1), list_taille(list)+1, list);
             }
             // on vérifie si le déplacement en ligne 2 pions verticale vers la gauche
-            if (col > 0 && line < ROWS - 1 && move_lateral_two((Move){line, col, line+1, col-1}, me, board, 0)) {
+            if (col > 0 && line < BOARD_SIZE - 1 && move_lateral_two((Move){line, col, line+1, col-1}, me, board, 0)) {
                 list_insere(move_create(line, col, line+1, col-1), list_taille(list)+1, list);
             }
             // on vérifie si le déplacement en ligne 2 pions verticale vers la droite
-            if (col < COLS - 1 && line < ROWS - 1 && move_lateral_two((Move){line, col, line+1, col+1}, me, board, 0)) {
+            if (col < BOARD_SIZE - 1 && line < BOARD_SIZE - 1 && move_lateral_two((Move){line, col, line+1, col+1}, me, board, 0)) {
                 list_insere(move_create(line, col, line+1, col+1), list_taille(list)+1, list);
             }
 
             // déplacement 3 pions
             // en ligne
             // on vérifie si le déplacement en ligne 3 pions vers la droite (libre ou pion ennemi)
-            if (col < COLS - 3 && move_line_three((Move){line, col, line, col+3}, me, board, 0)) {
+            if (col < BOARD_SIZE - 3 && move_line_three((Move){line, col, line, col+3}, me, board, 0)) {
                 list_insere(move_create(line, col, line, col+3), list_taille(list)+1, list);
             }
             // on vérifie si le déplacement en ligne 3 pions vers le bas
-            if (line < ROWS - 3 && move_line_three((Move){line, col, line+3, col}, me, board, 0)) {
+            if (line < BOARD_SIZE - 3 && move_line_three((Move){line, col, line+3, col}, me, board, 0)) {
                 list_insere(move_create(line, col, line+3, col), list_taille(list)+1, list);
             }
             // on vérifie si le déplacement en ligne 3 pions vers la gauche
@@ -412,19 +412,19 @@ List *move_available(Cell me, Cell board[ROWS][COLS]) {
             }
             // latéralle
             // on vérifie si le déplacement en ligne 3 pions horizontale vers le haut
-            if (col < COLS - 2 && line > 0 && move_lateral_three((Move){line, col, line-1, col+2}, me, board, 0)) {
+            if (col < BOARD_SIZE - 2 && line > 0 && move_lateral_three((Move){line, col, line-1, col+2}, me, board, 0)) {
                 list_insere(move_create(line, col, line-1, col+2), list_taille(list)+1, list);
             }
             // on vérifie si le déplacement en ligne 3 pions horizontale vers le bas
-            if (col < COLS - 2 && line < ROWS - 1 && move_lateral_three((Move){line, col, line+1, col+2}, me, board, 0)) {
+            if (col < BOARD_SIZE - 2 && line < BOARD_SIZE - 1 && move_lateral_three((Move){line, col, line+1, col+2}, me, board, 0)) {
                 list_insere(move_create(line, col, line+1, col+2), list_taille(list)+1, list);
             }
             // on vérifie si le déplacement en ligne 3 pions verticale vers la gauche
-            if (col > 0 && line < ROWS - 2 && move_lateral_three((Move){line, col, line+2, col-1}, me, board, 0)) {
+            if (col > 0 && line < BOARD_SIZE - 2 && move_lateral_three((Move){line, col, line+2, col-1}, me, board, 0)) {
                 list_insere(move_create(line, col, line+2, col-1), list_taille(list)+1, list);
             }
             // on vérifie si le déplacement en ligne 3 pions verticale vers la droite
-            if (col < COLS - 1 && line < ROWS - 2 && move_lateral_three((Move){line, col, line+2, col+1}, me, board, 0)) {
+            if (col < BOARD_SIZE - 1 && line < BOARD_SIZE - 2 && move_lateral_three((Move){line, col, line+2, col+1}, me, board, 0)) {
                 list_insere(move_create(line, col, line+2, col+1), list_taille(list)+1, list);
             }
         }

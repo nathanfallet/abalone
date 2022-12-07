@@ -6,7 +6,7 @@
 
 // Algorithme minimax. Il retourne une décision (move) et prend en compte le joueur qui joue ainsi que le board actuel
 
-ScoredMove *compare(Cell me, Cell board[ROWS][COLS], Move *root, int profondeur, int max, int threshold) {
+ScoredMove *compare(Cell me, Board board, Move *root, int profondeur, int max, int threshold) {
     // Retourne le move avec le score le plus élevé/faible
     // On calcul le score si la profondeur atteint 0,
     // sinon on garde le plus grand/petit score des enfants
@@ -21,10 +21,10 @@ ScoredMove *compare(Cell me, Cell board[ROWS][COLS], Move *root, int profondeur,
         // Cas de la profondeur
         if (profondeur > 0) {
             // On continue plus profond
-            Cell copy[ROWS][COLS];
-            clone_board(board, copy);
+            Board copy;
+            board_clone(board, copy);
             if (move_apply(*move, me, copy, 1)) {
-                sc = compare(inversion(me), copy, move, profondeur - 1, max == 0, threshold);
+                sc = compare(cell_opposite(me), copy, move, profondeur - 1, max == 0, threshold);
                 if (root != NULL) {
                     sc->root = root;
                 }
@@ -55,7 +55,7 @@ ScoredMove *compare(Cell me, Cell board[ROWS][COLS], Move *root, int profondeur,
     return move_selected;
 }
 
-Move minimax(Cell me, Cell board[ROWS][COLS], int profondeur) {
+Move minimax(Cell me, Board board, int profondeur) {
     ScoredMove *move = compare(me, board, NULL, profondeur, 1, 0);
     return *move->root;
 }

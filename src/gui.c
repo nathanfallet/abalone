@@ -4,6 +4,7 @@
 #include <unistd.h>
 #include "gui.h"
 #include <gdk/gdkkeysyms.h>
+
 // Stockage de trucs
 
 GtkWidget *window;
@@ -114,11 +115,11 @@ gboolean gui_update_grid(GtkWidget *widget, cairo_t *cr, gpointer data) {
   		cairo_set_source_rgba(cr, 0, 0, 0, 1);
   		cairo_show_text(cr, char_to_string('A' + j));
   		int stroke = 0;
-  		switch (last_game->board[i][j]) {
-                    case Black:
+  		switch (board_get_cell(last_game->board, i, j)) {
+                    case CELL_BLACK:
   	  		cairo_set_source_rgb(cr, 0.1, 0.1, 0.1);
                         break;
-                    case White:
+                    case CELL_WHITE:
   	  		cairo_set_source_rgb(cr, 1.0, 1.0, 1.0);
   	  		stroke = 1;
                         break;
@@ -140,10 +141,10 @@ gboolean gui_update_grid(GtkWidget *widget, cairo_t *cr, gpointer data) {
   }
 
     // On actualise aussi les labels
-    gtk_label_set_text(GTK_LABEL(label_me), g_strdup_printf("Vous êtes : %s", last_me == Black ? "Noir" : "Blanc"));
+    gtk_label_set_text(GTK_LABEL(label_me), g_strdup_printf("Vous êtes : %s", last_me == CELL_BLACK ? "Noir" : "Blanc"));
     switch (last_state) {
         case In_progress:
-            gtk_label_set_text(GTK_LABEL(label_playing), g_strdup_printf("Au tour de : %s", last_game->playing == Black ? "Noir" : "Blanc"));
+            gtk_label_set_text(GTK_LABEL(label_playing), g_strdup_printf("Au tour de : %s", last_game->playing == CELL_BLACK ? "Noir" : "Blanc"));
             break;
         case Win_black:
             gtk_label_set_text(GTK_LABEL(label_playing), g_strdup_printf("Le gagnant est : Noir"));

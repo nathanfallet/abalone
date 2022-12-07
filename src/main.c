@@ -28,19 +28,19 @@ int main(int argc, char* argv[]){
     switch (argv[1][1]) {
         case 'l':
             if (strcmp(argv[2], "noir") == 0) {
-                default_init(Black, ia_update);
+                default_init(CELL_BLACK, ia_update);
             } else if (strcmp(argv[2], "blanc") == 0) {
-                default_init(White, ia_update);
+                default_init(CELL_WHITE, ia_update);
             } else {
                 print_help();
                 return 1;
             }
             break;
         case 's':
-            network_init(White, default_init, NULL, atoi(argv[2]));
+            network_init(CELL_WHITE, default_init, NULL, atoi(argv[2]));
             break;
         case 'c':
-            network_init(Black, default_init, strtok(argv[2], ":"), atoi(strtok(NULL, ":")));
+            network_init(CELL_BLACK, default_init, strtok(argv[2], ":"), atoi(strtok(NULL, ":")));
             break;
         default:
             print_help();

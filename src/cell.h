@@ -1,15 +1,10 @@
-#ifndef CELL_H_
-#define CELL_H_
+#ifndef CELL_H
+#define CELL_H
 
 #include "constants.h"
 
-typedef enum{
-	White,
-	Black,
-	Empty,
-} Cell;
+typedef unsigned char Cell;
 
-Cell inversion(Cell casee);
-void clone_board(Cell board[ROWS][COLS], Cell target[ROWS][COLS]);
+Cell cell_opposite(Cell cell);
 
 #endif

@@ -1,10 +1,17 @@
 #ifndef CONSTANTS_H
 #define CONSTANTS_H
 
-#define ROWS 8
-#define COLS 8
+#define BOARD_SIZE 8
+
+#define CELL_EMPTY 0
+#define CELL_BLACK 1
+#define CELL_WHITE 2
+
+#define MOVE_NONE 0
+#define MOVE_LIST_SIZE 32
 
 #define WEIGTH_WIN 100000
+#define PAWN_TOT 14
 
 #define ADDRESS_LENGTH 255
 
@@ -15,7 +22,5 @@
 #define WHTHB "\e[0;107m"
 /* reset colors */
 #define reset "\e[0m"
-
-#define PAWN_TOT 14
 
 #endif

@@ -7,28 +7,12 @@ PGame new_game(Cell owner) {
     PGame game = (PGame) malloc(sizeof(Game));
 
     // Initialisation du tableau
-    for(int i=0; i<ROWS; i++){
-        for(int j=0; j<COLS; j++){
-            game->board[i][j] = Empty;
-        }
-    }
-    for (int i=0; i<8; i++){
-        game->board[0][i]=White;
-    }
-    for (int i=1; i<7; i++){
-        game->board[1][i]=White;
-    }
-    for (int i=1; i<7; i++){
-        game->board[6][i]=Black;
-    }
-    for (int i=0; i<8; i++){
-        game->board[7][i]=Black;
-    }
+    board_create(game->board);
 
     // Valeur par défaut pour le reste
     game->start = time(NULL);
     game->owner = owner;
-    game->playing = Black;
+    game->playing = CELL_BLACK;
     game->has_last_move = 0;
     game->last_move = (Move){0,0,0,0};
     game->refresh = NULL;
@@ -46,7 +30,7 @@ void game_turn(PGame game, Move move) {
     }
 
     // Actualiser le joueur
-    game->playing = inversion(game->playing);
+    game->playing = cell_opposite(game->playing);
     game->has_last_move = 1;
     game->last_move = move;
 
@@ -56,7 +40,7 @@ void game_turn(PGame game, Move move) {
         game->refresh(game, game->owner, state);
     }
     if (game->refresh_opponent != NULL) {
-        game->refresh_opponent(game, inversion(game->owner), state);
+        game->refresh_opponent(game, cell_opposite(game->owner), state);
     }
 }
 
@@ -65,7 +49,7 @@ void game_start(PGame game) {
         game->refresh(game, game->owner, In_progress);
     }
     if (game->refresh_opponent != NULL) {
-        game->refresh_opponent(game, inversion(game->owner), In_progress);
+        game->refresh_opponent(game, cell_opposite(game->owner), In_progress);
     }
 }
 
@@ -80,11 +64,11 @@ State game_state(PGame game){
     // Count the number of pawns
     int pawn_black = 0;
     int pawn_white = 0;
-    for(int i = 0; i<ROWS; i++){
+    for(int i = 0; i<BOARD_SIZE; i++){
         //Compte le nombre de pions dans la partie
-        for(int j = 0; j<COLS; j++){
-            if(game->board[i][j] == Black) pawn_black += 1;
-            if(game->board[i][j] == White) pawn_white += 1;
+        for(int j = 0; j<BOARD_SIZE; j++){
+            if(board_get_cell(game->board, i, j) == CELL_BLACK) pawn_black += 1;
+            if(board_get_cell(game->board, i, j) == CELL_WHITE) pawn_white += 1;
         }
     }
     if(pawn_black < PAWN_TOT) return Win_white;

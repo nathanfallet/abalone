@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "constants.h"
+#include "board.h"
 #include "move.h"
 #include "cell.h"
 #include "state.h"
@@ -15,7 +16,7 @@ typedef struct game_t {
 	time_t start;
 
 	// Plateau : vide, pion noir ou pion blanc
-	Cell board[ROWS][COLS];
+	Board board;
 
 	// Joueur qui a lancé la partie, et celui qui doit jouer
 	Cell owner;
