@@ -12,13 +12,10 @@ Cell inversion(Cell casee){
 	return Empty;
 }
 
-Cell **clone_board(Cell board[ROWS][COLS]){
-	Cell **clone = malloc(ROWS * sizeof(Cell *));
+void clone_board(Cell board[ROWS][COLS], Cell target[ROWS][COLS]) {
 	for (int i = 0; i < ROWS; i++){
-		clone[i] = malloc(COLS * sizeof(Cell));
 		for (int j = 0; j < COLS; j++){
-			clone[i][j] = board[i][j];
+			target[i][j] = board[i][j];
 		}
 	}
-	return clone;
 }

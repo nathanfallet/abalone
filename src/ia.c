@@ -4,44 +4,61 @@
 #include <unistd.h>
 #include "ia.h"
 
-int max(){
-    return 0;
-}
-
-int min(){
-    return 0;
-}
-
 // Algorithme minimax. Il retourne une décision (move) et prend en compte le joueur qui joue ainsi que le board actuel
 
-Move minimax(Cell me, Cell board[ROWS][COLS]){
-    List *moves = move_available(me, board);
-    List *scored_moves = list_init();
-    for(int i=1;i<=list_taille(moves);i++){
-        Move *move = (Move*)list_accede(i,moves);
-        list_insere(
-            score_move_new(*move, compute_score(*move, me, board)),
-            i,
-            scored_moves
-        );
+ScoredMove *compare(Cell me, Cell board[ROWS][COLS], Move *root, int profondeur, int max, int threshold) {
+    // Retourne le move avec le score le plus élevé/faible
+    // On calcul le score si la profondeur atteint 0,
+    // sinon on garde le plus grand/petit score des enfants
+    
+    List *moves= move_available(me, board);
+    ScoredMove *move_selected = NULL;
+    for (int i=1; i <= list_taille(moves); i++) {
+        // Itération des moves possibles
+        Move *move = list_accede(i, moves);
+        ScoredMove *sc;
+
+        // Cas de la profondeur
+        if (profondeur > 0) {
+            // On continue plus profond
+            Cell copy[ROWS][COLS];
+            clone_board(board, copy);
+            if (move_apply(*move, me, copy, 1)) {
+                sc = compare(inversion(me), copy, move, profondeur - 1, max == 0, threshold);
+                if (root != NULL) {
+                    sc->root = root;
+                }
+            }
+        } else {
+            // On a atteint la profondeur max, on calcule le score
+            sc = score_move_new(
+                move,
+                root != NULL ? root : move,
+                compute_score(*move, me, board)
+            );
+        }
+
+        // Check pour la sélection du move
+        if (sc != NULL && (
+            move_selected == NULL ||
+            (max ? sc->score > move_selected->score : sc->score < move_selected->score) ||
+            (sc->score = move_selected->score && rand() % 2)
+        )) {
+            move_selected=sc;
+        }
     }
 
-    // Tri
-    list_trirapide(scored_moves, score_move_cmp);
-
-    // On fait genre que l'IA réfléchit
-    sleep(3);
-
-    // Prends le move avec le plus haut score
-    if (list_taille(scored_moves) > 0) {
-        ScoredMove *sm = list_accede(1, scored_moves);
-        return sm->move;
+    if (move_selected == NULL) {
+        // Move par défaut (pour éviter les erreurs)
+        return score_move_new(root, root, 0);
     }
-
-    // Cas par défaut
-    return (Move){0,0,0,0};
+    return move_selected;
 }
 
+Move minimax(Cell me, Cell board[ROWS][COLS], int profondeur) {
+    ScoredMove *move = compare(me, board, NULL, profondeur, 1, 0);
+    return *move->root;
+}
 
 // Implémentation des fonctions de base pour intéragir avec le jeu
 
@@ -61,8 +78,7 @@ void ia_update(PGame game, Cell me, State state){
 
     // Si c'est mon tour:
     if (game->playing == me) {
-        Move move = minimax(me, game->board);
+        Move move = minimax(me, game->board, 3);
         game_turn(game, move);
-
     }
 }

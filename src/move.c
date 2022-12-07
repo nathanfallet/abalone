@@ -18,9 +18,17 @@ Move *move_create(int fromLine, int fromColumn, int toLine, int toColumn) {
 
 Move move_from_string(char *str) {
     Move move;
-    move.fromLine = str[0] - 'A';
+    char fromLine = str[0];
+    if (fromLine >= 'a' && fromLine <= 'h') {
+        fromLine -= 32;
+    }
+    move.fromLine = fromLine - 'A';
     move.fromColumn = str[1] - '1';
-    move.toLine = str[3] - 'A';
+    char toLine = str[3];
+    if (toLine >= 'a' && toLine <= 'h') {
+        toLine -= 32;
+    }
+    move.toLine = toLine - 'A';
     move.toColumn = str[4] - '1';
     return move;
 }
@@ -246,7 +254,10 @@ int move_lateral_three(Move move, Cell me, Cell board[ROWS][COLS], int apply) {
     // On vérifie que les cases intermédiaires sont bonnes
     Cell intermediare1 = read_cell(move.fromLine, move.toColumn, board);
     Cell intermediare2 = read_cell(move.toLine, move.fromColumn, board);
-    if (intermediare1 == Empty && intermediare2 == me) {
+    int dx = abs(move.toColumn - move.fromColumn);
+    int dy = abs(move.toLine - move.fromLine);
+
+    if (dy == 2 && intermediare1 == Empty && intermediare2 == me) {
         // On check les pions du milieu (on sait qu'on a des pions alignés verticalement)
         Cell milieu1 = read_cell(move.fromLine + sign(move.toLine - move.fromLine), move.fromColumn, board);
         Cell milieu2 = read_cell(move.fromLine + sign(move.toLine - move.fromLine), move.toColumn, board);
@@ -265,7 +276,7 @@ int move_lateral_three(Move move, Cell me, Cell board[ROWS][COLS], int apply) {
         }
         return 1;
     }
-    if (intermediare1 == me && intermediare2 == Empty) {
+    if (dx == 2 && intermediare1 == me && intermediare2 == Empty) {
         // On check les pions du milieu (on sait qu'on a des pions alignés horizontalement)
         Cell milieu1 = read_cell(move.fromLine, move.fromColumn + sign(move.toColumn - move.fromColumn), board);
         Cell milieu2 = read_cell(move.toLine, move.fromColumn + sign(move.toColumn - move.fromColumn), board);
@@ -288,7 +299,7 @@ int move_lateral_three(Move move, Cell me, Cell board[ROWS][COLS], int apply) {
     return 0;
 }
 
-// Aguillage
+// Aiguillage
 
 int move_apply(Move move, Cell me, Cell board[ROWS][COLS], int apply) {
     // Aguillage du déplacement selon sa catégorie
@@ -319,153 +330,105 @@ int move_apply(Move move, Cell me, Cell board[ROWS][COLS], int apply) {
     return 0;
 }
 
-// Aguillage
+// Coups disponibles
 
 List *move_available(Cell me, Cell board[ROWS][COLS]) {
     // Liste le nombre de déplacement possible        
     List *list = list_init();
-    int count=0;
-    for(int line = 0; line < ROWS; line++){
-        for(int col=0; col<COLS; col++){
-
-
+    
+    for(int line = 0; line < ROWS; line++) {
+        for(int col=0; col<COLS; col++) {
             // déplacement pion solo
             // on vérifie si la case a droite est libre
             if (col < COLS - 1 && move_line_one((Move){line, col, line, col+1}, me, board, 0)) {
-                // ajouter dans une liste
                 list_insere(move_create(line, col, line, col+1), list_taille(list)+1, list);
-             count++;
             }
             // on vérifie si la case en bas est libre
             if (line < ROWS - 1 && move_line_one((Move){line, col, line+1, col}, me, board, 0)) {
-                // ajouter dans une liste
                 list_insere(move_create(line, col, line+1, col), list_taille(list)+1, list);
-             count++;
             }
             // on vérifie si la case en gauche est libre
             if (col > 0 && move_line_one((Move){line, col, line, col-1}, me, board, 0)) {
-                // ajouter dans une liste
                 list_insere(move_create(line, col, line, col-1), list_taille(list)+1, list);
-             count++;
             }
             // on vérifie si la case en haut est libre
             if (line > 0 && move_line_one((Move){line, col, line-1, col}, me, board, 0)) {
-                // ajouter dans une liste
                 list_insere(move_create(line, col, line-1, col), list_taille(list)+1, list);
-             count++;
             }
-
 
             // déplacement 2 pions
             // en ligne
             // on vérifie si le déplacement en ligne 2 pions vers la droite (libre ou pion ennemi)
             if (col < COLS - 2 && move_line_two((Move){line, col, line, col+2}, me, board, 0)) {
-                // ajouter dans une liste
                 list_insere(move_create(line, col, line, col+2), list_taille(list)+1, list);
-             count++;
             }
             // on vérifie si le déplacement en ligne 2 pions vers le bas
             if (line < ROWS - 2 && move_line_two((Move){line, col, line+2, col}, me, board, 0)) {
-                // ajouter dans une liste
                 list_insere(move_create(line, col, line+2, col), list_taille(list)+1, list);
-             count++;
             }
             // on vérifie si le déplacement en ligne 2 pions vers la gauche
             if (col > 0 && move_line_two((Move){line, col+1, line, col-1}, me, board, 0)) {
-                // ajouter dans une liste
                 list_insere(move_create(line, col+1, line, col-1), list_taille(list)+1, list);
-             count++;
             }
             // on vérifie si le déplacement en ligne 2 pions vers le haut
             if (line > 0 && move_line_two((Move){line+1, col, line-1, col}, me, board, 0)) {
-                // ajouter dans une liste
                 list_insere(move_create(line+1, col, line-1, col), list_taille(list)+1, list);
-             count++;
             }
             // latéralle
             // on vérifie si le déplacement en ligne 2 pions horizontale vers le haut
             if (col < COLS - 1 && line > 0 && move_lateral_two((Move){line, col, line-1, col+1}, me, board, 0)) {
-                // ajouter dans une liste
                 list_insere(move_create(line, col, line-1, col+1), list_taille(list)+1, list);
-             count++;
             }
             // on vérifie si le déplacement en ligne 2 pions horizontale vers le bas
             if (col < COLS - 1 && line < ROWS - 1 && move_lateral_two((Move){line, col, line+1, col+1}, me, board, 0)) {
-                // ajouter dans une liste
                 list_insere(move_create(line, col, line+1, col+1), list_taille(list)+1, list);
-             count++;
             }
             // on vérifie si le déplacement en ligne 2 pions verticale vers la gauche
             if (col > 0 && line < ROWS - 1 && move_lateral_two((Move){line, col, line+1, col-1}, me, board, 0)) {
-                // ajouter dans une liste
                 list_insere(move_create(line, col, line+1, col-1), list_taille(list)+1, list);
-             count++;
             }
             // on vérifie si le déplacement en ligne 2 pions verticale vers la droite
             if (col < COLS - 1 && line < ROWS - 1 && move_lateral_two((Move){line, col, line+1, col+1}, me, board, 0)) {
-                // ajouter dans une liste
                 list_insere(move_create(line, col, line+1, col+1), list_taille(list)+1, list);
-             count++;
             }
-
 
             // déplacement 3 pions
             // en ligne
             // on vérifie si le déplacement en ligne 3 pions vers la droite (libre ou pion ennemi)
             if (col < COLS - 3 && move_line_three((Move){line, col, line, col+3}, me, board, 0)) {
-                // ajouter dans une liste
                 list_insere(move_create(line, col, line, col+3), list_taille(list)+1, list);
-             count++;
             }
             // on vérifie si le déplacement en ligne 3 pions vers le bas
             if (line < ROWS - 3 && move_line_three((Move){line, col, line+3, col}, me, board, 0)) {
-                // ajouter dans une liste
                 list_insere(move_create(line, col, line+3, col), list_taille(list)+1, list);
-             count++;
             }
             // on vérifie si le déplacement en ligne 3 pions vers la gauche
             if (col > 0 && move_line_three((Move){line, col+2, line, col-1}, me, board, 0)) {
-                // ajouter dans une liste
                 list_insere(move_create(line, col+2, line, col-1), list_taille(list)+1, list);
-             count++;
             }
             // on vérifie si le déplacement en ligne 3 pions vers le haut
             if (line > 0 && move_line_three((Move){line+2, col, line-1, col}, me, board, 0)) {
-                // ajouter dans une liste
                 list_insere(move_create(line+2, col, line-1, col), list_taille(list)+1, list);
-             count++;
             }
             // latéralle
             // on vérifie si le déplacement en ligne 3 pions horizontale vers le haut
             if (col < COLS - 2 && line > 0 && move_lateral_three((Move){line, col, line-1, col+2}, me, board, 0)) {
-                // ajouter dans une liste
                 list_insere(move_create(line, col, line-1, col+2), list_taille(list)+1, list);
-             count++;
             }
             // on vérifie si le déplacement en ligne 3 pions horizontale vers le bas
             if (col < COLS - 2 && line < ROWS - 1 && move_lateral_three((Move){line, col, line+1, col+2}, me, board, 0)) {
-                // ajouter dans une liste
                 list_insere(move_create(line, col, line+1, col+2), list_taille(list)+1, list);
-             count++;
             }
             // on vérifie si le déplacement en ligne 3 pions verticale vers la gauche
             if (col > 0 && line < ROWS - 2 && move_lateral_three((Move){line, col, line+2, col-1}, me, board, 0)) {
-                // ajouter dans une liste
                 list_insere(move_create(line, col, line+2, col-1), list_taille(list)+1, list);
-             count++;
             }
             // on vérifie si le déplacement en ligne 3 pions verticale vers la droite
             if (col < COLS - 1 && line < ROWS - 2 && move_lateral_three((Move){line, col, line+2, col+1}, me, board, 0)) {
-                // ajouter dans une liste
                 list_insere(move_create(line, col, line+2, col+1), list_taille(list)+1, list);
-             count++;
             }
-
-
         }
-        //on regarde le voisin a droite
-
     }
-    printf(" \n nombre de coup dispo %i \n", count);
+
     return list;
 }

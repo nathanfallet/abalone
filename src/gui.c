@@ -1,32 +1,34 @@
 #include <gtk/gtk.h>
 #include <pthread.h>
+#include <stdlib.h>
 #include <unistd.h>
 #include "gui.h"
-
+#include <gdk/gdkkeysyms.h>
 // Stockage de trucs
 
 GtkWidget *window;
 GtkWidget *container;
-GtkWidget *grid;
+GtkWidget *drawing_area;
 GtkWidget *label_me;
 GtkWidget *label_playing;
 GtkWidget *label_move;
 GtkWidget *entry;
 GtkWidget *button;
+GtkWidget *click;
 
 PGame last_game;
 Cell last_me;
 State last_state;
 Move last_move;
 
-// Couleurs
-
-const static GdkRGBA color_background = {.red = 0.17, .green = 0.48, .blue = 0.0, .alpha = 1.0};
-const static GdkRGBA color_background_alt = {.red = 0.12, .green = 0.43, .blue = 0.0, .alpha = 1.0};
-const static GdkRGBA color_black = {.red = 0.0, .green = 0.0, .blue = 0.0, .alpha = 1.0};
-const static GdkRGBA color_white = {.red = 1.0, .green = 1.0, .blue = 1.0, .alpha = 1.0};
-
 // Fonctions internes
+
+char *char_to_string(char c) {
+	char *string = malloc(2 * sizeof(char));
+	string[0] = c;
+	string[1] = '\0';
+	return string;
+}
 
 void gui_background_start(PGame game) {
     /*
@@ -48,6 +50,10 @@ void gui_button_callback() {
     * après avoir mi à jour le jeu (et lu le move si besoin)
     */
 
+    if (last_game->playing != last_me || last_state != In_progress) {
+        return;
+    }
+
     gtk_widget_set_sensitive(button, FALSE);
     last_move = move_from_string(g_strdup(gtk_entry_get_text(GTK_ENTRY(entry))));
     gtk_entry_set_text(GTK_ENTRY(entry), "");
@@ -56,106 +62,82 @@ void gui_button_callback() {
     pthread_create(&thread, NULL, gui_background_turn, NULL);
 }
 
+gboolean gui_entry_callback(GtkWidget *widget, GdkEventKey *event, gpointer user_data) {
+    // Tester si entré est pressé:
+    if(event->keyval == GDK_KEY_Return) {
+        gui_button_callback();
+        return TRUE;
+    }
+    return FALSE;
+}
+
+gboolean gui_click_event(GtkWidget *widget, GdkEventKey *event, gpointer user_data) {
+  
+}
+
+void gui_draw_callback() {
+	gtk_widget_queue_draw(drawing_area);
+}
+
 static void gui_destroy(GtkWidget *widget, gpointer data){
     gtk_main_quit();
 }
 
-void gui_init_window() {
-    // Initialisation de GTK
-    gtk_init(NULL, NULL);
-    window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
-    gtk_window_set_title(GTK_WINDOW(window), "Abalone");
-    gtk_window_set_default_size(GTK_WINDOW(window), 500, 500);
-    g_signal_connect(window, "destroy", G_CALLBACK (gui_destroy), NULL);
-    
-    container = gtk_grid_new();
-    gtk_grid_set_row_homogeneous(GTK_GRID(container), TRUE);
-    gtk_grid_set_column_homogeneous(GTK_GRID(container), TRUE);
-
-    GtkWidget *header = gtk_grid_new();
-    gtk_grid_set_row_homogeneous(GTK_GRID(header), TRUE);
-    gtk_grid_set_column_homogeneous(GTK_GRID(header), TRUE);
-
-    label_me = gtk_label_new("");
-    label_playing = gtk_label_new("");
-    label_move = gtk_label_new("");
-
-    gtk_grid_attach(GTK_GRID(header), label_me, 0, 0, 1, 1);
-    gtk_grid_attach(GTK_GRID(header), label_playing, 1, 0, 1, 1);
-    gtk_grid_attach(GTK_GRID(header), label_move, 2, 0, 1, 1);
-
-    GtkWidget *footer = gtk_grid_new();
-    gtk_grid_set_row_homogeneous(GTK_GRID(footer), TRUE);
-    gtk_grid_set_column_homogeneous(GTK_GRID(footer), TRUE);
-
-    GtkWidget *label = gtk_label_new("Votre coup :");
-    entry = gtk_entry_new();
-    button = gtk_button_new_with_label("Jouer");
-    g_signal_connect(button, "clicked", G_CALLBACK(gui_button_callback), NULL);
-
-    gtk_grid_attach(GTK_GRID(footer), label, 0, 0, 1, 1);
-    gtk_grid_attach(GTK_GRID(footer), entry, 1, 0, 2, 1);
-    gtk_grid_attach(GTK_GRID(footer), button, 3, 0, 1, 1);
-
-    gtk_grid_attach(GTK_GRID(container), header, 0, 0, 1, 1);
-    gtk_grid_attach(GTK_GRID(container), footer, 0, 11, 1, 1);
-    gtk_container_add(GTK_CONTAINER(window), container);
+void clear(cairo_t *cr) {
+	 /* Save current context */
+	 cairo_save(cr);
+	 cairo_set_source_rgb(cr, 1, 1, 1);
+	 cairo_paint(cr);
+	 /* Restore context */
+	 cairo_restore(cr);
 }
 
-gboolean gui_update_grid() {
+gboolean gui_update_grid(GtkWidget *widget, cairo_t *cr, gpointer data) {
     /*
     * Mise à jour de la grille dans l'interface graphique
     */
-
-    // On enlève la grille précédente
-    if (grid != NULL) {
-        gtk_container_remove(GTK_CONTAINER(container), grid);
-    }
-
-    // Création de la grille
-    grid = gtk_grid_new();
-    gtk_grid_set_row_homogeneous(GTK_GRID(grid), TRUE);
-    gtk_grid_set_column_homogeneous(GTK_GRID(grid), TRUE);
-
-    for (int i = 0; i <= ROWS+1; i++) {
-        for (int j = 0; j <= COLS+1; j++) {
-            GtkWidget *label = gtk_label_new("");
-
-            if ((i == 0 || i == COLS+1) && j != 0 && j != ROWS+1) {
-                // Top row - numbers
-                gtk_label_set_text(GTK_LABEL(label), g_strdup_printf("%c", '1' + j - 1));
-            } else if ((j == 0 || j == ROWS+1) && i != 0 && i != COLS+1) {
-                // Left column - letters
-                gtk_label_set_text(GTK_LABEL(label), g_strdup_printf("%c", 'A' + i - 1));
-            } else if (i != 0 && i != COLS+1 && j != 0 && j != ROWS+1) {
-                // Board
-                gtk_widget_override_background_color(
-                    label, GTK_STATE_FLAG_NORMAL,
-                    i % 2 == j % 2 ? &color_background : &color_background_alt
-                );
-                switch (last_game->board[i-1][j-1]) {
+    
+    // Set the line width and color for the rectangle
+    clear(cr);
+  // Draw the circles
+  for(int i=0; i<8; i++){
+  	cairo_select_font_face(cr, "Calibri", CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_BOLD);
+  	cairo_set_font_size(cr, 24);
+  	cairo_move_to(cr, 92.5+i*70, 50);
+  	cairo_set_source_rgba(cr, 0, 0, 0, 1);
+  	cairo_show_text(cr, char_to_string('1' + i));
+  	cairo_set_source_rgba(cr, 0, 0, 0, 0);
+  	for(int j=0;j<8;j++){
+  		cairo_select_font_face(cr, "Calibri", CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_BOLD);
+  		cairo_set_font_size(cr, 24);
+  		cairo_move_to(cr, 20, 105+j*70);
+  		cairo_set_source_rgba(cr, 0, 0, 0, 1);
+  		cairo_show_text(cr, char_to_string('A' + j));
+  		int stroke = 0;
+  		switch (last_game->board[i][j]) {
                     case Black:
-                        gtk_label_set_text(GTK_LABEL(label), g_strdup_printf("⬤"));
-                        gtk_widget_override_color(label, GTK_STATE_FLAG_NORMAL, &color_black);
+  	  		cairo_set_source_rgb(cr, 0.1, 0.1, 0.1);
                         break;
                     case White:
-                        gtk_label_set_text(GTK_LABEL(label), g_strdup_printf("⬤"));
-                        gtk_widget_override_color(label, GTK_STATE_FLAG_NORMAL, &color_white);
+  	  		cairo_set_source_rgb(cr, 1.0, 1.0, 1.0);
+  	  		stroke = 1;
                         break;
                     default:
+  	  		cairo_set_source_rgb(cr, 0.85, 0.85, 0.85);
                         break;
                 }
-            }
-
-            gtk_label_set_xalign(GTK_LABEL(label), 0.5);
-            gtk_label_set_yalign(GTK_LABEL(label), 0.5);
-            gtk_grid_attach(GTK_GRID(grid), label, j, i, 1, 1);
-        }
-    }
-
-    // On l'ajoute et on rafrachit
-    gtk_grid_attach(GTK_GRID(container), grid, 0, 1, 1, 9);
-    gtk_widget_show_all(window);
+  		cairo_arc(cr, 100.00+70*j, 100.00+70*i, 25.00, 0, 2*G_PI);
+  		cairo_fill(cr);
+  		if (stroke) {
+  			cairo_set_line_width(cr, 2.0);
+    			cairo_set_source_rgb(cr, 0, 0, 0);
+  			cairo_arc(cr, 100.00+70*j, 100.00+70*i, 26.00, 0, 2*G_PI);
+  			cairo_stroke(cr);
+  		}
+  		cairo_set_source_rgba(cr, 0, 0, 0, 0);
+  		cairo_set_line_width(cr, 0);
+  	}
+  }
 
     // On actualise aussi les labels
     gtk_label_set_text(GTK_LABEL(label_me), g_strdup_printf("Vous êtes : %s", last_me == Black ? "Noir" : "Blanc"));
@@ -185,6 +167,61 @@ gboolean gui_update_grid() {
 
     // C'est updated, on dit qu'on s'arrête là (sinon ça update à l'infini)
     return FALSE;
+}
+
+void gui_init_window() {
+    // Initialisation de GTK
+    gtk_init(NULL, NULL);
+    window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+    gtk_window_set_title(GTK_WINDOW(window), "Abalone");
+    gtk_window_set_resizable(GTK_WINDOW(window), FALSE);
+    gtk_window_set_default_size(GTK_WINDOW(window), 630, 750);
+    g_signal_connect(window, "destroy", G_CALLBACK (gui_destroy), NULL);
+    
+    container = gtk_grid_new();
+    gtk_grid_set_row_homogeneous(GTK_GRID(container), TRUE);
+    gtk_grid_set_column_homogeneous(GTK_GRID(container), TRUE);
+
+    GtkWidget *header = gtk_grid_new();
+    gtk_grid_set_row_homogeneous(GTK_GRID(header), TRUE);
+    gtk_grid_set_column_homogeneous(GTK_GRID(header), TRUE);
+
+    label_me = gtk_label_new("");
+    label_playing = gtk_label_new("");
+    label_move = gtk_label_new("");
+
+    gtk_grid_attach(GTK_GRID(header), label_me, 0, 0, 1, 1);
+    gtk_grid_attach(GTK_GRID(header), label_playing, 1, 0, 1, 1);
+    gtk_grid_attach(GTK_GRID(header), label_move, 2, 0, 1, 1);
+
+    GtkWidget *footer = gtk_grid_new();
+    gtk_grid_set_row_homogeneous(GTK_GRID(footer), TRUE);
+    gtk_grid_set_column_homogeneous(GTK_GRID(footer), TRUE);
+
+    GtkWidget *label = gtk_label_new("Votre coup :");
+    entry = gtk_entry_new();
+    button = gtk_button_new_with_label("Jouer");
+
+    g_signal_connect(button, "clicked", G_CALLBACK(gui_button_callback), NULL);
+
+    // détection de touche
+    g_signal_connect(entry, "key_press_event",G_CALLBACK(gui_entry_callback), NULL);
+
+    g_signal_connect(entry, "key_press_event",G_CALLBACK(gui_entry_callback), NULL);
+
+    gtk_grid_attach(GTK_GRID(footer), label, 0, 0, 1, 1);
+    gtk_grid_attach(GTK_GRID(footer), entry, 1, 0, 2, 1);
+    gtk_grid_attach(GTK_GRID(footer), button, 3, 0, 1, 1);
+    
+    drawing_area = gtk_drawing_area_new();
+    g_signal_connect(G_OBJECT(drawing_area), "draw", G_CALLBACK(gui_update_grid), NULL);
+
+    gtk_grid_attach(GTK_GRID(container), header, 0, 0, 1, 1);
+    gtk_grid_attach(GTK_GRID(container), drawing_area, 0, 1, 1, 11);
+    gtk_grid_attach(GTK_GRID(container), footer, 0, 13, 1, 1);
+    gtk_container_add(GTK_CONTAINER(window), container);
+    
+    gtk_widget_show_all(window);
 }
 
 // Fonctions publiques
@@ -221,7 +258,8 @@ void gui_update(PGame game, Cell me, State state) {
 
     // On laisse l'UI se mettre à jour (sur le main thread)
     GSource *source = g_idle_source_new();
-    g_source_set_callback(source, gui_update_grid, NULL, NULL);
+    g_source_set_callback(source, gui_draw_callback, NULL, NULL);
     g_source_attach(source, g_main_context_default());
     g_source_unref(source);
 }
+

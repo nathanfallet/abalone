@@ -4,6 +4,8 @@
 #define ROWS 8
 #define COLS 8
 
+#define WEIGTH_WIN 100000
+
 #define ADDRESS_LENGTH 255
 
 #define PN "\033[38;5;232m"

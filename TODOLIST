@@ -1,66 +1,11 @@
 TO DO LIST
 
 
-
--MAIN :
--
--
--
-
-GAME :
-TABLEAU 8x8
-ENUM {VIDE , NOIR , BLANC};
--
--
--
--
-
-
--PLAYER (l'ENMU : NONE, BLACK, WHITE) 
-
-
--GAME 
-	fct : initialisation board
-	appliquer le move du tableau 
-	calculer le statue d'une partie
-
-
--MOVE (envoie)(? demande par le terminal un déplacement au player, retourne le déplacement)
-
--MOVE (reçu)(Modification du tableau. Gère les déplacements)
-	(prend en argument le tableau précédent, le nouveau déplacement et retourne un tableau ou une erreure
-	(prend un déplacement en entré et si valide, retourne le board, sinon code erreure défaite)
 	
-	Struct Move : 
-	
-	fct : encode et décode le déplacement (string en i,j)
-	
-	fct : vérification (prend le dépalcement, le board et retourne si possible ou non)
-		utilise le décodage
-		vérifie la couleur du pion déplacé => si mauvaise couleur, code erreur 
-		déplacement 1 pion, 
-		déplacement 2 pions
-		déplacement 3 pions
-	
-	
--DISPLAY
-	display_terminal (prend en argument le board et l'affiche dans le terminale)
-	display_GTK (à faire plus tard, pas important)
-	
-	
--AI (prend en argument le board et retourne un déplacement)
-	commencer par une AI qui se déplace aléatoirement
-	implémenter min et max puis
-	implémenter l'algorithme de minimax (d'abord à la profondeur 1 puis à une profondeur plus grande) 
+-AI (prend en argument le board et retourne un déplacement. Actuellement l'IA fait le même déplacement (gauche-droite) en boucle)
 	implémenter alpha-beta (qui réutilisera minimax)
 	implémenter une fonction d'évaluation
 
+-DOCUMENTATION 
 
--STATE (vérifie l'état de la partie. Victoire/Défaite)
-	si piont éjecté => fin de partie (compte le nb de pion) 
-	timer
-	abandont
-
-
-
-
+-TEST

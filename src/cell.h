@@ -10,6 +10,6 @@ typedef enum{
 } Cell;
 
 Cell inversion(Cell casee);
-Cell **clone_board(Cell board[ROWS][COLS]);
+void clone_board(Cell board[ROWS][COLS], Cell target[ROWS][COLS]);
 
 #endif
