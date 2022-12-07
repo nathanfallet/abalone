@@ -3,7 +3,7 @@
 #include "move.h"
 #include "cell.h"
 
-ScoredMove *score_move_new(Move *move, Move *root, int score){
+ScoredMove *score_move_new(Move move, Move root, int score){
     ScoredMove *score_move = malloc(sizeof(ScoredMove));
     score_move->move=move;
     score_move->root=root;

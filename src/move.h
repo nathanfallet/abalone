@@ -6,18 +6,17 @@
 #include "cell.h"
 #include "list.h"
 
-typedef struct {
-    int fromLine;
-    int fromColumn;
-    int toLine;
-    int toColumn;
-} Move;
+typedef unsigned short Move;
 
-Move *move_create(int fromLine, int fromColumn, int toLine, int toColumn);
-Move move_from_string(char *str);
+Move move_create(unsigned char fromLine, unsigned char fromColumn, unsigned char toLine, unsigned char toColumn);
+unsigned char move_get_from_line(Move move);
+unsigned char move_get_from_column(Move move);
+unsigned char move_get_to_line(Move move);
+unsigned char move_get_to_column(Move move);
+Move move_from_string(char *string);
 char *move_to_string(Move move);
 
 int move_apply(Move move, Cell me, Board board, int apply);
-List *move_available(Cell me, Board board);
+void move_available(Cell me, Board board, Move array[MOVE_LIST_SIZE]);
 
 #endif

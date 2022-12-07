@@ -6,16 +6,19 @@
 
 // Algorithme minimax. Il retourne une décision (move) et prend en compte le joueur qui joue ainsi que le board actuel
 
-ScoredMove *compare(Cell me, Board board, Move *root, int profondeur, int max, int threshold) {
+ScoredMove *compare(Cell me, Board board, Move root, int profondeur, int max, int threshold) {
     // Retourne le move avec le score le plus élevé/faible
     // On calcul le score si la profondeur atteint 0,
     // sinon on garde le plus grand/petit score des enfants
     
-    List *moves= move_available(me, board);
+    Move moves[MOVE_LIST_SIZE];
+    move_available(me, board, moves);
     ScoredMove *move_selected = NULL;
-    for (int i=1; i <= list_taille(moves); i++) {
+
+    Move move = MOVE_NONE;
+    int i = 0;
+    while ((move = moves[i]) != MOVE_NONE) {
         // Itération des moves possibles
-        Move *move = list_accede(i, moves);
         ScoredMove *sc;
 
         // Cas de la profondeur
@@ -23,9 +26,9 @@ ScoredMove *compare(Cell me, Board board, Move *root, int profondeur, int max, i
             // On continue plus profond
             Board copy;
             board_clone(board, copy);
-            if (move_apply(*move, me, copy, 1)) {
+            if (move_apply(move, me, copy, 1)) {
                 sc = compare(cell_opposite(me), copy, move, profondeur - 1, max == 0, threshold);
-                if (root != NULL) {
+                if (root != MOVE_NONE) {
                     sc->root = root;
                 }
             }
@@ -33,8 +36,8 @@ ScoredMove *compare(Cell me, Board board, Move *root, int profondeur, int max, i
             // On a atteint la profondeur max, on calcule le score
             sc = score_move_new(
                 move,
-                root != NULL ? root : move,
-                compute_score(*move, me, board)
+                root != MOVE_NONE ? root : move,
+                compute_score(move, me, board)
             );
         }
 
@@ -46,6 +49,9 @@ ScoredMove *compare(Cell me, Board board, Move *root, int profondeur, int max, i
         )) {
             move_selected=sc;
         }
+
+        // Move suivant
+        i++;
     }
 
     if (move_selected == NULL) {
@@ -56,8 +62,8 @@ ScoredMove *compare(Cell me, Board board, Move *root, int profondeur, int max, i
 }
 
 Move minimax(Cell me, Board board, int profondeur) {
-    ScoredMove *move = compare(me, board, NULL, profondeur, 1, 0);
-    return *move->root;
+    ScoredMove *move = compare(me, board, MOVE_NONE, profondeur, 1, 0);
+    return move->root;
 }
 
 // Implémentation des fonctions de base pour intéragir avec le jeu

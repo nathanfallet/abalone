@@ -14,7 +14,7 @@ PGame new_game(Cell owner) {
     game->owner = owner;
     game->playing = CELL_BLACK;
     game->has_last_move = 0;
-    game->last_move = (Move){0,0,0,0};
+    game->last_move = MOVE_NONE;
     game->refresh = NULL;
     game->refresh_opponent = NULL;
 

@@ -8,7 +8,7 @@
 #define CELL_WHITE 2
 
 #define MOVE_NONE 0
-#define MOVE_LIST_SIZE 32
+#define MOVE_LIST_SIZE 2048
 
 #define WEIGTH_WIN 100000
 #define PAWN_TOT 14
