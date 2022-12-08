@@ -1,13 +1,6 @@
-#ifndef STATE_H_
-#define STATE_H_
+#ifndef STATE_H
+#define STATE_H
 
-#include "constants.h"
-
-typedef enum{
-    Win_white,
-    Win_black,
-    Out_of_time,
-    In_progress,
-}State;
+typedef char State;
 
 #endif

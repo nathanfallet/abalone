@@ -46,11 +46,12 @@ void game_turn(PGame game, Move move) {
 }
 
 void game_start(PGame game) {
+    State state = game_state(game);
     if (game->refresh != NULL) {
-        game->refresh(game, game->owner, In_progress);
+        game->refresh(game, game->owner, state);
     }
     if (game->refresh_opponent != NULL) {
-        game->refresh_opponent(game, cell_opposite(game->owner), In_progress);
+        game->refresh_opponent(game, cell_opposite(game->owner), state);
     }
 }
 
@@ -59,7 +60,7 @@ State game_state(PGame game){
     // Check for time first (timeout after 15 minutes)
     time_t now = time(NULL);
     if (difftime(now, game->start) > 15*60) {
-        return Out_of_time;
+        return STATE_TIME_OUT;
     }
 
     // Count the number of pawns
@@ -72,8 +73,8 @@ State game_state(PGame game){
             if(board_get_cell(game->board, i, j) == CELL_WHITE) pawn_white += 1;
         }
     }
-    if(pawn_black < PAWN_TOT) return Win_white;
-    if(pawn_white < PAWN_TOT) return Win_black;
+    if (pawn_black < PAWN_TOT) return STATE_WIN_WHITE;
+    if (pawn_white < PAWN_TOT) return STATE_WIN_BLACK;
 
-    return In_progress;
+    return STATE_PLAYING;
 }

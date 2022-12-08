@@ -7,6 +7,11 @@
 #define CELL_BLACK 1
 #define CELL_WHITE 2
 
+#define STATE_PLAYING 0
+#define STATE_WIN_BLACK 1
+#define STATE_WIN_WHITE 2
+#define STATE_TIME_OUT 3
+
 #define MOVE_NONE 0
 #define MOVE_LIST_SIZE 280
 

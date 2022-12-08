@@ -95,8 +95,8 @@ void ia_init(Cell owner, void (*refresh_opponent)(PGame game, Cell me, State sta
 }
 
 void ia_update(PGame game, Cell me, State state){
-    // Fin de partie 
-    if (state != In_progress) {
+    // Fin de partie
+    if (state != STATE_PLAYING) {
         return;
     }
 

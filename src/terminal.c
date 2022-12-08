@@ -1,7 +1,15 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <unistd.h>
 #include <string.h>
+#include <pthread.h>
 #include "terminal.h"
+
+// Stockage de trucs
+
+PGame last_game;
+Cell last_me;
+State last_state;
 
 // Fonctions internes
 
@@ -11,8 +19,7 @@ Move terminal_read() {
     return move_from_string(input);
 }
 
-int display(PGame game){
-
+int terminal_print(PGame game){
     char *alpha = {"ABCDEFGH"};  // colonne lettre
     printf("\n   ");
     for(int i=1; i<=8; i++){
@@ -53,21 +60,47 @@ int display(PGame game){
     return 0;
 }
 
+void terminal_background_start(PGame game) {
+    pthread_t thread;
+    pthread_create(&thread, NULL, game_start, game);
+}
+
+void *terminal_background_turn() {
+    if (last_game->ia_override) {
+        // Ask IA
+        ia_update(last_game, last_me, last_state);
+    } else {
+        // Ask player
+        Move move = MOVE_NONE;
+        do {
+            printf("Votre coup : ");
+            move = terminal_read();
+        } while(move_apply(move, last_me, last_game->board, 0) == 0);
+        game_turn(last_game, move);
+    }
+    return NULL;
+}
+
 void terminal_update_intern(PGame game, Cell me, State state, int affichage) {
+    // On enregistre les trucs (pour les passer au main thread)
+    last_game = game;
+    last_me = me;
+    last_state = state;
+
+    // Affichage
     if (affichage) {
-        // Affichage
-        display(game);
+        terminal_print(game);
     }
 
     // Fin de la partie
     switch (state) {
-        case Win_black:
+        case STATE_WIN_BLACK:
             printf("Le joueur Black a gagné !\n");
             return;
-        case Win_white:
+        case STATE_WIN_WHITE:
             printf("Le joueur White a gagné !\n");
             return;
-        case Out_of_time:
+        case STATE_TIME_OUT:
             printf("Temps écoulé !\n");
             return;
         default:
@@ -76,18 +109,8 @@ void terminal_update_intern(PGame game, Cell me, State state, int affichage) {
 
     // Si c'est mon tour:
     if (game->playing == me) {
-        if (game->ia_override) {
-            // Ask IA
-            ia_update(game, me, state);
-        } else {
-            // Ask player
-            Move move = MOVE_NONE;
-            do {
-                printf("Votre coup : ");
-                move = terminal_read();
-            } while(move_apply(move, me, game->board, 0) == 0);
-            game_turn(game, move);
-        }
+        pthread_t thread;
+        pthread_create(&thread, NULL, terminal_background_turn, NULL);
     }
 }
 
@@ -98,7 +121,11 @@ void terminal_init(Cell owner, int ia_override, void (*refresh_opponent)(PGame g
     game->refresh = terminal_update;
     game->refresh_opponent = refresh_opponent;
 
-    game_start(game);
+    terminal_background_start(game);
+
+    while(1) {
+        sleep(1);
+    }
 }
 
 void terminal_update(PGame game, Cell me, State state){
@@ -108,20 +135,3 @@ void terminal_update(PGame game, Cell me, State state){
 void terminal_update_no_print(PGame game, Cell me, State state) {
     terminal_update_intern(game, me, state, 0);
 }
-
-/*   example color
-printf("\033[31m");        // write in red
-printf("My text in RED\n");
-printf("\033[00m");
-
-      case NOIR    : printf("\033[30m" ); break;
-      case ROUGE   : printf("\033[31m" ); break;
-      case VERT    : printf("\033[32m" ); break;
-      case ORANGE  : printf("\033[33m" ); break;
-      case BLEU    : printf("\033[34m" ); break;
-      case MAGENTA : printf("\033[35m" ); break;
-      case CYAN    : printf("\033[36m" ); break;
-      case BLANC   : printf("\033[37m" ); break;
-      case JAUNE   : printf("\033[00m" ); break;
-*/
-

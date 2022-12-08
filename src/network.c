@@ -93,11 +93,6 @@ void network_init(Cell owner, int ia_override, void (*init)(Cell owner, int ia_o
 }
 
 void network_update(PGame game, Cell me, State state) {
-    // End of game
-    if (state != In_progress) {
-        return;
-    }
-
     // If it is my turn
     if (game->playing == me) {
         if (game->has_last_move) {
@@ -111,7 +106,14 @@ void network_update(PGame game, Cell me, State state) {
                 }
             } while(fdclient == -1);
         }
+    }
 
+    // End of game
+    if (state != STATE_PLAYING) {
+        return;
+    }
+    
+    if (game->playing == me) {
         // Receive opponent's move
         char *opponent_move = malloc(sizeof(char) * 6);
         Move result = MOVE_NONE;

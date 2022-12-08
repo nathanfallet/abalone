@@ -60,13 +60,19 @@ void gui_background_turn() {
     game_turn(last_game, last_move);
 }
 
+void gui_background_turn_ia() {
+    if (last_game->ia_override) {
+        ia_update(last_game, last_me, last_state);
+    }
+}
+
 void gui_button_callback() {
     /*
     * Fonction appelée sur le background thread
     * après avoir mi à jour le jeu (et lu le move si besoin)
     */
 
-    if (last_game->playing != last_me || last_state != In_progress) {
+    if (last_game->playing != last_me || last_state != STATE_PLAYING) {
         return;
     }
 
@@ -181,16 +187,16 @@ gboolean gui_update_grid(GtkWidget *widget, cairo_t *cr, gpointer data) {
     // On actualise aussi les labels
     gtk_label_set_text(GTK_LABEL(label_me), g_strdup_printf("Vous êtes : %s", last_me == CELL_BLACK ? "Noir" : "Blanc"));
     switch (last_state) {
-        case In_progress:
+        case STATE_PLAYING:
             gtk_label_set_text(GTK_LABEL(label_playing), g_strdup_printf("Au tour de : %s", last_game->playing == CELL_BLACK ? "Noir" : "Blanc"));
             break;
-        case Win_black:
+        case STATE_WIN_BLACK:
             gtk_label_set_text(GTK_LABEL(label_playing), g_strdup_printf("Le gagnant est : Noir"));
             break;
-        case Win_white:
+        case STATE_WIN_WHITE:
             gtk_label_set_text(GTK_LABEL(label_playing), g_strdup_printf("Le gagnant est : Blanc"));
             break;
-        case Out_of_time:
+        case STATE_TIME_OUT:
             gtk_label_set_text(GTK_LABEL(label_playing), g_strdup_printf("Temps écoulé !"));
             break;
     }
@@ -203,7 +209,7 @@ gboolean gui_update_grid(GtkWidget *widget, cairo_t *cr, gpointer data) {
         button,
         last_game->playing == last_me &&
         last_game->ia_override == 0 &&
-        last_state == In_progress ? TRUE : FALSE
+        last_state == STATE_PLAYING ? TRUE : FALSE
     );
 
     // C'est updated, on dit qu'on s'arrête là (sinon ça update à l'infini)
@@ -308,7 +314,8 @@ void gui_update(PGame game, Cell me, State state) {
 
     // Si c'est l'IA qui joue
     if (game->playing == me && game->ia_override) {
-        ia_update(game, me, state);
+        pthread_t thread;
+        pthread_create(&thread, NULL, gui_background_turn_ia, NULL);
     }
 }
 
