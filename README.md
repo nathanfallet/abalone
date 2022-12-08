@@ -15,5 +15,9 @@ brew install gtk+3 # macOS
 
 ```bash
 make
-./abalone
+./abalone -l <noir/blanc> : jeu local contre l IA  // exemple:  <./abalone -l noir>
+
+./abalone -s <port> : lancer un serveur sur le port donné  // exemple:  <./abalone -c YYYY>
+
+./abalone -c <adresse>:<port> : se connecter à un serveur distant  //exemple:  <./abalone -c XXX.XXX.XXX.XXX:YYYY>
 ```

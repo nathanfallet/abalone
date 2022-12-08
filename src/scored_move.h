@@ -1,4 +1,6 @@
 #include "move.h"
+#include "cell.h"
+#include "constants.h"
 
 typedef unsigned long ScoredMove;
 

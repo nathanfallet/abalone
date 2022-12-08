@@ -9,6 +9,7 @@
 
 GtkWidget *window;
 GtkWidget *container;
+GtkWidget *event_box;
 GtkWidget *drawing_area;
 GtkWidget *label_me;
 GtkWidget *label_playing;
@@ -22,12 +23,23 @@ Cell last_me;
 State last_state;
 Move last_move;
 
+int has_clicked = 0;
+int i1, i2, j1, j2;
+
 // Fonctions internes
 
 char *char_to_string(char c) {
 	char *string = malloc(2 * sizeof(char));
 	string[0] = c;
 	string[1] = '\0';
+	return string;
+}
+
+char *chars_to_string(char c, char c2) {
+	char *string = malloc(2 * sizeof(char));
+	string[0] = c;
+	string[1] = c2;
+	string[2] = '\0';
 	return string;
 }
 
@@ -42,6 +54,9 @@ void gui_background_start(PGame game) {
 }
 
 void gui_background_turn() {
+    if (last_game->ia_override) {
+        return;
+    }
     game_turn(last_game, last_move);
 }
 
@@ -59,6 +74,11 @@ void gui_button_callback() {
     last_move = move_from_string(g_strdup(gtk_entry_get_text(GTK_ENTRY(entry))));
     gtk_entry_set_text(GTK_ENTRY(entry), "");
 
+    if (move_apply(last_move, last_me, last_game->board, 0) == 0) {
+        gtk_label_set_text(GTK_LABEL(label_move), g_strdup_printf("Coup invalide !"));
+        return;
+    }
+
     pthread_t thread;
     pthread_create(&thread, NULL, gui_background_turn, NULL);
 }
@@ -72,8 +92,26 @@ gboolean gui_entry_callback(GtkWidget *widget, GdkEventKey *event, gpointer user
     return FALSE;
 }
 
-gboolean gui_click_event(GtkWidget *widget, GdkEventKey *event, gpointer user_data) {
-  
+gboolean gui_click_callback(GtkWidget *widget, GdkEventButton *event, gpointer user_data) {
+    // (x,y) = prendre coor sourri
+    int x = event->x;
+    int y = event->y;
+    int i = (y-65) / 70;
+    int j = (x-65) / 70;
+
+    if (has_clicked) {
+        i2 = i;
+        j2 = j;
+        last_move = move_create(i1, j1, i2, j2);
+        gtk_entry_set_text(GTK_ENTRY(entry), move_to_string(last_move));
+        gui_button_callback();
+        has_clicked = 0;
+    } else {
+        i1 = i;
+        j1 = j;
+        gtk_entry_set_text(GTK_ENTRY(entry), chars_to_string('A' + i1, '1' + j1));
+        has_clicked = 1;
+    }
 }
 
 void gui_draw_callback() {
@@ -163,7 +201,9 @@ gboolean gui_update_grid(GtkWidget *widget, cairo_t *cr, gpointer data) {
     // Si c'est mon tour
     gtk_widget_set_sensitive(
         button,
-        last_game->playing == last_me && last_state == In_progress ? TRUE : FALSE
+        last_game->playing == last_me &&
+        last_game->ia_override == 0 &&
+        last_state == In_progress ? TRUE : FALSE
     );
 
     // C'est updated, on dit qu'on s'arrête là (sinon ça update à l'infini)
@@ -208,17 +248,20 @@ void gui_init_window() {
     // détection de touche
     g_signal_connect(entry, "key_press_event",G_CALLBACK(gui_entry_callback), NULL);
 
-    g_signal_connect(entry, "key_press_event",G_CALLBACK(gui_entry_callback), NULL);
 
     gtk_grid_attach(GTK_GRID(footer), label, 0, 0, 1, 1);
     gtk_grid_attach(GTK_GRID(footer), entry, 1, 0, 2, 1);
     gtk_grid_attach(GTK_GRID(footer), button, 3, 0, 1, 1);
+
+    event_box = gtk_event_box_new();
+    g_signal_connect(G_OBJECT(event_box), "button_press_event", G_CALLBACK(gui_click_callback), NULL);
     
     drawing_area = gtk_drawing_area_new();
     g_signal_connect(G_OBJECT(drawing_area), "draw", G_CALLBACK(gui_update_grid), NULL);
+    gtk_container_add(GTK_CONTAINER(event_box), drawing_area);
 
     gtk_grid_attach(GTK_GRID(container), header, 0, 0, 1, 1);
-    gtk_grid_attach(GTK_GRID(container), drawing_area, 0, 1, 1, 11);
+    gtk_grid_attach(GTK_GRID(container), event_box, 0, 1, 1, 11);
     gtk_grid_attach(GTK_GRID(container), footer, 0, 13, 1, 1);
     gtk_container_add(GTK_CONTAINER(window), container);
     
@@ -227,13 +270,13 @@ void gui_init_window() {
 
 // Fonctions publiques
 
-void gui_init(Cell owner, void (*refresh_opponent)(PGame game, Cell me, State state)) {
+void gui_init(Cell owner, int ia_override, void (*refresh_opponent)(PGame game, Cell me, State state)) {
     /*
     * Fonction d'initialisation de l'interface
     */
 
     // Initialisation de la partie
-    PGame game = new_game(owner);
+    PGame game = game_new(owner, ia_override);
     game->refresh = gui_update;
     game->refresh_opponent = refresh_opponent;
 
@@ -262,5 +305,10 @@ void gui_update(PGame game, Cell me, State state) {
     g_source_set_callback(source, gui_draw_callback, NULL, NULL);
     g_source_attach(source, g_main_context_default());
     g_source_unref(source);
+
+    // Si c'est l'IA qui joue
+    if (game->playing == me && game->ia_override) {
+        ia_update(game, me, state);
+    }
 }
 

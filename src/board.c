@@ -12,6 +12,9 @@ void board_clone(Board board, Board target) {
 }
 
 Cell board_get_cell(Board board, int line, int column) {
+    if (line < 0 || line >= BOARD_SIZE || column < 0 || column >= BOARD_SIZE) {
+        return CELL_EMPTY;
+    }
     if (board[0] >> (line * 8 + column) & 1) {
         return CELL_BLACK;
     }
@@ -22,6 +25,11 @@ Cell board_get_cell(Board board, int line, int column) {
 }
 
 void board_set_cell(Board board, int line, int column, Cell cell) {
+    /* Outside of board */
+    if (line < 0 || line >= BOARD_SIZE || column < 0 || column >= BOARD_SIZE) {
+        return;
+    }
+
     /* Reset previous cell */
     board[0] &= ~(1UL << (line * 8 + column));
     board[1] &= ~(1UL << (line * 8 + column));

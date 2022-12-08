@@ -21,6 +21,7 @@ typedef struct game_t {
 	// Joueur qui a lancé la partie, et celui qui doit jouer
 	Cell owner;
 	Cell playing;
+	int ia_override;
 
 	// Dernier coup joué
 	int has_last_move;
@@ -32,7 +33,7 @@ typedef struct game_t {
 } Game;
 typedef Game* PGame;
 
-PGame new_game(Cell owner);
+PGame game_new(Cell owner, int ia_override);
 void game_turn(PGame game, Move move);
 void game_start(PGame game);
 State game_state(PGame game);

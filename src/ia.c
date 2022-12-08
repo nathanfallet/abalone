@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <unistd.h>
+#include <limits.h>
 #include "ia.h"
 
 // Algorithme minimax. Il retourne une décision (move) et prend en compte le joueur qui joue ainsi que le board actuel
@@ -19,6 +20,13 @@ ScoredMove compare(Cell me, Board board, Move root, int profondeur, int max, int
 
     int i = 0;
     while ((move = moves[i]) != MOVE_NONE) {
+        // Check du threshold
+        if (move_selected != MOVE_NONE && (
+            max ? threshold >= scored_move_score(move_selected) : threshold <= scored_move_score(move_selected)
+        )) {
+            break;
+        }
+
         // Itération des moves possibles
         ScoredMove sc = MOVE_NONE;
 
@@ -28,7 +36,11 @@ ScoredMove compare(Cell me, Board board, Move root, int profondeur, int max, int
             Board copy;
             board_clone(board, copy);
             if (move_apply(move, me, copy, 1)) {
-                sc = compare(cell_opposite(me), copy, move, profondeur - 1, max == 0, threshold);
+                int child_threshold = max ? INT_MAX : INT_MIN;
+                if (move_selected != MOVE_NONE) {
+                    child_threshold = scored_move_score(move_selected);
+                }
+                sc = compare(cell_opposite(me), copy, move, profondeur - 1, max == 0, child_threshold);
                 if (root != MOVE_NONE) {
                     sc = scored_move_new(
                         scored_move_move(sc),
@@ -47,10 +59,11 @@ ScoredMove compare(Cell me, Board board, Move root, int profondeur, int max, int
         }
 
         // Check pour la sélection du move
+        int score = scored_move_score(sc);
         if (sc != MOVE_NONE && (
             move_selected == MOVE_NONE ||
-            (max ? scored_move_score(sc) > scored_move_score(move_selected) : scored_move_score(sc) < scored_move_score(move_selected)) ||
-            (scored_move_score(sc) == scored_move_score(move_selected) && rand() % 8 == 0)
+            (max ? score > scored_move_score(move_selected) : score < scored_move_score(move_selected)) ||
+            (score == scored_move_score(move_selected) && rand() % 8 == 0)
         )) {
             move_selected = sc;
         }
@@ -67,14 +80,14 @@ ScoredMove compare(Cell me, Board board, Move root, int profondeur, int max, int
 }
 
 Move minimax(Cell me, Board board, int profondeur) {
-    ScoredMove move = compare(me, board, MOVE_NONE, profondeur, 1, 0);
+    ScoredMove move = compare(me, board, MOVE_NONE, profondeur, 1, INT_MIN);
     return scored_move_root(move);
 }
 
 // Implémentation des fonctions de base pour intéragir avec le jeu
 
 void ia_init(Cell owner, void (*refresh_opponent)(PGame game, Cell me, State state)) {
-    PGame game = new_game(owner);
+    PGame game = game_new(owner, 0);
     game->refresh = ia_update;
     game->refresh_opponent = refresh_opponent;
 
@@ -89,7 +102,7 @@ void ia_update(PGame game, Cell me, State state){
 
     // Si c'est mon tour:
     if (game->playing == me) {
-        Move move = minimax(me, game->board, 3);
+        Move move = minimax(me, game->board, 2);
         game_turn(game, move);
     }
 }

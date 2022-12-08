@@ -11,8 +11,8 @@
 int fdsocket;
 int fdclient;
 
-void network_init(Cell owner, void (*init)(Cell owner, void (*actualiser_adversaire)(PGame game, Cell me, State state)), char address[ADDRESS_LENGTH], int port) {
-    if (address == NULL) {
+void network_init(Cell owner, int ia_override, void (*init)(Cell owner, int ia_override, void (*actualiser_adversaire)(PGame game, Cell me, State state)), char address[ADDRESS_LENGTH], int port) {
+    if (strcmp(address, "") == 0) {
         // On est le serveur
         if ((fdsocket = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP)) == -1) {
             printf("Error: Could not create socket: %s\n", strerror(errno));
@@ -62,7 +62,7 @@ void network_init(Cell owner, void (*init)(Cell owner, void (*actualiser_adversa
     }
 
     // Et on init le reste comme d'habitude
-    init(owner, network_update);
+    init(owner, ia_override, network_update);
 }
 
 void network_update(PGame game, Cell me, State state) {

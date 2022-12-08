@@ -462,5 +462,6 @@ void move_available(Cell me, Board board, Move array[MOVE_LIST_SIZE]) {
     }
 
     /* End of array */
+   // printf("nombre de coup dispo : %i \n", index);
     array[index] = MOVE_NONE;
 }

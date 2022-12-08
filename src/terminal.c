@@ -3,8 +3,6 @@
 #include <string.h>
 #include "terminal.h"
 
-#define color(param) printf("\033[%sm",param)
-
 // Fonctions internes
 
 Move terminal_read() {
@@ -78,16 +76,25 @@ void terminal_update_intern(PGame game, Cell me, State state, int affichage) {
 
     // Si c'est mon tour:
     if (game->playing == me) {
-        printf("Votre coup : ");
-        Move move = terminal_read();
-        game_turn(game, move);
+        if (game->ia_override) {
+            // Ask IA
+            ia_update(game, me, state);
+        } else {
+            // Ask player
+            Move move = MOVE_NONE;
+            do {
+                printf("Votre coup : ");
+                move = terminal_read();
+            } while(move_apply(move, me, game->board, 0) == 0);
+            game_turn(game, move);
+        }
     }
 }
 
 // Fonctions publiques
 
-void terminal_init(Cell owner, void (*refresh_opponent)(PGame game, Cell me, State state)){
-    PGame game = new_game(owner);
+void terminal_init(Cell owner, int ia_override, void (*refresh_opponent)(PGame game, Cell me, State state)){
+    PGame game = game_new(owner, ia_override);
     game->refresh = terminal_update;
     game->refresh_opponent = refresh_opponent;
 

@@ -8,19 +8,23 @@
 #define CELL_WHITE 2
 
 #define MOVE_NONE 0
-#define MOVE_LIST_SIZE 2048
+#define MOVE_LIST_SIZE 280
 
-#define WEIGTH_WIN 100000
+#define WEIGHT_WIN 100000
+#define WEIGHT_PROXIMITY 1
+#define WEIGHT_CENTER 5
+#define WEIGHT_OPPOSITE 3
 #define PAWN_TOT 14
+
+#define INIT_NONE -1
+#define INIT_TERMINAL 0
+#define INIT_GUI 1
+#define INIT_NETWORK 2
+#define INIT_DEFAULT INIT_GUI
 
 #define ADDRESS_LENGTH 255
 
-#define PN "\033[38;5;232m"
-#define BRBLKB "\e[100m"
-#define GRISM "\033[48;5;244m"
-#define BGFG "\033[38;5;232;48;5;244m"
-#define WHTHB "\e[0;107m"
-/* reset colors */
-#define reset "\e[0m"
+#define color(param) printf("\033[%sm",param)
+
 
 #endif

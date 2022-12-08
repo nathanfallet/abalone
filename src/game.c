@@ -3,7 +3,7 @@
 #include "game.h"
 
 
-PGame new_game(Cell owner) {
+PGame game_new(Cell owner, int ia_override) {
     PGame game = (PGame) malloc(sizeof(Game));
 
     // Initialisation du tableau
@@ -13,6 +13,7 @@ PGame new_game(Cell owner) {
     game->start = time(NULL);
     game->owner = owner;
     game->playing = CELL_BLACK;
+    game->ia_override = ia_override;
     game->has_last_move = 0;
     game->last_move = MOVE_NONE;
     game->refresh = NULL;
