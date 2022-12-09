@@ -43,6 +43,20 @@ char *chars_to_string(char c, char c2) {
 	return string;
 }
 
+void play_sound(char *path) {
+    /*
+    * Joue un son
+    */
+
+    char command[100];
+    #ifdef __APPLE__
+    sprintf(command, "afplay %s", path);
+    #else
+    sprintf(command, "aplay %s", path);
+    #endif
+    system(command);
+}
+
 void gui_background_start(PGame game) {
     /*
     * Initialisation du background thread
@@ -311,6 +325,11 @@ void gui_update(PGame game, Cell me, State state) {
     g_source_set_callback(source, gui_draw_callback, NULL, NULL);
     g_source_attach(source, g_main_context_default());
     g_source_unref(source);
+
+    // Si y'a un dernier coup, on joue le son
+    if (gui_last_game->has_last_move) {
+        play_sound("assets/move.wav");
+    }
 
     // Si c'est l'IA qui joue
     if (game->playing == me && game->ia_override) {
