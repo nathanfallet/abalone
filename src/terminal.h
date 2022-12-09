@@ -9,7 +9,6 @@
 #include "cell.h"
 #include "state.h"
 
-
 /**
  * initialise l'affichage dans le terminal
  * @param owner Le joueur qui créé la partie (CELL_BLACK ou CELL_WHITE)

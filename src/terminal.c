@@ -19,7 +19,7 @@ Move terminal_read() {
     return move_from_string(input);
 }
 
-int terminal_print(PGame game){
+int terminal_print(Board board) {
     char *alpha = {"ABCDEFGH"};  // colonne lettre
     printf("\n   ");
     for(int i=1; i<=8; i++){
@@ -31,7 +31,7 @@ int terminal_print(PGame game){
         printf(" %c ",alpha[i]);
         for (int j=0; j<8 ; j++){
             printf("| ");
-            switch (board_get_cell(game->board, i, j)) {
+            switch (board_get_cell(board, i, j)) {
                 case CELL_BLACK:
                     color("31" );
                     printf("⬤ ");
@@ -89,7 +89,7 @@ void terminal_update_intern(PGame game, Cell me, State state, int affichage) {
 
     // Affichage
     if (affichage) {
-        terminal_print(game);
+        terminal_print(game->board);
     }
 
     // Fin de la partie
