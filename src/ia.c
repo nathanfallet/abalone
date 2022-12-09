@@ -7,13 +7,10 @@
 
 // Algorithme minimax. Il retourne une décision (move) et prend en compte le joueur qui joue ainsi que le board actuel
 
-ScoredMove compare(Cell me, Board board, Move root, int profondeur, int max, int threshold) {
-    // Retourne le move avec le score le plus élevé/faible
-    // On calcul le score si la profondeur atteint 0,
-    // sinon on garde le plus grand/petit score des enfants
-    
+ScoredMove compare(Cell me, Cell playing, Board board, Move root, int profondeur, int max, int threshold) {
+    // On récupère les moves possibles
     Move moves[MOVE_LIST_SIZE];
-    move_available(me, board, moves);
+    move_available(playing, board, moves);
 
     ScoredMove move_selected = MOVE_NONE;
     Move move = MOVE_NONE;
@@ -30,54 +27,52 @@ ScoredMove compare(Cell me, Board board, Move root, int profondeur, int max, int
         // Itération des moves possibles
         ScoredMove sc = MOVE_NONE;
 
-        // Cas de la profondeur
-        if (profondeur > 0) {
-            // On continue plus profond
-            Board copy;
-            board_clone(board, copy);
-            if (move_apply(move, me, copy, 1)) {
-                State state = board_state(copy);
-                if (state != STATE_PLAYING) {
-                    // On a atteint la fin du jeu
-                    Cell winner = state == STATE_WIN_BLACK ? CELL_BLACK : CELL_WHITE;
-                    sc = scored_move_new(
-                        move,
-                        root != MOVE_NONE ? root : move,
-                        winner == me ? WEIGHT_WIN : -WEIGHT_WIN
-                    );
-                } else {
-                    // On continue la recherche
-                    int child_threshold = max ? INT_MAX : INT_MIN;
-                    if (move_selected != MOVE_NONE) {
-                        child_threshold = scored_move_score(move_selected);
-                    }
-                    sc = compare(cell_opposite(me), copy, move, profondeur - 1, max == 0, child_threshold);
-                    if (root != MOVE_NONE) {
-                        sc = scored_move_new(
-                            scored_move_move(sc),
-                            root,
-                            scored_move_score(sc)
-                        );
-                    }
+        // On applique le move
+        Board copy;
+        board_clone(board, copy);
+        if (move_apply(move, playing, copy, 1)) {
+            State state = board_state(copy);
+            if (state != STATE_PLAYING) {
+                // On a atteint la fin du jeu (prioritaire)
+                Cell winner = state == STATE_WIN_BLACK ? CELL_BLACK : CELL_WHITE;
+                sc = scored_move_new(
+                    move,
+                    root != MOVE_NONE ? root : move,
+                    winner == me ? WEIGHT_WIN : -WEIGHT_WIN
+                );
+            } else if (profondeur > 1) {
+                // On continue plus profond
+                int child_threshold = max ? INT_MAX : INT_MIN;
+                if (move_selected != MOVE_NONE) {
+                    child_threshold = scored_move_score(move_selected);
                 }
+                sc = compare(me, cell_opposite(playing), copy, move, profondeur - 1, max == 0, child_threshold);
+                if (root != MOVE_NONE) {
+                    sc = scored_move_new(
+                        scored_move_move(sc),
+                        root,
+                        scored_move_score(sc)
+                    );
+                }
+            } else {
+                // On a atteint la profondeur max, on calcule le score
+                sc = scored_move_new(
+                    move,
+                    root != MOVE_NONE ? root : move,
+                    scored_move_compute(me, copy)
+                );
             }
-        } else {
-            // On a atteint la profondeur max, on calcule le score
-            sc = scored_move_new(
-                move,
-                root != MOVE_NONE ? root : move,
-                scored_move_compute(move, me, board)
-            );
-        }
 
-        // Check pour la sélection du move
-        int score = scored_move_score(sc);
-        if (sc != MOVE_NONE && (
-            move_selected == MOVE_NONE ||
-            (max ? score > scored_move_score(move_selected) : score < scored_move_score(move_selected)) ||
-            (score == scored_move_score(move_selected) && rand() % 8 == 0)
-        )) {
-            move_selected = sc;
+            // Check pour la sélection du move
+            int selected_score = scored_move_score(move_selected);
+            int score = scored_move_score(sc);
+            if (sc != MOVE_NONE && (
+                move_selected == MOVE_NONE ||
+                (max ? score > selected_score : score < selected_score) ||
+                (score == selected_score && rand() % 8 == 0)
+            )) {
+                move_selected = sc;
+            }
         }
 
         // Move suivant
@@ -92,7 +87,7 @@ ScoredMove compare(Cell me, Board board, Move root, int profondeur, int max, int
 }
 
 Move minimax(Cell me, Board board, int profondeur) {
-    ScoredMove move = compare(me, board, MOVE_NONE, profondeur, 1, INT_MIN);
+    ScoredMove move = compare(me, me, board, MOVE_NONE, profondeur, 1, INT_MIN);
     return scored_move_root(move);
 }
 
@@ -114,7 +109,7 @@ void ia_update(PGame game, Cell me, State state){
 
     // Si c'est mon tour:
     if (game->playing == me) {
-        Move move = minimax(me, game->board, 2);
+        Move move = minimax(me, game->board, 4);
         game_turn(game, move);
     }
 }

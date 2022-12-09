@@ -50,9 +50,9 @@ void play_sound(char *path) {
 
     char command[100];
     #ifdef __APPLE__
-    sprintf(command, "afplay %s", path);
+    sprintf(command, "afplay %s &", path);
     #else
-    sprintf(command, "aplay %s 2>/dev/null", path);
+    sprintf(command, "aplay %s 2>/dev/null &", path);
     #endif
     system(command);
 }

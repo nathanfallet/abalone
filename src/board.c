@@ -44,20 +44,19 @@ void board_set_cell(Board board, int line, int column, Cell cell) {
 
 State board_state(Board board) {
     int count_black = 0;
-    int count_white = 0;
-    for (int line = 0; line < BOARD_SIZE; line++) {
-        for (int column = 0; column < BOARD_SIZE; column++) {
-            Cell cell = board_get_cell(board, line, column);
-            if (cell == CELL_BLACK) {
-                count_black++;
-            }
-            if (cell == CELL_WHITE) {
-                count_white++;
-            }
-        }
+    unsigned long board_black = board[0];
+    while (board_black) {
+        count_black += board_black & 1;
+        board_black >>= 1;
     }
     if (count_black < PAWN_TOT) {
         return STATE_WIN_WHITE;
+    }
+    int count_white = 0;
+    unsigned long board_white = board[1];
+    while (board_white) {
+        count_white += board_white & 1;
+        board_white >>= 1;
     }
     if (count_white < PAWN_TOT) {
         return STATE_WIN_BLACK;

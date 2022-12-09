@@ -25,12 +25,8 @@ int scored_move_score(ScoredMove scored_move)
 // si le mouvement est gagnant, return 1
 // si le mouvement est perdant (suicide), return -1
 // sinon, si le mouvement n'implique pas directement la victoire ou la défaite du joueur, return 0
-int scored_move_compute(Move move, Cell me, Board board)
+int scored_move_compute(Cell me, Board board)
 {
-    Board copy;
-    board_clone(board, copy);
-    move_apply(move, me, copy, 1);
-
     int score = 0;
     int pawn_me = 0;
     int pawn_opponent = 0;
@@ -39,30 +35,31 @@ int scored_move_compute(Move move, Cell me, Board board)
     {
         for (int j = 0; j < BOARD_SIZE; j++)
         {
+            Cell current = board_get_cell(board, i, j);
             int distance = 0;
             int count = 0;
             // point par rapport au centre
-            if (board_get_cell(copy, i, j) == me)
+            if (current == me)
                 score += WEIGHT_CENTER * (10 - abs(4 - i) - abs(4 - j));
-            if (board_get_cell(copy, i, j) == cell_opposite(me))
+            if (current == cell_opposite(me))
                 score -= WEIGHT_CENTER * (10 - abs(4 - i) - abs(4 - j));
             // Count the number of pawns
-            if (board_get_cell(copy, i, j) == me)
+            if (current == me)
                 pawn_me += 1;
-            if (board_get_cell(copy, i, j) == cell_opposite(me))
+            if (current == cell_opposite(me))
                 pawn_opponent += 1;
             // Regarde la proximité par rapport au autres pions
-            if (board_get_cell(copy, i, j) == me)
+            if (current == me)
             {
                 // regarde si on est aligné à 2 verticalement
-                if (board_get_cell(copy, i + 1, j) == me)
+                if (board_get_cell(board, i + 1, j) == me)
                 {
                     score += WEIGHT_NEIGHBOUR;
                     // regarde vers le bas si on est sur la même colonne que l'adversaire
                     for (int k = i + 1; k < BOARD_SIZE; k++)
                     {
                         // compte le nombre d'aversaire sur la colonne
-                        if (board_get_cell(copy, i + k, j) == cell_opposite(me))
+                        if (board_get_cell(board, i + k, j) == cell_opposite(me))
                         {
                             count += 1;
                             // enregistre la distance du plus proche adversaire
@@ -87,7 +84,7 @@ int scored_move_compute(Move move, Cell me, Board board)
                     for (int k = i; k > 0; k--)
                     {
                         // compte le nombre d'aversaire sur la colonne
-                        if (board_get_cell(copy, i + k, j) == cell_opposite(me))
+                        if (board_get_cell(board, i + k, j) == cell_opposite(me))
                         {
                             count += 1;
                             // enregistre la distance du plus proche adversaire
@@ -109,14 +106,14 @@ int scored_move_compute(Move move, Cell me, Board board)
                     count = 0;
                     distance = 0;
                     // regarde si on est aligné à 3 verticalement
-                    if (board_get_cell(copy, i + 2, j) == me)
+                    if (board_get_cell(board, i + 2, j) == me)
                     {
                         score += 2 * WEIGHT_NEIGHBOUR;
                         // regarde vers le bas si on est sur la même colonne que l'adversaire
                         for (int k = i + 2; k < BOARD_SIZE; k++)
                         {
                             // compte le nombre d'aversaire sur la colonne
-                            if (board_get_cell(copy, i + k, j) == cell_opposite(me))
+                            if (board_get_cell(board, i + k, j) == cell_opposite(me))
                             {
                                 count += 1;
                                 // enregistre la distance du plus proche adversaire
@@ -137,7 +134,7 @@ int scored_move_compute(Move move, Cell me, Board board)
                         for (int k = i - 2; k > 0; k--)
                         {
                             // compte le nombre d'aversaire sur la colonne
-                            if (board_get_cell(copy, i + k, j) == cell_opposite(me))
+                            if (board_get_cell(board, i + k, j) == cell_opposite(me))
                             {
                                 count += 1;
                                 // enregistre la distance du plus proche adversaire
@@ -157,14 +154,14 @@ int scored_move_compute(Move move, Cell me, Board board)
                     }
                 }
                 // regarde si on est aligné à 2 horizontalement
-                if (board_get_cell(copy, i, j + 1) == me)
+                if (board_get_cell(board, i, j + 1) == me)
                 {
                     score += WEIGHT_NEIGHBOUR;
                     // regarde vers la droite si on est sur la même ligne que l'adversaire
                     for (int k = j; k < BOARD_SIZE; k++)
                     {
                         // compte le nombre d'aversaire sur la ligne
-                        if (board_get_cell(copy, i, j + k) == cell_opposite(me))
+                        if (board_get_cell(board, i, j + k) == cell_opposite(me))
                         {
                             count += 1;
                             // enregistre la distance du plus proche adversaire
@@ -189,7 +186,7 @@ int scored_move_compute(Move move, Cell me, Board board)
                     for (int k = j; k > 0; k--)
                     {
                         // compte le nombre d'aversaire sur la ligne
-                        if (board_get_cell(copy, i, j + k) == cell_opposite(me))
+                        if (board_get_cell(board, i, j + k) == cell_opposite(me))
                         {
                             count += 1;
                             // enregistre la distance du plus proche adversaire
@@ -211,14 +208,14 @@ int scored_move_compute(Move move, Cell me, Board board)
                     count = 0;
                     distance = 0;
                     // regarde si on est aligné à 3 horizontalement
-                    if (board_get_cell(copy, i, j + 2) == me)
+                    if (board_get_cell(board, i, j + 2) == me)
                     {
                         score += 2 * WEIGHT_NEIGHBOUR;
                         // regarde vers la droite si on est sur la même ligne que l'adversaire
                         for (int k = j + 2; k < BOARD_SIZE; k++)
                         {
                             // compte le nombre d'aversaire sur la ligne
-                            if (board_get_cell(copy, i, j + k) == cell_opposite(me))
+                            if (board_get_cell(board, i, j + k) == cell_opposite(me))
                             {
                                 count += 1;
                                 // enregistre la distance du plus proche adversaire
@@ -239,7 +236,7 @@ int scored_move_compute(Move move, Cell me, Board board)
                         for (int k = j - 2; k > 0; k--)
                         {
                             // compte le nombre d'aversaire sur la ligne
-                            if (board_get_cell(copy, i, j + k) == cell_opposite(me))
+                            if (board_get_cell(board, i, j + k) == cell_opposite(me))
                             {
                                 count += 1;
                                 // enregistre la distance du plus proche adversaire

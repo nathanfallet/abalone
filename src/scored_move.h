@@ -42,4 +42,4 @@ int scored_move_score(ScoredMove scored_move);
  * @param board Le plateau
  * @return Le score
 */
-int scored_move_compute(Move move, Cell me, Board board);
+int scored_move_compute(Cell me, Board board);

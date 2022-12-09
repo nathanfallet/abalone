@@ -19,7 +19,7 @@
  * @param threshold Le seuil de coup
  * @return Le move avec le score le plus élevé/faible
 */
-ScoredMove compare(Cell me, Board board, Move root, int profondeur, int max, int threshold);
+ScoredMove compare(Cell me, Cell playing, Board board, Move root, int profondeur, int max, int threshold);
 
 /**
  * Initialise l'IA avec le callback pour actualiser les joueurs
