@@ -199,13 +199,13 @@ gboolean gui_update_grid(GtkWidget *widget, cairo_t *cr, gpointer data) {
   }
 
     // On actualise aussi les labels
-    gtk_label_set_text(GTK_LABEL(label_me), g_strdup_printf("Vous êtes le %s", gui_last_me == CELL_BLACK ? "Noir" : "Blanc"));
+    gtk_label_set_text(GTK_LABEL(label_me), g_strdup_printf("Vous êtes : %s", gui_last_me == CELL_BLACK ? "Noir" : "Blanc"));
     switch (gui_last_state) {
         case STATE_PLAYING:
             gtk_label_set_text(GTK_LABEL(label_playing), g_strdup_printf("Au tour de : %s", gui_last_game->playing == CELL_BLACK ? "Noir" : "Blanc"));
             break;
         case STATE_WIN_BLACK:
-            gtk_label_set_text(GTK_LABEL(label_playing), g_strdup_printf("Le Noir a triomphé"));
+            gtk_label_set_text(GTK_LABEL(label_playing), g_strdup_printf("Le gagnant est : Noir"));
             break;
         case STATE_WIN_WHITE:
             gtk_label_set_text(GTK_LABEL(label_playing), g_strdup_printf("Le gagnant est : Blanc"));
