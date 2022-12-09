@@ -12,6 +12,7 @@ TESTS_SRCS := $(shell find $(TESTS_DIR) -name '*.c')
 # String substitution for every C file.
 # As an example, hello.c turns into ./build/hello.c.o
 OBJS := $(SRCS:%=$(BUILD_DIR)/%.o)
+OBJS_FOR_TESTS := $(addsuffix _tests, $(filter-out %/gui.c.o, $(filter-out %/main.c.o, $(OBJS))))
 TESTS_OBJS := $(TESTS_SRCS:%=$(BUILD_DIR)/%.o)
 
 # String substitution (suffix version without %).
@@ -28,13 +29,16 @@ INC_FLAGS := $(addprefix -I,$(INC_DIRS))
 # These files will have .d instead of .o as the output.
 CPPFLAGS := $(INC_FLAGS) -MMD -MP
 
+# Default task (Test and compile)
+all: clean tests $(TARGET_EXEC)
+
 # The final build step.
 $(TARGET_EXEC): $(OBJS)
 	gcc -pthread $(OBJS) -o $@ $(LDFLAGS) $$(pkg-config --libs --cflags gtk+-3.0)
 
 # The build step for tests.
 tests: $(OBJS) $(TESTS_OBJS)
-	gcc -Wall -fprofile-arcs -ftest-coverage -pthread $(addsuffix _tests, $(filter-out %/main.c.o, $(OBJS))) $(TESTS_OBJS) -o $(TARGET_EXEC)_tests $(LDFLAGS)
+	gcc -Wall -fprofile-arcs -ftest-coverage -pthread $(OBJS_FOR_TESTS) $(TESTS_OBJS) -o $(TARGET_EXEC)_tests $(LDFLAGS)
 	./$(TARGET_EXEC)_tests
 	gcov -pb $(filter-out %/main.c, $(OBJS))
 
@@ -46,8 +50,10 @@ $(BUILD_DIR)/%.c.o: %.c
 
 .PHONY: clean
 clean:
-	rm -r $(BUILD_DIR)
-	rm *.gcov
+	-rm abalone
+	-rm abalone_tests
+	-rm -r $(BUILD_DIR)
+	-rm *.gcov
 
 # Include the .d makefiles. The - at the front suppresses the errors of missing
 # Makefiles. Initially, all the .d files will be missing, and we don't want those

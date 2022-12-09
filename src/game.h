@@ -33,9 +33,33 @@ typedef struct game_t {
 } Game;
 typedef Game* PGame;
 
+
+/**
+ * Créé et initialise une partie
+ * @param owner Le joueur qui créé la partie (CELL_BLACK ou CELL_WHITE)
+ * @param ia_override Si l'IA doit jouer à la place du joueur
+ * @return La partie crée
+ */
 PGame game_new(Cell owner, int ia_override);
+
+/**
+ * Exécute le prochain tour de jeu
+ * @param game La partie
+ * @param move Le coup à jouer
+ */
 void game_turn(PGame game, Move move);
+
+/**
+ * Démarre la partie
+ * @param game La partie
+ */
 void game_start(PGame game);
+
+/**
+ * Renvoi l'état de la partie
+ * @param game La partie
+ * @return L'état de la partie
+ */
 State game_state(PGame game);
 
 #endif

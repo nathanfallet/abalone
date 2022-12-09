@@ -7,9 +7,9 @@
 
 // Stockage de trucs
 
-PGame last_game;
-Cell last_me;
-State last_state;
+PGame terminal_last_game;
+Cell terminal_last_me;
+State terminal_last_state;
 
 // Fonctions internes
 
@@ -66,26 +66,26 @@ void terminal_background_start(PGame game) {
 }
 
 void *terminal_background_turn() {
-    if (last_game->ia_override) {
+    if (terminal_last_game->ia_override) {
         // Ask IA
-        ia_update(last_game, last_me, last_state);
+        ia_update(terminal_last_game, terminal_last_me, terminal_last_state);
     } else {
         // Ask player
         Move move = MOVE_NONE;
         do {
             printf("Votre coup : ");
             move = terminal_read();
-        } while(move_apply(move, last_me, last_game->board, 0) == 0);
-        game_turn(last_game, move);
+        } while(move_apply(move, terminal_last_me, terminal_last_game->board, 0) == 0);
+        game_turn(terminal_last_game, move);
     }
     return NULL;
 }
 
 void terminal_update_intern(PGame game, Cell me, State state, int affichage) {
     // On enregistre les trucs (pour les passer au main thread)
-    last_game = game;
-    last_me = me;
-    last_state = state;
+    terminal_last_game = game;
+    terminal_last_me = me;
+    terminal_last_state = state;
 
     // Affichage
     if (affichage) {

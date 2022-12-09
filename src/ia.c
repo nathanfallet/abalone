@@ -102,7 +102,7 @@ void ia_update(PGame game, Cell me, State state){
 
     // Si c'est mon tour:
     if (game->playing == me) {
-        Move move = minimax(me, game->board, 2);
+        Move move = minimax(me, game->board, 4);
         game_turn(game, move);
     }
 }

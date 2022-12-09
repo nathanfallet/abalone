@@ -18,10 +18,10 @@ GtkWidget *entry;
 GtkWidget *button;
 GtkWidget *click;
 
-PGame last_game;
-Cell last_me;
-State last_state;
-Move last_move;
+PGame gui_last_game;
+Cell gui_last_me;
+State gui_last_state;
+Move gui_last_move;
 
 int has_clicked = 0;
 int i1, i2, j1, j2;
@@ -54,15 +54,15 @@ void gui_background_start(PGame game) {
 }
 
 void gui_background_turn() {
-    if (last_game->ia_override) {
+    if (gui_last_game->ia_override) {
         return;
     }
-    game_turn(last_game, last_move);
+    game_turn(gui_last_game, gui_last_move);
 }
 
 void gui_background_turn_ia() {
-    if (last_game->ia_override) {
-        ia_update(last_game, last_me, last_state);
+    if (gui_last_game->ia_override) {
+        ia_update(gui_last_game, gui_last_me, gui_last_state);
     }
 }
 
@@ -72,15 +72,15 @@ void gui_button_callback() {
     * après avoir mi à jour le jeu (et lu le move si besoin)
     */
 
-    if (last_game->playing != last_me || last_state != STATE_PLAYING) {
+    if (gui_last_game->playing != gui_last_me || gui_last_state != STATE_PLAYING) {
         return;
     }
 
     gtk_widget_set_sensitive(button, FALSE);
-    last_move = move_from_string(g_strdup(gtk_entry_get_text(GTK_ENTRY(entry))));
+    gui_last_move = move_from_string(g_strdup(gtk_entry_get_text(GTK_ENTRY(entry))));
     gtk_entry_set_text(GTK_ENTRY(entry), "");
 
-    if (move_apply(last_move, last_me, last_game->board, 0) == 0) {
+    if (move_apply(gui_last_move, gui_last_me, gui_last_game->board, 0) == 0) {
         gtk_label_set_text(GTK_LABEL(label_move), g_strdup_printf("Coup invalide !"));
         return;
     }
@@ -108,8 +108,8 @@ gboolean gui_click_callback(GtkWidget *widget, GdkEventButton *event, gpointer u
     if (has_clicked) {
         i2 = i;
         j2 = j;
-        last_move = move_create(i1, j1, i2, j2);
-        gtk_entry_set_text(GTK_ENTRY(entry), move_to_string(last_move));
+        gui_last_move = move_create(i1, j1, i2, j2);
+        gtk_entry_set_text(GTK_ENTRY(entry), move_to_string(gui_last_move));
         gui_button_callback();
         has_clicked = 0;
     } else {
@@ -159,7 +159,7 @@ gboolean gui_update_grid(GtkWidget *widget, cairo_t *cr, gpointer data) {
   		cairo_set_source_rgba(cr, 0, 0, 0, 1);
   		cairo_show_text(cr, char_to_string('A' + j));
   		int stroke = 0;
-  		switch (board_get_cell(last_game->board, i, j)) {
+  		switch (board_get_cell(gui_last_game->board, i, j)) {
                     case CELL_BLACK:
   	  		cairo_set_source_rgb(cr, 0.1, 0.1, 0.1);
                         break;
@@ -185,10 +185,10 @@ gboolean gui_update_grid(GtkWidget *widget, cairo_t *cr, gpointer data) {
   }
 
     // On actualise aussi les labels
-    gtk_label_set_text(GTK_LABEL(label_me), g_strdup_printf("Vous êtes : %s", last_me == CELL_BLACK ? "Noir" : "Blanc"));
-    switch (last_state) {
+    gtk_label_set_text(GTK_LABEL(label_me), g_strdup_printf("Vous êtes : %s", gui_last_me == CELL_BLACK ? "Noir" : "Blanc"));
+    switch (gui_last_state) {
         case STATE_PLAYING:
-            gtk_label_set_text(GTK_LABEL(label_playing), g_strdup_printf("Au tour de : %s", last_game->playing == CELL_BLACK ? "Noir" : "Blanc"));
+            gtk_label_set_text(GTK_LABEL(label_playing), g_strdup_printf("Au tour de : %s", gui_last_game->playing == CELL_BLACK ? "Noir" : "Blanc"));
             break;
         case STATE_WIN_BLACK:
             gtk_label_set_text(GTK_LABEL(label_playing), g_strdup_printf("Le gagnant est : Noir"));
@@ -200,16 +200,16 @@ gboolean gui_update_grid(GtkWidget *widget, cairo_t *cr, gpointer data) {
             gtk_label_set_text(GTK_LABEL(label_playing), g_strdup_printf("Temps écoulé !"));
             break;
     }
-    if (last_game->has_last_move) {
-        gtk_label_set_text(GTK_LABEL(label_move), g_strdup_printf("Dernier coup : %s", move_to_string(last_game->last_move)));
+    if (gui_last_game->has_last_move) {
+        gtk_label_set_text(GTK_LABEL(label_move), g_strdup_printf("Dernier coup : %s", move_to_string(gui_last_game->last_move)));
     }
 
     // Si c'est mon tour
     gtk_widget_set_sensitive(
         button,
-        last_game->playing == last_me &&
-        last_game->ia_override == 0 &&
-        last_state == STATE_PLAYING ? TRUE : FALSE
+        gui_last_game->playing == gui_last_me &&
+        gui_last_game->ia_override == 0 &&
+        gui_last_state == STATE_PLAYING ? TRUE : FALSE
     );
 
     // C'est updated, on dit qu'on s'arrête là (sinon ça update à l'infini)
@@ -302,9 +302,9 @@ void gui_update(PGame game, Cell me, State state) {
     */
 
     // On enregistre les trucs (pour les passer au main thread)
-    last_game = game;
-    last_me = me;
-    last_state = state;
+    gui_last_game = game;
+    gui_last_me = me;
+    gui_last_state = state;
 
     // On laisse l'UI se mettre à jour (sur le main thread)
     GSource *source = g_idle_source_new();

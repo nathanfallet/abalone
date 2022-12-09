@@ -43,12 +43,12 @@ int scored_move_compute(Move move, Cell me, Board board) {
             if(board_get_cell(copy, i, j) == me){
                 //regarde si on est aligné à 2
                 if(board_get_cell(copy, i+1,j) == me){
-                    score += WEIGHT_PROXIMITY;
+                    score += WEIGHT_NEIGHBOUR;
                     for(int k=i;k<BOARD_SIZE;k++){
             		if(board_get_cell(copy, i+k, j) == cell_opposite(me)){
             			count+=1;
             			if(count==1){
-            				score*=WEIGHT_OPPOSITE;
+            				score+=3*WEIGHT_OPPOSITE;
             			}
             			else{
             				score-=WEIGHT_OPPOSITE;
@@ -60,7 +60,7 @@ int scored_move_compute(Move move, Cell me, Board board) {
             		if(board_get_cell(copy, i+k, j) == cell_opposite(me)){
             			count+=1;
             			if(count==1){
-            				score*=WEIGHT_OPPOSITE;
+            				score+=3*WEIGHT_OPPOSITE;
             			}
             			else{
             				score-=WEIGHT_OPPOSITE;
@@ -74,7 +74,7 @@ int scored_move_compute(Move move, Cell me, Board board) {
                     }*/
                     //regarde si on est aligné à 3
                     if(board_get_cell(copy, i+2, j) == me){
-                        score += 2*WEIGHT_PROXIMITY;
+                        score += 2*WEIGHT_NEIGHBOUR;
                         /*cherche s'il y a un aversaire au bout de la ligne
                         if(board_get_cell(copy, i+3,j) == cell_opposite(me)){
                             score += WeiGTH_OPPOSITE;
@@ -83,7 +83,7 @@ int scored_move_compute(Move move, Cell me, Board board) {
             		if(board_get_cell(copy, i+k, j) == cell_opposite(me)){
             			count+=1;
             			if(count<=2){
-            				score*=WEIGHT_OPPOSITE;
+            				score+=3*WEIGHT_OPPOSITE;
             			}
             		   }
             	    	}
@@ -91,7 +91,7 @@ int scored_move_compute(Move move, Cell me, Board board) {
             			if(board_get_cell(copy, i+k, j) == cell_opposite(me)){
             				count+=1;
             				if(count<=2){
-            					score*=WEIGHT_OPPOSITE;
+            					score+=3*WEIGHT_OPPOSITE;
             				}
             		}
             	    }
@@ -99,7 +99,7 @@ int scored_move_compute(Move move, Cell me, Board board) {
                 }
                 //regarde si on est aligné à 2
                 if(board_get_cell(copy, i,j+1) == me){
-                    score += WEIGHT_PROXIMITY;
+                    score += WEIGHT_NEIGHBOUR;
                     //cherche s'il y a un aversaire au bout de la ligne
                     /*if(board_get_cell(copy, i, j+2) == cell_opposite(me) || board_get_cell(copy, i, j-1) == cell_opposite(me)){
                         score += WeiGTH_OPPOSITE;
@@ -108,7 +108,7 @@ int scored_move_compute(Move move, Cell me, Board board) {
             		if(board_get_cell(copy, i, j+k) == cell_opposite(me)){
             			count+=1;
             			if(count==1){
-            				score*=WEIGHT_OPPOSITE;
+            				score+=3*WEIGHT_OPPOSITE;
             			}
             			else{
             				score-=WEIGHT_OPPOSITE;
@@ -120,7 +120,7 @@ int scored_move_compute(Move move, Cell me, Board board) {
             		if(board_get_cell(copy, i, j+k) == cell_opposite(me)){
             			count+=1;
             			if(count==1){
-            				score*=WEIGHT_OPPOSITE;
+            				score+=3*WEIGHT_OPPOSITE;
             			}
             			else{
             				score-=WEIGHT_OPPOSITE;
@@ -130,7 +130,7 @@ int scored_move_compute(Move move, Cell me, Board board) {
             	    }
                     //regarde si on est aligné à 3
                     if(board_get_cell(copy, i, j+2) == me){
-                        score += 2*WEIGHT_PROXIMITY;
+                        score += 2*WEIGHT_NEIGHBOUR;
                         /*cherche s'il y a un aversaire au bout de la ligne
                         if(board_get_cell(copy, i,j+3) == cell_opposite(me)){
                             score += WeiGTH_OPPOSITE;
@@ -139,7 +139,7 @@ int scored_move_compute(Move move, Cell me, Board board) {
             			if(board_get_cell(copy, i, j+k) == cell_opposite(me)){
             				count+=1;
             				if(count<=2){
-            					score*=WEIGHT_OPPOSITE;
+            					score+=3*WEIGHT_OPPOSITE;
             			}
             		   }
             	    	}
@@ -147,7 +147,7 @@ int scored_move_compute(Move move, Cell me, Board board) {
             			if(board_get_cell(copy, i, j+k) == cell_opposite(me)){
             				count+=1;
             				if(count<=2){
-            					score*=WEIGHT_OPPOSITE;
+            					score+=3*WEIGHT_OPPOSITE;
             				}
             			}
             	    	}
