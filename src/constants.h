@@ -3,8 +3,18 @@
 
 #define BOARD_SIZE 8
 
-#define CELL_EMPTY 0
+/**
+ * cellule vide 
+ */
+#define CELL_EMPTY 0 
+
+/**
+ * cellule noire 
+ */
 #define CELL_BLACK 1
+/**
+ * cellule blanche
+ */
 #define CELL_WHITE 2
 
 #define STATE_PLAYING 0

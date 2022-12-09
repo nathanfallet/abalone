@@ -33,8 +33,10 @@ void test_board_set_cell() {
     Board board;
     board_create(board);
     board_set_cell(board, 0, 0, CELL_BLACK);
+    board_set_cell(board, 0, 1, CELL_EMPTY);
     board_set_cell(board, 7, 0, CELL_WHITE);
     assert(board_get_cell(board, 0, 0) == CELL_BLACK);
+    assert(board_get_cell(board, 0, 1) == CELL_EMPTY);
     assert(board_get_cell(board, 7, 0) == CELL_WHITE);
     board_set_cell(board, 0, -1, CELL_EMPTY);
     board_set_cell(board, -1, 0, CELL_EMPTY);
