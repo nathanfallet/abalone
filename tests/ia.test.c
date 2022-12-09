@@ -16,8 +16,8 @@ void test_ia_minimax_victory() {
 	board_set_cell(board, 7, 1, CELL_EMPTY);
 	assert(ia_minimax(CELL_BLACK, board, 1) == move_from_string("C1:A1"));
 	assert(ia_minimax(CELL_BLACK, board, 2) == move_from_string("C1:A1"));
-	assert(ia_minimax(CELL_BLACK, board, 3) == move_from_string("C1:A1")); // TODO: Fix this
-	assert(ia_minimax(CELL_BLACK, board, 4) == move_from_string("C1:A1")); // TODO: Same
+	assert(ia_minimax(CELL_BLACK, board, 3) == move_from_string("C1:A1"));
+	assert(ia_minimax(CELL_BLACK, board, 4) == move_from_string("C1:A1"));
 }
 
 void test_ia() {
