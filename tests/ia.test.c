@@ -7,6 +7,18 @@ void test_ia_update() {
 	assert(game->playing == CELL_WHITE);
 }
 
+void test_ia_update_not_my_turn() {
+	PGame game = game_new(CELL_BLACK, 0);
+	ia_update(game, CELL_WHITE, STATE_PLAYING);
+	assert(game->playing == CELL_BLACK);
+}
+
+void test_ia_update_not_playing() {
+	PGame game = game_new(CELL_BLACK, 0);
+	ia_update(game, CELL_BLACK, STATE_WIN_BLACK);
+	assert(game->playing == CELL_BLACK);
+}
+
 void test_ia_minimax_victory() {
 	Board board;
 	board_create(board);
@@ -22,5 +34,7 @@ void test_ia_minimax_victory() {
 
 void test_ia() {
 	test_ia_update();
+	test_ia_update_not_my_turn();
+	test_ia_update_not_playing();
 	test_ia_minimax_victory();
 }

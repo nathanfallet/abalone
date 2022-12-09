@@ -24,12 +24,4 @@ void terminal_init(Cell owner, int ia_override, void (*refresh_opponent)(PGame g
  */
 void terminal_update(PGame game, Cell me, State state);
 
-/**
- * actualise le terrain sans affichage
- * @param game La partie
- * @param me Le joueur
- * @param state L'état de la partie
- */
-void terminal_update_no_print(PGame game, Cell me, State state);
-
 #endif

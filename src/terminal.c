@@ -19,7 +19,7 @@ Move terminal_read() {
     return move_from_string(input);
 }
 
-int terminal_print(Board board) {
+void terminal_print(Board board) {
     char *alpha = {"ABCDEFGH"}; // colonne lettre
     printf("\n   ");
     for (int i = 1; i <= 8; i++) {
@@ -57,7 +57,6 @@ int terminal_print(Board board) {
     printf("         White   ");
     color("00");
     printf("\n");
-    return 0;
 }
 
 void terminal_background_start(PGame game) {
@@ -82,16 +81,28 @@ void *terminal_background_turn() {
     return NULL;
 }
 
-void terminal_update_intern(PGame game, Cell me, State state, int affichage) {
+// Fonctions publiques
+
+void terminal_init(Cell owner, int ia_override, void (*refresh_opponent)(PGame game, Cell me, State state)) {
+    PGame game = game_new(owner, ia_override);
+    game->refresh = terminal_update;
+    game->refresh_opponent = refresh_opponent;
+
+    terminal_background_start(game);
+
+    while (1) {
+        sleep(1);
+    }
+}
+
+void terminal_update(PGame game, Cell me, State state) {
     // On enregistre les trucs (pour les passer au main thread)
     terminal_last_game = game;
     terminal_last_me = me;
     terminal_last_state = state;
 
     // Affichage
-    if (affichage) {
-        terminal_print(game->board);
-    }
+    terminal_print(game->board);
 
     // Fin de la partie
     switch (state) {
@@ -110,26 +121,4 @@ void terminal_update_intern(PGame game, Cell me, State state, int affichage) {
         pthread_t thread;
         pthread_create(&thread, NULL, terminal_background_turn, NULL);
     }
-}
-
-// Fonctions publiques
-
-void terminal_init(Cell owner, int ia_override, void (*refresh_opponent)(PGame game, Cell me, State state)) {
-    PGame game = game_new(owner, ia_override);
-    game->refresh = terminal_update;
-    game->refresh_opponent = refresh_opponent;
-
-    terminal_background_start(game);
-
-    while (1) {
-        sleep(1);
-    }
-}
-
-void terminal_update(PGame game, Cell me, State state) {
-    terminal_update_intern(game, me, state, 1);
-}
-
-void terminal_update_no_print(PGame game, Cell me, State state) {
-    terminal_update_intern(game, me, state, 0);
 }

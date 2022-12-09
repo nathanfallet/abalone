@@ -1,3 +1,5 @@
 ignore:
   - "tests"
-  - "src/main.c"
+  - "src/main.c" # Main is not compiled for tests
+  - "src/gui.c" # We cannot test UI
+  - "src/terminal.c" # It's like UI, but in a terminal

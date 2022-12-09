@@ -22,13 +22,11 @@ ScoredMove ia_minimax_compare(Cell me, Cell playing, Board board, Move root, int
             break;
         }
 
-        // Itération des moves possibles
-        ScoredMove sc = MOVE_NONE;
-
         // On applique le move
         Board copy;
         board_clone(board, copy);
         move_apply(move, playing, copy, 1);
+        ScoredMove sc = MOVE_NONE;
 
         State state = board_state(copy);
         if (state != STATE_PLAYING) {
@@ -69,9 +67,9 @@ ScoredMove ia_minimax_compare(Cell me, Cell playing, Board board, Move root, int
         // Check pour la sélection du move
         int selected_score = scored_move_score(move_selected);
         int score = scored_move_score(sc);
-        if (sc != MOVE_NONE && (move_selected == MOVE_NONE ||
-                                (max ? score > selected_score : score < selected_score) ||
-                                (score == selected_score && rand() % 8 == 0))) {
+        if (move_selected == MOVE_NONE ||
+            (max ? score > selected_score : score < selected_score) ||
+            (score == selected_score && rand() % 8 == 0)) {
             move_selected = sc;
         }
 
@@ -79,22 +77,10 @@ ScoredMove ia_minimax_compare(Cell me, Cell playing, Board board, Move root, int
         i++;
     }
 
-    if (move_selected == MOVE_NONE) {
-        // Move par défaut (pour éviter les erreurs)
-        return scored_move_new(root, root, 0);
-    }
     return move_selected;
 }
 
 // Implémentation des fonctions de base pour intéragir avec le jeu
-
-void ia_init(Cell owner, void (*refresh_opponent)(PGame game, Cell me, State state)) {
-    PGame game = game_new(owner, 0);
-    game->refresh = ia_update;
-    game->refresh_opponent = refresh_opponent;
-
-    game_start(game);
-}
 
 void ia_update(PGame game, Cell me, State state) {
     // Fin de partie

@@ -20,13 +20,6 @@
 ScoredMove compare(Cell me, Cell playing, Board board, Move root, int profondeur, int max, int threshold);
 
 /**
- * Initialise l'IA avec le callback pour actualiser les joueurs
- * @param owner Le joueur qui créé la partie (CELL_BLACK ou CELL_WHITE)
- * @param refresh_opponent Le callback pour actualiser l'adversaire
- */
-void ia_init(Cell owner, void (*refresh_opponent)(PGame game, Cell me, State state));
-
-/**
  * Exécute le prochain tour de jeu de l'IA
  * @param game La partie
  * @param me Le joueur
