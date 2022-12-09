@@ -12,8 +12,6 @@ void test_game_turn_new_player() {
 }
 
 
-
-
 void test_game() {
  test_game_turn_new_player();
 }
