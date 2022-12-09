@@ -86,11 +86,6 @@ ScoredMove compare(Cell me, Cell playing, Board board, Move root, int profondeur
     return move_selected;
 }
 
-Move minimax(Cell me, Board board, int profondeur) {
-    ScoredMove move = compare(me, me, board, MOVE_NONE, profondeur, 1, INT_MIN);
-    return scored_move_root(move);
-}
-
 // Implémentation des fonctions de base pour intéragir avec le jeu
 
 void ia_init(Cell owner, void (*refresh_opponent)(PGame game, Cell me, State state)) {
@@ -109,7 +104,12 @@ void ia_update(PGame game, Cell me, State state){
 
     // Si c'est mon tour:
     if (game->playing == me) {
-        Move move = minimax(me, game->board, 4);
+        Move move = ia_minimax(me, game->board, 4);
         game_turn(game, move);
     }
+}
+
+Move ia_minimax(Cell me, Board board, int profondeur) {
+    ScoredMove move = compare(me, me, board, MOVE_NONE, profondeur, 1, INT_MIN);
+    return scored_move_root(move);
 }
