@@ -5,7 +5,6 @@
 #include "cell.h"
 #include "state.h"
 
-
 /**
  * Initialise la connexion réseau
  * @param owner La cellule du joueur

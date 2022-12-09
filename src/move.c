@@ -40,8 +40,7 @@ Move move_from_string(char *string) {
         fromLine - 'A',
         string[1] - '1',
         toLine - 'A',
-        string[4] - '1'
-    );
+        string[4] - '1');
 }
 
 char *move_to_string(Move move) {
@@ -142,7 +141,7 @@ int move_line_three(Move move, Cell me, Board board, int apply) {
     if (board_get_cell(board, move_get_from_line(move) + sign(move_get_to_line(move) - move_get_from_line(move)), move_get_from_column(move) + sign(move_get_to_column(move) - move_get_from_column(move))) != me) {
         return 0;
     }
-    if (board_get_cell(board, move_get_from_line(move) + 2*sign(move_get_to_line(move) - move_get_from_line(move)), move_get_from_column(move) + 2*sign(move_get_to_column(move) - move_get_from_column(move))) != me) {
+    if (board_get_cell(board, move_get_from_line(move) + 2 * sign(move_get_to_line(move) - move_get_from_line(move)), move_get_from_column(move) + 2 * sign(move_get_to_column(move) - move_get_from_column(move))) != me) {
         return 0;
     }
 
@@ -171,8 +170,8 @@ int move_line_three(Move move, Cell me, Board board, int apply) {
             return 1;
         }
         if (arrivee2 == cell_opposite(me)) {
-            int toLine3 = move_get_to_line(move) + 2*sign(move_get_to_line(move) - move_get_from_line(move));
-            int toColumn3 = move_get_to_column(move) + 2*sign(move_get_to_column(move) - move_get_from_column(move));
+            int toLine3 = move_get_to_line(move) + 2 * sign(move_get_to_line(move) - move_get_from_line(move));
+            int toColumn3 = move_get_to_column(move) + 2 * sign(move_get_to_column(move) - move_get_from_column(move));
             Cell arrivee3 = board_get_cell(board, toLine3, toColumn3);
 
             // On vérifie que la case d'arrivée est vide
@@ -186,7 +185,7 @@ int move_line_three(Move move, Cell me, Board board, int apply) {
                 board_set_cell(board, toLine2, toColumn2, cell_opposite(me));
                 board_set_cell(board, move_get_to_line(move), move_get_to_column(move), me);
                 board_set_cell(board, move_get_from_line(move) + sign(move_get_to_line(move) - move_get_from_line(move)), move_get_from_column(move) + sign(move_get_to_column(move) - move_get_from_column(move)), me);
-                board_set_cell(board, move_get_from_line(move) + 2*sign(move_get_to_line(move) - move_get_from_line(move)), move_get_from_column(move) + 2*sign(move_get_to_column(move) - move_get_from_column(move)), me);
+                board_set_cell(board, move_get_from_line(move) + 2 * sign(move_get_to_line(move) - move_get_from_line(move)), move_get_from_column(move) + 2 * sign(move_get_to_column(move) - move_get_from_column(move)), me);
                 board_set_cell(board, move_get_from_line(move), move_get_from_column(move), CELL_EMPTY);
             }
             return 1;
@@ -327,124 +326,124 @@ int move_apply(Move move, Cell me, Board board, int apply) {
 // Coups disponibles
 
 void move_available(Cell me, Board board, Move array[MOVE_LIST_SIZE]) {
-    // Liste le nombre de déplacement possible        
+    // Liste le nombre de déplacement possible
     int index = 0;
-    
-    for(int line = 0; line < BOARD_SIZE; line++) {
-        for(int col=0; col<BOARD_SIZE; col++) {
+
+    for (int line = 0; line < BOARD_SIZE; line++) {
+        for (int col = 0; col < BOARD_SIZE; col++) {
             // déplacement pion solo
             // on vérifie si la case a droite est libre
-            if (col < BOARD_SIZE - 1 && move_line_one(move_create(line, col, line, col+1), me, board, 0)) {
-                array[index] = move_create(line, col, line, col+1);
+            if (col < BOARD_SIZE - 1 && move_line_one(move_create(line, col, line, col + 1), me, board, 0)) {
+                array[index] = move_create(line, col, line, col + 1);
                 index++;
             }
             // on vérifie si la case en bas est libre
-            if (line < BOARD_SIZE - 1 && move_line_one(move_create(line, col, line+1, col), me, board, 0)) {
-                array[index] = move_create(line, col, line+1, col);
+            if (line < BOARD_SIZE - 1 && move_line_one(move_create(line, col, line + 1, col), me, board, 0)) {
+                array[index] = move_create(line, col, line + 1, col);
                 index++;
             }
             // on vérifie si la case en gauche est libre
-            if (col > 0 && move_line_one(move_create(line, col, line, col-1), me, board, 0)) {
-                array[index] = move_create(line, col, line, col-1);
+            if (col > 0 && move_line_one(move_create(line, col, line, col - 1), me, board, 0)) {
+                array[index] = move_create(line, col, line, col - 1);
                 index++;
             }
             // on vérifie si la case en haut est libre
-            if (line > 0 && move_line_one(move_create(line, col, line-1, col), me, board, 0)) {
-                array[index] = move_create(line, col, line-1, col);
+            if (line > 0 && move_line_one(move_create(line, col, line - 1, col), me, board, 0)) {
+                array[index] = move_create(line, col, line - 1, col);
                 index++;
             }
 
             // déplacement 2 pions
             // en ligne
             // on vérifie si le déplacement en ligne 2 pions vers la droite (libre ou pion ennemi)
-            if (col < BOARD_SIZE - 2 && move_line_two(move_create(line, col, line, col+2), me, board, 0)) {
-                array[index] = move_create(line, col, line, col+2);
+            if (col < BOARD_SIZE - 2 && move_line_two(move_create(line, col, line, col + 2), me, board, 0)) {
+                array[index] = move_create(line, col, line, col + 2);
                 index++;
             }
             // on vérifie si le déplacement en ligne 2 pions vers le bas
-            if (line < BOARD_SIZE - 2 && move_line_two(move_create(line, col, line+2, col), me, board, 0)) {
-                array[index] = move_create(line, col, line+2, col);
+            if (line < BOARD_SIZE - 2 && move_line_two(move_create(line, col, line + 2, col), me, board, 0)) {
+                array[index] = move_create(line, col, line + 2, col);
                 index++;
             }
             // on vérifie si le déplacement en ligne 2 pions vers la gauche
-            if (col > 0 && move_line_two(move_create(line, col+1, line, col-1), me, board, 0)) {
-                array[index] = move_create(line, col+1, line, col-1);
+            if (col > 0 && move_line_two(move_create(line, col + 1, line, col - 1), me, board, 0)) {
+                array[index] = move_create(line, col + 1, line, col - 1);
                 index++;
             }
             // on vérifie si le déplacement en ligne 2 pions vers le haut
-            if (line > 0 && move_line_two(move_create(line+1, col, line-1, col), me, board, 0)) {
-                array[index] = move_create(line+1, col, line-1, col);
+            if (line > 0 && move_line_two(move_create(line + 1, col, line - 1, col), me, board, 0)) {
+                array[index] = move_create(line + 1, col, line - 1, col);
                 index++;
             }
             // latéralle
             // on vérifie si le déplacement en ligne 2 pions horizontale vers le haut
-            if (col < BOARD_SIZE - 1 && line > 0 && move_lateral_two(move_create(line, col, line-1, col+1), me, board, 0)) {
-                array[index] = move_create(line, col, line-1, col+1);
+            if (col < BOARD_SIZE - 1 && line > 0 && move_lateral_two(move_create(line, col, line - 1, col + 1), me, board, 0)) {
+                array[index] = move_create(line, col, line - 1, col + 1);
                 index++;
             }
             // on vérifie si le déplacement en ligne 2 pions horizontale vers le bas
-            if (col < BOARD_SIZE - 1 && line < BOARD_SIZE - 1 && move_lateral_two(move_create(line, col, line+1, col+1), me, board, 0)) {
-                array[index] = move_create(line, col, line+1, col+1);
+            if (col < BOARD_SIZE - 1 && line < BOARD_SIZE - 1 && move_lateral_two(move_create(line, col, line + 1, col + 1), me, board, 0)) {
+                array[index] = move_create(line, col, line + 1, col + 1);
                 index++;
             }
             // on vérifie si le déplacement en ligne 2 pions verticale vers la gauche
-            if (col > 0 && line < BOARD_SIZE - 1 && move_lateral_two(move_create(line, col, line+1, col-1), me, board, 0)) {
-                array[index] = move_create(line, col, line+1, col-1);
+            if (col > 0 && line < BOARD_SIZE - 1 && move_lateral_two(move_create(line, col, line + 1, col - 1), me, board, 0)) {
+                array[index] = move_create(line, col, line + 1, col - 1);
                 index++;
             }
             // on vérifie si le déplacement en ligne 2 pions verticale vers la droite
-            if (col < BOARD_SIZE - 1 && line < BOARD_SIZE - 1 && move_lateral_two(move_create(line, col, line+1, col+1), me, board, 0)) {
-                array[index] = move_create(line, col, line+1, col+1);
+            if (col < BOARD_SIZE - 1 && line < BOARD_SIZE - 1 && move_lateral_two(move_create(line, col, line + 1, col + 1), me, board, 0)) {
+                array[index] = move_create(line, col, line + 1, col + 1);
                 index++;
             }
 
             // déplacement 3 pions
             // en ligne
             // on vérifie si le déplacement en ligne 3 pions vers la droite (libre ou pion ennemi)
-            if (col < BOARD_SIZE - 3 && move_line_three(move_create(line, col, line, col+3), me, board, 0)) {
-                array[index] = move_create(line, col, line, col+3);
+            if (col < BOARD_SIZE - 3 && move_line_three(move_create(line, col, line, col + 3), me, board, 0)) {
+                array[index] = move_create(line, col, line, col + 3);
                 index++;
             }
             // on vérifie si le déplacement en ligne 3 pions vers le bas
-            if (line < BOARD_SIZE - 3 && move_line_three(move_create(line, col, line+3, col), me, board, 0)) {
-                array[index] = move_create(line, col, line+3, col);
+            if (line < BOARD_SIZE - 3 && move_line_three(move_create(line, col, line + 3, col), me, board, 0)) {
+                array[index] = move_create(line, col, line + 3, col);
                 index++;
             }
             // on vérifie si le déplacement en ligne 3 pions vers la gauche
-            if (col > 0 && move_line_three(move_create(line, col+2, line, col-1), me, board, 0)) {
-                array[index] = move_create(line, col+2, line, col-1);
+            if (col > 0 && move_line_three(move_create(line, col + 2, line, col - 1), me, board, 0)) {
+                array[index] = move_create(line, col + 2, line, col - 1);
                 index++;
             }
             // on vérifie si le déplacement en ligne 3 pions vers le haut
-            if (line > 0 && move_line_three(move_create(line+2, col, line-1, col), me, board, 0)) {
-                array[index] = move_create(line+2, col, line-1, col);
+            if (line > 0 && move_line_three(move_create(line + 2, col, line - 1, col), me, board, 0)) {
+                array[index] = move_create(line + 2, col, line - 1, col);
                 index++;
             }
             // latéralle
             // on vérifie si le déplacement en ligne 3 pions horizontale vers le haut
-            if (col < BOARD_SIZE - 2 && line > 0 && move_lateral_three(move_create(line, col, line-1, col+2), me, board, 0)) {
-                array[index] = move_create(line, col, line-1, col+2);
+            if (col < BOARD_SIZE - 2 && line > 0 && move_lateral_three(move_create(line, col, line - 1, col + 2), me, board, 0)) {
+                array[index] = move_create(line, col, line - 1, col + 2);
                 index++;
             }
             // on vérifie si le déplacement en ligne 3 pions horizontale vers le bas
-            if (col < BOARD_SIZE - 2 && line < BOARD_SIZE - 1 && move_lateral_three(move_create(line, col, line+1, col+2), me, board, 0)) {
-                array[index] = move_create(line, col, line+1, col+2);
+            if (col < BOARD_SIZE - 2 && line < BOARD_SIZE - 1 && move_lateral_three(move_create(line, col, line + 1, col + 2), me, board, 0)) {
+                array[index] = move_create(line, col, line + 1, col + 2);
                 index++;
             }
             // on vérifie si le déplacement en ligne 3 pions verticale vers la gauche
-            if (col > 0 && line < BOARD_SIZE - 2 && move_lateral_three(move_create(line, col, line+2, col-1), me, board, 0)) {
-                array[index] = move_create(line, col, line+2, col-1);
+            if (col > 0 && line < BOARD_SIZE - 2 && move_lateral_three(move_create(line, col, line + 2, col - 1), me, board, 0)) {
+                array[index] = move_create(line, col, line + 2, col - 1);
                 index++;
             }
             // on vérifie si le déplacement en ligne 3 pions verticale vers la droite
-            if (col < BOARD_SIZE - 1 && line < BOARD_SIZE - 2 && move_lateral_three(move_create(line, col, line+2, col+1), me, board, 0)) {
-                array[index] = move_create(line, col, line+2, col+1);
+            if (col < BOARD_SIZE - 1 && line < BOARD_SIZE - 2 && move_lateral_three(move_create(line, col, line + 2, col + 1), me, board, 0)) {
+                array[index] = move_create(line, col, line + 2, col + 1);
                 index++;
             }
         }
     }
 
     /* End of array */
-   // printf("nombre de coup dispo : %i \n", index);
+    // printf("nombre de coup dispo : %i \n", index);
     array[index] = MOVE_NONE;
 }

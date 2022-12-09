@@ -1,5 +1,5 @@
-#ifndef GAME_H_
-#define GAME_H_
+#ifndef GAME_H
+#define GAME_H
 
 #include "constants.h"
 #include "board.h"
@@ -24,8 +24,7 @@ typedef struct game_t {
 	void (*refresh)(struct game_t *game, Cell me, State state);
 	void (*refresh_opponent)(struct game_t *game, Cell me, State state);
 } Game;
-typedef Game* PGame;
-
+typedef Game *PGame;
 
 /**
  * Créé et initialise une partie

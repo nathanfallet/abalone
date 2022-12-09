@@ -18,14 +18,15 @@ void print_help() {
 void default_init(Cell me, int ia_override, void (*update)(PGame game, Cell me, State state)) {
     if (INIT_DEFAULT == INIT_TERMINAL) {
         terminal_init(me, ia_override, update);
-    } else if (INIT_DEFAULT == INIT_GUI) {
+    }
+    else if (INIT_DEFAULT == INIT_GUI) {
         gui_init(me, ia_override, update);
     }
 }
 
-int main(int argc, char* argv[]) {
+int main(int argc, char *argv[]) {
     // Init du random
-    srand(time( NULL ));
+    srand(time(NULL));
 
     // Status
     int init = INIT_NONE;
@@ -42,40 +43,44 @@ int main(int argc, char* argv[]) {
             return 1;
         }
         switch (argv[i][1]) {
-            case 'l':
-                if (strcmp(argv[i+1], "noir") == 0) {
-                    init = INIT_DEFAULT;
-                } else if (strcmp(argv[i+1], "blanc") == 0) {
-                    init = INIT_DEFAULT;
-                    me = CELL_WHITE;
-                } else {
-                    print_help();
-                    return 1;
-                }
-                break;
-            case 's':
-                init = INIT_NETWORK;
+        case 'l':
+            if (strcmp(argv[i + 1], "noir") == 0) {
+                init = INIT_DEFAULT;
+            }
+            else if (strcmp(argv[i + 1], "blanc") == 0) {
+                init = INIT_DEFAULT;
                 me = CELL_WHITE;
-                port = atoi(argv[i+1]);
-                break;
-            case 'c':
-                init = INIT_NETWORK;
-                strcpy(address, strtok(argv[i+1], ":"));
-                port = atoi(strtok(NULL, ":"));
-                break;
-            case 'm':
-                if (strcmp(argv[i+1], "me") == 0) {
-                    ia_override = 0;
-                } else if (strcmp(argv[i+1], "ia") == 0) {
-                    ia_override = 1;
-                } else {
-                    print_help();
-                    return 1;
-                }
-                break;
-            default:
+            }
+            else {
                 print_help();
                 return 1;
+            }
+            break;
+        case 's':
+            init = INIT_NETWORK;
+            me = CELL_WHITE;
+            port = atoi(argv[i + 1]);
+            break;
+        case 'c':
+            init = INIT_NETWORK;
+            strcpy(address, strtok(argv[i + 1], ":"));
+            port = atoi(strtok(NULL, ":"));
+            break;
+        case 'm':
+            if (strcmp(argv[i + 1], "me") == 0) {
+                ia_override = 0;
+            }
+            else if (strcmp(argv[i + 1], "ia") == 0) {
+                ia_override = 1;
+            }
+            else {
+                print_help();
+                return 1;
+            }
+            break;
+        default:
+            print_help();
+            return 1;
         }
         i += 2;
     }
@@ -87,15 +92,15 @@ int main(int argc, char* argv[]) {
 
     // Call
     switch (init) {
-        case INIT_DEFAULT:
-            default_init(me, ia_override, ia_update);
-            break;
-        case INIT_NETWORK:
-            network_init(me, ia_override, default_init, address, port);
-            break;
-        default:
-            print_help();
-            return 1;
+    case INIT_DEFAULT:
+        default_init(me, ia_override, ia_update);
+        break;
+    case INIT_NETWORK:
+        network_init(me, ia_override, default_init, address, port);
+        break;
+    default:
+        print_help();
+        return 1;
     }
 
     return 0;

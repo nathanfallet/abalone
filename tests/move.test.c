@@ -32,102 +32,94 @@ void test_move_to_string() {
     assert(strcmp(string, "B3:D5") == 0);
 }
 
-// test move
-
-void  test_move_apply_line_one(){
+void test_move_apply_line_one() {
     Board board;
     board_create(board);
     Move move = move_from_string("A1:B1");
-    assert (move_apply(move, CELL_WHITE, board, 1));
-    assert (board_get_cell(board, 0, 0) == CELL_EMPTY);
-    assert (board_get_cell(board, 1, 0) == CELL_WHITE);
+    assert(move_apply(move, CELL_WHITE, board, 1));
+    assert(board_get_cell(board, 0, 0) == CELL_EMPTY);
+    assert(board_get_cell(board, 1, 0) == CELL_WHITE);
 }
 
-void  test_move_apply_line_two(){
+void test_move_apply_line_two() {
     Board board;
     board_create(board);
     Move move = move_from_string("A2:C2");
-    assert (move_apply(move, CELL_WHITE, board, 1));
-    assert (board_get_cell(board, 0, 1) == CELL_EMPTY);
-    assert (board_get_cell(board, 1, 1) == CELL_WHITE);
-        assert (board_get_cell(board, 2, 1) == CELL_WHITE);
+    assert(move_apply(move, CELL_WHITE, board, 1));
+    assert(board_get_cell(board, 0, 1) == CELL_EMPTY);
+    assert(board_get_cell(board, 1, 1) == CELL_WHITE);
+    assert(board_get_cell(board, 2, 1) == CELL_WHITE);
 }
 
-void  test_move_apply_line_three(){
+void test_move_apply_line_three() {
     Board board;
     board_create(board);
     Move move = move_from_string("B4:B1");
-    assert (move_apply(move, CELL_WHITE, board, 1));
-    assert (board_get_cell(board, 1, 3) == CELL_EMPTY);
-    assert (board_get_cell(board, 1, 0) == CELL_WHITE);
-    assert (board_get_cell(board, 1, 1) == CELL_WHITE);
-    assert (board_get_cell(board, 1, 2) == CELL_WHITE);
+    assert(move_apply(move, CELL_WHITE, board, 1));
+    assert(board_get_cell(board, 1, 3) == CELL_EMPTY);
+    assert(board_get_cell(board, 1, 0) == CELL_WHITE);
+    assert(board_get_cell(board, 1, 1) == CELL_WHITE);
+    assert(board_get_cell(board, 1, 2) == CELL_WHITE);
 }
 
-void  test_move_apply_lateral_two(){
+void test_move_apply_lateral_two() {
     Board board;
     board_create(board);
     Move move = move_from_string("B2:C3");
-    assert (move_apply(move, CELL_WHITE, board, 1));
-    assert (board_get_cell(board, 1, 1) == CELL_EMPTY);
-    assert (board_get_cell(board, 1, 2) == CELL_EMPTY);
-    assert (board_get_cell(board, 2, 1) == CELL_WHITE);
-    assert (board_get_cell(board, 2, 2) == CELL_WHITE);
+    assert(move_apply(move, CELL_WHITE, board, 1));
+    assert(board_get_cell(board, 1, 1) == CELL_EMPTY);
+    assert(board_get_cell(board, 1, 2) == CELL_EMPTY);
+    assert(board_get_cell(board, 2, 1) == CELL_WHITE);
+    assert(board_get_cell(board, 2, 2) == CELL_WHITE);
 }
 
-void  test_move_apply_lateral_three(){
+void test_move_apply_lateral_three() {
     Board board;
     board_create(board);
     Move move = move_from_string("B2:C4");
-    assert (move_apply(move, CELL_WHITE, board, 1));
-    assert (board_get_cell(board, 1, 1) == CELL_EMPTY);
-    assert (board_get_cell(board, 1, 2) == CELL_EMPTY);
-    assert (board_get_cell(board, 1, 3) == CELL_EMPTY);
-    assert (board_get_cell(board, 2, 1) == CELL_WHITE);
-    assert (board_get_cell(board, 2, 2) == CELL_WHITE);
-    assert (board_get_cell(board, 2, 3) == CELL_WHITE);
+    assert(move_apply(move, CELL_WHITE, board, 1));
+    assert(board_get_cell(board, 1, 1) == CELL_EMPTY);
+    assert(board_get_cell(board, 1, 2) == CELL_EMPTY);
+    assert(board_get_cell(board, 1, 3) == CELL_EMPTY);
+    assert(board_get_cell(board, 2, 1) == CELL_WHITE);
+    assert(board_get_cell(board, 2, 2) == CELL_WHITE);
+    assert(board_get_cell(board, 2, 3) == CELL_WHITE);
 }
 
-// Test move invalide
- void  test_move_apply_line_one_error(){
+void test_move_apply_line_one_error() {
     Board board;
     board_create(board);
     Move move = move_from_string("A1:A2");
-    assert (move_apply(move, CELL_WHITE, board, 1)==0);
+    assert(move_apply(move, CELL_WHITE, board, 1) == 0);
 }
 
- void  test_move_apply_line_two_error(){
+void test_move_apply_line_two_error() {
     Board board;
     board_create(board);
     Move move = move_from_string("A1:A3");
-    assert (move_apply(move, CELL_WHITE, board, 1)==0);
+    assert(move_apply(move, CELL_WHITE, board, 1) == 0);
 }
 
- void  test_move_apply_line_three_error(){
+void test_move_apply_line_three_error() {
     Board board;
     board_create(board);
     Move move = move_from_string("A1:A4");
-    assert (move_apply(move, CELL_WHITE, board, 1)==0);
+    assert(move_apply(move, CELL_WHITE, board, 1) == 0);
 }
 
-
- void  test_move_apply_lateral_two_error(){
+void test_move_apply_lateral_two_error() {
     Board board;
     board_create(board);
     Move move = move_from_string("A2:B3");
-    assert (move_apply(move, CELL_WHITE, board, 1)==0);
+    assert(move_apply(move, CELL_WHITE, board, 1) == 0);
 }
 
- void  test_move_apply_lateral_three_error(){
+void test_move_apply_lateral_three_error() {
     Board board;
     board_create(board);
     Move move = move_from_string("A2:B4");
-    assert (move_apply(move, CELL_WHITE, board, 1)==0);
+    assert(move_apply(move, CELL_WHITE, board, 1) == 0);
 }
-
-
-
-
 
 // TODO: Test move_apply and move_available
 

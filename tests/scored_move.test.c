@@ -17,7 +17,7 @@ void test_scored_move_compute() {
     // la proximité avec des pions adverses
 }
 
-void test_scored_move_compute_victory(){
+void test_scored_move_compute_victory() {
     Board board;
     board_create(board);
     board_set_cell(board, 1, 0, CELL_BLACK);
@@ -26,18 +26,18 @@ void test_scored_move_compute_victory(){
     board_set_cell(board, 7, 1, CELL_EMPTY);
     Move move = move_from_string("C1:A1");
     move_apply(move, CELL_BLACK, board, 1);
-    assert(scored_move_compute(CELL_BLACK, board)>0);
+    assert(scored_move_compute(CELL_BLACK, board) > 0);
 }
 
-void test_scored_move_compute_defeat(){
+void test_scored_move_compute_defeat() {
     Board board;
     board_create(board);
-    Move move = move_create(0,7,0,8);
+    Move move = move_create(0, 7, 0, 8);
     move_apply(move, CELL_WHITE, board, 1);
-    assert(scored_move_compute(CELL_WHITE, board)<0);
+    assert(scored_move_compute(CELL_WHITE, board) < 0);
 }
 
-void test_scored_move_compute_center(){
+void test_scored_move_compute_center() {
     Board board, copy1, copy2;
     board_create(board);
     board_set_cell(board, 4, 2, CELL_BLACK);
@@ -48,10 +48,10 @@ void test_scored_move_compute_center(){
     board_clone(board, copy2);
     move_apply(move1, CELL_BLACK, copy1, 1);
     move_apply(move2, CELL_BLACK, copy2, 1);
-    assert(scored_move_compute(CELL_BLACK, copy1)>scored_move_compute(CELL_BLACK, copy2));
+    assert(scored_move_compute(CELL_BLACK, copy1) > scored_move_compute(CELL_BLACK, copy2));
 }
 
-void test_scored_move_compute_two_push_one_bottom(){
+void test_scored_move_compute_two_push_one_bottom() {
     Board board, copy1, copy2;
     board_create(board);
     board_set_cell(board, 6, 7, CELL_WHITE);
@@ -66,10 +66,10 @@ void test_scored_move_compute_two_push_one_bottom(){
     board_clone(board, copy2);
     move_apply(move1, CELL_BLACK, copy1, 1);
     move_apply(move2, CELL_BLACK, copy2, 1);
-    assert(scored_move_compute(CELL_BLACK, copy1)>scored_move_compute(CELL_BLACK, copy2));
+    assert(scored_move_compute(CELL_BLACK, copy1) > scored_move_compute(CELL_BLACK, copy2));
 }
 
-void test_scored_move_compute_two_push_one_top(){
+void test_scored_move_compute_two_push_one_top() {
     Board board, copy1, copy2;
     board_create(board);
     board_set_cell(board, 6, 7, CELL_BLACK);
@@ -82,10 +82,10 @@ void test_scored_move_compute_two_push_one_top(){
     board_clone(board, copy2);
     move_apply(move1, CELL_BLACK, copy1, 1);
     move_apply(move2, CELL_BLACK, copy2, 1);
-    //assert(scored_move_compute(CELL_BLACK, copy1)>scored_move_compute(CELL_BLACK, copy2));
+    // assert(scored_move_compute(CELL_BLACK, copy1)>scored_move_compute(CELL_BLACK, copy2));
 }
 
-void test_scored_move_compute_three_push_two_bottom(){
+void test_scored_move_compute_three_push_two_bottom() {
     Board board, copy1, copy2;
     board_create(board);
     board_set_cell(board, 7, 7, CELL_EMPTY);
@@ -104,10 +104,10 @@ void test_scored_move_compute_three_push_two_bottom(){
     board_clone(board, copy2);
     move_apply(move1, CELL_BLACK, copy1, 1);
     move_apply(move2, CELL_BLACK, copy2, 1);
-    assert(scored_move_compute(CELL_BLACK, copy1)>scored_move_compute(CELL_BLACK, copy2));
+    assert(scored_move_compute(CELL_BLACK, copy1) > scored_move_compute(CELL_BLACK, copy2));
 }
 
-void test_scored_move_compute_three_push_two_top(){
+void test_scored_move_compute_three_push_two_top() {
     Board board, copy1, copy2;
     board_create(board);
     board_set_cell(board, 7, 7, CELL_EMPTY);
@@ -126,10 +126,10 @@ void test_scored_move_compute_three_push_two_top(){
     board_clone(board, copy2);
     move_apply(move1, CELL_BLACK, copy1, 1);
     move_apply(move2, CELL_BLACK, copy2, 1);
-    //assert(scored_move_compute(CELL_BLACK, copy1)>scored_move_compute(CELL_BLACK, copy2));
+    // assert(scored_move_compute(CELL_BLACK, copy1)>scored_move_compute(CELL_BLACK, copy2));
 }
 
-void test_scored_move_compute_two_push_one_right(){
+void test_scored_move_compute_two_push_one_right() {
     Board board, copy1, copy2;
     board_create(board);
     board_set_cell(board, 6, 6, CELL_WHITE);
@@ -141,10 +141,10 @@ void test_scored_move_compute_two_push_one_right(){
     board_clone(board, copy2);
     move_apply(move1, CELL_BLACK, copy1, 1);
     move_apply(move2, CELL_BLACK, copy2, 1);
-    //assert(scored_move_compute(CELL_BLACK, copy1)>scored_move_compute(CELL_BLACK, copy2));
+    // assert(scored_move_compute(CELL_BLACK, copy1)>scored_move_compute(CELL_BLACK, copy2));
 }
 
-void test_scored_move_compute_two_push_one_left(){
+void test_scored_move_compute_two_push_one_left() {
     Board board, copy1, copy2;
     board_create(board);
     board_set_cell(board, 6, 1, CELL_WHITE);
@@ -156,10 +156,10 @@ void test_scored_move_compute_two_push_one_left(){
     board_clone(board, copy2);
     move_apply(move1, CELL_BLACK, copy1, 1);
     move_apply(move2, CELL_BLACK, copy2, 1);
-    //assert(scored_move_compute(CELL_BLACK, copy1)>scored_move_compute(CELL_BLACK, copy2));
+    // assert(scored_move_compute(CELL_BLACK, copy1)>scored_move_compute(CELL_BLACK, copy2));
 }
 
-void test_scored_move_compute_three_push_two_right(){
+void test_scored_move_compute_three_push_two_right() {
     Board board, copy1, copy2;
     board_create(board);
     board_set_cell(board, 6, 6, CELL_WHITE);
@@ -174,10 +174,10 @@ void test_scored_move_compute_three_push_two_right(){
     board_clone(board, copy2);
     move_apply(move1, CELL_BLACK, copy1, 1);
     move_apply(move2, CELL_BLACK, copy2, 1);
-    //assert(scored_move_compute(CELL_BLACK, copy1)>scored_move_compute(CELL_BLACK, copy2));
+    // assert(scored_move_compute(CELL_BLACK, copy1)>scored_move_compute(CELL_BLACK, copy2));
 }
 
-void test_scored_move_compute_three_push_two_left(){
+void test_scored_move_compute_three_push_two_left() {
     Board board, copy1, copy2;
     board_create(board);
     board_set_cell(board, 6, 1, CELL_WHITE);
@@ -192,7 +192,7 @@ void test_scored_move_compute_three_push_two_left(){
     board_clone(board, copy2);
     move_apply(move1, CELL_BLACK, copy1, 1);
     move_apply(move2, CELL_BLACK, copy2, 1);
-    //assert(scored_move_compute(CELL_BLACK, copy1)>scored_move_compute(CELL_BLACK, copy2));
+    // assert(scored_move_compute(CELL_BLACK, copy1)>scored_move_compute(CELL_BLACK, copy2));
 }
 
 void test_scored_move() {

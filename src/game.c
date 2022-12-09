@@ -2,9 +2,8 @@
 #include <stdlib.h>
 #include "game.h"
 
-
 PGame game_new(Cell owner, int ia_override) {
-    PGame game = (PGame) malloc(sizeof(Game));
+    PGame game = (PGame)malloc(sizeof(Game));
 
     // Initialisation du tableau
     board_create(game->board);

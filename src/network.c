@@ -37,7 +37,7 @@ void network_connect() {
         addr.sin_port = htons(saved_port);
 
         // Bind and listen
-        if (bind(fdsocket, (struct sockaddr *) &addr, sizeof(addr)) != 0) {
+        if (bind(fdsocket, (struct sockaddr *)&addr, sizeof(addr)) != 0) {
             printf("Could not bind socket: %s\n", strerror(errno));
             exit(1);
         }
@@ -52,7 +52,8 @@ void network_connect() {
             printf("Could not accept client on socket: %s\n", strerror(errno));
             exit(1);
         }
-    } else {
+    }
+    else {
         // On est le client
         fdclient = socket(AF_INET, SOCK_STREAM, 0);
         if (fdclient == -1) {
@@ -65,7 +66,7 @@ void network_connect() {
         addr.sin_port = htons(saved_port);
 
         // Connexion au serveur
-        if (connect(fdclient, (struct sockaddr *) &addr, sizeof(addr)) != 0) {
+        if (connect(fdclient, (struct sockaddr *)&addr, sizeof(addr)) != 0) {
             printf("Could not connect to server: %s (I will retry in 1 second)\n", strerror(errno));
             sleep(1);
         }
@@ -104,7 +105,7 @@ void network_update(PGame game, Cell me, State state) {
                 if (n <= 0) {
                     network_disconnect();
                 }
-            } while(fdclient == -1);
+            } while (fdclient == -1);
         }
     }
 
@@ -112,7 +113,7 @@ void network_update(PGame game, Cell me, State state) {
     if (state != STATE_PLAYING) {
         return;
     }
-    
+
     if (game->playing == me) {
         // Receive opponent's move
         char *opponent_move = malloc(sizeof(char) * 6);
@@ -127,7 +128,7 @@ void network_update(PGame game, Cell me, State state) {
             if (move_apply(result, me, game->board, 0) == 0) {
                 result = MOVE_NONE;
             }
-        } while(fdclient == -1 || result == MOVE_NONE);
+        } while (fdclient == -1 || result == MOVE_NONE);
         game_turn(game, result);
     }
 }
