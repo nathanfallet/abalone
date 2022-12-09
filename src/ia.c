@@ -36,17 +36,29 @@ ScoredMove compare(Cell me, Board board, Move root, int profondeur, int max, int
             Board copy;
             board_clone(board, copy);
             if (move_apply(move, me, copy, 1)) {
-                int child_threshold = max ? INT_MAX : INT_MIN;
-                if (move_selected != MOVE_NONE) {
-                    child_threshold = scored_move_score(move_selected);
-                }
-                sc = compare(cell_opposite(me), copy, move, profondeur - 1, max == 0, child_threshold);
-                if (root != MOVE_NONE) {
+                State state = board_state(copy);
+                if (state != STATE_PLAYING) {
+                    // On a atteint la fin du jeu
+                    Cell winner = state == STATE_WIN_BLACK ? CELL_BLACK : CELL_WHITE;
                     sc = scored_move_new(
-                        scored_move_move(sc),
-                        root,
-                        scored_move_score(sc)
+                        move,
+                        root != MOVE_NONE ? root : move,
+                        winner == me ? WEIGHT_WIN : -WEIGHT_WIN
                     );
+                } else {
+                    // On continue la recherche
+                    int child_threshold = max ? INT_MAX : INT_MIN;
+                    if (move_selected != MOVE_NONE) {
+                        child_threshold = scored_move_score(move_selected);
+                    }
+                    sc = compare(cell_opposite(me), copy, move, profondeur - 1, max == 0, child_threshold);
+                    if (root != MOVE_NONE) {
+                        sc = scored_move_new(
+                            scored_move_move(sc),
+                            root,
+                            scored_move_score(sc)
+                        );
+                    }
                 }
             }
         } else {

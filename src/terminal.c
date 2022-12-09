@@ -100,9 +100,6 @@ void terminal_update_intern(PGame game, Cell me, State state, int affichage) {
         case STATE_WIN_WHITE:
             printf("Le joueur White a gagné !\n");
             return;
-        case STATE_TIME_OUT:
-            printf("Temps écoulé !\n");
-            return;
         default:
             break;
     }

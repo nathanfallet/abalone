@@ -3,6 +3,7 @@
 
 #include "constants.h"
 #include "cell.h"
+#include "state.h"
 
 typedef unsigned long Board[2];
 
@@ -36,5 +37,12 @@ Cell board_get_cell(Board board, int line, int column);
  * @param cell La cellule
  */
 void board_set_cell(Board board, int line, int column, Cell cell);
+
+/**
+ * Retourne l'état du plateau
+ * @param board Le plateau
+ * @return L'état du plateau
+ */
+State board_state(Board board);
 
 #endif

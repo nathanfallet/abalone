@@ -1,10 +1,6 @@
 #ifndef GAME_H_
 #define GAME_H_
 
-/* existing libraries */
-#include <time.h>
-#include <stdlib.h>
-#include <stdio.h>
 #include "constants.h"
 #include "board.h"
 #include "move.h"
@@ -12,9 +8,6 @@
 #include "state.h"
 
 typedef struct game_t {
-	// Time de début de partie
-	time_t start;
-
 	// Plateau : vide, pion noir ou pion blanc
 	Board board;
 
@@ -54,12 +47,5 @@ void game_turn(PGame game, Move move);
  * @param game La partie
  */
 void game_start(PGame game);
-
-/**
- * Renvoi l'état de la partie
- * @param game La partie
- * @return L'état de la partie
- */
-State game_state(PGame game);
 
 #endif

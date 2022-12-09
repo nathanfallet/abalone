@@ -210,9 +210,6 @@ gboolean gui_update_grid(GtkWidget *widget, cairo_t *cr, gpointer data) {
         case STATE_WIN_WHITE:
             gtk_label_set_text(GTK_LABEL(label_playing), g_strdup_printf("Le gagnant est : Blanc"));
             break;
-        case STATE_TIME_OUT:
-            gtk_label_set_text(GTK_LABEL(label_playing), g_strdup_printf("Temps écoulé !"));
-            break;
     }
     if (gui_last_game->has_last_move) {
         gtk_label_set_text(GTK_LABEL(label_move), g_strdup_printf("Dernier coup : %s", move_to_string(gui_last_game->last_move)));

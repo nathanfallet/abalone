@@ -41,3 +41,26 @@ void board_set_cell(Board board, int line, int column, Cell cell) {
         board[1] |= 1UL << (line * 8 + column);
     }
 }
+
+State board_state(Board board) {
+    int count_black = 0;
+    int count_white = 0;
+    for (int line = 0; line < BOARD_SIZE; line++) {
+        for (int column = 0; column < BOARD_SIZE; column++) {
+            Cell cell = board_get_cell(board, line, column);
+            if (cell == CELL_BLACK) {
+                count_black++;
+            }
+            if (cell == CELL_WHITE) {
+                count_white++;
+            }
+        }
+    }
+    if (count_black < PAWN_TOT) {
+        return STATE_WIN_WHITE;
+    }
+    if (count_white < PAWN_TOT) {
+        return STATE_WIN_BLACK;
+    }
+    return STATE_PLAYING;
+}

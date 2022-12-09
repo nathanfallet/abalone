@@ -44,9 +44,21 @@ void test_board_set_cell() {
     board_set_cell(board, 7, 8, CELL_EMPTY);
 }
 
+void test_board_state() {
+    Board board;
+    board_create(board);
+    assert(board_state(board) == STATE_PLAYING);
+    board_set_cell(board, 0, 0, CELL_EMPTY);
+    assert(board_state(board) == STATE_WIN_BLACK);
+    board_set_cell(board, 0, 0, CELL_WHITE);
+    board_set_cell(board, 7, 0, CELL_EMPTY);
+    assert(board_state(board) == STATE_WIN_WHITE);
+}
+
 void test_board() {
     test_board_create();
     test_board_clone();
     test_board_get_cell();
     test_board_set_cell();
+    test_board_state();
 }
