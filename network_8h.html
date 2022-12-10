@@ -77,25 +77,25 @@ $(function() {
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &quot;<a class="el" href="game_8h_source.html">game.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="cell_8h_source.html">cell.h</a>&quot;</code><br />
-<code>#include &quot;state.h&quot;</code><br />
+<code>#include &quot;<a class="el" href="state_8h_source.html">state.h</a>&quot;</code><br />
 </div>
 <p><a href="network_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:adb43f8a57b139e661aa8cb3049bdfc54"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="network_8h.html#adb43f8a57b139e661aa8cb3049bdfc54">network_init</a> (<a class="el" href="cell_8h.html#a53efbb3b59542e13799bdf1fd8607c44">Cell</a> owner, int ia_override, void(*init)(<a class="el" href="cell_8h.html#a53efbb3b59542e13799bdf1fd8607c44">Cell</a> owner, int ia_override, void(*actualiser_adversaire)(<a class="el" href="structgame__t.html">PGame</a> game, <a class="el" href="cell_8h.html#a53efbb3b59542e13799bdf1fd8607c44">Cell</a> me, State state)), char address[ADDRESS_LENGTH], int port)</td></tr>
-<tr class="memdesc:adb43f8a57b139e661aa8cb3049bdfc54"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialise la connexion réseau.  <a href="network_8h.html#adb43f8a57b139e661aa8cb3049bdfc54">More...</a><br /></td></tr>
-<tr class="separator:adb43f8a57b139e661aa8cb3049bdfc54"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2f81967fc782e7cca71f8862fa7afed9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="network_8h.html#a2f81967fc782e7cca71f8862fa7afed9">network_update</a> (<a class="el" href="structgame__t.html">PGame</a> game, <a class="el" href="cell_8h.html#a53efbb3b59542e13799bdf1fd8607c44">Cell</a> me, State state)</td></tr>
-<tr class="memdesc:a2f81967fc782e7cca71f8862fa7afed9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exécute le prochain tour de jeu de la connexion réseau.  <a href="network_8h.html#a2f81967fc782e7cca71f8862fa7afed9">More...</a><br /></td></tr>
-<tr class="separator:a2f81967fc782e7cca71f8862fa7afed9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6118fffc91cfec16d4c6c5218492191d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="network_8h.html#a6118fffc91cfec16d4c6c5218492191d">network_init</a> (<a class="el" href="cell_8h.html#a53efbb3b59542e13799bdf1fd8607c44">Cell</a> owner, int ia_override, void(*init)(<a class="el" href="cell_8h.html#a53efbb3b59542e13799bdf1fd8607c44">Cell</a> owner, int ia_override, void(*actualiser_adversaire)(<a class="el" href="structGame.html">Game</a> *game, <a class="el" href="cell_8h.html#a53efbb3b59542e13799bdf1fd8607c44">Cell</a> me, <a class="el" href="state_8h.html#a923fb9080b37d642c98cbc0159c9fd0e">State</a> state)), char address[<a class="el" href="constants_8h.html#a8beaa5b28cf9a48a1df357d25ec9704e">ADDRESS_LENGTH</a>], int port)</td></tr>
+<tr class="memdesc:a6118fffc91cfec16d4c6c5218492191d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialise la connexion réseau.  <a href="network_8h.html#a6118fffc91cfec16d4c6c5218492191d">More...</a><br /></td></tr>
+<tr class="separator:a6118fffc91cfec16d4c6c5218492191d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae820e5359e94527c9ce5128062981d9b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="network_8h.html#ae820e5359e94527c9ce5128062981d9b">network_update</a> (<a class="el" href="structGame.html">Game</a> *game, <a class="el" href="cell_8h.html#a53efbb3b59542e13799bdf1fd8607c44">Cell</a> me, <a class="el" href="state_8h.html#a923fb9080b37d642c98cbc0159c9fd0e">State</a> state)</td></tr>
+<tr class="memdesc:ae820e5359e94527c9ce5128062981d9b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exécute le prochain tour de jeu de la connexion réseau.  <a href="network_8h.html#ae820e5359e94527c9ce5128062981d9b">More...</a><br /></td></tr>
+<tr class="separator:ae820e5359e94527c9ce5128062981d9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Gestion du réseau. </p>
 <p>Gestion du réseau, et de la communication client/serveur. </p>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="adb43f8a57b139e661aa8cb3049bdfc54"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adb43f8a57b139e661aa8cb3049bdfc54">&#9670;&nbsp;</a></span>network_init()</h2>
+<a id="a6118fffc91cfec16d4c6c5218492191d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6118fffc91cfec16d4c6c5218492191d">&#9670;&nbsp;</a></span>network_init()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -115,7 +115,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">void(*)(<a class="el" href="cell_8h.html#a53efbb3b59542e13799bdf1fd8607c44">Cell</a> owner, int ia_override, void(*actualiser_adversaire)(<a class="el" href="structgame__t.html">PGame</a> game, <a class="el" href="cell_8h.html#a53efbb3b59542e13799bdf1fd8607c44">Cell</a> me, State state))&#160;</td>
+          <td class="paramtype">void(*)(<a class="el" href="cell_8h.html#a53efbb3b59542e13799bdf1fd8607c44">Cell</a> owner, int ia_override, void(*actualiser_adversaire)(<a class="el" href="structGame.html">Game</a> *game, <a class="el" href="cell_8h.html#a53efbb3b59542e13799bdf1fd8607c44">Cell</a> me, <a class="el" href="state_8h.html#a923fb9080b37d642c98cbc0159c9fd0e">State</a> state))&#160;</td>
           <td class="paramname"><em>init</em>, </td>
         </tr>
         <tr>
@@ -152,8 +152,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a2f81967fc782e7cca71f8862fa7afed9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2f81967fc782e7cca71f8862fa7afed9">&#9670;&nbsp;</a></span>network_update()</h2>
+<a id="ae820e5359e94527c9ce5128062981d9b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae820e5359e94527c9ce5128062981d9b">&#9670;&nbsp;</a></span>network_update()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -161,7 +161,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">void network_update </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structgame__t.html">PGame</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="structGame.html">Game</a> *&#160;</td>
           <td class="paramname"><em>game</em>, </td>
         </tr>
         <tr>
@@ -173,7 +173,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">State&#160;</td>
+          <td class="paramtype"><a class="el" href="state_8h.html#a923fb9080b37d642c98cbc0159c9fd0e">State</a>&#160;</td>
           <td class="paramname"><em>state</em>&#160;</td>
         </tr>
         <tr>

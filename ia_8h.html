@@ -77,17 +77,17 @@ $(function() {
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &quot;<a class="el" href="board_8h_source.html">board.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="game_8h_source.html">game.h</a>&quot;</code><br />
-<code>#include &quot;constants.h&quot;</code><br />
+<code>#include &quot;<a class="el" href="constants_8h_source.html">constants.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="scored__move_8h_source.html">scored_move.h</a>&quot;</code><br />
-<code>#include &quot;state.h&quot;</code><br />
+<code>#include &quot;<a class="el" href="state_8h_source.html">state.h</a>&quot;</code><br />
 </div>
 <p><a href="ia_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:aa4ff60570cedd1ddfbfc316321ed8265"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ia_8h.html#aa4ff60570cedd1ddfbfc316321ed8265">ia_update</a> (<a class="el" href="structgame__t.html">PGame</a> game, <a class="el" href="cell_8h.html#a53efbb3b59542e13799bdf1fd8607c44">Cell</a> me, State state)</td></tr>
-<tr class="memdesc:aa4ff60570cedd1ddfbfc316321ed8265"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exécute le prochain tour de jeu de l'IA.  <a href="ia_8h.html#aa4ff60570cedd1ddfbfc316321ed8265">More...</a><br /></td></tr>
-<tr class="separator:aa4ff60570cedd1ddfbfc316321ed8265"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab7ae547153183fd30b75a0df4eaed715"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ia_8h.html#ab7ae547153183fd30b75a0df4eaed715">ia_update</a> (<a class="el" href="structGame.html">Game</a> *game, <a class="el" href="cell_8h.html#a53efbb3b59542e13799bdf1fd8607c44">Cell</a> me, <a class="el" href="state_8h.html#a923fb9080b37d642c98cbc0159c9fd0e">State</a> state)</td></tr>
+<tr class="memdesc:ab7ae547153183fd30b75a0df4eaed715"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exécute le prochain tour de jeu de l'IA.  <a href="ia_8h.html#ab7ae547153183fd30b75a0df4eaed715">More...</a><br /></td></tr>
+<tr class="separator:ab7ae547153183fd30b75a0df4eaed715"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a78e55f6e0f85d690aad4906c290c24ea"><td class="memItemLeft" align="right" valign="top"><a class="el" href="move_8h.html#ab9f77aa389af7f0da89bdcb6ae41a897">Move</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ia_8h.html#a78e55f6e0f85d690aad4906c290c24ea">ia_minimax</a> (<a class="el" href="cell_8h.html#a53efbb3b59542e13799bdf1fd8607c44">Cell</a> me, <a class="el" href="board_8h.html#abf0efda810e3e4bfc5686b70abe6bfb2">Board</a> board, int profondeur)</td></tr>
 <tr class="memdesc:a78e55f6e0f85d690aad4906c290c24ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retourne le meilleur move pour l'IA.  <a href="ia_8h.html#a78e55f6e0f85d690aad4906c290c24ea">More...</a><br /></td></tr>
 <tr class="separator:a78e55f6e0f85d690aad4906c290c24ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -141,8 +141,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="aa4ff60570cedd1ddfbfc316321ed8265"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa4ff60570cedd1ddfbfc316321ed8265">&#9670;&nbsp;</a></span>ia_update()</h2>
+<a id="ab7ae547153183fd30b75a0df4eaed715"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab7ae547153183fd30b75a0df4eaed715">&#9670;&nbsp;</a></span>ia_update()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -150,7 +150,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">void ia_update </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structgame__t.html">PGame</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="structGame.html">Game</a> *&#160;</td>
           <td class="paramname"><em>game</em>, </td>
         </tr>
         <tr>
@@ -162,7 +162,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">State&#160;</td>
+          <td class="paramtype"><a class="el" href="state_8h.html#a923fb9080b37d642c98cbc0159c9fd0e">State</a>&#160;</td>
           <td class="paramname"><em>state</em>&#160;</td>
         </tr>
         <tr>

@@ -77,52 +77,51 @@ $(function() {
 
 <p>Gestion d'une partie.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &quot;constants.h&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="constants_8h_source.html">constants.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="board_8h_source.html">board.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="move_8h_source.html">move.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="cell_8h_source.html">cell.h</a>&quot;</code><br />
-<code>#include &quot;state.h&quot;</code><br />
+<code>#include &quot;<a class="el" href="state_8h_source.html">state.h</a>&quot;</code><br />
 </div>
 <p><a href="game_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Data Structures</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgame__t.html">game_t</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structGame.html">Game</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Structure d'une partie.  <a href="structGame.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
-<tr class="memitem:aab66f7da2c26fe89ebd92eddee50e185"><td class="memItemLeft" align="right" valign="top"><a id="aab66f7da2c26fe89ebd92eddee50e185"></a>
-typedef struct <a class="el" href="structgame__t.html">game_t</a>&#160;</td><td class="memItemRight" valign="bottom"><b>Game</b></td></tr>
-<tr class="separator:aab66f7da2c26fe89ebd92eddee50e185"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5717e313fc91e0b0862d661d5b26638e"><td class="memItemLeft" align="right" valign="top"><a id="a5717e313fc91e0b0862d661d5b26638e"></a>
-typedef <a class="el" href="structgame__t.html">Game</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>PGame</b></td></tr>
-<tr class="separator:a5717e313fc91e0b0862d661d5b26638e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a69b5df78d315f81ed77df30fdbfb7002"><td class="memItemLeft" align="right" valign="top"><a id="a69b5df78d315f81ed77df30fdbfb7002"></a>
+typedef struct <a class="el" href="structGame.html">Game</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="game_8h.html#a69b5df78d315f81ed77df30fdbfb7002">Game</a></td></tr>
+<tr class="memdesc:a69b5df78d315f81ed77df30fdbfb7002"><td class="mdescLeft">&#160;</td><td class="mdescRight">Structure d'une partie. <br /></td></tr>
+<tr class="separator:a69b5df78d315f81ed77df30fdbfb7002"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a2c70b6e91d5d44d4c008e137c058a862"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structgame__t.html">PGame</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="game_8h.html#a2c70b6e91d5d44d4c008e137c058a862">game_new</a> (<a class="el" href="cell_8h.html#a53efbb3b59542e13799bdf1fd8607c44">Cell</a> owner, int ia_override)</td></tr>
-<tr class="memdesc:a2c70b6e91d5d44d4c008e137c058a862"><td class="mdescLeft">&#160;</td><td class="mdescRight">Créé et initialise une partie.  <a href="game_8h.html#a2c70b6e91d5d44d4c008e137c058a862">More...</a><br /></td></tr>
-<tr class="separator:a2c70b6e91d5d44d4c008e137c058a862"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a047fc208897faba5143db1f0381540f9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="game_8h.html#a047fc208897faba5143db1f0381540f9">game_turn</a> (<a class="el" href="structgame__t.html">PGame</a> game, <a class="el" href="move_8h.html#ab9f77aa389af7f0da89bdcb6ae41a897">Move</a> move)</td></tr>
-<tr class="memdesc:a047fc208897faba5143db1f0381540f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exécute le prochain tour de jeu.  <a href="game_8h.html#a047fc208897faba5143db1f0381540f9">More...</a><br /></td></tr>
-<tr class="separator:a047fc208897faba5143db1f0381540f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acfa7c6bcf8ef8a8e7c13e0d28b3d8028"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="game_8h.html#acfa7c6bcf8ef8a8e7c13e0d28b3d8028">game_start</a> (<a class="el" href="structgame__t.html">PGame</a> game)</td></tr>
-<tr class="memdesc:acfa7c6bcf8ef8a8e7c13e0d28b3d8028"><td class="mdescLeft">&#160;</td><td class="mdescRight">Démarre la partie.  <a href="game_8h.html#acfa7c6bcf8ef8a8e7c13e0d28b3d8028">More...</a><br /></td></tr>
-<tr class="separator:acfa7c6bcf8ef8a8e7c13e0d28b3d8028"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad86c57ce14b4b2a0b4cd8a39956c7e54"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structGame.html">Game</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="game_8h.html#ad86c57ce14b4b2a0b4cd8a39956c7e54">game_new</a> (<a class="el" href="cell_8h.html#a53efbb3b59542e13799bdf1fd8607c44">Cell</a> owner, int ia_override)</td></tr>
+<tr class="memdesc:ad86c57ce14b4b2a0b4cd8a39956c7e54"><td class="mdescLeft">&#160;</td><td class="mdescRight">Créé et initialise une partie.  <a href="game_8h.html#ad86c57ce14b4b2a0b4cd8a39956c7e54">More...</a><br /></td></tr>
+<tr class="separator:ad86c57ce14b4b2a0b4cd8a39956c7e54"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6bc46c8dd4125466eca9424eeba8da01"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="game_8h.html#a6bc46c8dd4125466eca9424eeba8da01">game_turn</a> (<a class="el" href="structGame.html">Game</a> *game, <a class="el" href="move_8h.html#ab9f77aa389af7f0da89bdcb6ae41a897">Move</a> move)</td></tr>
+<tr class="memdesc:a6bc46c8dd4125466eca9424eeba8da01"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exécute le prochain tour de jeu.  <a href="game_8h.html#a6bc46c8dd4125466eca9424eeba8da01">More...</a><br /></td></tr>
+<tr class="separator:a6bc46c8dd4125466eca9424eeba8da01"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1b079dacf7c25ae5d29f87151ee53e2b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="game_8h.html#a1b079dacf7c25ae5d29f87151ee53e2b">game_start</a> (<a class="el" href="structGame.html">Game</a> *game)</td></tr>
+<tr class="memdesc:a1b079dacf7c25ae5d29f87151ee53e2b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Démarre la partie.  <a href="game_8h.html#a1b079dacf7c25ae5d29f87151ee53e2b">More...</a><br /></td></tr>
+<tr class="separator:a1b079dacf7c25ae5d29f87151ee53e2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Gestion d'une partie. </p>
 <p>Gestion d'une partie et de son déroulement. </p>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="a2c70b6e91d5d44d4c008e137c058a862"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2c70b6e91d5d44d4c008e137c058a862">&#9670;&nbsp;</a></span>game_new()</h2>
+<a id="ad86c57ce14b4b2a0b4cd8a39956c7e54"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad86c57ce14b4b2a0b4cd8a39956c7e54">&#9670;&nbsp;</a></span>game_new()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structgame__t.html">PGame</a> game_new </td>
+          <td class="memname"><a class="el" href="structGame.html">Game</a>* game_new </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="cell_8h.html#a53efbb3b59542e13799bdf1fd8607c44">Cell</a>&#160;</td>
           <td class="paramname"><em>owner</em>, </td>
@@ -153,8 +152,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="acfa7c6bcf8ef8a8e7c13e0d28b3d8028"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acfa7c6bcf8ef8a8e7c13e0d28b3d8028">&#9670;&nbsp;</a></span>game_start()</h2>
+<a id="a1b079dacf7c25ae5d29f87151ee53e2b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1b079dacf7c25ae5d29f87151ee53e2b">&#9670;&nbsp;</a></span>game_start()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -162,7 +161,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">void game_start </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structgame__t.html">PGame</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="structGame.html">Game</a> *&#160;</td>
           <td class="paramname"><em>game</em></td><td>)</td>
           <td></td>
         </tr>
@@ -179,8 +178,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a047fc208897faba5143db1f0381540f9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a047fc208897faba5143db1f0381540f9">&#9670;&nbsp;</a></span>game_turn()</h2>
+<a id="a6bc46c8dd4125466eca9424eeba8da01"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6bc46c8dd4125466eca9424eeba8da01">&#9670;&nbsp;</a></span>game_turn()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -188,7 +187,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">void game_turn </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structgame__t.html">PGame</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="structGame.html">Game</a> *&#160;</td>
           <td class="paramname"><em>game</em>, </td>
         </tr>
         <tr>

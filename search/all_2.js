@@ -1,11 +1,11 @@
 var searchData=
 [
-  ['game_2eh_10',['game.h',['../game_8h.html',1,'']]],
-  ['game_5fnew_11',['game_new',['../game_8h.html#a2c70b6e91d5d44d4c008e137c058a862',1,'game.c']]],
-  ['game_5fstart_12',['game_start',['../game_8h.html#acfa7c6bcf8ef8a8e7c13e0d28b3d8028',1,'game.c']]],
-  ['game_5ft_13',['game_t',['../structgame__t.html',1,'']]],
-  ['game_5fturn_14',['game_turn',['../game_8h.html#a047fc208897faba5143db1f0381540f9',1,'game.c']]],
-  ['gui_2eh_15',['gui.h',['../gui_8h.html',1,'']]],
-  ['gui_5finit_16',['gui_init',['../gui_8h.html#a49b8de191724318e774a0879e573d205',1,'gui.c']]],
-  ['gui_5fupdate_17',['gui_update',['../gui_8h.html#acce3edfd6f54e7385eecd335c269c026',1,'gui.c']]]
+  ['cell_10',['Cell',['../cell_8h.html#a53efbb3b59542e13799bdf1fd8607c44',1,'cell.h']]],
+  ['cell_2eh_11',['cell.h',['../cell_8h.html',1,'']]],
+  ['cell_5fblack_12',['CELL_BLACK',['../constants_8h.html#ae072923a15858869c057c52d39da190c',1,'constants.h']]],
+  ['cell_5fempty_13',['CELL_EMPTY',['../constants_8h.html#ab95aa986509de505fb54b0d2c2b5a019',1,'constants.h']]],
+  ['cell_5fopposite_14',['cell_opposite',['../cell_8h.html#abe42a3aa76ef7f8e1ae66e7b290ed6ce',1,'cell.c']]],
+  ['cell_5fwhite_15',['CELL_WHITE',['../constants_8h.html#aa38562dc28eef3b8dc358d5389b9c5e0',1,'constants.h']]],
+  ['color_16',['color',['../constants_8h.html#a7e3662e10fcd0bb440a524366d7fbc27',1,'constants.h']]],
+  ['constants_2eh_17',['constants.h',['../constants_8h.html',1,'']]]
 ];

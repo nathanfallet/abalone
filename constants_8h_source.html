@@ -70,56 +70,56 @@ $(function() {
 <div class="title">constants.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef CONSTANTS_H</span></div>
+<a href="constants_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef CONSTANTS_H</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define CONSTANTS_H</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#define BOARD_SIZE 8</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#define CELL_EMPTY 0 </span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#define CELL_BLACK 1</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#define CELL_WHITE 2</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#define STATE_PLAYING 0</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="preprocessor">#define STATE_WIN_BLACK 1</span></div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="preprocessor">#define STATE_WIN_WHITE 2</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="preprocessor">#define MOVE_NONE 0</span></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="preprocessor">#define MOVE_LIST_SIZE 280</span></div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="preprocessor">#define WEIGHT_WIN 100000</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="preprocessor">#define WEIGHT_WIN_DIRECT 1000000</span></div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="preprocessor">#define WEIGHT_NEIGHBOUR 2</span></div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="preprocessor">#define WEIGHT_PROXIMITY 1</span></div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="preprocessor">#define WEIGHT_CENTER 3</span></div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="preprocessor">#define WEIGHT_OPPOSITE 3</span></div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="preprocessor">#define PAWN_TOT 14</span></div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="preprocessor">#define INIT_NONE -1</span></div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="preprocessor">#define INIT_TERMINAL 0</span></div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160; </div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="preprocessor">#define INIT_GUI 1</span></div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; </div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="preprocessor">#define INIT_NETWORK 2</span></div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160; </div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="preprocessor">#define INIT_DEFAULT INIT_GUI</span></div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160; </div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<span class="preprocessor">#define ADDRESS_LENGTH 16</span></div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160; </div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;<span class="preprocessor">#define color(param) printf(&quot;\033[%sm&quot;</span>,param)</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160; </div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="constants_8h.html#a1db39eb31d1315ce982608fe25587b6d">   12</a></span>&#160;<span class="preprocessor">#define BOARD_SIZE 8</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
+<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="constants_8h.html#ab95aa986509de505fb54b0d2c2b5a019">   17</a></span>&#160;<span class="preprocessor">#define CELL_EMPTY 0 </span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
+<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="constants_8h.html#ae072923a15858869c057c52d39da190c">   22</a></span>&#160;<span class="preprocessor">#define CELL_BLACK 1</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
+<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="constants_8h.html#aa38562dc28eef3b8dc358d5389b9c5e0">   27</a></span>&#160;<span class="preprocessor">#define CELL_WHITE 2</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
+<div class="line"><a name="l00032"></a><span class="lineno"><a class="line" href="constants_8h.html#a419dde1f1ac1a18c1d724656fe327d99">   32</a></span>&#160;<span class="preprocessor">#define STATE_PLAYING 0</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
+<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="constants_8h.html#aff94ee50c77888c42c5f755e1710d906">   37</a></span>&#160;<span class="preprocessor">#define STATE_WIN_BLACK 1</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
+<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="constants_8h.html#aba2dd0cb170df718e81b1a8388b554ef">   42</a></span>&#160;<span class="preprocessor">#define STATE_WIN_WHITE 2</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
+<div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="constants_8h.html#a56184e4f8d0b5471da178122a836aa02">   47</a></span>&#160;<span class="preprocessor">#define MOVE_NONE 0</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
+<div class="line"><a name="l00052"></a><span class="lineno"><a class="line" href="constants_8h.html#a5e77478a367850def3042ebb1af823b2">   52</a></span>&#160;<span class="preprocessor">#define MOVE_LIST_SIZE 280</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
+<div class="line"><a name="l00057"></a><span class="lineno"><a class="line" href="constants_8h.html#ab5d35a30ec6ebb33819b3bc2257dbbe3">   57</a></span>&#160;<span class="preprocessor">#define WEIGHT_WIN 100000</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
+<div class="line"><a name="l00062"></a><span class="lineno"><a class="line" href="constants_8h.html#a789c90d10eec95f24d8324db2853ede9">   62</a></span>&#160;<span class="preprocessor">#define WEIGHT_WIN_DIRECT 1000000</span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
+<div class="line"><a name="l00067"></a><span class="lineno"><a class="line" href="constants_8h.html#a92a42ed6ebcd76a79c68750ba5093191">   67</a></span>&#160;<span class="preprocessor">#define WEIGHT_NEIGHBOUR 2</span></div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
+<div class="line"><a name="l00072"></a><span class="lineno"><a class="line" href="constants_8h.html#aed61705bbbae8d187a2159ffe18a1e50">   72</a></span>&#160;<span class="preprocessor">#define WEIGHT_PROXIMITY 1</span></div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
+<div class="line"><a name="l00077"></a><span class="lineno"><a class="line" href="constants_8h.html#a9ca1c49478b466bb3fba5c9a2c97e363">   77</a></span>&#160;<span class="preprocessor">#define WEIGHT_CENTER 3</span></div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
+<div class="line"><a name="l00082"></a><span class="lineno"><a class="line" href="constants_8h.html#af2627a5556cc2d249662cecc9c34a98c">   82</a></span>&#160;<span class="preprocessor">#define WEIGHT_OPPOSITE 3</span></div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
+<div class="line"><a name="l00087"></a><span class="lineno"><a class="line" href="constants_8h.html#a6682a908f5810b16aa600eaa72e37726">   87</a></span>&#160;<span class="preprocessor">#define PAWN_TOT 14</span></div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; </div>
+<div class="line"><a name="l00092"></a><span class="lineno"><a class="line" href="constants_8h.html#ab5a97fe72c827de31e835229da1ad3ea">   92</a></span>&#160;<span class="preprocessor">#define INIT_NONE -1</span></div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160; </div>
+<div class="line"><a name="l00097"></a><span class="lineno"><a class="line" href="constants_8h.html#a4bae50a454d5c591874ccefd04702122">   97</a></span>&#160;<span class="preprocessor">#define INIT_TERMINAL 0</span></div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160; </div>
+<div class="line"><a name="l00102"></a><span class="lineno"><a class="line" href="constants_8h.html#a0c0c1b26175b9d407b16a2e1c2757efb">  102</a></span>&#160;<span class="preprocessor">#define INIT_GUI 1</span></div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160; </div>
+<div class="line"><a name="l00107"></a><span class="lineno"><a class="line" href="constants_8h.html#abcac1dfbd831180c21724fb3ea13026a">  107</a></span>&#160;<span class="preprocessor">#define INIT_NETWORK 2</span></div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160; </div>
+<div class="line"><a name="l00112"></a><span class="lineno"><a class="line" href="constants_8h.html#a9ba5e93e685df51511c44b32d1e2774e">  112</a></span>&#160;<span class="preprocessor">#define INIT_DEFAULT INIT_GUI</span></div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160; </div>
+<div class="line"><a name="l00117"></a><span class="lineno"><a class="line" href="constants_8h.html#a8beaa5b28cf9a48a1df357d25ec9704e">  117</a></span>&#160;<span class="preprocessor">#define ADDRESS_LENGTH 16</span></div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160; </div>
+<div class="line"><a name="l00122"></a><span class="lineno"><a class="line" href="constants_8h.html#a7e3662e10fcd0bb440a524366d7fbc27">  122</a></span>&#160;<span class="preprocessor">#define color(param) printf(&quot;\033[%sm&quot;</span>,param)</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160; </div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;<span class="preprocessor">#endif</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

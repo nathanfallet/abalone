@@ -73,9 +73,9 @@ $(function() {
 <a href="board_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef BOARD_H</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define BOARD_H</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &quot;constants.h&quot;</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="constants_8h.html">constants.h</a>&quot;</span></div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="cell_8h.html">cell.h</a>&quot;</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &quot;state.h&quot;</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="state_8h.html">state.h</a>&quot;</span></div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
 <div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="board_8h.html#abf0efda810e3e4bfc5686b70abe6bfb2">   28</a></span>&#160;<span class="keyword">typedef</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <a class="code" href="board_8h.html#abf0efda810e3e4bfc5686b70abe6bfb2">Board</a>[2];</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
@@ -87,7 +87,7 @@ $(function() {
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="keywordtype">void</span> <a class="code" href="board_8h.html#a1ba08fe6590fb7e30f47ed18d5c25de2">board_set_cell</a>(<a class="code" href="board_8h.html#abf0efda810e3e4bfc5686b70abe6bfb2">Board</a> board, <span class="keywordtype">int</span> line, <span class="keywordtype">int</span> column, <a class="code" href="cell_8h.html#a53efbb3b59542e13799bdf1fd8607c44">Cell</a> cell);</div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;State <a class="code" href="board_8h.html#ada110c8050fb1fba66d0a75619d77c9e">board_state</a>(<a class="code" href="board_8h.html#abf0efda810e3e4bfc5686b70abe6bfb2">Board</a> board);</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<a class="code" href="state_8h.html#a923fb9080b37d642c98cbc0159c9fd0e">State</a> <a class="code" href="board_8h.html#ada110c8050fb1fba66d0a75619d77c9e">board_state</a>(<a class="code" href="board_8h.html#abf0efda810e3e4bfc5686b70abe6bfb2">Board</a> board);</div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="ttc" id="aboard_8h_html_a1b09fd139ef7dabc39cd96cd830f6edc"><div class="ttname"><a href="board_8h.html#a1b09fd139ef7dabc39cd96cd830f6edc">board_create</a></div><div class="ttdeci">void board_create(Board board)</div><div class="ttdoc">Crée un plateau par défaut.</div><div class="ttdef"><b>Definition:</b> board.c:3</div></div>
@@ -98,6 +98,9 @@ $(function() {
 <div class="ttc" id="aboard_8h_html_ada110c8050fb1fba66d0a75619d77c9e"><div class="ttname"><a href="board_8h.html#ada110c8050fb1fba66d0a75619d77c9e">board_state</a></div><div class="ttdeci">State board_state(Board board)</div><div class="ttdoc">Retourne l'état du plateau.</div><div class="ttdef"><b>Definition:</b> board.c:46</div></div>
 <div class="ttc" id="acell_8h_html"><div class="ttname"><a href="cell_8h.html">cell.h</a></div><div class="ttdoc">Cellule de plateau.</div></div>
 <div class="ttc" id="acell_8h_html_a53efbb3b59542e13799bdf1fd8607c44"><div class="ttname"><a href="cell_8h.html#a53efbb3b59542e13799bdf1fd8607c44">Cell</a></div><div class="ttdeci">unsigned char Cell</div><div class="ttdoc">Cellule de plateau.</div><div class="ttdef"><b>Definition:</b> cell.h:21</div></div>
+<div class="ttc" id="aconstants_8h_html"><div class="ttname"><a href="constants_8h.html">constants.h</a></div><div class="ttdoc">Constantes globales.</div></div>
+<div class="ttc" id="astate_8h_html"><div class="ttname"><a href="state_8h.html">state.h</a></div><div class="ttdoc">Statut de la partie.</div></div>
+<div class="ttc" id="astate_8h_html_a923fb9080b37d642c98cbc0159c9fd0e"><div class="ttname"><a href="state_8h.html#a923fb9080b37d642c98cbc0159c9fd0e">State</a></div><div class="ttdeci">char State</div><div class="ttdoc">Statut de la partie.</div><div class="ttdef"><b>Definition:</b> state.h:14</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

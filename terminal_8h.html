@@ -80,25 +80,25 @@ $(function() {
 <code>#include &quot;<a class="el" href="ia_8h_source.html">ia.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="game_8h_source.html">game.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="cell_8h_source.html">cell.h</a>&quot;</code><br />
-<code>#include &quot;state.h&quot;</code><br />
+<code>#include &quot;<a class="el" href="state_8h_source.html">state.h</a>&quot;</code><br />
 </div>
 <p><a href="terminal_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a7e667eb052951672cb3890dbc9d7f1bb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="terminal_8h.html#a7e667eb052951672cb3890dbc9d7f1bb">terminal_init</a> (<a class="el" href="cell_8h.html#a53efbb3b59542e13799bdf1fd8607c44">Cell</a> owner, int ia_override, void(*refresh_opponent)(<a class="el" href="structgame__t.html">PGame</a> game, <a class="el" href="cell_8h.html#a53efbb3b59542e13799bdf1fd8607c44">Cell</a> me, State state))</td></tr>
-<tr class="memdesc:a7e667eb052951672cb3890dbc9d7f1bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialise l'affichage dans le terminal.  <a href="terminal_8h.html#a7e667eb052951672cb3890dbc9d7f1bb">More...</a><br /></td></tr>
-<tr class="separator:a7e667eb052951672cb3890dbc9d7f1bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af1392aa729df874044bd0e2cbf1fd044"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="terminal_8h.html#af1392aa729df874044bd0e2cbf1fd044">terminal_update</a> (<a class="el" href="structgame__t.html">PGame</a> game, <a class="el" href="cell_8h.html#a53efbb3b59542e13799bdf1fd8607c44">Cell</a> me, State state)</td></tr>
-<tr class="memdesc:af1392aa729df874044bd0e2cbf1fd044"><td class="mdescLeft">&#160;</td><td class="mdescRight">Actualise l'affichage du terrain dans le terminal.  <a href="terminal_8h.html#af1392aa729df874044bd0e2cbf1fd044">More...</a><br /></td></tr>
-<tr class="separator:af1392aa729df874044bd0e2cbf1fd044"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8a6a4e03d492b6e8c74e2e981817c2e6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="terminal_8h.html#a8a6a4e03d492b6e8c74e2e981817c2e6">terminal_init</a> (<a class="el" href="cell_8h.html#a53efbb3b59542e13799bdf1fd8607c44">Cell</a> owner, int ia_override, void(*refresh_opponent)(<a class="el" href="structGame.html">Game</a> *game, <a class="el" href="cell_8h.html#a53efbb3b59542e13799bdf1fd8607c44">Cell</a> me, <a class="el" href="state_8h.html#a923fb9080b37d642c98cbc0159c9fd0e">State</a> state))</td></tr>
+<tr class="memdesc:a8a6a4e03d492b6e8c74e2e981817c2e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialise l'affichage dans le terminal.  <a href="terminal_8h.html#a8a6a4e03d492b6e8c74e2e981817c2e6">More...</a><br /></td></tr>
+<tr class="separator:a8a6a4e03d492b6e8c74e2e981817c2e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4b7ebb96c84de3a2eb907b0fde59138d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="terminal_8h.html#a4b7ebb96c84de3a2eb907b0fde59138d">terminal_update</a> (<a class="el" href="structGame.html">Game</a> *game, <a class="el" href="cell_8h.html#a53efbb3b59542e13799bdf1fd8607c44">Cell</a> me, <a class="el" href="state_8h.html#a923fb9080b37d642c98cbc0159c9fd0e">State</a> state)</td></tr>
+<tr class="memdesc:a4b7ebb96c84de3a2eb907b0fde59138d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Actualise l'affichage du terrain dans le terminal.  <a href="terminal_8h.html#a4b7ebb96c84de3a2eb907b0fde59138d">More...</a><br /></td></tr>
+<tr class="separator:a4b7ebb96c84de3a2eb907b0fde59138d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Gestion du terminal. </p>
 <p>Gestion de l'affichage dans le terminal. </p>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="a7e667eb052951672cb3890dbc9d7f1bb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7e667eb052951672cb3890dbc9d7f1bb">&#9670;&nbsp;</a></span>terminal_init()</h2>
+<a id="a8a6a4e03d492b6e8c74e2e981817c2e6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8a6a4e03d492b6e8c74e2e981817c2e6">&#9670;&nbsp;</a></span>terminal_init()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -118,7 +118,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">void(*)(<a class="el" href="structgame__t.html">PGame</a> game, <a class="el" href="cell_8h.html#a53efbb3b59542e13799bdf1fd8607c44">Cell</a> me, State state)&#160;</td>
+          <td class="paramtype">void(*)(<a class="el" href="structGame.html">Game</a> *game, <a class="el" href="cell_8h.html#a53efbb3b59542e13799bdf1fd8607c44">Cell</a> me, <a class="el" href="state_8h.html#a923fb9080b37d642c98cbc0159c9fd0e">State</a> state)&#160;</td>
           <td class="paramname"><em>refresh_opponent</em>&#160;</td>
         </tr>
         <tr>
@@ -141,8 +141,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="af1392aa729df874044bd0e2cbf1fd044"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af1392aa729df874044bd0e2cbf1fd044">&#9670;&nbsp;</a></span>terminal_update()</h2>
+<a id="a4b7ebb96c84de3a2eb907b0fde59138d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4b7ebb96c84de3a2eb907b0fde59138d">&#9670;&nbsp;</a></span>terminal_update()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -150,7 +150,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">void terminal_update </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structgame__t.html">PGame</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="structGame.html">Game</a> *&#160;</td>
           <td class="paramname"><em>game</em>, </td>
         </tr>
         <tr>
@@ -162,7 +162,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">State&#160;</td>
+          <td class="paramtype"><a class="el" href="state_8h.html#a923fb9080b37d642c98cbc0159c9fd0e">State</a>&#160;</td>
           <td class="paramname"><em>state</em>&#160;</td>
         </tr>
         <tr>
