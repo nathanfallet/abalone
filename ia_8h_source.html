@@ -73,7 +73,7 @@ $(function() {
 <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef IA_H</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define IA_H</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;board.h&quot;</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="board_8h.html">board.h</a>&quot;</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;game.h&quot;</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;constants.h&quot;</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;scored_move.h&quot;</span></div>
@@ -81,9 +81,11 @@ $(function() {
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keywordtype">void</span> ia_update(<a class="code" href="structgame__t.html">PGame</a> game, Cell me, State state);</div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;Move ia_minimax(Cell me, Board board, <span class="keywordtype">int</span> profondeur);</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;Move ia_minimax(Cell me, <a class="code" href="board_8h.html#abf0efda810e3e4bfc5686b70abe6bfb2">Board</a> board, <span class="keywordtype">int</span> profondeur);</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="aboard_8h_html"><div class="ttname"><a href="board_8h.html">board.h</a></div><div class="ttdoc">Gestion d'un plateau.</div></div>
+<div class="ttc" id="aboard_8h_html_abf0efda810e3e4bfc5686b70abe6bfb2"><div class="ttname"><a href="board_8h.html#abf0efda810e3e4bfc5686b70abe6bfb2">Board</a></div><div class="ttdeci">unsigned long Board[2]</div><div class="ttdoc">Plateau de jeu.</div><div class="ttdef"><b>Definition:</b> board.h:28</div></div>
 <div class="ttc" id="astructgame__t_html"><div class="ttname"><a href="structgame__t.html">game_t</a></div><div class="ttdef"><b>Definition:</b> game.h:10</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->

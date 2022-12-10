@@ -74,14 +74,14 @@ $(function() {
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define GAME_H</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;constants.h&quot;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;board.h&quot;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="board_8h.html">board.h</a>&quot;</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;move.h&quot;</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;cell.h&quot;</span></div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;state.h&quot;</span></div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
 <div class="line"><a name="l00010"></a><span class="lineno"><a class="line" href="structgame__t.html">   10</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="structgame__t.html">game_t</a> {</div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    <span class="comment">// Plateau : vide, pion noir ou pion blanc</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    Board board;</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    <a class="code" href="board_8h.html#abf0efda810e3e4bfc5686b70abe6bfb2">Board</a> board;</div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <span class="comment">// Joueur qui a lancé la partie, et celui qui doit jouer</span></div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    Cell owner;</div>
@@ -105,6 +105,8 @@ $(function() {
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="keywordtype">void</span> game_start(<a class="code" href="structgame__t.html">PGame</a> game);</div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="aboard_8h_html"><div class="ttname"><a href="board_8h.html">board.h</a></div><div class="ttdoc">Gestion d'un plateau.</div></div>
+<div class="ttc" id="aboard_8h_html_abf0efda810e3e4bfc5686b70abe6bfb2"><div class="ttname"><a href="board_8h.html#abf0efda810e3e4bfc5686b70abe6bfb2">Board</a></div><div class="ttdeci">unsigned long Board[2]</div><div class="ttdoc">Plateau de jeu.</div><div class="ttdef"><b>Definition:</b> board.h:28</div></div>
 <div class="ttc" id="astructgame__t_html"><div class="ttname"><a href="structgame__t.html">game_t</a></div><div class="ttdef"><b>Definition:</b> game.h:10</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
