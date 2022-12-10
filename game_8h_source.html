@@ -70,44 +70,51 @@ $(function() {
 <div class="title">game.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef GAME_H</span></div>
+<a href="game_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef GAME_H</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define GAME_H</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;constants.h&quot;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="board_8h.html">board.h</a>&quot;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;move.h&quot;</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;cell.h&quot;</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;state.h&quot;</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
-<div class="line"><a name="l00010"></a><span class="lineno"><a class="line" href="structgame__t.html">   10</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="structgame__t.html">game_t</a> {</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    <span class="comment">// Plateau : vide, pion noir ou pion blanc</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    <a class="code" href="board_8h.html#abf0efda810e3e4bfc5686b70abe6bfb2">Board</a> board;</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <span class="comment">// Joueur qui a lancé la partie, et celui qui doit jouer</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    Cell owner;</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    Cell playing;</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <span class="keywordtype">int</span> ia_override;</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <span class="comment">// Dernier coup joué</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="keywordtype">int</span> has_last_move;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    Move last_move;</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="comment">// Callback pour actualiser les joueurs</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    void (*refresh)(<span class="keyword">struct </span><a class="code" href="structgame__t.html">game_t</a> *game, Cell me, State state);</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    void (*refresh_opponent)(<span class="keyword">struct </span><a class="code" href="structgame__t.html">game_t</a> *game, Cell me, State state);</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;} <a class="code" href="structgame__t.html">Game</a>;</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keyword">typedef</span> <a class="code" href="structgame__t.html">Game</a> *<a class="code" href="structgame__t.html">PGame</a>;</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<a class="code" href="structgame__t.html">PGame</a> game_new(Cell owner, <span class="keywordtype">int</span> ia_override);</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="keywordtype">void</span> game_turn(<a class="code" href="structgame__t.html">PGame</a> game, Move move);</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &quot;constants.h&quot;</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="board_8h.html">board.h</a>&quot;</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="move_8h.html">move.h</a>&quot;</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="cell_8h.html">cell.h</a>&quot;</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &quot;state.h&quot;</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
+<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="structgame__t.html">   17</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="structgame__t.html">game_t</a> {</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="comment">// Plateau : vide, pion noir ou pion blanc</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <a class="code" href="board_8h.html#abf0efda810e3e4bfc5686b70abe6bfb2">Board</a> board;</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="comment">// Joueur qui a lancé la partie, et celui qui doit jouer</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <a class="code" href="cell_8h.html#a53efbb3b59542e13799bdf1fd8607c44">Cell</a> owner;</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <a class="code" href="cell_8h.html#a53efbb3b59542e13799bdf1fd8607c44">Cell</a> playing;</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="keywordtype">int</span> ia_override;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="comment">// Dernier coup joué</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keywordtype">int</span> has_last_move;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <a class="code" href="move_8h.html#ab9f77aa389af7f0da89bdcb6ae41a897">Move</a> last_move;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="comment">// Callback pour actualiser les joueurs</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    void (*refresh)(<span class="keyword">struct </span><a class="code" href="structgame__t.html">game_t</a> *game, <a class="code" href="cell_8h.html#a53efbb3b59542e13799bdf1fd8607c44">Cell</a> me, State state);</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    void (*refresh_opponent)(<span class="keyword">struct </span><a class="code" href="structgame__t.html">game_t</a> *game, <a class="code" href="cell_8h.html#a53efbb3b59542e13799bdf1fd8607c44">Cell</a> me, State state);</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;} <a class="code" href="structgame__t.html">Game</a>;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="keyword">typedef</span> <a class="code" href="structgame__t.html">Game</a> *<a class="code" href="structgame__t.html">PGame</a>;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<a class="code" href="structgame__t.html">PGame</a> <a class="code" href="game_8h.html#a2c70b6e91d5d44d4c008e137c058a862">game_new</a>(<a class="code" href="cell_8h.html#a53efbb3b59542e13799bdf1fd8607c44">Cell</a> owner, <span class="keywordtype">int</span> ia_override);</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="keywordtype">void</span> game_start(<a class="code" href="structgame__t.html">PGame</a> game);</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="keywordtype">void</span> <a class="code" href="game_8h.html#a047fc208897faba5143db1f0381540f9">game_turn</a>(<a class="code" href="structgame__t.html">PGame</a> game, <a class="code" href="move_8h.html#ab9f77aa389af7f0da89bdcb6ae41a897">Move</a> move);</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="keywordtype">void</span> <a class="code" href="game_8h.html#acfa7c6bcf8ef8a8e7c13e0d28b3d8028">game_start</a>(<a class="code" href="structgame__t.html">PGame</a> game);</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="ttc" id="aboard_8h_html"><div class="ttname"><a href="board_8h.html">board.h</a></div><div class="ttdoc">Gestion d'un plateau.</div></div>
 <div class="ttc" id="aboard_8h_html_abf0efda810e3e4bfc5686b70abe6bfb2"><div class="ttname"><a href="board_8h.html#abf0efda810e3e4bfc5686b70abe6bfb2">Board</a></div><div class="ttdeci">unsigned long Board[2]</div><div class="ttdoc">Plateau de jeu.</div><div class="ttdef"><b>Definition:</b> board.h:28</div></div>
-<div class="ttc" id="astructgame__t_html"><div class="ttname"><a href="structgame__t.html">game_t</a></div><div class="ttdef"><b>Definition:</b> game.h:10</div></div>
+<div class="ttc" id="acell_8h_html"><div class="ttname"><a href="cell_8h.html">cell.h</a></div><div class="ttdoc">Cellule de plateau.</div></div>
+<div class="ttc" id="acell_8h_html_a53efbb3b59542e13799bdf1fd8607c44"><div class="ttname"><a href="cell_8h.html#a53efbb3b59542e13799bdf1fd8607c44">Cell</a></div><div class="ttdeci">unsigned char Cell</div><div class="ttdoc">Cellule de plateau.</div><div class="ttdef"><b>Definition:</b> cell.h:21</div></div>
+<div class="ttc" id="agame_8h_html_a047fc208897faba5143db1f0381540f9"><div class="ttname"><a href="game_8h.html#a047fc208897faba5143db1f0381540f9">game_turn</a></div><div class="ttdeci">void game_turn(PGame game, Move move)</div><div class="ttdoc">Exécute le prochain tour de jeu.</div><div class="ttdef"><b>Definition:</b> game.c:23</div></div>
+<div class="ttc" id="agame_8h_html_a2c70b6e91d5d44d4c008e137c058a862"><div class="ttname"><a href="game_8h.html#a2c70b6e91d5d44d4c008e137c058a862">game_new</a></div><div class="ttdeci">PGame game_new(Cell owner, int ia_override)</div><div class="ttdoc">Créé et initialise une partie.</div><div class="ttdef"><b>Definition:</b> game.c:5</div></div>
+<div class="ttc" id="agame_8h_html_acfa7c6bcf8ef8a8e7c13e0d28b3d8028"><div class="ttname"><a href="game_8h.html#acfa7c6bcf8ef8a8e7c13e0d28b3d8028">game_start</a></div><div class="ttdeci">void game_start(PGame game)</div><div class="ttdoc">Démarre la partie.</div><div class="ttdef"><b>Definition:</b> game.c:46</div></div>
+<div class="ttc" id="amove_8h_html"><div class="ttname"><a href="move_8h.html">move.h</a></div><div class="ttdoc">Gestion d'un mouvement.</div></div>
+<div class="ttc" id="amove_8h_html_ab9f77aa389af7f0da89bdcb6ae41a897"><div class="ttname"><a href="move_8h.html#ab9f77aa389af7f0da89bdcb6ae41a897">Move</a></div><div class="ttdeci">unsigned short Move</div><div class="ttdef"><b>Definition:</b> move.h:18</div></div>
+<div class="ttc" id="astructgame__t_html"><div class="ttname"><a href="structgame__t.html">game_t</a></div><div class="ttdef"><b>Definition:</b> game.h:17</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
