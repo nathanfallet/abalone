@@ -66,7 +66,7 @@
 /**
  * Poids quand un pion est au centre
  */
-#define WEIGHT_CENTER 5
+#define WEIGHT_CENTER 3
 
 /**
  * Poids quand un pion peut pousser un autre pion

@@ -18,7 +18,7 @@ ScoredMove ia_minimax_compare(Cell me, Cell playing, Board board, Move root, int
     int i = 0;
     while ((move = moves[i]) != MOVE_NONE) {
         // Check du threshold
-        if (move_selected != MOVE_NONE && (max ? threshold >= scored_move_score(move_selected) : threshold <= scored_move_score(move_selected))) {
+        if (move_selected != MOVE_NONE && (max ? threshold <= scored_move_score(move_selected) : threshold >= scored_move_score(move_selected))) {
             break;
         }
 
@@ -38,13 +38,13 @@ ScoredMove ia_minimax_compare(Cell me, Cell playing, Board board, Move root, int
                 winner == me ? WEIGHT_WIN_DIRECT : -WEIGHT_WIN_DIRECT);
 
             // Si c'est une victoire assurée, on ne va même pas chercher la suite de l'arbre
-            if (winner == me) {
+            if (max ? winner == me : winner != me) {
                 return sc;
             }
         }
         else if (profondeur > 1) {
             // On continue plus profond
-            int child_threshold = max ? INT_MAX : INT_MIN;
+            int child_threshold = max ? INT_MIN : INT_MAX;
             if (move_selected != MOVE_NONE) {
                 child_threshold = scored_move_score(move_selected);
             }
@@ -96,6 +96,6 @@ void ia_update(PGame game, Cell me, State state) {
 }
 
 Move ia_minimax(Cell me, Board board, int profondeur) {
-    ScoredMove move = ia_minimax_compare(me, me, board, MOVE_NONE, profondeur, 1, INT_MIN);
+    ScoredMove move = ia_minimax_compare(me, me, board, MOVE_NONE, profondeur, 1, INT_MAX);
     return scored_move_root(move);
 }
