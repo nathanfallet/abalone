@@ -82,7 +82,7 @@ ScoredMove ia_minimax_compare(Cell me, Board board, Move root, int profondeur, i
 
 // Implémentation des fonctions de base pour intéragir avec le jeu
 
-void ia_update(PGame game, Cell me, State state) {
+void ia_update(Game *game, Cell me, State state) {
     // Fin de partie
     if (state != STATE_PLAYING) {
         return;

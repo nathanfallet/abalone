@@ -13,7 +13,13 @@
 #include "cell.h"
 
 /**
- * Représente un mouvement
+ * \brief Représente un mouvement
+ * 
+ * Un mouvement est représenté par un entier sur 16 bits,
+ * avec les 4 bits de poids fort pour la ligne de départ,
+ * les 4 bits suivants pour la colonne de départ,
+ * les 4 bits suivants pour la ligne d'arrivée et
+ * les 4 bits de poids faible pour la colonne d'arrivée.
  */
 typedef unsigned short Move;
 

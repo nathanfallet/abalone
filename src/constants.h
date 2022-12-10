@@ -1,6 +1,14 @@
 #ifndef CONSTANTS_H
 #define CONSTANTS_H
 
+/**
+ * \file constants.h
+ * \brief Constantes globales
+ */
+
+/**
+ * \brief Taille du plateau
+ */
 #define BOARD_SIZE 8
 
 /**

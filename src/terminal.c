@@ -7,7 +7,7 @@
 
 // Stockage de trucs
 
-PGame terminal_last_game;
+Game *terminal_last_game;
 Cell terminal_last_me;
 State terminal_last_state;
 
@@ -59,7 +59,7 @@ void terminal_print(Board board) {
     printf("\n");
 }
 
-void terminal_background_start(PGame game) {
+void terminal_background_start(Game *game) {
     pthread_t thread;
     pthread_create(&thread, NULL, game_start, game);
 }
@@ -83,8 +83,8 @@ void *terminal_background_turn() {
 
 // Fonctions publiques
 
-void terminal_init(Cell owner, int ia_override, void (*refresh_opponent)(PGame game, Cell me, State state)) {
-    PGame game = game_new(owner, ia_override);
+void terminal_init(Cell owner, int ia_override, void (*refresh_opponent)(Game *game, Cell me, State state)) {
+    Game *game = game_new(owner, ia_override);
     game->refresh = terminal_update;
     game->refresh_opponent = refresh_opponent;
 
@@ -95,7 +95,7 @@ void terminal_init(Cell owner, int ia_override, void (*refresh_opponent)(PGame g
     }
 }
 
-void terminal_update(PGame game, Cell me, State state) {
+void terminal_update(Game *game, Cell me, State state) {
     // On enregistre les trucs (pour les passer au main thread)
     terminal_last_game = game;
     terminal_last_me = me;

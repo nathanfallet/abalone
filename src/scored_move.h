@@ -12,6 +12,14 @@
 #include "cell.h"
 #include "constants.h"
 
+/**
+ * \brief Représente un déplacement associé à un score
+ * 
+ * Un déplacement associé à un score est représenté par un entier sur 64 bits,
+ * avec les 16 bits de poids faible pour le déplacement,
+ * les 16 bits suivants pour le déplacement de départ,
+ * et les 32 bits de poids fort pour le score.
+ */
 typedef unsigned long ScoredMove;
 
 /**

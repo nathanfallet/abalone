@@ -20,7 +20,7 @@
  * \param me Le joueur
  * \param state L'état de la partie
  */
-void ia_update(PGame game, Cell me, State state);
+void ia_update(Game *game, Cell me, State state);
 
 /**
  * \brief Retourne le meilleur move pour l'IA

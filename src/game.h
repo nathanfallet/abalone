@@ -14,24 +14,22 @@
 #include "cell.h"
 #include "state.h"
 
-typedef struct game_t {
-	// Plateau : vide, pion noir ou pion blanc
-	Board board;
+/**
+ * \brief Structure d'une partie
+ */
+typedef struct Game {
+	Board board; /*!< Plateau de jeu de la partie */
 
-	// Joueur qui a lancé la partie, et celui qui doit jouer
-	Cell owner;
-	Cell playing;
-	int ia_override;
+	Cell owner; /*!< Le joueur qui a créé la partie */
+	Cell playing; /*!< Le joueur qui joue actuellement */
+	int ia_override; /*!< Si l'IA doit jouer à la place du joueur */
 
-	// Dernier coup joué
-	int has_last_move;
-	Move last_move;
+	int has_last_move; /*!< Si un coup a été joué dans la partie */
+	Move last_move; /*!< Le dernier coup joué */
 
-	// Callback pour actualiser les joueurs
-	void (*refresh)(struct game_t *game, Cell me, State state);
-	void (*refresh_opponent)(struct game_t *game, Cell me, State state);
+	void (*refresh)(struct Game *game, Cell me, State state); /*!< Callback pour actualiser l'affichage */
+	void (*refresh_opponent)(struct Game *game, Cell me, State state); /*!< Callback pour actualiser l'affichage de l'adversaire */
 } Game;
-typedef Game *PGame;
 
 /**
  * \brief Créé et initialise une partie
@@ -39,19 +37,19 @@ typedef Game *PGame;
  * \param ia_override Si l'IA doit jouer à la place du joueur
  * \return La partie crée
  */
-PGame game_new(Cell owner, int ia_override);
+Game *game_new(Cell owner, int ia_override);
 
 /**
  * \brief Exécute le prochain tour de jeu
  * \param game La partie
  * \param move Le coup à jouer
  */
-void game_turn(PGame game, Move move);
+void game_turn(Game *game, Move move);
 
 /**
  * \brief Démarre la partie
  * \param game La partie
  */
-void game_start(PGame game);
+void game_start(Game *game);
 
 #endif

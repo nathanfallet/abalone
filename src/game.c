@@ -2,8 +2,8 @@
 #include <stdlib.h>
 #include "game.h"
 
-PGame game_new(Cell owner, int ia_override) {
-    PGame game = (PGame)malloc(sizeof(Game));
+Game *game_new(Cell owner, int ia_override) {
+    Game *game = malloc(sizeof(Game));
 
     // Initialisation du tableau
     board_create(game->board);
@@ -20,7 +20,7 @@ PGame game_new(Cell owner, int ia_override) {
     return game;
 }
 
-void game_turn(PGame game, Move move) {
+void game_turn(Game *game, Move move) {
     // Appliquer le movement
     if (move_apply(move, game->playing, game->board, 1) == 0) {
         // Move invalide !
@@ -43,7 +43,7 @@ void game_turn(PGame game, Move move) {
     }
 }
 
-void game_start(PGame game) {
+void game_start(Game *game) {
     State state = board_state(game->board);
     if (game->refresh != NULL) {
         game->refresh(game, game->owner, state);

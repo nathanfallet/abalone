@@ -18,7 +18,7 @@ GtkWidget *entry;
 GtkWidget *button;
 GtkWidget *click;
 
-PGame gui_last_game;
+Game *gui_last_game;
 Cell gui_last_me;
 State gui_last_state;
 Move gui_last_move;
@@ -57,7 +57,7 @@ void play_sound(char *path) {
     system(command);
 }
 
-void gui_background_start(PGame game) {
+void gui_background_start(Game *game) {
     /*
      * Initialisation du background thread
      * Pour que le jeu se fasse en background et ne bloque pas l'interface
@@ -288,13 +288,13 @@ void gui_init_window() {
 
 // Fonctions publiques
 
-void gui_init(Cell owner, int ia_override, void (*refresh_opponent)(PGame game, Cell me, State state)) {
+void gui_init(Cell owner, int ia_override, void (*refresh_opponent)(Game *game, Cell me, State state)) {
     /*
      * Fonction d'initialisation de l'interface
      */
 
     // Initialisation de la partie
-    PGame game = game_new(owner, ia_override);
+    Game *game = game_new(owner, ia_override);
     game->refresh = gui_update;
     game->refresh_opponent = refresh_opponent;
 
@@ -308,7 +308,7 @@ void gui_init(Cell owner, int ia_override, void (*refresh_opponent)(PGame game, 
     gtk_main();
 }
 
-void gui_update(PGame game, Cell me, State state) {
+void gui_update(Game *game, Cell me, State state) {
     /*
      * Fonction appelée par le jeu avec les données à jour
      */

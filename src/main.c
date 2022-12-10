@@ -15,7 +15,7 @@ void print_help() {
     printf(" -c <adresse>:<port> : se connecter à un serveur distant\n");
 }
 
-void default_init(Cell me, int ia_override, void (*update)(PGame game, Cell me, State state)) {
+void default_init(Cell me, int ia_override, void (*update)(Game *game, Cell me, State state)) {
     if (INIT_DEFAULT == INIT_TERMINAL) {
         terminal_init(me, ia_override, update);
     }

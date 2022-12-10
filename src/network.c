@@ -84,7 +84,7 @@ void network_disconnect() {
     }
 }
 
-void network_init(Cell owner, int ia_override, void (*init)(Cell owner, int ia_override, void (*actualiser_adversaire)(PGame game, Cell me, State state)), char address[ADDRESS_LENGTH], int port) {
+void network_init(Cell owner, int ia_override, void (*init)(Cell owner, int ia_override, void (*actualiser_adversaire)(Game *game, Cell me, State state)), char address[ADDRESS_LENGTH], int port) {
     // Save address and port
     strcpy(saved_address, address);
     saved_port = port;
@@ -93,7 +93,7 @@ void network_init(Cell owner, int ia_override, void (*init)(Cell owner, int ia_o
     init(owner, ia_override, network_update);
 }
 
-void network_update(PGame game, Cell me, State state) {
+void network_update(Game *game, Cell me, State state) {
     // If it is my turn
     if (game->playing == me) {
         if (game->has_last_move) {
