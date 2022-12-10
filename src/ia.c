@@ -7,10 +7,10 @@
 
 // Algorithme minimax. Il retourne une décision (move) et prend en compte le joueur qui joue ainsi que le board actuel
 
-ScoredMove ia_minimax_compare(Cell me, Cell playing, Board board, Move root, int profondeur, int max, int threshold) {
+ScoredMove ia_minimax_compare(Cell me, Board board, Move root, int profondeur, int max, int threshold) {
     // On récupère les moves possibles
     Move moves[MOVE_LIST_SIZE];
-    move_available(playing, board, moves);
+    move_available(max ? me : cell_opposite(me), board, moves);
 
     ScoredMove move_selected = MOVE_NONE;
     Move move = MOVE_NONE;
@@ -25,7 +25,7 @@ ScoredMove ia_minimax_compare(Cell me, Cell playing, Board board, Move root, int
         // On applique le move
         Board copy;
         board_clone(board, copy);
-        move_apply(move, playing, copy, 1);
+        move_apply(move, max ? me : cell_opposite(me), copy, 1);
         ScoredMove sc = MOVE_NONE;
 
         State state = board_state(copy);
@@ -38,7 +38,7 @@ ScoredMove ia_minimax_compare(Cell me, Cell playing, Board board, Move root, int
                 winner == me ? WEIGHT_WIN_DIRECT : -WEIGHT_WIN_DIRECT);
 
             // Si c'est une victoire assurée, on ne va même pas chercher la suite de l'arbre
-            if (max ? winner == me : winner != me) {
+            if (winner == (max ? me : cell_opposite(me))) {
                 return sc;
             }
         }
@@ -48,7 +48,7 @@ ScoredMove ia_minimax_compare(Cell me, Cell playing, Board board, Move root, int
             if (move_selected != MOVE_NONE) {
                 child_threshold = scored_move_score(move_selected);
             }
-            sc = ia_minimax_compare(me, cell_opposite(playing), copy, move, profondeur - 1, max == 0, child_threshold);
+            sc = ia_minimax_compare(me, copy, move, profondeur - 1, max == 0, child_threshold);
             if (root != MOVE_NONE) {
                 sc = scored_move_new(
                     scored_move_move(sc),
@@ -96,6 +96,6 @@ void ia_update(PGame game, Cell me, State state) {
 }
 
 Move ia_minimax(Cell me, Board board, int profondeur) {
-    ScoredMove move = ia_minimax_compare(me, me, board, MOVE_NONE, profondeur, 1, INT_MAX);
+    ScoredMove move = ia_minimax_compare(me, board, MOVE_NONE, profondeur, 1, INT_MAX);
     return scored_move_root(move);
 }

@@ -8,18 +8,6 @@
 #include "state.h"
 
 /**
- * Retourne le move avec le score le plus élevé/faible
- * @param me Le joueur
- * @param board Le plateau
- * @param root Le move à comparer
- * @param profondeur La profondeur de l'arbre
- * @param max Si on cherche le max ou le min
- * @param threshold Le seuil de coup
- * @return Le move avec le score le plus élevé/faible
- */
-ScoredMove compare(Cell me, Cell playing, Board board, Move root, int profondeur, int max, int threshold);
-
-/**
  * Exécute le prochain tour de jeu de l'IA
  * @param game La partie
  * @param me Le joueur
