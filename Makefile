@@ -40,13 +40,16 @@ $(TARGET_EXEC): $(OBJS)
 tests: $(OBJS) $(TESTS_OBJS)
 	gcc -Wall -fprofile-arcs -ftest-coverage -pthread $(OBJS_FOR_TESTS) $(TESTS_OBJS) -o $(TARGET_EXEC)_tests $(LDFLAGS)
 	./$(TARGET_EXEC)_tests
-	gcov -pb $(filter-out %/main.c, $(OBJS))
 
 # Build step for C source
 $(BUILD_DIR)/%.c.o: %.c
 	mkdir -p $(dir $@)
 	gcc $(CPPFLAGS) $(CFLAGS) $$(pkg-config --libs --cflags gtk+-3.0) -c $< -o $@
 	gcc -fprofile-arcs -ftest-coverage -O0 $(CPPFLAGS) $(CFLAGS) $$(pkg-config --libs --cflags gtk+-3.0) -c $< -o $@_tests
+
+# Generate coverage report
+coverage: tests
+	gcov -pb $(OBJS)
 
 .PHONY: clean
 clean:
