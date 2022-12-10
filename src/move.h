@@ -1,6 +1,13 @@
 #ifndef MOVE_H
 #define MOVE_H
 
+/**
+ * \file move.h
+ * \brief Gestion d'un mouvement
+ * 
+ * Gestion d'un mouvement, avec les vérifications nécessaires
+ */
+
 #include "constants.h"
 #include "board.h"
 #include "cell.h"
@@ -11,7 +18,7 @@
 typedef unsigned short Move;
 
 /**
- * Créé un mouvement
+ * \brief Créé un mouvement
  * \param fromLine La ligne de départ du mouvement
  * \param fromColumn La colonne de départ du mouvement
  * \param toLine La ligne d'arrivée du mouvement
@@ -21,36 +28,35 @@ typedef unsigned short Move;
 Move move_create(unsigned char fromLine, unsigned char fromColumn, unsigned char toLine, unsigned char toColumn);
 
 /**
- * Lire la ligne de départ du mouvement
+ * \brief Lire la ligne de départ du mouvement
  * \param move Le mouvement que l'on veut lire
  * \return La ligne de départ du mouvement
  */
 unsigned char move_get_from_line(Move move);
 
 /**
- * Lire la colonne de départ du mouvement
+ * \brief Lire la colonne de départ du mouvement
  * \param move Le mouvement que l'on veut lire
  * \return La colonne de départ du mouvement
  */
 unsigned char move_get_from_column(Move move);
 
 /**
- * Lire la ligne d'arrivée du mouvement
+ * \brief Lire la ligne d'arrivée du mouvement
  * \param move Le mouvement que l'on veut lire
  * \return La ligne d'arrivée du mouvement
  */
 unsigned char move_get_to_line(Move move);
 
 /**
- * Lire la colonne d'arrivée du mouvement
+ * \brief Lire la colonne d'arrivée du mouvement
  * \param move Le mouvement que l'on veut lire
  * \return La colonne d'arrivée du mouvement
  */
 unsigned char move_get_to_column(Move move);
 
 /**
- * Convertir la chaîne de caractère en un mouvement
- * en un mouvement
+ * \brief Convertir la chaîne de caractère en un mouvement
  * \param string Est la chaîne de caractère correspondant à un mouvement
  * on peut utiliser des lettres minuscules ou majuscules. Cette chaîne de
  * caractères permet au joueur d'entrer le mouvement qu'il souhaite faire
@@ -59,14 +65,14 @@ unsigned char move_get_to_column(Move move);
 Move move_from_string(char *string);
 
 /**
- * Convertir le mouvement en une chaîne de caractères
+ * \brief Convertir le mouvement en une chaîne de caractères
  * \param move Le mouvement que l'on veut convertir
  * \return La chaîne de caractères correspondante au mouvement
  */
 char *move_to_string(Move move);
 
 /**
- * Vérifier la validité du mouvement et l'appliquer le cas échéant
+ * \brief Vérifier la validité du mouvement et l'appliquer le cas échéant
  * \param move Le mouvement que l'on veut appliquer
  * \param me Correspond à la couleur du joueur puisque la validité du
  * mouvement varie en fonction de la couleur des pions
@@ -79,7 +85,7 @@ char *move_to_string(Move move);
 int move_apply(Move move, Cell me, Board board, int apply);
 
 /**
- * Lister le nombre de mouvement possible
+ * \brief Lister le nombre de mouvement possible
  * \param me Correspond à la couleur du joueur dont on veut savoir les mouvements
  * possibles sur le plateau
  * \param board Représente le plateau au moment où l'on veut savoir tous les

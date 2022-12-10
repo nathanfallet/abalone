@@ -1,6 +1,13 @@
 #ifndef IA_H
 #define IA_H
 
+/**
+ * \file ia.h
+ * \brief Gestion de l'IA
+ * 
+ * Gestion de l'IA et de sa réfléxion.
+ */
+
 #include "board.h"
 #include "game.h"
 #include "constants.h"
@@ -8,7 +15,7 @@
 #include "state.h"
 
 /**
- * Exécute le prochain tour de jeu de l'IA
+ * \brief Exécute le prochain tour de jeu de l'IA
  * \param game La partie
  * \param me Le joueur
  * \param state L'état de la partie
@@ -16,7 +23,7 @@
 void ia_update(PGame game, Cell me, State state);
 
 /**
- * Retourne le meilleur move pour l'IA
+ * \brief Retourne le meilleur move pour l'IA
  * \param me Le joueur
  * \param board Le plateau
  * \param profondeur La profondeur de l'arbre

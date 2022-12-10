@@ -1,6 +1,13 @@
 #ifndef GAME_H
 #define GAME_H
 
+/**
+ * \file game.h
+ * \brief Gestion d'une partie
+ * 
+ * Gestion d'une partie et de son déroulement.
+ */
+
 #include "constants.h"
 #include "board.h"
 #include "move.h"
@@ -27,7 +34,7 @@ typedef struct game_t {
 typedef Game *PGame;
 
 /**
- * Créé et initialise une partie
+ * \brief Créé et initialise une partie
  * \param owner Le joueur qui créé la partie (CELL_BLACK ou CELL_WHITE)
  * \param ia_override Si l'IA doit jouer à la place du joueur
  * \return La partie crée
@@ -35,14 +42,14 @@ typedef Game *PGame;
 PGame game_new(Cell owner, int ia_override);
 
 /**
- * Exécute le prochain tour de jeu
+ * \brief Exécute le prochain tour de jeu
  * \param game La partie
  * \param move Le coup à jouer
  */
 void game_turn(PGame game, Move move);
 
 /**
- * Démarre la partie
+ * \brief Démarre la partie
  * \param game La partie
  */
 void game_start(PGame game);

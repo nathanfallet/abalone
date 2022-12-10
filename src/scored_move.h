@@ -1,6 +1,13 @@
 #ifndef SCORED_MOVE_H
 #define SCORED_MOVE_H
 
+/**
+ * \file scored_move.h
+ * \brief Gestion du score des mouvements
+ * 
+ * Gestion du score des mouvements, avec leur calcul.
+ */
+
 #include "move.h"
 #include "cell.h"
 #include "constants.h"
@@ -8,8 +15,7 @@
 typedef unsigned long ScoredMove;
 
 /**
- * Crée un nouveau déplacement associé à un score
- * et sauvegarde le déplacement de départ
+ * \brief Crée un nouveau déplacement associé à un score et sauvegarde le déplacement de départ
  * \param move Le déplacement
  * \param root Le déplacement de départ
  * \param score Le score
@@ -18,28 +24,28 @@ typedef unsigned long ScoredMove;
 ScoredMove scored_move_new(Move move, Move root, int score);
 
 /**
- * Renvoi le déplacement associé au score
+ * \brief Renvoi le déplacement associé au score
  * \param scored_move Le déplacement associé au score
  * \return Le déplacement
  */
 Move scored_move_move(ScoredMove scored_move);
 
 /**
- * Renvoi le déplacement de départ
+ * \brief Renvoi le déplacement de départ
  * \param scored_move Le déplacement associé au score
  * \return Le déplacement de départ
  */
 Move scored_move_root(ScoredMove scored_move);
 
 /**
- * Renvoi le score associé au déplacement
+ * \brief Renvoi le score associé au déplacement
  * \param scored_move Le déplacement associé au score
  * \return Le score
  */
 int scored_move_score(ScoredMove scored_move);
 
 /**
- * Calcul le score d'un déplacement
+ * \brief Calcul le score d'un déplacement
  * \param scored_move Le déplacement associé au score
  * \param me Le joueur
  * \param board Le plateau
