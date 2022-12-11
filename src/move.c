@@ -377,22 +377,22 @@ void move_available(Cell me, Board board, Move array[MOVE_LIST_SIZE]) {
             }
             // latéralle
             // on vérifie si le déplacement en ligne 2 pions horizontale vers le haut
-            if (col < BOARD_SIZE - 1 && line > 0 && move_lateral_two(move_create(line, col, line - 1, col + 1), me, board, 0)) {
+            if (col < BOARD_SIZE - 1 && line > 0 && board_get_cell(board, line, col + 1) == me && move_lateral_two(move_create(line, col, line - 1, col + 1), me, board, 0)) {
                 array[index] = move_create(line, col, line - 1, col + 1);
                 index++;
             }
             // on vérifie si le déplacement en ligne 2 pions horizontale vers le bas
-            if (col < BOARD_SIZE - 1 && line < BOARD_SIZE - 1 && move_lateral_two(move_create(line, col, line + 1, col + 1), me, board, 0)) {
+            if (col < BOARD_SIZE - 1 && line < BOARD_SIZE - 1 && board_get_cell(board, line, col + 1) == me && move_lateral_two(move_create(line, col, line + 1, col + 1), me, board, 0)) {
                 array[index] = move_create(line, col, line + 1, col + 1);
                 index++;
             }
             // on vérifie si le déplacement en ligne 2 pions verticale vers la gauche
-            if (col > 0 && line < BOARD_SIZE - 1 && move_lateral_two(move_create(line, col, line + 1, col - 1), me, board, 0)) {
+            if (col > 0 && line < BOARD_SIZE - 1 && board_get_cell(board, line + 1, col) == me && move_lateral_two(move_create(line, col, line + 1, col - 1), me, board, 0)) {
                 array[index] = move_create(line, col, line + 1, col - 1);
                 index++;
             }
             // on vérifie si le déplacement en ligne 2 pions verticale vers la droite
-            if (col < BOARD_SIZE - 1 && line < BOARD_SIZE - 1 && move_lateral_two(move_create(line, col, line + 1, col + 1), me, board, 0)) {
+            if (col < BOARD_SIZE - 1 && line < BOARD_SIZE - 1 && board_get_cell(board, line + 1, col) == me && move_lateral_two(move_create(line, col, line + 1, col + 1), me, board, 0)) {
                 array[index] = move_create(line, col, line + 1, col + 1);
                 index++;
             }
