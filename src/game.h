@@ -23,9 +23,12 @@ typedef struct Game {
 	Cell owner; /*!< Le joueur qui a créé la partie */
 	Cell playing; /*!< Le joueur qui joue actuellement */
 	int ia_override; /*!< Si l'IA doit jouer à la place du joueur */
-
-	int has_last_move; /*!< Si un coup a été joué dans la partie */
 	Move last_move; /*!< Le dernier coup joué */
+
+	char address[ADDRESS_LENGTH]; /*!< Adresse du serveur (si partie en client) */
+	int port; /*!< Port du serveur (si partie en client ou serveur) */
+	int fdsocket; /*!< Socket du serveur (si partie en serveur) */
+	int fdclient; /*!< Socket du client (si partie en client ou serveur) */
 
 	void (*refresh)(struct Game *game, Cell me, State state); /*!< Callback pour actualiser l'affichage */
 	void (*refresh_opponent)(struct Game *game, Cell me, State state); /*!< Callback pour actualiser l'affichage de l'adversaire */

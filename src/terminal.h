@@ -21,7 +21,7 @@
  * \param ia_override Si l'IA doit jouer à la place du joueur
  * \param refresh_opponent Le callback pour actualiser l'adversaire
  */
-void terminal_init(Cell owner, int ia_override, void (*refresh_opponent)(Game *game, Cell me, State state));
+void terminal_init(Cell owner, int ia_override, void (*refresh_opponent)(Game *game, Cell me, State state), char address[ADDRESS_LENGTH], int port);
 
 /**
  * \brief Actualise l'affichage du terrain dans le terminal

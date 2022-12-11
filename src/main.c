@@ -15,12 +15,12 @@ void print_help() {
     printf(" -c <adresse>:<port> : se connecter à un serveur distant\n");
 }
 
-void default_init(Cell me, int ia_override, void (*update)(Game *game, Cell me, State state)) {
+void default_init(Cell me, int ia_override, void (*update)(Game *game, Cell me, State state), char address[ADDRESS_LENGTH], int port) {
     if (INIT_DEFAULT == INIT_TERMINAL) {
-        terminal_init(me, ia_override, update);
+        terminal_init(me, ia_override, update, address, port);
     }
     else if (INIT_DEFAULT == INIT_GUI) {
-        gui_init(me, ia_override, update);
+        gui_init(me, ia_override, update, address, port);
     }
 }
 
@@ -93,7 +93,7 @@ int main(int argc, char *argv[]) {
     // Call
     switch (init) {
     case INIT_DEFAULT:
-        default_init(me, ia_override, ia_update);
+        default_init(me, ia_override, ia_update, address, port);
         break;
     case INIT_NETWORK:
         network_init(me, ia_override, default_init, address, port);

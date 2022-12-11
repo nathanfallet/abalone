@@ -83,8 +83,10 @@ void *terminal_background_turn() {
 
 // Fonctions publiques
 
-void terminal_init(Cell owner, int ia_override, void (*refresh_opponent)(Game *game, Cell me, State state)) {
+void terminal_init(Cell owner, int ia_override, void (*refresh_opponent)(Game *game, Cell me, State state), char address[ADDRESS_LENGTH], int port) {
     Game *game = game_new(owner, ia_override);
+    strcpy(game->address, address);
+    game->port = port;
     game->refresh = terminal_update;
     game->refresh_opponent = refresh_opponent;
 

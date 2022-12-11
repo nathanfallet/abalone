@@ -8,104 +8,95 @@
 #include <arpa/inet.h>
 #include "network.h"
 
-char saved_address[ADDRESS_LENGTH];
-int saved_port;
-int fdsocket = -1;
-int fdclient = -1;
-
-void network_connect() {
+void network_connect(Game *game) {
     // Already connected
-    if (fdclient != -1) {
+    if (game->fdclient != -1) {
         return;
     }
 
     // Connect
-    if (strcmp(saved_address, "") == 0) {
+    if (strcmp(game->address, "") == 0) {
         // On est le serveur
-        if ((fdsocket = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP)) == -1) {
+        if ((game->fdsocket = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP)) == -1) {
             printf("Could not create socket: %s\n", strerror(errno));
             exit(1);
         }
         int opt = 1;
-        if (setsockopt(fdsocket, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt)) != 0) {
+        if (setsockopt(game->fdsocket, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt)) != 0) {
             printf("Could not set options to socket: %s\n", strerror(errno));
             exit(1);
         }
         struct sockaddr_in addr;
         addr.sin_family = AF_INET;
         addr.sin_addr.s_addr = INADDR_ANY;
-        addr.sin_port = htons(saved_port);
+        addr.sin_port = htons(game->port);
 
         // Bind and listen
-        if (bind(fdsocket, (struct sockaddr *)&addr, sizeof(addr)) != 0) {
+        if (bind(game->fdsocket, (struct sockaddr *)&addr, sizeof(addr)) != 0) {
             printf("Could not bind socket: %s\n", strerror(errno));
             exit(1);
         }
-        if (listen(fdsocket, 1) != 0) {
+        if (listen(game->fdsocket, 1) != 0) {
             printf("Could not listen on socket: %s\n", strerror(errno));
             exit(1);
         }
 
         // Accept connections
-        fdclient = accept(fdsocket, NULL, NULL);
-        if (fdclient == -1) {
+        game->fdclient = accept(game->fdsocket, NULL, NULL);
+        if (game->fdclient == -1) {
             printf("Could not accept client on socket: %s\n", strerror(errno));
             exit(1);
         }
     }
     else {
         // On est le client
-        fdclient = socket(AF_INET, SOCK_STREAM, 0);
-        if (fdclient == -1) {
+        game->fdclient = socket(AF_INET, SOCK_STREAM, 0);
+        if (game->fdclient == -1) {
             printf("Could not create socket: %s\n", strerror(errno));
             exit(1);
         }
         struct sockaddr_in addr;
         addr.sin_family = AF_INET;
-        addr.sin_addr.s_addr = inet_addr(saved_address);
-        addr.sin_port = htons(saved_port);
+        addr.sin_addr.s_addr = inet_addr(game->address);
+        addr.sin_port = htons(game->port);
 
         // Connexion au serveur
-        if (connect(fdclient, (struct sockaddr *)&addr, sizeof(addr)) != 0) {
+        if (connect(game->fdclient, (struct sockaddr *)&addr, sizeof(addr)) != 0) {
             printf("Could not connect to server: %s (I will retry in 1 second)\n", strerror(errno));
             sleep(1);
         }
     }
 }
 
-void network_disconnect() {
-    if (fdclient != -1) {
-        close(fdclient);
-        fdclient = -1;
+void network_disconnect(Game *game) {
+    if (game->fdclient != -1) {
+        close(game->fdclient);
+        game->fdclient = -1;
     }
-    if (fdsocket != -1) {
-        close(fdsocket);
-        fdsocket = -1;
+    if (game->fdsocket != -1) {
+        close(game->fdsocket);
+        game->fdsocket = -1;
     }
 }
 
-void network_init(Cell owner, int ia_override, void (*init)(Cell owner, int ia_override, void (*actualiser_adversaire)(Game *game, Cell me, State state)), char address[ADDRESS_LENGTH], int port) {
-    // Save address and port
-    strcpy(saved_address, address);
-    saved_port = port;
-
-    // Et on init le reste comme d'habitude
-    init(owner, ia_override, network_update);
+void network_init(Cell owner, int ia_override, void (*init)(Cell owner, int ia_override, void (*refresh_opponent)(Game *game, Cell me, State state), char address[ADDRESS_LENGTH], int port), char address[ADDRESS_LENGTH], int port) {
+    // On init le reste comme d'habitude
+    init(owner, ia_override, network_update, address, port);
 }
 
 void network_update(Game *game, Cell me, State state) {
     // If it is my turn
     if (game->playing == me) {
-        if (game->has_last_move) {
+        if (game->last_move != MOVE_NONE) {
             // Send last move to opponent
             char *move = move_to_string(game->last_move);
             do {
-                network_connect();
-                int n = write(fdclient, move, 6);
+                network_connect(game);
+                int n = write(game->fdclient, move, 6);
                 if (n <= 0) {
-                    network_disconnect();
+                    network_disconnect(game);
                 }
-            } while (fdclient == -1);
+            } while (game->fdclient == -1);
         }
     }
 
@@ -119,16 +110,16 @@ void network_update(Game *game, Cell me, State state) {
         char *opponent_move = malloc(sizeof(char) * 6);
         Move result = MOVE_NONE;
         do {
-            network_connect();
-            int n = read(fdclient, opponent_move, sizeof(opponent_move));
+            network_connect(game);
+            int n = read(game->fdclient, opponent_move, sizeof(opponent_move));
             if (n <= 0) {
-                network_disconnect();
+                network_disconnect(game);
             }
             result = move_from_string(opponent_move);
             if (move_apply(result, me, game->board, 0) == 0) {
                 result = MOVE_NONE;
             }
-        } while (fdclient == -1 || result == MOVE_NONE);
+        } while (game->fdclient == -1 || result == MOVE_NONE);
         game_turn(game, result);
     }
 }

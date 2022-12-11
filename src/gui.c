@@ -212,7 +212,7 @@ gboolean gui_update_grid(GtkWidget *widget, cairo_t *cr, gpointer data) {
         gtk_label_set_text(GTK_LABEL(label_playing), g_strdup_printf("Le gagnant est : Blanc"));
         break;
     }
-    if (gui_last_game->has_last_move) {
+    if (gui_last_game->last_move != MOVE_NONE) {
         gtk_label_set_text(GTK_LABEL(label_move), g_strdup_printf("Dernier coup : %s", move_to_string(gui_last_game->last_move)));
     }
 
@@ -288,13 +288,15 @@ void gui_init_window() {
 
 // Fonctions publiques
 
-void gui_init(Cell owner, int ia_override, void (*refresh_opponent)(Game *game, Cell me, State state)) {
+void gui_init(Cell owner, int ia_override, void (*refresh_opponent)(Game *game, Cell me, State state), char address[ADDRESS_LENGTH], int port) {
     /*
      * Fonction d'initialisation de l'interface
      */
 
     // Initialisation de la partie
     Game *game = game_new(owner, ia_override);
+    strcpy(game->address, address);
+    game->port = port;
     game->refresh = gui_update;
     game->refresh_opponent = refresh_opponent;
 
@@ -325,7 +327,7 @@ void gui_update(Game *game, Cell me, State state) {
     g_source_unref(source);
 
     // Si y'a un dernier coup, on joue le son
-    if (gui_last_game->has_last_move) {
+    if (gui_last_game->last_move != MOVE_NONE) {
         play_sound("assets/move.wav");
     }
 

@@ -12,8 +12,9 @@ Game *game_new(Cell owner, int ia_override) {
     game->owner = owner;
     game->playing = CELL_BLACK;
     game->ia_override = ia_override;
-    game->has_last_move = 0;
     game->last_move = MOVE_NONE;
+    game->fdsocket = -1;
+    game->fdclient = -1;
     game->refresh = NULL;
     game->refresh_opponent = NULL;
 
@@ -30,7 +31,6 @@ void game_turn(Game *game, Move move) {
 
     // Actualiser le joueur
     game->playing = cell_opposite(game->playing);
-    game->has_last_move = 1;
     game->last_move = move;
 
     // On emet
