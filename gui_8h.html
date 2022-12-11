@@ -86,9 +86,9 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ad821d9f506f109713138cca7c229693c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gui_8h.html#ad821d9f506f109713138cca7c229693c">gui_init</a> (<a class="el" href="cell_8h.html#a53efbb3b59542e13799bdf1fd8607c44">Cell</a> owner, int ia_override, void(*refresh_opponent)(<a class="el" href="structGame.html">Game</a> *game, <a class="el" href="cell_8h.html#a53efbb3b59542e13799bdf1fd8607c44">Cell</a> me, <a class="el" href="state_8h.html#a923fb9080b37d642c98cbc0159c9fd0e">State</a> state))</td></tr>
-<tr class="memdesc:ad821d9f506f109713138cca7c229693c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialise l'affichage GTK.  <a href="gui_8h.html#ad821d9f506f109713138cca7c229693c">More...</a><br /></td></tr>
-<tr class="separator:ad821d9f506f109713138cca7c229693c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7584f77c92fad8a7d9fe5c6048f04887"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gui_8h.html#a7584f77c92fad8a7d9fe5c6048f04887">gui_init</a> (<a class="el" href="cell_8h.html#a53efbb3b59542e13799bdf1fd8607c44">Cell</a> owner, int ia_override, void(*refresh_opponent)(<a class="el" href="structGame.html">Game</a> *game, <a class="el" href="cell_8h.html#a53efbb3b59542e13799bdf1fd8607c44">Cell</a> me, <a class="el" href="state_8h.html#a923fb9080b37d642c98cbc0159c9fd0e">State</a> state), char address[<a class="el" href="constants_8h.html#a8beaa5b28cf9a48a1df357d25ec9704e">ADDRESS_LENGTH</a>], int port)</td></tr>
+<tr class="memdesc:a7584f77c92fad8a7d9fe5c6048f04887"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialise l'affichage GTK.  <a href="gui_8h.html#a7584f77c92fad8a7d9fe5c6048f04887">More...</a><br /></td></tr>
+<tr class="separator:a7584f77c92fad8a7d9fe5c6048f04887"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0e467464710c3f9f6f0f89a5db7007a8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gui_8h.html#a0e467464710c3f9f6f0f89a5db7007a8">gui_update</a> (<a class="el" href="structGame.html">Game</a> *game, <a class="el" href="cell_8h.html#a53efbb3b59542e13799bdf1fd8607c44">Cell</a> me, <a class="el" href="state_8h.html#a923fb9080b37d642c98cbc0159c9fd0e">State</a> state)</td></tr>
 <tr class="memdesc:a0e467464710c3f9f6f0f89a5db7007a8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Actualise l'affichage dans GTK.  <a href="gui_8h.html#a0e467464710c3f9f6f0f89a5db7007a8">More...</a><br /></td></tr>
 <tr class="separator:a0e467464710c3f9f6f0f89a5db7007a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -97,8 +97,8 @@ Functions</h2></td></tr>
 <div class="textblock"><p>Affichage graphique. </p>
 <p>Affichage graphique avec GTK. </p>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="ad821d9f506f109713138cca7c229693c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad821d9f506f109713138cca7c229693c">&#9670;&nbsp;</a></span>gui_init()</h2>
+<a id="a7584f77c92fad8a7d9fe5c6048f04887"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7584f77c92fad8a7d9fe5c6048f04887">&#9670;&nbsp;</a></span>gui_init()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -119,7 +119,19 @@ Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">void(*)(<a class="el" href="structGame.html">Game</a> *game, <a class="el" href="cell_8h.html#a53efbb3b59542e13799bdf1fd8607c44">Cell</a> me, <a class="el" href="state_8h.html#a923fb9080b37d642c98cbc0159c9fd0e">State</a> state)&#160;</td>
-          <td class="paramname"><em>refresh_opponent</em>&#160;</td>
+          <td class="paramname"><em>refresh_opponent</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char&#160;</td>
+          <td class="paramname"><em>address</em>[ADDRESS_LENGTH], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>port</em>&#160;</td>
         </tr>
         <tr>
           <td></td>

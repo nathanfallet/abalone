@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['refresh_56',['refresh',['../structGame.html#aaaebbe831407df6d87879d86ccbc641c',1,'Game']]],
-  ['refresh_5fopponent_57',['refresh_opponent',['../structGame.html#a38c63c7f3cf8a8e6859435ec6027e4de',1,'Game']]]
+  ['refresh_59',['refresh',['../structGame.html#aaaebbe831407df6d87879d86ccbc641c',1,'Game']]],
+  ['refresh_5fopponent_60',['refresh_opponent',['../structGame.html#a38c63c7f3cf8a8e6859435ec6027e4de',1,'Game']]]
 ];

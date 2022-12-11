@@ -83,9 +83,9 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a6118fffc91cfec16d4c6c5218492191d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="network_8h.html#a6118fffc91cfec16d4c6c5218492191d">network_init</a> (<a class="el" href="cell_8h.html#a53efbb3b59542e13799bdf1fd8607c44">Cell</a> owner, int ia_override, void(*init)(<a class="el" href="cell_8h.html#a53efbb3b59542e13799bdf1fd8607c44">Cell</a> owner, int ia_override, void(*actualiser_adversaire)(<a class="el" href="structGame.html">Game</a> *game, <a class="el" href="cell_8h.html#a53efbb3b59542e13799bdf1fd8607c44">Cell</a> me, <a class="el" href="state_8h.html#a923fb9080b37d642c98cbc0159c9fd0e">State</a> state)), char address[<a class="el" href="constants_8h.html#a8beaa5b28cf9a48a1df357d25ec9704e">ADDRESS_LENGTH</a>], int port)</td></tr>
-<tr class="memdesc:a6118fffc91cfec16d4c6c5218492191d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialise la connexion réseau.  <a href="network_8h.html#a6118fffc91cfec16d4c6c5218492191d">More...</a><br /></td></tr>
-<tr class="separator:a6118fffc91cfec16d4c6c5218492191d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac2aae596e4555665715ef6dbf76b52a9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="network_8h.html#ac2aae596e4555665715ef6dbf76b52a9">network_init</a> (<a class="el" href="cell_8h.html#a53efbb3b59542e13799bdf1fd8607c44">Cell</a> owner, int ia_override, void(*init)(<a class="el" href="cell_8h.html#a53efbb3b59542e13799bdf1fd8607c44">Cell</a> owner, int ia_override, void(*refresh_opponent)(<a class="el" href="structGame.html">Game</a> *game, <a class="el" href="cell_8h.html#a53efbb3b59542e13799bdf1fd8607c44">Cell</a> me, <a class="el" href="state_8h.html#a923fb9080b37d642c98cbc0159c9fd0e">State</a> state), char address[<a class="el" href="constants_8h.html#a8beaa5b28cf9a48a1df357d25ec9704e">ADDRESS_LENGTH</a>], int port), char address[<a class="el" href="constants_8h.html#a8beaa5b28cf9a48a1df357d25ec9704e">ADDRESS_LENGTH</a>], int port)</td></tr>
+<tr class="memdesc:ac2aae596e4555665715ef6dbf76b52a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialise la connexion réseau.  <a href="network_8h.html#ac2aae596e4555665715ef6dbf76b52a9">More...</a><br /></td></tr>
+<tr class="separator:ac2aae596e4555665715ef6dbf76b52a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae820e5359e94527c9ce5128062981d9b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="network_8h.html#ae820e5359e94527c9ce5128062981d9b">network_update</a> (<a class="el" href="structGame.html">Game</a> *game, <a class="el" href="cell_8h.html#a53efbb3b59542e13799bdf1fd8607c44">Cell</a> me, <a class="el" href="state_8h.html#a923fb9080b37d642c98cbc0159c9fd0e">State</a> state)</td></tr>
 <tr class="memdesc:ae820e5359e94527c9ce5128062981d9b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exécute le prochain tour de jeu de la connexion réseau.  <a href="network_8h.html#ae820e5359e94527c9ce5128062981d9b">More...</a><br /></td></tr>
 <tr class="separator:ae820e5359e94527c9ce5128062981d9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -94,8 +94,8 @@ Functions</h2></td></tr>
 <div class="textblock"><p>Gestion du réseau. </p>
 <p>Gestion du réseau, et de la communication client/serveur. </p>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="a6118fffc91cfec16d4c6c5218492191d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6118fffc91cfec16d4c6c5218492191d">&#9670;&nbsp;</a></span>network_init()</h2>
+<a id="ac2aae596e4555665715ef6dbf76b52a9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac2aae596e4555665715ef6dbf76b52a9">&#9670;&nbsp;</a></span>network_init()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -115,7 +115,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">void(*)(<a class="el" href="cell_8h.html#a53efbb3b59542e13799bdf1fd8607c44">Cell</a> owner, int ia_override, void(*actualiser_adversaire)(<a class="el" href="structGame.html">Game</a> *game, <a class="el" href="cell_8h.html#a53efbb3b59542e13799bdf1fd8607c44">Cell</a> me, <a class="el" href="state_8h.html#a923fb9080b37d642c98cbc0159c9fd0e">State</a> state))&#160;</td>
+          <td class="paramtype">void(*)(<a class="el" href="cell_8h.html#a53efbb3b59542e13799bdf1fd8607c44">Cell</a> owner, int ia_override, void(*refresh_opponent)(<a class="el" href="structGame.html">Game</a> *game, <a class="el" href="cell_8h.html#a53efbb3b59542e13799bdf1fd8607c44">Cell</a> me, <a class="el" href="state_8h.html#a923fb9080b37d642c98cbc0159c9fd0e">State</a> state), char address[<a class="el" href="constants_8h.html#a8beaa5b28cf9a48a1df357d25ec9704e">ADDRESS_LENGTH</a>], int port)&#160;</td>
           <td class="paramname"><em>init</em>, </td>
         </tr>
         <tr>

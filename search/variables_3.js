@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['last_5fmove_125',['last_move',['../structGame.html#ab1699e2d8c4a824feedbd6e40efb7496',1,'Game']]]
+  ['ia_5foverride_129',['ia_override',['../structGame.html#aafbbbde017a5c7ee8a61d30b068510a0',1,'Game']]]
 ];

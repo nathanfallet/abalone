@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['has_5flast_5fmove_123',['has_last_move',['../structGame.html#ac89e6b29f7f749fefdf741f34434ad67',1,'Game']]]
+  ['board_126',['board',['../structGame.html#aa82ec2ef46b7f2f6b838b07403015cee',1,'Game']]]
 ];

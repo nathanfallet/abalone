@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['owner_126',['owner',['../structGame.html#a4e1d31b8cbdd8fea274d739fa8b38760',1,'Game']]]
+  ['last_5fmove_130',['last_move',['../structGame.html#ab1699e2d8c4a824feedbd6e40efb7496',1,'Game']]]
 ];

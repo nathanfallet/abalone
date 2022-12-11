@@ -84,10 +84,16 @@ Data Fields</h2></td></tr>
 <tr class="separator:ac45f710e92e57157309dedc0a4a12590"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aafbbbde017a5c7ee8a61d30b068510a0"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structGame.html#aafbbbde017a5c7ee8a61d30b068510a0">ia_override</a></td></tr>
 <tr class="separator:aafbbbde017a5c7ee8a61d30b068510a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac89e6b29f7f749fefdf741f34434ad67"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structGame.html#ac89e6b29f7f749fefdf741f34434ad67">has_last_move</a></td></tr>
-<tr class="separator:ac89e6b29f7f749fefdf741f34434ad67"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab1699e2d8c4a824feedbd6e40efb7496"><td class="memItemLeft" align="right" valign="top"><a class="el" href="move_8h.html#ab9f77aa389af7f0da89bdcb6ae41a897">Move</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structGame.html#ab1699e2d8c4a824feedbd6e40efb7496">last_move</a></td></tr>
 <tr class="separator:ab1699e2d8c4a824feedbd6e40efb7496"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af10212335bc4b0a73f9b791c31e6937d"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structGame.html#af10212335bc4b0a73f9b791c31e6937d">address</a> [<a class="el" href="constants_8h.html#a8beaa5b28cf9a48a1df357d25ec9704e">ADDRESS_LENGTH</a>]</td></tr>
+<tr class="separator:af10212335bc4b0a73f9b791c31e6937d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a63c89c04d1feae07ca35558055155ffb"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structGame.html#a63c89c04d1feae07ca35558055155ffb">port</a></td></tr>
+<tr class="separator:a63c89c04d1feae07ca35558055155ffb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5a5459df0f0132f46c5c58d769902de7"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structGame.html#a5a5459df0f0132f46c5c58d769902de7">fdsocket</a></td></tr>
+<tr class="separator:a5a5459df0f0132f46c5c58d769902de7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b0b03c4f6407a2f1c22a86b17255f40"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structGame.html#a5b0b03c4f6407a2f1c22a86b17255f40">fdclient</a></td></tr>
+<tr class="separator:a5b0b03c4f6407a2f1c22a86b17255f40"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaaebbe831407df6d87879d86ccbc641c"><td class="memItemLeft" align="right" valign="top">void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structGame.html#aaaebbe831407df6d87879d86ccbc641c">refresh</a> )(struct <a class="el" href="structGame.html">Game</a> *game, <a class="el" href="cell_8h.html#a53efbb3b59542e13799bdf1fd8607c44">Cell</a> me, <a class="el" href="state_8h.html#a923fb9080b37d642c98cbc0159c9fd0e">State</a> state)</td></tr>
 <tr class="separator:aaaebbe831407df6d87879d86ccbc641c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a38c63c7f3cf8a8e6859435ec6027e4de"><td class="memItemLeft" align="right" valign="top">void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structGame.html#a38c63c7f3cf8a8e6859435ec6027e4de">refresh_opponent</a> )(struct <a class="el" href="structGame.html">Game</a> *game, <a class="el" href="cell_8h.html#a53efbb3b59542e13799bdf1fd8607c44">Cell</a> me, <a class="el" href="state_8h.html#a923fb9080b37d642c98cbc0159c9fd0e">State</a> state)</td></tr>
@@ -96,6 +102,21 @@ Data Fields</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Structure d'une partie. </p>
 </div><h2 class="groupheader">Field Documentation</h2>
+<a id="af10212335bc4b0a73f9b791c31e6937d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af10212335bc4b0a73f9b791c31e6937d">&#9670;&nbsp;</a></span>address</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char address[<a class="el" href="constants_8h.html#a8beaa5b28cf9a48a1df357d25ec9704e">ADDRESS_LENGTH</a>]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Adresse du serveur (si partie en client) </p>
+
+</div>
+</div>
 <a id="aa82ec2ef46b7f2f6b838b07403015cee"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa82ec2ef46b7f2f6b838b07403015cee">&#9670;&nbsp;</a></span>board</h2>
 
@@ -111,18 +132,33 @@ Data Fields</h2></td></tr>
 
 </div>
 </div>
-<a id="ac89e6b29f7f749fefdf741f34434ad67"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac89e6b29f7f749fefdf741f34434ad67">&#9670;&nbsp;</a></span>has_last_move</h2>
+<a id="a5b0b03c4f6407a2f1c22a86b17255f40"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5b0b03c4f6407a2f1c22a86b17255f40">&#9670;&nbsp;</a></span>fdclient</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int has_last_move</td>
+          <td class="memname">int fdclient</td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Si un coup a été joué dans la partie </p>
+<p>Socket du client (si partie en client ou serveur) </p>
+
+</div>
+</div>
+<a id="a5a5459df0f0132f46c5c58d769902de7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5a5459df0f0132f46c5c58d769902de7">&#9670;&nbsp;</a></span>fdsocket</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int fdsocket</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Socket du serveur (si partie en serveur) </p>
 
 </div>
 </div>
@@ -183,6 +219,21 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Le joueur qui joue actuellement </p>
+
+</div>
+</div>
+<a id="a63c89c04d1feae07ca35558055155ffb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a63c89c04d1feae07ca35558055155ffb">&#9670;&nbsp;</a></span>port</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int port</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Port du serveur (si partie en client ou serveur) </p>
 
 </div>
 </div>
