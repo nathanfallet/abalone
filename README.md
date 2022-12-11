@@ -1,8 +1,10 @@
-# Abalone game
+# Abalone {#mainpage}
 
 ## Project structure
 
 ![Project structure](structure.png)
+
+See [files](https://nathanfallet.github.io/Abalone/files.html) for more details.
 
 ## Install GTK3
 
