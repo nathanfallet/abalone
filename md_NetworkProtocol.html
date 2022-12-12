@@ -91,7 +91,7 @@ Exemple de lecture et écriture</h1>
 <div class="line"><span class="keyword">struct </span>sockaddr_in addr;</div>
 <div class="line">addr.sin_family = AF_INET;</div>
 <div class="line">addr.sin_addr.s_addr = INADDR_ANY;</div>
-<div class="line">addr.sin_port = htons(1234); <span class="comment">// Valeur à remplacer</span></div>
+<div class="line">addr.sin_port = htons(6969); <span class="comment">// Valeur à remplacer</span></div>
 <div class="line">bind(fdsocket, (<span class="keyword">struct</span> sockaddr *) &amp;addr, <span class="keyword">sizeof</span>(addr));</div>
 <div class="line">listen(fdsocket, 1);</div>
 <div class="line">fdclient = accept(fdsocket, NULL, NULL);</div>
@@ -100,7 +100,7 @@ Exemple de lecture et écriture</h1>
 <div class="line"><span class="keyword">struct </span>sockaddr_in addr;</div>
 <div class="line">addr.sin_family = AF_INET;</div>
 <div class="line">addr.sin_addr.s_addr = inet_addr(<span class="stringliteral">&quot;127.0.0.1&quot;</span>); <span class="comment">// Valeur à remplacer</span></div>
-<div class="line">addr.sin_port = htons(1234); <span class="comment">// Valeur à remplacer</span></div>
+<div class="line">addr.sin_port = htons(6969); <span class="comment">// Valeur à remplacer</span></div>
 <div class="line"><span class="keywordflow">if</span> (connect(fdclient, (<span class="keyword">struct</span> sockaddr *) &amp;addr, <span class="keyword">sizeof</span>(addr)) != 0) {</div>
 <div class="line">    printf(<span class="stringliteral">&quot;Could not connect: %s\n&quot;</span>, strerror(errno));</div>
 <div class="line">}</div>
@@ -111,10 +111,7 @@ Exemple de lecture et écriture</h1>
 </div><!-- fragment --><div class="fragment"><div class="line"><span class="comment">// Récupération du coup de l&#39;adversaire (dans `opponent_move`)</span></div>
 <div class="line"><span class="keywordtype">char</span> *opponent_move = malloc(<span class="keyword">sizeof</span>(<span class="keywordtype">char</span>) * 6);</div>
 <div class="line">read(fdclient, opponent_move, <span class="keyword">sizeof</span>(opponent_move));</div>
-</div><!-- fragment --><p>Il faut juste bien veiller à envoyer et récupérer les coups dans le bon ordre, car c'est le client qui joue en premier.</p>
-<h1><a class="anchor" id="autotoc_md20"></a>
-Mot de la fin</h1>
-<p>N'hésitez pas à venir me voir si vous avez des questions, ou pour tester le protocol avec notre équipe. Bon courage ! </p>
+</div><!-- fragment --><p>Il faut juste bien veiller à envoyer et récupérer les coups dans le bon ordre, car c'est le client qui joue en premier. </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 <!-- start footer part -->
