@@ -91,7 +91,7 @@ void ia_update(Game *game, Cell me, State state) {
 
     /* If it's my turn : */
     if (game->playing == me) {
-        Move move = ia_minimax(me, game->board, DEEPNESS);
+        Move move = ia_minimax(me, game->board, IA_DEEPNESS);
         game_turn(game, move);
     }
 }
@@ -104,8 +104,8 @@ Move ia_minimax(Cell me, Board board, int deepness) {
 
     /* Sleep if we responded too quickly */
     #ifndef TEST
-    if (difftime(end, start) < 3) {
-        sleep(3 - difftime(end, start));
+    if (difftime(end, start) < IA_SLEEP) {
+        sleep(IA_SLEEP - difftime(end, start));
     }
     #endif
 

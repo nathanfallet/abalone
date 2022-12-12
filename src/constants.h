@@ -89,9 +89,14 @@
 /**
  * \brief Deepness of IA
  */
-#ifndef DEEPNESS
-#define DEEPNESS 4
+#ifndef IA_DEEPNESS
+#define IA_DEEPNESS 4
 #endif
+
+/**
+ * \brief Sleep time of IA
+ */
+#define IA_SLEEP 3
 
 /**
  * \brief Initialization constant (none)
