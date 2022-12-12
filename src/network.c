@@ -108,12 +108,16 @@ void network_update(Game *game, Cell me, State state) {
     if (game->playing == me) {
         // Receive opponent's move
         char *opponent_move = malloc(sizeof(char) * 6);
+        int bytes = 0;
         Move result = MOVE_NONE;
         do {
             network_connect(game);
-            int n = read(game->fdclient, opponent_move, sizeof(opponent_move));
+            int n = read(game->fdclient, opponent_move + bytes, sizeof(opponent_move) - bytes);
             if (n <= 0) {
+                bytes = 0;
                 network_disconnect(game);
+            } else {
+                bytes += n;
             }
             result = move_from_string(opponent_move);
             if (move_apply(result, me, game->board, 0) == 0) {

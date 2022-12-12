@@ -3,12 +3,13 @@
 #include <string.h>
 #include <unistd.h>
 #include <limits.h>
+#include <time.h>
 #include "ia.h"
 
-// Algorithme minimax. Il retourne une décision (move) et prend en compte le joueur qui joue ainsi que le board actuel
+/* Minimax algorithm. It returns a decision (move) and takes the player who plays and the actual board into account */
 
 ScoredMove ia_minimax_compare(Cell me, Board board, Move root, int profondeur, int max, int threshold) {
-    // On récupère les moves possibles
+    /* Recovering available Move */
     Move moves[MOVE_LIST_SIZE];
     move_available(max ? me : cell_opposite(me), board, moves);
 
@@ -17,12 +18,12 @@ ScoredMove ia_minimax_compare(Cell me, Board board, Move root, int profondeur, i
 
     int i = 0;
     while ((move = moves[i]) != MOVE_NONE) {
-        // Check du threshold
+        /* Verification of threshold */
         if (move_selected != MOVE_NONE && (max ? threshold <= scored_move_score(move_selected) : threshold >= scored_move_score(move_selected))) {
             break;
         }
 
-        // On applique le move
+        /* Applying Move */
         Board copy;
         board_clone(board, copy);
         move_apply(move, max ? me : cell_opposite(me), copy, 1);
@@ -30,20 +31,20 @@ ScoredMove ia_minimax_compare(Cell me, Board board, Move root, int profondeur, i
 
         State state = board_state(copy);
         if (state != STATE_PLAYING) {
-            // On a atteint la fin du jeu (prioritaire)
+            /* Reaching the end game (priority) */
             Cell winner = state == STATE_WIN_BLACK ? CELL_BLACK : CELL_WHITE;
             sc = scored_move_new(
                 move,
                 root != MOVE_NONE ? root : move,
                 winner == me ? WEIGHT_WIN_DIRECT : -WEIGHT_WIN_DIRECT);
 
-            // Si c'est une victoire assurée, on ne va même pas chercher la suite de l'arbre
+            /* If it's a assured victory, we're not even going to continue building the tree */
             if (winner == (max ? me : cell_opposite(me))) {
                 return sc;
             }
         }
         else if (profondeur > 1) {
-            // On continue plus profond
+            /* We go deeper */
             int child_threshold = max ? INT_MIN : INT_MAX;
             if (move_selected != MOVE_NONE) {
                 child_threshold = scored_move_score(move_selected);
@@ -57,14 +58,14 @@ ScoredMove ia_minimax_compare(Cell me, Board board, Move root, int profondeur, i
             }
         }
         else {
-            // On a atteint la profondeur max, on calcule le score
+            /* We have reached maximum deep, we compute the score */
             sc = scored_move_new(
                 move,
                 root != MOVE_NONE ? root : move,
                 scored_move_compute(me, copy));
         }
 
-        // Check pour la sélection du move
+        /* Check for the Move selection */
         int selected_score = scored_move_score(move_selected);
         int score = scored_move_score(sc);
         if (move_selected == MOVE_NONE ||
@@ -73,22 +74,22 @@ ScoredMove ia_minimax_compare(Cell me, Board board, Move root, int profondeur, i
             move_selected = sc;
         }
 
-        // Move suivant
+        /* Next Move */
         i++;
     }
 
     return move_selected;
 }
 
-// Implémentation des fonctions de base pour intéragir avec le jeu
+/* Implementation of basics functions to interact with the game */
 
 void ia_update(Game *game, Cell me, State state) {
-    // Fin de partie
+    /* End of game */
     if (state != STATE_PLAYING) {
         return;
     }
 
-    // Si c'est mon tour:
+    /* If it's my turn : */
     if (game->playing == me) {
         Move move = ia_minimax(me, game->board, 4);
         game_turn(game, move);
@@ -96,6 +97,17 @@ void ia_update(Game *game, Cell me, State state) {
 }
 
 Move ia_minimax(Cell me, Board board, int profondeur) {
+    /* Get a move */
+    time_t start = time(NULL);
     ScoredMove move = ia_minimax_compare(me, board, MOVE_NONE, profondeur, 1, INT_MAX);
+    time_t end = time(NULL);
+
+    /* Sleep if we responded too quickly */
+    #ifndef TEST
+    if (difftime(end, start) < 3) {
+        sleep(3 - difftime(end, start));
+    }
+    #endif
+
     return scored_move_root(move);
 }

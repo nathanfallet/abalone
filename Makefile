@@ -52,7 +52,7 @@ $(BUILD_DIR)/%.c.o: %.c
 	mkdir -p $(dir $@)
 	gcc $(CPPFLAGS) $(CFLAGS) $$(pkg-config --libs --cflags gtk+-3.0) -c $< -o $@
 	gcc $(CPPFLAGS) $(CFLAGS) -D NOGUI $$(pkg-config --libs --cflags gtk+-3.0) -c $< -o $@_nogui
-	gcc -fprofile-arcs -ftest-coverage -O0 $(CPPFLAGS) $(CFLAGS) -D NOGUI $$(pkg-config --libs --cflags gtk+-3.0) -c $< -o $@_tests
+	gcc -fprofile-arcs -ftest-coverage -O0 $(CPPFLAGS) $(CFLAGS) -D NOGUI -D TEST $$(pkg-config --libs --cflags gtk+-3.0) -c $< -o $@_tests
 
 # Generate coverage report
 coverage: tests

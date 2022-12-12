@@ -5,10 +5,10 @@
 Game *game_new(Cell owner, int ia_override) {
     Game *game = malloc(sizeof(Game));
 
-    // Initialisation du tableau
+    /* board initialization */ 
     board_create(game->board);
 
-    // Valeur par défaut pour le reste
+    /* Default value for the rest */ 
     game->owner = owner;
     game->playing = CELL_BLACK;
     game->ia_override = ia_override;
@@ -22,18 +22,17 @@ Game *game_new(Cell owner, int ia_override) {
 }
 
 void game_turn(Game *game, Move move) {
-    // Appliquer le movement
+    /* apply the movement */
     if (move_apply(move, game->playing, game->board, 1) == 0) {
-        // Move invalide !
+        /* impossible to move ! */
         printf("Move invalide !\n");
         exit(1);
     }
 
-    // Actualiser le joueur
+    /* refresh player */
     game->playing = cell_opposite(game->playing);
     game->last_move = move;
 
-    // On emet
     State state = board_state(game->board);
     if (game->refresh != NULL) {
         game->refresh(game, game->owner, state);
