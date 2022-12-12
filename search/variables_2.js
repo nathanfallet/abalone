@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['fdclient_132',['fdclient',['../structGame.html#a5b0b03c4f6407a2f1c22a86b17255f40',1,'Game']]],
-  ['fdsocket_133',['fdsocket',['../structGame.html#a5a5459df0f0132f46c5c58d769902de7',1,'Game']]]
+  ['fdclient_133',['fdclient',['../structGame.html#a5b0b03c4f6407a2f1c22a86b17255f40',1,'Game']]],
+  ['fdsocket_134',['fdsocket',['../structGame.html#a5a5459df0f0132f46c5c58d769902de7',1,'Game']]]
 ];

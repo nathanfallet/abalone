@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['pawn_5ftot_161',['PAWN_TOT',['../constants_8h.html#a6682a908f5810b16aa600eaa72e37726',1,'constants.h']]]
+  ['state_5fplaying_164',['STATE_PLAYING',['../constants_8h.html#a419dde1f1ac1a18c1d724656fe327d99',1,'constants.h']]],
+  ['state_5fwin_5fblack_165',['STATE_WIN_BLACK',['../constants_8h.html#aff94ee50c77888c42c5f755e1710d906',1,'constants.h']]],
+  ['state_5fwin_5fwhite_166',['STATE_WIN_WHITE',['../constants_8h.html#aba2dd0cb170df718e81b1a8388b554ef',1,'constants.h']]]
 ];

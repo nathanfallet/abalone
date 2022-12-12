@@ -1,8 +1,5 @@
 var searchData=
 [
-  ['init_5fdefault_154',['INIT_DEFAULT',['../constants_8h.html#a9ba5e93e685df51511c44b32d1e2774e',1,'constants.h']]],
-  ['init_5fgui_155',['INIT_GUI',['../constants_8h.html#a0c0c1b26175b9d407b16a2e1c2757efb',1,'constants.h']]],
-  ['init_5fnetwork_156',['INIT_NETWORK',['../constants_8h.html#abcac1dfbd831180c21724fb3ea13026a',1,'constants.h']]],
-  ['init_5fnone_157',['INIT_NONE',['../constants_8h.html#ab5a97fe72c827de31e835229da1ad3ea',1,'constants.h']]],
-  ['init_5fterminal_158',['INIT_TERMINAL',['../constants_8h.html#a4bae50a454d5c591874ccefd04702122',1,'constants.h']]]
+  ['move_5flist_5fsize_161',['MOVE_LIST_SIZE',['../constants_8h.html#a5e77478a367850def3042ebb1af823b2',1,'constants.h']]],
+  ['move_5fnone_162',['MOVE_NONE',['../constants_8h.html#a56184e4f8d0b5471da178122a836aa02',1,'constants.h']]]
 ];

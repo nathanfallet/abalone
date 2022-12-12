@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['network_2eh_55',['network.h',['../network_8h.html',1,'']]],
-  ['network_5finit_56',['network_init',['../network_8h.html#ac2aae596e4555665715ef6dbf76b52a9',1,'network.c']]],
-  ['network_5fupdate_57',['network_update',['../network_8h.html#ae820e5359e94527c9ce5128062981d9b',1,'network.c']]]
+  ['owner_59',['owner',['../structGame.html#a4e1d31b8cbdd8fea274d739fa8b38760',1,'Game']]]
 ];

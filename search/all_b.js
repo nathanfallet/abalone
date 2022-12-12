@@ -1,8 +1,5 @@
 var searchData=
 [
-  ['pawn_5ftot_59',['PAWN_TOT',['../constants_8h.html#a6682a908f5810b16aa600eaa72e37726',1,'constants.h']]],
-  ['playing_60',['playing',['../structGame.html#ac45f710e92e57157309dedc0a4a12590',1,'Game']]],
-  ['port_61',['port',['../structGame.html#a63c89c04d1feae07ca35558055155ffb',1,'Game']]],
-  ['possible_20moves_20and_20related_20checks_62',['Possible moves and related checks',['../md_Moves.html',1,'']]],
-  ['protocol_20réseau_20pour_20les_20échanges_63',['Protocol réseau pour les échanges',['../md_NetworkProtocol.html',1,'']]]
+  ['refresh_65',['refresh',['../structGame.html#aaaebbe831407df6d87879d86ccbc641c',1,'Game']]],
+  ['refresh_5fopponent_66',['refresh_opponent',['../structGame.html#a38c63c7f3cf8a8e6859435ec6027e4de',1,'Game']]]
 ];
