@@ -4,9 +4,12 @@
 #include <time.h>
 #include "constants.h"
 #include "terminal.h"
-#include "gui.h"
 #include "ia.h"
 #include "network.h"
+
+#ifndef NOGUI
+#include "gui.h"
+#endif
 
 void print_help() {
     printf("Usage: ./abalone [options] (-m <me/ia>)\n");
@@ -16,12 +19,11 @@ void print_help() {
 }
 
 void default_init(Cell me, int ia_override, void (*update)(Game *game, Cell me, State state), char address[ADDRESS_LENGTH], int port) {
-    if (INIT_DEFAULT == INIT_TERMINAL) {
-        terminal_init(me, ia_override, update, address, port);
-    }
-    else if (INIT_DEFAULT == INIT_GUI) {
-        gui_init(me, ia_override, update, address, port);
-    }
+    #ifdef NOGUI
+    terminal_init(me, ia_override, update, address, port);
+    #else
+    gui_init(me, ia_override, update, address, port);
+    #endif
 }
 
 int main(int argc, char *argv[]) {

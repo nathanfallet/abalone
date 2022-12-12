@@ -17,6 +17,7 @@ brew install gtk+3 # macOS
 
 ```bash
 make
+make nogui # Si GTK n'est pas installé
 ./abalone -l <noir/blanc> # jeu local contre l IA
 ./abalone -s <port> # lancer un serveur sur le port donné
 ./abalone -c <adresse>:<port> # se connecter à un serveur distant

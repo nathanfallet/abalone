@@ -12,6 +12,7 @@ TESTS_SRCS := $(shell find $(TESTS_DIR) -name '*.c')
 # String substitution for every C file.
 # As an example, hello.c turns into ./build/hello.c.o
 OBJS := $(SRCS:%=$(BUILD_DIR)/%.o)
+OBJS_NO_GUI := $(addsuffix _nogui, $(filter-out %/gui.c.o, $(OBJS)))
 OBJS_FOR_TESTS := $(addsuffix _tests, $(filter-out %/gui.c.o, $(filter-out %/main.c.o, $(OBJS))))
 TESTS_OBJS := $(TESTS_SRCS:%=$(BUILD_DIR)/%.o)
 
@@ -31,12 +32,17 @@ CPPFLAGS := $(INC_FLAGS) -MMD -MP
 
 # Default task (Test and compile)
 all: clean tests $(TARGET_EXEC)
+nogui: clean tests $(TARGET_EXEC)_nogui
 
-# The final build step.
+# The final build step
 $(TARGET_EXEC): $(OBJS)
-	gcc -pthread $(OBJS) -o $@ $(LDFLAGS) $$(pkg-config --libs --cflags gtk+-3.0)
+	gcc -pthread $(OBJS) -o $(TARGET_EXEC) $(LDFLAGS) $$(pkg-config --libs --cflags gtk+-3.0)
 
-# The build step for tests.
+# The final build step (no gui variant)
+$(TARGET_EXEC)_nogui: $(OBJS_NO_GUI)
+	gcc -pthread $(OBJS_NO_GUI) -o $(TARGET_EXEC) $(LDFLAGS)
+
+# The build step for tests
 tests: $(OBJS) $(TESTS_OBJS)
 	gcc -Wall -fprofile-arcs -ftest-coverage -pthread $(OBJS_FOR_TESTS) $(TESTS_OBJS) -o $(TARGET_EXEC)_tests $(LDFLAGS)
 	./$(TARGET_EXEC)_tests
@@ -45,7 +51,8 @@ tests: $(OBJS) $(TESTS_OBJS)
 $(BUILD_DIR)/%.c.o: %.c
 	mkdir -p $(dir $@)
 	gcc $(CPPFLAGS) $(CFLAGS) $$(pkg-config --libs --cflags gtk+-3.0) -c $< -o $@
-	gcc -fprofile-arcs -ftest-coverage -O0 $(CPPFLAGS) $(CFLAGS) $$(pkg-config --libs --cflags gtk+-3.0) -c $< -o $@_tests
+	gcc $(CPPFLAGS) $(CFLAGS) -D NOGUI $$(pkg-config --libs --cflags gtk+-3.0) -c $< -o $@_nogui
+	gcc -fprofile-arcs -ftest-coverage -O0 $(CPPFLAGS) $(CFLAGS) -D NOGUI $$(pkg-config --libs --cflags gtk+-3.0) -c $< -o $@_tests
 
 # Generate coverage report
 coverage: tests

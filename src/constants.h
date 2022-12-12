@@ -92,24 +92,24 @@
 #define INIT_NONE -1
 
 /**
+ * \brief Constante d'initialisation par défaut
+ */
+#define INIT_DEFAULT 0
+
+/**
  * \brief Constante d'initialisation (terminal)
  */
-#define INIT_TERMINAL 0
+#define INIT_TERMINAL 1
 
 /**
  * \brief Constante d'initialisation (interface graphique)
  */
-#define INIT_GUI 1
+#define INIT_GUI 2
 
 /**
  * \brief Constante d'initialisation (réseau)
  */
-#define INIT_NETWORK 2
-
-/**
- * \brief Constante d'initialisation par défaut
- */
-#define INIT_DEFAULT INIT_GUI
+#define INIT_NETWORK 3
 
 /**
  * \brief Taille maximale d'une adresse IP
