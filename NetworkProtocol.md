@@ -4,6 +4,8 @@
 
 Au démarrage de la partie, le serveur et le client se connectent au moyen d'un socket en TCP.
 
+On utilise par défaut le port `6969`, sauf si un port est précisé en ligne de commande (via l'option `-s PORT`).
+
 > ⚠️ On garde le même socket ouvert tout le long de la partie, il n'est pas nécessaire d'en créer un nouveau (surtout qu'une coupure de connexion pourrait casser la partie)
 
 ## Echange de coups
@@ -30,7 +32,7 @@ setsockopt(fdsocket, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt));
 struct sockaddr_in addr;
 addr.sin_family = AF_INET;
 addr.sin_addr.s_addr = INADDR_ANY;
-addr.sin_port = htons(1234); // Valeur à remplacer
+addr.sin_port = htons(6969); // Valeur à remplacer
 bind(fdsocket, (struct sockaddr *) &addr, sizeof(addr));
 listen(fdsocket, 1);
 fdclient = accept(fdsocket, NULL, NULL);
@@ -42,7 +44,7 @@ fdclient = socket(AF_INET, SOCK_STREAM, 0);
 struct sockaddr_in addr;
 addr.sin_family = AF_INET;
 addr.sin_addr.s_addr = inet_addr("127.0.0.1"); // Valeur à remplacer
-addr.sin_port = htons(1234); // Valeur à remplacer
+addr.sin_port = htons(6969); // Valeur à remplacer
 if (connect(fdclient, (struct sockaddr *) &addr, sizeof(addr)) != 0) {
     printf("Could not connect: %s\n", strerror(errno));
 }
@@ -63,7 +65,3 @@ read(fdclient, opponent_move, sizeof(opponent_move));
 ```
 
 Il faut juste bien veiller à envoyer et récupérer les coups dans le bon ordre, car c'est le client qui joue en premier.
-
-## Mot de la fin
-
-N'hésitez pas à venir me voir si vous avez des questions, ou pour tester le protocol avec notre équipe. Bon courage !
