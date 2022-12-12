@@ -3,9 +3,9 @@
 
 /**
  * \file game.h
- * \brief Gestion d'une partie
+ * \brief Game management
  * 
- * Gestion d'une partie et de son déroulement.
+ * Management of a game and its progress. 
  */
 
 #include "constants.h"
@@ -15,43 +15,43 @@
 #include "state.h"
 
 /**
- * \brief Structure d'une partie
+ * \brief Game structure
  */
 typedef struct Game {
-	Board board; /*!< Plateau de jeu de la partie */
+	Board board; /*!< Board of game */
 
-	Cell owner; /*!< Le joueur qui a créé la partie */
-	Cell playing; /*!< Le joueur qui joue actuellement */
-	int ia_override; /*!< Si l'IA doit jouer à la place du joueur */
-	Move last_move; /*!< Le dernier coup joué */
+	Cell owner; /*!< The player who create the game */
+	Cell playing; /*!< The player who currently playing */
+	int ia_override; /*!< If the AI ​​should play instead of the player */
+	Move last_move; /*!< The last move played */
 
-	char address[ADDRESS_LENGTH]; /*!< Adresse du serveur (si partie en client) */
-	int port; /*!< Port du serveur (si partie en client ou serveur) */
-	int fdsocket; /*!< Socket du serveur (si partie en serveur) */
-	int fdclient; /*!< Socket du client (si partie en client ou serveur) */
+	char address[ADDRESS_LENGTH]; /*!< Server address (if game as client) */
+	int port; /*!< Server port (if game as client or server) */
+	int fdsocket; /*!< Server socket (if game as server) */
+	int fdclient; /*!< Client socket (if game as client or server) */
 
-	void (*refresh)(struct Game *game, Cell me, State state); /*!< Callback pour actualiser l'affichage */
-	void (*refresh_opponent)(struct Game *game, Cell me, State state); /*!< Callback pour actualiser l'affichage de l'adversaire */
+	void (*refresh)(struct Game *game, Cell me, State state); /*!< Callback for refesh display */
+	void (*refresh_opponent)(struct Game *game, Cell me, State state); /*!< Callback for refesh opponant display */
 } Game;
 
 /**
- * \brief Créé et initialise une partie
- * \param owner Le joueur qui créé la partie (CELL_BLACK ou CELL_WHITE)
- * \param ia_override Si l'IA doit jouer à la place du joueur
- * \return La partie crée
+ * \brief Create and initialize a game
+ * \param owner The player who create the game (CELL_BLACK or CELL_WHITE)
+ * \param ia_override If the AI must play instead of player
+ * \return The game created
  */
 Game *game_new(Cell owner, int ia_override);
 
 /**
- * \brief Exécute le prochain tour de jeu
- * \param game La partie
- * \param move Le coup à jouer
+ * \brief Execute the next game turn
+ * \param game The game
+ * \param move The move to play
  */
 void game_turn(Game *game, Move move);
 
 /**
- * \brief Démarre la partie
- * \param game La partie
+ * \brief Star game
+ * \param game The game
  */
 void game_start(Game *game);
 

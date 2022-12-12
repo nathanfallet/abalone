@@ -3,9 +3,9 @@
 
 /**
  * \file gui.h
- * \brief Affichage graphique
+ * \brief Graphic display
  * 
- * Affichage graphique avec GTK.
+ * Graphic display whith GTK.
  */
 
 #include <stdlib.h>
@@ -16,18 +16,18 @@
 #include "move.h"
 
 /**
- * \brief Initialise l'affichage GTK
- * \param owner Le joueur qui créé la partie (CELL_BLACK ou CELL_WHITE)
- * \param ia_override Si l'IA doit jouer à la place du joueur
- * \param refresh_opponent Le callback pour actualiser l'adversaire
+ * \brief Initialize GTK display
+ * \param owner The palyer who must create thge game (CELL_BLACK or CELL_WHITE)
+ * \param ia_override If the AI must play instead of player
+ * \param refresh_opponent The callback to refresh opponent
  */
 void gui_init(Cell owner, int ia_override, void (*refresh_opponent)(Game *game, Cell me, State state), char address[ADDRESS_LENGTH], int port);
 
 /**
- * \brief Actualise l'affichage dans GTK
- * \param game La partie
- * \param me Le joueur
- * \param state L'état de la partie
+ * \brief GTK Refesh GTK display
+ * \param game The game
+ * \param me The player
+ * \param state the state of game
  */
 void gui_update(Game *game, Cell me, State state);
 

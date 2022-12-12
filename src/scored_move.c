@@ -31,7 +31,7 @@ int scored_move_compute(Cell me, Board board) {
             if (current == me)
                 score += WEIGHT_CENTER * (20 - abs(4 - i) - abs(4 - j) - abs(3 - i) - abs(3 - j));
             if (current == cell_opposite(me))
-                score -= 2 * WEIGHT_CENTER * (20 - abs(4 - i) - abs(4 - j - abs(3 - i) - abs(3 - j)));
+                score -= 2 * WEIGHT_CENTER * (20 - abs(4 - i) - abs(4 - j) - abs(3 - i) - abs(3 - j));
             // Count the number of pawns
             if (current == me)
                 pawn_me += 1;

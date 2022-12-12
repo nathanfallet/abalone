@@ -3,27 +3,27 @@
 
 /**
  * \file cell.h
- * \brief Cellule de plateau
+ * \brief Board cell
  * 
- * Gestion des cellules de plateau.
- * Une cellule représente aussi un joueur.
+ * Board cells management.
+ * Cell also represent a player.
 */
 
 #include "constants.h"
 
 /**
- * \brief Cellule de plateau
+ * \brief Board cell
  * 
- * Une cellule est soit vide, soit noire, soit blanche.
- * Elle représente aussi un joueur.
- * Elle vaut CELL_EMPTY, CELL_BLACK ou CELL_WHITE.
+ * Cell is either empty, black or white.
+ * It also represent a player.
+ * It is worth CELL_EMPTY, CELL_BLACK or CELL_WHITE.
  */
 typedef unsigned char Cell;
 
 /**
- * \brief Vérifie si la cellule est occupée par un pion de couleur opposée
- * \param cell couleur ou état de la cellule (CELL_BLACK ou CELL_WHITE ou CELL_EMPTY)
- * \return la couleur noir/blanc/vide
+ * \brief Check if the cell is taken by an oponent pawn
+ * \param color or state cell (CELL_BLACK or CELL_WHITE or CELL_EMPTY) 
+ * \return the color black/white/empty
  */
 Cell cell_opposite(Cell cell);
 

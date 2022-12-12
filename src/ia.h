@@ -3,9 +3,9 @@
 
 /**
  * \file ia.h
- * \brief Gestion de l'IA
+ * \brief IA management
  * 
- * Gestion de l'IA et de sa réfléxion.
+ * IA management and his reflection.
  */
 
 #include "board.h"
@@ -15,19 +15,19 @@
 #include "state.h"
 
 /**
- * \brief Exécute le prochain tour de jeu de l'IA
- * \param game La partie
- * \param me Le joueur
- * \param state L'état de la partie
+ * \brief Execute the next game round of IA 
+ * \param game The game
+ * \param me The current player
+ * \param state The state of the game
  */
 void ia_update(Game *game, Cell me, State state);
 
 /**
- * \brief Retourne le meilleur move pour l'IA
- * \param me Le joueur
- * \param board Le plateau
- * \param profondeur La profondeur de l'arbre
- * \return Le meilleur move
+ * \brief Return the best Move for the IA
+ * \param me The player
+ * \param board The board
+ * \param profondeur The deep of the tree
+ * \return The best Move
  */
 Move ia_minimax(Cell me, Board board, int profondeur);
 

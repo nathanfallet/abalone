@@ -3,121 +3,121 @@
 
 /**
  * \file constants.h
- * \brief Constantes globales
+ * \brief Global constant
  */
 
 /**
- * \brief Taille du plateau
+ * \brief Board size
  */
 #define BOARD_SIZE 8
 
 /**
- * \brief Cellule vide 
+ * \brief Empty cell
  */
 #define CELL_EMPTY 0 
 
 /**
- * \brief Cellule noire 
+ * \brief Black cell
  */
 #define CELL_BLACK 1
 
 /**
- * \brief Cellule blanche
+ * \brief White cell
  */
 #define CELL_WHITE 2
 
 /**
- * \brief Partie en cours
+ * \brief Game in court
  */
 #define STATE_PLAYING 0
 
 /**
- * \brief Partie terminée, victoire noire
+ * \brief Game over, black victory
  */
 #define STATE_WIN_BLACK 1
 
 /**
- * \brief Partie terminée, victoire blanche
+ * \brief Game over, white victory
  */
 #define STATE_WIN_WHITE 2
 
 /**
- * \brief Move vide
+ * \brief Move none
  */
 #define MOVE_NONE 0
 
 /**
- * \brief Taille maximale de la liste des moves
+ * \brief Maximum move list size 
  */
 #define MOVE_LIST_SIZE 280
 
 /**
- * \brief Poids d'un move gagnant (dans scored_move_compute)
+ * \brief weight of win move (dans scored_move_compute)
  */
 #define WEIGHT_WIN 100000
 
 /**
- * \brief Poids d'un move gagnant (dans ia_minimax_compare directement)
+ * \brief weight of win move (dans ia_minimax_compare directement)
  */
 #define WEIGHT_WIN_DIRECT 1000000
 
 /**
- * \brief Poids quand un pion est voisin
+ * \brief Weight when a pawn is neighbour
  */
 #define WEIGHT_NEIGHBOUR 2
 
 /**
- * \brief Poids quand un pion est proche
+ * \brief Weight when a pawn is near
  */
 #define WEIGHT_PROXIMITY 1
 
 /**
- * \brief Poids quand un pion est au centre
+ * \brief Weight when a pawn is center
  */
 #define WEIGHT_CENTER 3
 
 /**
- * \brief Poids quand un pion peut pousser un autre pion
+ * \brief Weight when a pawn can push an another
  */
 #define WEIGHT_OPPOSITE 3
 
 /**
- * \brief Nombre de pions par joueur
+ * \brief Number of player pawns
  */
 #define PAWN_TOT 14
 
 /**
- * \brief Constante d'initialisation (aucune)
+ * \brief Initialization constant (none)
  */
 #define INIT_NONE -1
 
 /**
- * \brief Constante d'initialisation par défaut
+ * \brief Default initialization constant
  */
 #define INIT_DEFAULT 0
 
 /**
- * \brief Constante d'initialisation (terminal)
+ * \brief Initialization constant (terminal)
  */
 #define INIT_TERMINAL 1
 
 /**
- * \brief Constante d'initialisation (interface graphique)
+ * \brief Initialization constant (graphic interface)
  */
 #define INIT_GUI 2
 
 /**
- * \brief Constante d'initialisation (réseau)
+ * \brief Initialization constant  (network)
  */
 #define INIT_NETWORK 3
 
 /**
- * \brief Taille maximale d'une adresse IP
+ * \brief Maximum size of an IP address
  */
 #define ADDRESS_LENGTH 16
 
 /**
- * \brief Couleurs dans le terminal
+ * \brief Color in terminal
  */
 #define color(param) printf("\033[%sm",param)
 

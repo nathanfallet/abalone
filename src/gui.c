@@ -5,7 +5,7 @@
 #include <gdk/gdkkeysyms.h>
 #include "gui.h"
 
-// Stockage de trucs
+// Stuff storage
 
 GtkWidget *window;
 GtkWidget *container;
@@ -26,7 +26,7 @@ Move gui_last_move;
 int has_clicked = 0;
 int i1, i2, j1, j2;
 
-// Fonctions internes
+// Internal function
 
 char *char_to_string(char c) {
     char *string = malloc(2 * sizeof(char));
@@ -45,7 +45,7 @@ char *chars_to_string(char c, char c2) {
 
 void play_sound(char *path) {
     /*
-     * Joue un son
+     * Play a song
      */
 
     char command[100];
@@ -59,8 +59,8 @@ void play_sound(char *path) {
 
 void gui_background_start(Game *game) {
     /*
-     * Initialisation du background thread
-     * Pour que le jeu se fasse en background et ne bloque pas l'interface
+     * Initialization of background thread
+     * For that the game is done in the background and does not block the interface
      */
 
     pthread_t thread;
@@ -82,8 +82,8 @@ void gui_background_turn_ia() {
 
 void gui_button_callback() {
     /*
-     * Fonction appelée sur le background thread
-     * après avoir mi à jour le jeu (et lu le move si besoin)
+     * Function called on the background thread
+     * after updating the game (and reading the move if necessary)
      */
 
     if (gui_last_game->playing != gui_last_me || gui_last_state != STATE_PLAYING) {
@@ -104,7 +104,7 @@ void gui_button_callback() {
 }
 
 gboolean gui_entry_callback(GtkWidget *widget, GdkEventKey *event, gpointer user_data) {
-    // Tester si entré est pressé:
+    // Check if the buton is pressed
     if (event->keyval == GDK_KEY_Return) {
         gui_button_callback();
         return TRUE;
@@ -113,7 +113,7 @@ gboolean gui_entry_callback(GtkWidget *widget, GdkEventKey *event, gpointer user
 }
 
 gboolean gui_click_callback(GtkWidget *widget, GdkEventButton *event, gpointer user_data) {
-    // (x,y) = prendre coor sourri
+    // (x,y) = taken mouse coor
     int x = event->x;
     int y = event->y;
     int i = (y - 65) / 70;
@@ -154,7 +154,7 @@ void clear(cairo_t *cr) {
 
 gboolean gui_update_grid(GtkWidget *widget, cairo_t *cr, gpointer data) {
     /*
-     * Mise à jour de la grille dans l'interface graphique
+     * Board update in GUI
      */
 
     // Set the line width and color for the rectangle
@@ -199,7 +199,7 @@ gboolean gui_update_grid(GtkWidget *widget, cairo_t *cr, gpointer data) {
         }
     }
 
-    // On actualise aussi les labels
+    // Refesh also labels
     gtk_label_set_text(GTK_LABEL(label_me), g_strdup_printf("Vous êtes : %s", gui_last_me == CELL_BLACK ? "Noir" : "Blanc"));
     switch (gui_last_state) {
     case STATE_PLAYING:
@@ -216,7 +216,7 @@ gboolean gui_update_grid(GtkWidget *widget, cairo_t *cr, gpointer data) {
         gtk_label_set_text(GTK_LABEL(label_move), g_strdup_printf("Dernier coup : %s", move_to_string(gui_last_game->last_move)));
     }
 
-    // Si c'est mon tour
+    // if it is my turn
     gtk_widget_set_sensitive(
         button,
         gui_last_game->playing == gui_last_me &&
@@ -225,30 +225,36 @@ gboolean gui_update_grid(GtkWidget *widget, cairo_t *cr, gpointer data) {
             ? TRUE
             : FALSE);
 
-    // C'est updated, on dit qu'on s'arrête là (sinon ça update à l'infini)
+    // it is updated, we say when it is finish (else it infinit)
     return FALSE;
 }
 
 void gui_init_window() {
-    // Initialisation de GTK
+    // GTK initialization
     gtk_init(NULL, NULL);
     window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
     gtk_window_set_title(GTK_WINDOW(window), "Abalone");
     //gtk_window_set_resizable(GTK_WINDOW(window), FALSE);
-    gtk_window_set_default_size(GTK_WINDOW(window), 630, 750);
+    gtk_window_set_default_size(GTK_WINDOW(window), 750, 800);
     g_signal_connect(window, "destroy", G_CALLBACK(gui_destroy), NULL);
 
+    GdkRGBA background = {1.0, 1.0, 1.0, 1};
     container = gtk_grid_new();
     gtk_grid_set_row_homogeneous(GTK_GRID(container), TRUE);
     gtk_grid_set_column_homogeneous(GTK_GRID(container), TRUE);
+    gtk_widget_override_background_color(container, GTK_STATE_FLAG_NORMAL, &background);
 
     GtkWidget *header = gtk_grid_new();
     gtk_grid_set_row_homogeneous(GTK_GRID(header), TRUE);
     gtk_grid_set_column_homogeneous(GTK_GRID(header), TRUE);
 
+    GdkRGBA foreground = {0.0, 0.0, 0.0, 1};
     label_me = gtk_label_new("");
     label_playing = gtk_label_new("");
     label_move = gtk_label_new("");
+    gtk_widget_override_color(label_me, GTK_STATE_FLAG_NORMAL, &foreground);
+    gtk_widget_override_color(label_playing, GTK_STATE_FLAG_NORMAL, &foreground);
+    gtk_widget_override_color(label_move, GTK_STATE_FLAG_NORMAL, &foreground);
 
     gtk_grid_attach(GTK_GRID(header), label_me, 0, 0, 1, 1);
     gtk_grid_attach(GTK_GRID(header), label_playing, 1, 0, 1, 1);
@@ -259,12 +265,13 @@ void gui_init_window() {
     gtk_grid_set_column_homogeneous(GTK_GRID(footer), TRUE);
 
     GtkWidget *label = gtk_label_new("Votre coup :");
+    gtk_widget_override_color(label, GTK_STATE_FLAG_NORMAL, &foreground);
     entry = gtk_entry_new();
     button = gtk_button_new_with_label("Jouer");
 
     g_signal_connect(button, "clicked", G_CALLBACK(gui_button_callback), NULL);
 
-    // détection de touche
+    // Touch detection
     g_signal_connect(entry, "key_press_event", G_CALLBACK(gui_entry_callback), NULL);
 
     gtk_grid_attach(GTK_GRID(footer), label, 0, 0, 1, 1);
@@ -278,60 +285,74 @@ void gui_init_window() {
     g_signal_connect(G_OBJECT(drawing_area), "draw", G_CALLBACK(gui_update_grid), NULL);
     gtk_container_add(GTK_CONTAINER(event_box), drawing_area);
 
-    gtk_grid_attach(GTK_GRID(container), header, 0, 0, 1, 1);
-    gtk_grid_attach(GTK_GRID(container), event_box, 0, 1, 1, 11);
-    gtk_grid_attach(GTK_GRID(container), footer, 0, 13, 1, 1);
+    GtkWidget *image = gtk_image_new_from_file("assets/image.gif");
+    GtkWidget *image2 = gtk_image_new_from_file("assets/image_rotated.gif");
+    GtkWidget *image3 = gtk_image_new_from_file("assets/image_rotated2.gif");
+    gtk_widget_set_halign(image, GTK_ALIGN_CENTER);
+    gtk_widget_set_valign(image, GTK_ALIGN_CENTER);
+    gtk_widget_set_halign(image2, GTK_ALIGN_CENTER);
+    gtk_widget_set_valign(image2, GTK_ALIGN_CENTER);
+    gtk_widget_set_halign(image3, GTK_ALIGN_CENTER);
+    gtk_widget_set_valign(image3, GTK_ALIGN_CENTER);
+
+    // Colonne, ligne, largeur, hauteur
+    gtk_grid_attach(GTK_GRID(container), image, 0, 0, 14, 1);
+    gtk_grid_attach(GTK_GRID(container), image2, 0, 1, 1, 14);
+    gtk_grid_attach(GTK_GRID(container), image3, 13, 1, 1, 14);
+    gtk_grid_attach(GTK_GRID(container), header, 0, 1, 14, 1);
+    gtk_grid_attach(GTK_GRID(container), event_box, 1, 2, 12, 12);
+    gtk_grid_attach(GTK_GRID(container), footer, 1, 14, 12, 1);
     gtk_container_add(GTK_CONTAINER(window), container);
 
     gtk_widget_show_all(window);
 }
 
-// Fonctions publiques
+// Public function
 
 void gui_init(Cell owner, int ia_override, void (*refresh_opponent)(Game *game, Cell me, State state), char address[ADDRESS_LENGTH], int port) {
     /*
-     * Fonction d'initialisation de l'interface
+     * Interface initialisation function
      */
 
-    // Initialisation de la partie
+    // Game initialization
     Game *game = game_new(owner, ia_override);
     strcpy(game->address, address);
     game->port = port;
     game->refresh = gui_update;
     game->refresh_opponent = refresh_opponent;
 
-    // Initialisation de GTK
+    // GTK initialization
     gui_init_window();
 
-    // Démarrage
+    // Start
     gui_background_start(game);
 
-    // Boucle principale (bloquante, donc ne rien mettre en dessous)
+    // Main loop (blocking, so do not put anything below)
     gtk_main();
 }
 
 void gui_update(Game *game, Cell me, State state) {
     /*
-     * Fonction appelée par le jeu avec les données à jour
+     * Function called by the game with data updating
      */
 
-    // On enregistre les trucs (pour les passer au main thread)
+    // record for the main thread
     gui_last_game = game;
     gui_last_me = me;
     gui_last_state = state;
 
-    // On laisse l'UI se mettre à jour (sur le main thread)
+    // Interface user update (on the main thread)
     GSource *source = g_idle_source_new();
     g_source_set_callback(source, gui_draw_callback, NULL, NULL);
     g_source_attach(source, g_main_context_default());
     g_source_unref(source);
 
-    // Si y'a un dernier coup, on joue le son
+    // If there is a last move, play soud
     if (gui_last_game->last_move != MOVE_NONE) {
         play_sound("assets/move.wav");
     }
 
-    // Si c'est l'IA qui joue
+    // If it is Ai whitch played
     if (game->playing == me && game->ia_override) {
         pthread_t thread;
         pthread_create(&thread, NULL, gui_background_turn_ia, NULL);

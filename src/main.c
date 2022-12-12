@@ -27,17 +27,17 @@ void default_init(Cell me, int ia_override, void (*update)(Game *game, Cell me, 
 }
 
 int main(int argc, char *argv[]) {
-    // Init du random
+    /* Random initialization */
     srand(time(NULL));
 
-    // Status
+    /* Status */
     int init = INIT_NONE;
     Cell me = CELL_BLACK;
     int ia_override = -1;
     char address[ADDRESS_LENGTH] = "";
     int port = 0;
 
-    // Handle arguments
+    /* Handle arguments */
     int i = 1;
     while (i < argc) {
         if (argv[i][0] != '-') {
@@ -87,12 +87,12 @@ int main(int argc, char *argv[]) {
         i += 2;
     }
 
-    // IA override default value
+    /* IA override default value */
     if (ia_override == -1) {
         ia_override = init == INIT_NETWORK;
     }
 
-    // Call
+    /* Call */
     switch (init) {
     case INIT_DEFAULT:
         default_init(me, ia_override, ia_update, address, port);
