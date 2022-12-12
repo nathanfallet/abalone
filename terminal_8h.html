@@ -73,7 +73,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Gestion du terminal.  
+<p>Terminal management.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;stdlib.h&gt;</code><br />
 <code>#include &lt;stdio.h&gt;</code><br />
@@ -87,15 +87,15 @@ $(function() {
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a498ffc0845fea56aa3ae906aa7309b12"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="terminal_8h.html#a498ffc0845fea56aa3ae906aa7309b12">terminal_init</a> (<a class="el" href="cell_8h.html#a53efbb3b59542e13799bdf1fd8607c44">Cell</a> owner, int ia_override, void(*refresh_opponent)(<a class="el" href="structGame.html">Game</a> *game, <a class="el" href="cell_8h.html#a53efbb3b59542e13799bdf1fd8607c44">Cell</a> me, <a class="el" href="state_8h.html#a923fb9080b37d642c98cbc0159c9fd0e">State</a> state), char address[<a class="el" href="constants_8h.html#a8beaa5b28cf9a48a1df357d25ec9704e">ADDRESS_LENGTH</a>], int port)</td></tr>
-<tr class="memdesc:a498ffc0845fea56aa3ae906aa7309b12"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialise l'affichage dans le terminal.  <a href="terminal_8h.html#a498ffc0845fea56aa3ae906aa7309b12">More...</a><br /></td></tr>
+<tr class="memdesc:a498ffc0845fea56aa3ae906aa7309b12"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize terminal display.  <a href="terminal_8h.html#a498ffc0845fea56aa3ae906aa7309b12">More...</a><br /></td></tr>
 <tr class="separator:a498ffc0845fea56aa3ae906aa7309b12"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4b7ebb96c84de3a2eb907b0fde59138d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="terminal_8h.html#a4b7ebb96c84de3a2eb907b0fde59138d">terminal_update</a> (<a class="el" href="structGame.html">Game</a> *game, <a class="el" href="cell_8h.html#a53efbb3b59542e13799bdf1fd8607c44">Cell</a> me, <a class="el" href="state_8h.html#a923fb9080b37d642c98cbc0159c9fd0e">State</a> state)</td></tr>
-<tr class="memdesc:a4b7ebb96c84de3a2eb907b0fde59138d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Actualise l'affichage du terrain dans le terminal.  <a href="terminal_8h.html#a4b7ebb96c84de3a2eb907b0fde59138d">More...</a><br /></td></tr>
+<tr class="memdesc:a4b7ebb96c84de3a2eb907b0fde59138d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Actualize display of the plate in the terminal.  <a href="terminal_8h.html#a4b7ebb96c84de3a2eb907b0fde59138d">More...</a><br /></td></tr>
 <tr class="separator:a4b7ebb96c84de3a2eb907b0fde59138d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Gestion du terminal. </p>
-<p>Gestion de l'affichage dans le terminal. </p>
+<div class="textblock"><p>Terminal management. </p>
+<p>Display management in terminal </p>
 </div><h2 class="groupheader">Function Documentation</h2>
 <a id="a498ffc0845fea56aa3ae906aa7309b12"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a498ffc0845fea56aa3ae906aa7309b12">&#9670;&nbsp;</a></span>terminal_init()</h2>
@@ -141,12 +141,12 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Initialise l'affichage dans le terminal. </p>
+<p>Initialize terminal display. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">owner</td><td>Le joueur qui créé la partie (CELL_BLACK ou CELL_WHITE) </td></tr>
-    <tr><td class="paramname">ia_override</td><td>Si l'IA doit jouer à la place du joueur </td></tr>
-    <tr><td class="paramname">refresh_opponent</td><td>Le callback pour actualiser l'adversaire </td></tr>
+    <tr><td class="paramname">owner</td><td>The player creating the game (CELL_BLACK ou CELL_WHITE) </td></tr>
+    <tr><td class="paramname">ia_override</td><td>If the AI should play instead of the player </td></tr>
+    <tr><td class="paramname">refresh_opponent</td><td>The Callback to actualize the opponent </td></tr>
   </table>
   </dd>
 </dl>
@@ -185,12 +185,12 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Actualise l'affichage du terrain dans le terminal. </p>
+<p>Actualize display of the plate in the terminal. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">game</td><td>La partie </td></tr>
-    <tr><td class="paramname">me</td><td>Le joueur </td></tr>
-    <tr><td class="paramname">state</td><td>L'état de la partie </td></tr>
+    <tr><td class="paramname">game</td><td>The game </td></tr>
+    <tr><td class="paramname">me</td><td>The player </td></tr>
+    <tr><td class="paramname">state</td><td>The state of the game </td></tr>
   </table>
   </dd>
 </dl>
