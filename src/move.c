@@ -331,6 +331,11 @@ void move_available(Cell me, Board board, Move array[MOVE_LIST_SIZE]) {
 
     for (int line = 0; line < BOARD_SIZE; line++) {
         for (int col = 0; col < BOARD_SIZE; col++) {
+            /* Check that current cell is mine */
+            if (board_get_cell(board, line, col) != me) {
+                continue;
+            }
+
             // déplacement pion solo
             // on vérifie si la case a droite est libre
             if (col < BOARD_SIZE - 1 && move_line_one(move_create(line, col, line, col + 1), me, board, 0)) {
