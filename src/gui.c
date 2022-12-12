@@ -57,6 +57,11 @@ void play_sound(char *path) {
     system(command);
 }
 
+void *gui_game_start(void *game) {
+    game_start((Game *) game);
+    return NULL;
+}
+
 void gui_background_start(Game *game) {
     /*
      * Initialization of background thread
@@ -64,20 +69,22 @@ void gui_background_start(Game *game) {
      */
 
     pthread_t thread;
-    pthread_create(&thread, NULL, game_start, game);
+    pthread_create(&thread, NULL, gui_game_start, game);
 }
 
-void gui_background_turn() {
+void *gui_background_turn(void *null) {
     if (gui_last_game->ia_override) {
-        return;
+        return NULL;
     }
     game_turn(gui_last_game, gui_last_move);
+    return NULL;
 }
 
-void gui_background_turn_ia() {
+void *gui_background_turn_ia(void *null) {
     if (gui_last_game->ia_override) {
         ia_update(gui_last_game, gui_last_me, gui_last_state);
     }
+    return NULL;
 }
 
 void gui_button_callback() {
@@ -133,10 +140,12 @@ gboolean gui_click_callback(GtkWidget *widget, GdkEventButton *event, gpointer u
         gtk_entry_set_text(GTK_ENTRY(entry), chars_to_string('A' + i1, '1' + j1));
         has_clicked = 1;
     }
+    return TRUE;
 }
 
-void gui_draw_callback() {
+int gui_draw_callback(void *null) {
     gtk_widget_queue_draw(drawing_area);
+    return TRUE;
 }
 
 static void gui_destroy(GtkWidget *widget, gpointer data) {

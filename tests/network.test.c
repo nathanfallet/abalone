@@ -8,17 +8,24 @@ Game *game_client;
 Game *game_server;
 int has_played = 0;
 
+void *test_network_client_server_game_start(void *game) {
+    game_start((Game *) game);
+    return NULL;
+}
+
 void test_network_client_server_background_start(Game *game) {
     pthread_t thread;
-    pthread_create(&thread, NULL, game_start, game);
+    pthread_create(&thread, NULL, test_network_client_server_game_start, game);
 }
 
-void test_network_client_server_background_turn_client() {
+void *test_network_client_server_background_turn_client(void *null) {
     game_turn(game_client, move_from_string("H1:G1"));
+    return NULL;
 }
 
-void test_network_client_server_background_turn_server() {
+void *test_network_client_server_background_turn_server(void *null) {
     game_turn(game_server, move_from_string("A1:B1"));
+    return NULL;
 }
 
 void test_network_client_server_update_client(Game *game, Cell me, State state) {
