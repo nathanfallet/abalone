@@ -5,13 +5,13 @@
 #include <pthread.h>
 #include "terminal.h"
 
-// Stockage de trucs
+// Storage of things
 
 Game *terminal_last_game;
 Cell terminal_last_me;
 State terminal_last_state;
 
-// Fonctions internes
+// Internal functions
 
 Move terminal_read() {
     char input[6];
@@ -20,7 +20,7 @@ Move terminal_read() {
 }
 
 void terminal_print(Board board) {
-    char *alpha = {"ABCDEFGH"}; // colonne lettre
+    char *alpha = {"ABCDEFGH"}; // Column letter
     printf("\n   ");
     for (int i = 1; i <= 8; i++) {
         printf("  %i ", i);
@@ -81,7 +81,7 @@ void *terminal_background_turn() {
     return NULL;
 }
 
-// Fonctions publiques
+// Public functions
 
 void terminal_init(Cell owner, int ia_override, void (*refresh_opponent)(Game *game, Cell me, State state), char address[ADDRESS_LENGTH], int port) {
     Game *game = game_new(owner, ia_override);
@@ -98,15 +98,15 @@ void terminal_init(Cell owner, int ia_override, void (*refresh_opponent)(Game *g
 }
 
 void terminal_update(Game *game, Cell me, State state) {
-    // On enregistre les trucs (pour les passer au main thread)
+    // Saving things (To send them to the main thread)
     terminal_last_game = game;
     terminal_last_me = me;
     terminal_last_state = state;
 
-    // Affichage
+    // Display
     terminal_print(game->board);
 
-    // Fin de la partie
+    // End of the game
     switch (state) {
     case STATE_WIN_BLACK:
         printf("Le joueur Black a gagné !\n");
@@ -118,7 +118,7 @@ void terminal_update(Game *game, Cell me, State state) {
         break;
     }
 
-    // Si c'est mon tour:
+    // If it is my turn
     if (game->playing == me) {
         pthread_t thread;
         pthread_create(&thread, NULL, terminal_background_turn, NULL);

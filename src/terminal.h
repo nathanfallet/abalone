@@ -3,9 +3,9 @@
 
 /**
  * \file terminal.h
- * \brief Gestion du terminal
+ * \brief Terminal management
  * 
- * Gestion de l'affichage dans le terminal.
+ * Display management in terminal
  */
 
 #include <stdlib.h>
@@ -16,18 +16,18 @@
 #include "state.h"
 
 /**
- * \brief Initialise l'affichage dans le terminal
- * \param owner Le joueur qui créé la partie (CELL_BLACK ou CELL_WHITE)
- * \param ia_override Si l'IA doit jouer à la place du joueur
- * \param refresh_opponent Le callback pour actualiser l'adversaire
+ * \brief Initialize terminal display
+ * \param owner The player creating the game (CELL_BLACK ou CELL_WHITE)
+ * \param ia_override If the AI should play instead of the player
+ * \param refresh_opponent The Callback to actualize the opponent
  */
 void terminal_init(Cell owner, int ia_override, void (*refresh_opponent)(Game *game, Cell me, State state), char address[ADDRESS_LENGTH], int port);
 
 /**
- * \brief Actualise l'affichage du terrain dans le terminal
- * \param game La partie
- * \param me Le joueur
- * \param state L'état de la partie
+ * \brief Actualize display of the plate in the terminal
+ * \param game The game
+ * \param me The player
+ * \param state The state of the game
  */
 void terminal_update(Game *game, Cell me, State state);
 

@@ -16,7 +16,7 @@ void network_connect(Game *game) {
 
     // Connect
     if (strcmp(game->address, "") == 0) {
-        // On est le serveur
+        // We are the server
         if ((game->fdsocket = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP)) == -1) {
             printf("Could not create socket: %s\n", strerror(errno));
             exit(1);
@@ -49,7 +49,7 @@ void network_connect(Game *game) {
         }
     }
     else {
-        // On est le client
+        // We are the client
         game->fdclient = socket(AF_INET, SOCK_STREAM, 0);
         if (game->fdclient == -1) {
             printf("Could not create socket: %s\n", strerror(errno));
@@ -60,7 +60,7 @@ void network_connect(Game *game) {
         addr.sin_addr.s_addr = inet_addr(game->address);
         addr.sin_port = htons(game->port);
 
-        // Connexion au serveur
+        // Connexion to the server
         if (connect(game->fdclient, (struct sockaddr *)&addr, sizeof(addr)) != 0) {
             printf("Could not connect to server: %s (I will retry in 1 second)\n", strerror(errno));
             sleep(1);
@@ -80,7 +80,7 @@ void network_disconnect(Game *game) {
 }
 
 void network_init(Cell owner, int ia_override, void (*init)(Cell owner, int ia_override, void (*refresh_opponent)(Game *game, Cell me, State state), char address[ADDRESS_LENGTH], int port), char address[ADDRESS_LENGTH], int port) {
-    // On init le reste comme d'habitude
+    // initiate what remains
     init(owner, ia_override, network_update, address, port);
 }
 
@@ -123,7 +123,7 @@ void network_update(Game *game, Cell me, State state) {
             if (move_apply(result, me, game->board, 0) == 0) {
                 result = MOVE_NONE;
             }
-        } while (game->fdclient == -1 || bytes < 6 || result == MOVE_NONE);
+        } while (game->fdclient == -1 || result == MOVE_NONE);
         game_turn(game, result);
     }
 }

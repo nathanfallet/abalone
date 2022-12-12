@@ -27,7 +27,7 @@ int scored_move_compute(Cell me, Board board) {
             Cell current = board_get_cell(board, i, j);
             int distance = 0;
             int count = 0;
-            // point par rapport au centre
+            //position of a point compared to the center
             if (current == me)
                 score += WEIGHT_CENTER * (20 - abs(4 - i) - abs(4 - j) - abs(3 - i) - abs(3 - j));
             if (current == cell_opposite(me))
@@ -37,23 +37,23 @@ int scored_move_compute(Cell me, Board board) {
                 pawn_me += 1;
             if (current == cell_opposite(me))
                 pawn_opponent += 1;
-            // Regarde la proximité par rapport au autres pions
+            // Looks the proximity to other pawns
             if (current == me) {
-                // regarde si on est aligné à 2 verticalement
+                // checks if 2 pawns are aligned vertically
                 if (board_get_cell(board, i + 1, j) == me) {
                     score += WEIGHT_NEIGHBOUR;
-                    // regarde vers le bas si on est sur la même colonne que l'adversaire
+                    // checks down on the same column if there's an opponent
                     for (int k = i + 1; k < BOARD_SIZE; k++) {
-                        // compte le nombre d'aversaire sur la colonne
+                        // counts the number of opponents' pawns on the same column
                         if (board_get_cell(board, i + k, j) == cell_opposite(me)) {
                             count += 1;
-                            // enregistre la distance du plus proche adversaire
+                            // saves the distance to the first opponents' pawn
                             if (distance == 0) {
                                 distance = k;
                             }
                         }
                     }
-                    // vérifie si on peut pousser l'aversaire sur la colonne ou non
+                    // checks if it's possible to push the opponents' pawns on the column
                     if (count == 1) {
                         score += 3 * WEIGHT_OPPOSITE / (distance + 1);
                     }
@@ -62,18 +62,18 @@ int scored_move_compute(Cell me, Board board) {
                     }
                     count = 0;
                     distance = 0;
-                    // regarde vers le haut si on est sur la même colonne que l'adversaire
+                    // checks down on the same column if there's an opponent
                     for (int k = i; k > 0; k--) {
-                        // compte le nombre d'aversaire sur la colonne
+                        // counts the number of opponents' pawns on the same column
                         if (board_get_cell(board, i + k, j) == cell_opposite(me)) {
                             count += 1;
-                            // enregistre la distance du plus proche adversaire
+                            // saves the distance to the first opponents' pawn
                             if (distance == 0) {
                                 distance = k;
                             }
                         }
                     }
-                    // vérifie si on peut pousser l'aversaire sur la colonne ou non
+                    // checks if it's possible to push the opponents' pawns on the column
                     if (count == 1) {
                         score += 3 * WEIGHT_OPPOSITE / (distance + 1);
                     }
@@ -82,38 +82,38 @@ int scored_move_compute(Cell me, Board board) {
                     }
                     count = 0;
                     distance = 0;
-                    // regarde si on est aligné à 3 verticalement
+                    // checks if 3 pawns are aligned vertically
                     if (board_get_cell(board, i + 2, j) == me) {
                         score += 2 * WEIGHT_NEIGHBOUR;
-                        // regarde vers le bas si on est sur la même colonne que l'adversaire
+                        // checks up on the same column if there's an opponent
                         for (int k = i + 2; k < BOARD_SIZE; k++) {
-                            // compte le nombre d'aversaire sur la colonne
+                            // counts the number of opponents' pawns on the same column
                             if (board_get_cell(board, i + k, j) == cell_opposite(me)) {
                                 count += 1;
-                                // enregistre la distance du plus proche adversaire
+                                // saves the distance to the first opponents' pawn
                                 if (distance == 0) {
                                     distance = k;
                                 }
                             }
                         }
-                        // vérifie si on peut pousser l'aversaire sur la colonne ou non
+                        // checks if it's possible to push the opponents' pawns on the column
                         if (count <= 2) {
                             score += 3 * WEIGHT_OPPOSITE / (distance + 1);
                         }
                         count = 0;
                         distance = 0;
-                        // regarde vers le haut si on est sur la même colonne que l'adversaire
+                        // checks up if opponents' pawns are on the same column as ours
                         for (int k = i - 2; k > 0; k--) {
-                            // compte le nombre d'aversaire sur la colonne
+                            // counts the number of opponents' pawns on the same column
                             if (board_get_cell(board, i + k, j) == cell_opposite(me)) {
                                 count += 1;
-                                // enregistre la distance du plus proche adversaire
+                                // saves the distance to the first opponents' pawn
                                 if (distance == 0) {
                                     distance = k;
                                 }
                             }
                         }
-                        // vérifie si on peut pousser l'aversaire sur la colonne ou non
+                        // checks if it's possible to push the opponents' pawns on the column
                         if (count <= 2) {
                             score += 3 * WEIGHT_OPPOSITE;
                         }
@@ -121,21 +121,21 @@ int scored_move_compute(Cell me, Board board) {
                         distance = 0;
                     }
                 }
-                // regarde si on est aligné à 2 horizontalement
+                // checks if 2 of our pawns are aligned horizontally
                 if (board_get_cell(board, i, j + 1) == me) {
                     score += WEIGHT_NEIGHBOUR;
-                    // regarde vers la droite si on est sur la même ligne que l'adversaire
+                    // looks to the right if opponents' pawns are on the same line as ours
                     for (int k = j; k < BOARD_SIZE; k++) {
-                        // compte le nombre d'aversaire sur la ligne
+                        // counts the number of opponents' pawns on the same line
                         if (board_get_cell(board, i, j + k) == cell_opposite(me)) {
                             count += 1;
-                            // enregistre la distance du plus proche adversaire
+                            // saves the distance to the first opponents' pawn
                             if (distance == 0) {
                                 distance = k;
                             }
                         }
                     }
-                    // vérifie si on peut pousser l'aversaire sur la ligne ou non
+                    // checks if it's possible to push the opponents' pawns on the line
                     if (count == 1) {
                         score += 3 * WEIGHT_OPPOSITE / (distance + 1);
                     }
@@ -144,19 +144,19 @@ int scored_move_compute(Cell me, Board board) {
                     }
                     count = 0;
                     distance = 0;
-                    // regarde vers la gauche si on est sur la même ligne que l'adversaire
+                    /// looks to the left if opponents' pawns are on the same line as ours
                     for (int k = j; k > 0; k--) {
-                        // compte le nombre d'aversaire sur la ligne
+                        // counts the number of opponents' pawns on the same line
                         if (board_get_cell(board, i, j + k) == cell_opposite(me)) {
                             count += 1;
-                            // enregistre la distance du plus proche adversaire
+                            // saves the distance to the first opponents' pawn
                             if (distance == 0) {
                                 distance = k;
                             }
                         }
                     }
-                    // vérifie si on peut pousser l'aversaire sur la ligne ou non
-                    if (count == 1) {
+                    // checks if it's possible to push the opponents' pawns on the line
+                    if (count == 1) {// counts the number of opponents' pawns on the same column
                         score += 3 * WEIGHT_OPPOSITE / (distance + 1);
                     }
                     else {
@@ -164,38 +164,38 @@ int scored_move_compute(Cell me, Board board) {
                     }
                     count = 0;
                     distance = 0;
-                    // regarde si on est aligné à 3 horizontalement
+                    // checks if 3 of our pawns are aligned horizontally
                     if (board_get_cell(board, i, j + 2) == me) {
                         score += 2 * WEIGHT_NEIGHBOUR;
-                        // regarde vers la droite si on est sur la même ligne que l'adversaire
+                        // looks to the right if opponents' pawns are on the same line as ours
                         for (int k = j + 2; k < BOARD_SIZE; k++) {
-                            // compte le nombre d'aversaire sur la ligne
+                            // counts the number of opponents' pawns on the same line
                             if (board_get_cell(board, i, j + k) == cell_opposite(me)) {
                                 count += 1;
-                                // enregistre la distance du plus proche adversaire
+                                // saves the distance to the first opponents' pawn
                                 if (distance == 0) {
                                     distance = k;
                                 }
                             }
                         }
-                        // vérifie si on peut pousser l'aversaire sur la ligne ou non
+                        // checks if it's possible to push the opponents' pawns on the line
                         if (count <= 2) {
                             score += 3 * WEIGHT_OPPOSITE / (distance + 1);
                         }
                         count = 0;
                         distance = 0;
-                        // regarde vers la gauche si on est sur la même ligne que l'adversaire
+                        // looks to the left if opponents' pawns are on the same line as ours
                         for (int k = j - 2; k > 0; k--) {
-                            // compte le nombre d'aversaire sur la ligne
+                            // counts the number of opponents' pawns on the same line
                             if (board_get_cell(board, i, j + k) == cell_opposite(me)) {
                                 count += 1;
-                                // enregistre la distance du plus proche adversaire
+                                // saves the distance to the first opponents' pawn
                                 if (distance == 0) {
                                     distance = k;
                                 }
                             }
                         }
-                        // vérifie si on peut pousser l'aversaire sur la ligne ou non
+                        // checks if it's possible to push the opponents' pawns on the line
                         if (count <= 2) {
                             score += 3 * WEIGHT_OPPOSITE / (distance + 1);
                         }

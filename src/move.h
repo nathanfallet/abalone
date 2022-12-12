@@ -3,9 +3,9 @@
 
 /**
  * \file move.h
- * \brief Gestion d'un mouvement
+ * \brief Move management
  * 
- * Gestion d'un mouvement, avec les vérifications nécessaires
+ * Move management with the necessary checks
  */
 
 #include "constants.h"
@@ -13,90 +13,90 @@
 #include "cell.h"
 
 /**
- * \brief Représente un mouvement
+ * \brief Represents a movement
  * 
- * Un mouvement est représenté par un entier sur 16 bits,
- * avec les 4 bits de poids fort pour la ligne de départ,
- * les 4 bits suivants pour la colonne de départ,
- * les 4 bits suivants pour la ligne d'arrivée et
- * les 4 bits de poids faible pour la colonne d'arrivée.
+ * A movement is represented by a 16-bits integer,
+ * with the 4 most significant bits for the starting line,
+ * the next 4 bits for the starting column,
+ * the next 4 bits for the destination line and
+ * the 4 least significant bits for the destination column.
  */
 typedef unsigned short Move;
 
 /**
- * \brief Créé un mouvement
- * \param fromLine La ligne de départ du mouvement
- * \param fromColumn La colonne de départ du mouvement
- * \param toLine La ligne d'arrivée du mouvement
- * \param toColumn La colonne d'arrivée du mouvement
- * \return Le mouvement crée
+ * \brief Create a move
+ * \param fromLine The starting line of the move
+ * \param fromColumn The starting column of the move
+ * \param toLine The destination line of the move
+ * \param toColumn The destination column of the move
+ * \return Move creates
  */
 Move move_create(unsigned char fromLine, unsigned char fromColumn, unsigned char toLine, unsigned char toColumn);
 
 /**
- * \brief Lire la ligne de départ du mouvement
- * \param move Le mouvement que l'on veut lire
- * \return La ligne de départ du mouvement
+ * \brief Read the starting line of a move
+ * \param move The move we want to read
+ * \return The starting line of the move
  */
 unsigned char move_get_from_line(Move move);
 
 /**
- * \brief Lire la colonne de départ du mouvement
- * \param move Le mouvement que l'on veut lire
- * \return La colonne de départ du mouvement
+ * \brief Read the starting column of a move
+ * \param move The move we want to read
+ * \return The starting column of the move
  */
 unsigned char move_get_from_column(Move move);
 
 /**
- * \brief Lire la ligne d'arrivée du mouvement
- * \param move Le mouvement que l'on veut lire
- * \return La ligne d'arrivée du mouvement
+ * \brief Read the destination line of a move
+ * \param move The move we want to read
+ * \return The destination line of the move 
  */
 unsigned char move_get_to_line(Move move);
 
 /**
- * \brief Lire la colonne d'arrivée du mouvement
- * \param move Le mouvement que l'on veut lire
- * \return La colonne d'arrivée du mouvement
+ * \brief Read the destination column of a move
+ * \param move The move we want to read
+ * \return The destination column of the move
  */
 unsigned char move_get_to_column(Move move);
 
 /**
- * \brief Convertir la chaîne de caractère en un mouvement
- * \param string Est la chaîne de caractère correspondant à un mouvement
- * on peut utiliser des lettres minuscules ou majuscules. Cette chaîne de
- * caractères permet au joueur d'entrer le mouvement qu'il souhaite faire
- * \return Le mouvement correspondant à la chaîne correspondante
+ * \brief Convert string to move
+ * \param string Is the string corresponding to a move,
+ * We can use lowercase or uppercase letters. This string
+ * allows the player to enter the move they wish to make
+ * \return The move corresponding to the string
  */
 Move move_from_string(char *string);
 
 /**
- * \brief Convertir le mouvement en une chaîne de caractères
- * \param move Le mouvement que l'on veut convertir
- * \return La chaîne de caractères correspondante au mouvement
+ * \brief Convert move to string
+ * \param move The move that we want to convert
+ * \return The string corresponding to the move
  */
 char *move_to_string(Move move);
 
 /**
- * \brief Vérifier la validité du mouvement et l'appliquer le cas échéant
- * \param move Le mouvement que l'on veut appliquer
- * \param me Correspond à la couleur du joueur puisque la validité du
- * mouvement varie en fonction de la couleur des pions
- * \param board Représente le plateau au moment où l'on veut appliquer le
- * mouvement
- * \param apply Si apply vaut 0, permet uniquement de vérifier la validité du mouvement
- * Si apply vaut 1, permet de vérifier la validité du mouvement et l'applique le cas échéant
- * \return si le move est valide (0 pour erreur et 1 pour valide)
+ * \brief Check the validity of a move and apply if it is possible
+ * \param move The move that we want to apply
+ * \param me Is the color of the player since the validity of the
+ * move varies according to the color of the pawns
+ * \param board Represents the board at the moment that we want to
+ * apply the move
+ * \param apply If apply is 0, only allows to check the validity of a move
+ * If apply is 1, allows to check the validity of a move and apply it if it is possible
+ * \return If the move is possible (0 for error and 1 for valid)
  */
 int move_apply(Move move, Cell me, Board board, int apply);
 
 /**
- * \brief Lister le nombre de mouvement possible
- * \param me Correspond à la couleur du joueur dont on veut savoir les mouvements
- * possibles sur le plateau
- * \param board Représente le plateau au moment où l'on veut savoir tous les
- * mouvements possibles
- * \param array Récupère tous les mouvements possibles du joueur "me"
+ * \brief List all possible moves
+ * \param me Is the color of the player whose possible moves
+ * on the board we want to know
+ * \param board Represents the board at the moment that we want to know all the 
+ * possible moves
+ * \param array Recover all the possible moves for the player "me"
  */
 void move_available(Cell me, Board board, Move array[MOVE_LIST_SIZE]);
 

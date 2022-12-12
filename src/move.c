@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include "move.h"
 
-// Initialisation
+/* Initialization */
 
 Move move_create(unsigned char fromLine, unsigned char fromColumn, unsigned char toLine, unsigned char toColumn) {
     return (fromLine << 12) | (fromColumn << 8) | (toLine << 4) | toColumn;
@@ -25,7 +25,7 @@ unsigned char move_get_to_column(Move move) {
     return move & 15;
 }
 
-// Conversion d'une chaine de caractères en un mouvement et vice versa
+/*Converting a string to a Move and vice versa */
 
 Move move_from_string(char *string) {
     char fromLine = string[0];
@@ -54,7 +54,7 @@ char *move_to_string(Move move) {
     return string;
 }
 
-// Fonction utile
+/* Utility function */
 
 int sign(int x) {
     if (x < 0) {
@@ -66,20 +66,20 @@ int sign(int x) {
     return 0;
 }
 
-// Check et application d'un mouvement sur le board
+/* Check and applying of a Move on the board */
 
 int move_line_one(Move move, Cell me, Board board, int apply) {
-    // On vérifie que la case de départ contient bien un pion de la bonne couleur
+    /* We check that the original cell contains a pawn of the right color */
     if (board_get_cell(board, move_get_from_line(move), move_get_from_column(move)) != me) {
         return 0;
     }
 
-    // On vérifie que la case d'arrivée est vide
+    /* We check that the destination cell is empty */
     if (board_get_cell(board, move_get_to_line(move), move_get_to_column(move)) != CELL_EMPTY) {
         return 0;
     }
 
-    // On déplace le pion
+    /* We move the pawn */
     if (apply) {
         board_set_cell(board, move_get_to_line(move), move_get_to_column(move), me);
         board_set_cell(board, move_get_from_line(move), move_get_from_column(move), CELL_EMPTY);
@@ -89,20 +89,20 @@ int move_line_one(Move move, Cell me, Board board, int apply) {
 }
 
 int move_line_two(Move move, Cell me, Board board, int apply) {
-    // On vérifie que la case de départ contient bien un pion de la bonne couleur
+    /* We check that the orginal cell contains a pawn of the right color */
     if (board_get_cell(board, move_get_from_line(move), move_get_from_column(move)) != me) {
         return 0;
     }
 
-    // On vérifie que la case intermédiaire contient bien un pion de la bonne couleur
+    /* We check that the middle cell contains a pawn of the right color */
     if (board_get_cell(board, move_get_from_line(move) + sign(move_get_to_line(move) - move_get_from_line(move)), move_get_from_column(move) + sign(move_get_to_column(move) - move_get_from_column(move))) != me) {
         return 0;
     }
 
-    // Deux cas pour la case d'arrivée
+    /* Two cases for the destination cell */
     Cell arrivee = board_get_cell(board, move_get_to_line(move), move_get_to_column(move));
     if (arrivee == CELL_EMPTY) {
-        // On déplace le pion
+        /* We move the pawn */
         if (apply) {
             board_set_cell(board, move_get_to_line(move), move_get_to_column(move), me);
             board_set_cell(board, move_get_from_line(move), move_get_from_column(move), CELL_EMPTY);
@@ -114,12 +114,12 @@ int move_line_two(Move move, Cell me, Board board, int apply) {
         int toColumn2 = move_get_to_column(move) + sign(move_get_to_column(move) - move_get_from_column(move));
         Cell arrivee2 = board_get_cell(board, toLine2, toColumn2);
 
-        // On vérifie que la case d'arrivée est vide
+        /* We check that the destination cell is empty */
         if (arrivee2 != CELL_EMPTY) {
             return 0;
         }
 
-        // On déplace les pions
+        /* We move the pawn */
         if (apply) {
             board_set_cell(board, toLine2, toColumn2, cell_opposite(me));
             board_set_cell(board, move_get_to_line(move), move_get_to_column(move), me);
@@ -132,12 +132,12 @@ int move_line_two(Move move, Cell me, Board board, int apply) {
 }
 
 int move_line_three(Move move, Cell me, Board board, int apply) {
-    // On vérifie que la case de départ contient bien un pion de la bonne couleur
+    /* We check that the original cell contains a pawn of the right color */
     if (board_get_cell(board, move_get_from_line(move), move_get_from_column(move)) != me) {
         return 0;
     }
 
-    // On vérifie que les cases intermédiaires contientent bien un pion de la bonne couleur
+    /* We check that the middle cells contain a pawn of the right color */
     if (board_get_cell(board, move_get_from_line(move) + sign(move_get_to_line(move) - move_get_from_line(move)), move_get_from_column(move) + sign(move_get_to_column(move) - move_get_from_column(move))) != me) {
         return 0;
     }
@@ -145,10 +145,10 @@ int move_line_three(Move move, Cell me, Board board, int apply) {
         return 0;
     }
 
-    // Deux cas pour la case d'arrivée
+    /* Two cases for the destination cell */
     Cell arrivee = board_get_cell(board, move_get_to_line(move), move_get_to_column(move));
     if (arrivee == CELL_EMPTY) {
-        // On déplace le pion
+        /* We move the pawn */
         if (apply) {
             board_set_cell(board, move_get_to_line(move), move_get_to_column(move), me);
             board_set_cell(board, move_get_from_line(move), move_get_from_column(move), CELL_EMPTY);
@@ -161,7 +161,7 @@ int move_line_three(Move move, Cell me, Board board, int apply) {
         Cell arrivee2 = board_get_cell(board, toLine2, toColumn2);
 
         if (arrivee2 == CELL_EMPTY) {
-            // On déplace le pion
+            /* We move the pawn */
             if (apply) {
                 board_set_cell(board, toLine2, toColumn2, cell_opposite(me));
                 board_set_cell(board, move_get_to_line(move), move_get_to_column(move), me);
@@ -174,12 +174,12 @@ int move_line_three(Move move, Cell me, Board board, int apply) {
             int toColumn3 = move_get_to_column(move) + 2 * sign(move_get_to_column(move) - move_get_from_column(move));
             Cell arrivee3 = board_get_cell(board, toLine3, toColumn3);
 
-            // On vérifie que la case d'arrivée est vide
+            /* We check that the destination cell is empty */
             if (arrivee3 != CELL_EMPTY) {
                 return 0;
             }
 
-            // On déplace les pions
+            /* We move the pawns */
             if (apply) {
                 board_set_cell(board, toLine3, toColumn3, cell_opposite(me));
                 board_set_cell(board, toLine2, toColumn2, cell_opposite(me));
@@ -196,21 +196,21 @@ int move_line_three(Move move, Cell me, Board board, int apply) {
 }
 
 int move_lateral_two(Move move, Cell me, Board board, int apply) {
-    // On vérifie que la case de départ contient bien un pion de la bonne couleur
+    /* We check that the original cell contains a pawn of the right color */
     if (board_get_cell(board, move_get_from_line(move), move_get_from_column(move)) != me) {
         return 0;
     }
 
-    // On vérifie que la case d'arrivée est vide
+    /* We check that the destination cell is empty */
     if (board_get_cell(board, move_get_to_line(move), move_get_to_column(move)) != CELL_EMPTY) {
         return 0;
     }
 
-    // On vérifie que les cases intermédiaires sont bonnes
+    /* We check that the middle cells contain a pawn of the right color */
     Cell intermediare1 = board_get_cell(board, move_get_from_line(move), move_get_to_column(move));
     Cell intermediare2 = board_get_cell(board, move_get_to_line(move), move_get_from_column(move));
     if (intermediare1 == CELL_EMPTY && intermediare2 == me) {
-        // On déplace les pions (on les échange quoi)
+        /* We move the pawns (we exchange them) */
         if (apply) {
             board_set_cell(board, move_get_to_line(move), move_get_to_column(move), me);
             board_set_cell(board, move_get_from_line(move), move_get_from_column(move), CELL_EMPTY);
@@ -220,7 +220,7 @@ int move_lateral_two(Move move, Cell me, Board board, int apply) {
         return 1;
     }
     if (intermediare1 == me && intermediare2 == CELL_EMPTY) {
-        // On déplace les pions (on les échange quoi)
+        /* We move the pawns (we exchange them) */
         if (apply) {
             board_set_cell(board, move_get_to_line(move), move_get_to_column(move), me);
             board_set_cell(board, move_get_from_line(move), move_get_from_column(move), CELL_EMPTY);
@@ -234,31 +234,32 @@ int move_lateral_two(Move move, Cell me, Board board, int apply) {
 }
 
 int move_lateral_three(Move move, Cell me, Board board, int apply) {
-    // On vérifie que la case de départ contient bien un pion de la bonne couleur
+    /* We check that the original cell contains a pawn of the right color */
     if (board_get_cell(board, move_get_from_line(move), move_get_from_column(move)) != me) {
         return 0;
     }
 
-    // On vérifie que la case d'arrivée est vide
+    /* We check that the destination cell is empty */
     if (board_get_cell(board, move_get_to_line(move), move_get_to_column(move)) != CELL_EMPTY) {
         return 0;
     }
 
-    // On vérifie que les cases intermédiaires sont bonnes
+    /* We check that the middle cells contain a pawn of the right color */
     Cell intermediare1 = board_get_cell(board, move_get_from_line(move), move_get_to_column(move));
     Cell intermediare2 = board_get_cell(board, move_get_to_line(move), move_get_from_column(move));
     int dx = abs(move_get_to_column(move) - move_get_from_column(move));
     int dy = abs(move_get_to_line(move) - move_get_from_line(move));
 
     if (dy == 2 && intermediare1 == CELL_EMPTY && intermediare2 == me) {
-        // On check les pions du milieu (on sait qu'on a des pions alignés verticalement)
+        /* We check the middle cells (we know that we have pawns aligned vertically) */
         Cell milieu1 = board_get_cell(board, move_get_from_line(move) + sign(move_get_to_line(move) - move_get_from_line(move)), move_get_from_column(move));
         Cell milieu2 = board_get_cell(board, move_get_from_line(move) + sign(move_get_to_line(move) - move_get_from_line(move)), move_get_to_column(move));
         if (milieu1 != me || milieu2 != CELL_EMPTY) {
             return 0;
         }
 
-        // On déplace les pions (on les échange quoi)
+        /* We move the pawns (we exchange them) */
+        
         if (apply) {
             board_set_cell(board, move_get_to_line(move), move_get_to_column(move), me);
             board_set_cell(board, move_get_from_line(move), move_get_from_column(move), CELL_EMPTY);
@@ -270,14 +271,14 @@ int move_lateral_three(Move move, Cell me, Board board, int apply) {
         return 1;
     }
     if (dx == 2 && intermediare1 == me && intermediare2 == CELL_EMPTY) {
-        // On check les pions du milieu (on sait qu'on a des pions alignés horizontalement)
+        /* We check the middle cells (we know that we have pawns aligned vertically) */
         Cell milieu1 = board_get_cell(board, move_get_from_line(move), move_get_from_column(move) + sign(move_get_to_column(move) - move_get_from_column(move)));
         Cell milieu2 = board_get_cell(board, move_get_to_line(move), move_get_from_column(move) + sign(move_get_to_column(move) - move_get_from_column(move)));
         if (milieu1 != me || milieu2 != CELL_EMPTY) {
             return 0;
         }
 
-        // On déplace les pions (on les échange quoi)
+        /* We move the pawns (we exchange them) */
         if (apply) {
             board_set_cell(board, move_get_to_line(move), move_get_to_column(move), me);
             board_set_cell(board, move_get_from_line(move), move_get_from_column(move), CELL_EMPTY);
@@ -292,41 +293,41 @@ int move_lateral_three(Move move, Cell me, Board board, int apply) {
     return 0;
 }
 
-// Aiguillage
+/* Routing moves */
 
 int move_apply(Move move, Cell me, Board board, int apply) {
-    // Aguillage du déplacement selon sa catégorie
+    /* Routing moves according to its category */
     int dx = abs(move_get_to_column(move) - move_get_from_column(move));
     int dy = abs(move_get_to_line(move) - move_get_from_line(move));
 
     if ((dx == 0 && dy == 1) || (dx == 1 && dy == 0)) {
-        // Move 1 color
+        /* Move 1 color */
         return move_line_one(move, me, board, apply);
     }
     if ((dx == 0 && dy == 2) || (dx == 2 && dy == 0)) {
-        // Move 2 colors in a line
+        /* Move 2 colors in a line */
         return move_line_two(move, me, board, apply);
     }
     if ((dx == 0 && dy == 3) || (dx == 3 && dy == 0)) {
-        // Move 3 colors in a line
+        /* Move 3 colors in a line */
         return move_line_three(move, me, board, apply);
     }
     if (dx == 1 && dy == 1) {
-        // Move 2 colors laterally
+        /* Move 2 colors laterally */
         return move_lateral_two(move, me, board, apply);
     }
     if ((dx == 2 && dy == 1) || (dx == 1 && dy == 2)) {
-        // Move 3 colors laterally
+        /* Move 3 colors laterally */
         return move_lateral_three(move, me, board, apply);
     }
 
     return 0;
 }
 
-// Coups disponibles
+/* Available Move */
 
 void move_available(Cell me, Board board, Move array[MOVE_LIST_SIZE]) {
-    // Liste le nombre de déplacement possible
+    /* List all possible moves */
     int index = 0;
 
     for (int line = 0; line < BOARD_SIZE; line++) {
@@ -336,111 +337,111 @@ void move_available(Cell me, Board board, Move array[MOVE_LIST_SIZE]) {
                 continue;
             }
 
-            // déplacement pion solo
-            // on vérifie si la case a droite est libre
+            /* Single pawn move */
+            /* We check that the right cell is empty */
             if (col < BOARD_SIZE - 1 && move_line_one(move_create(line, col, line, col + 1), me, board, 0)) {
                 array[index] = move_create(line, col, line, col + 1);
                 index++;
             }
-            // on vérifie si la case en bas est libre
+            /* We check that the bottom cell is empty */
             if (line < BOARD_SIZE - 1 && move_line_one(move_create(line, col, line + 1, col), me, board, 0)) {
                 array[index] = move_create(line, col, line + 1, col);
                 index++;
             }
-            // on vérifie si la case en gauche est libre
+            /* We check that the left cell is empty */
             if (col > 0 && move_line_one(move_create(line, col, line, col - 1), me, board, 0)) {
                 array[index] = move_create(line, col, line, col - 1);
                 index++;
             }
-            // on vérifie si la case en haut est libre
+            /* We check that the top cell is empty */
             if (line > 0 && move_line_one(move_create(line, col, line - 1, col), me, board, 0)) {
                 array[index] = move_create(line, col, line - 1, col);
                 index++;
             }
 
-            // déplacement 2 pions
-            // en ligne
-            // on vérifie si le déplacement en ligne 2 pions vers la droite (libre ou pion ennemi)
+            /* Two pawns move */
+            /* Moving in line */
+            /* We check that the move is in line with 2 pawns to the right is possible (empty or enemy pawn) */
             if (col < BOARD_SIZE - 2 && move_line_two(move_create(line, col, line, col + 2), me, board, 0)) {
                 array[index] = move_create(line, col, line, col + 2);
                 index++;
             }
-            // on vérifie si le déplacement en ligne 2 pions vers le bas
+            /* We check that the move is in line with 2 pawns to the bottom is possible */
             if (line < BOARD_SIZE - 2 && move_line_two(move_create(line, col, line + 2, col), me, board, 0)) {
                 array[index] = move_create(line, col, line + 2, col);
                 index++;
             }
-            // on vérifie si le déplacement en ligne 2 pions vers la gauche
+            /* We check that the move is in line with 2 pawns to the left is possible */
             if (col > 0 && move_line_two(move_create(line, col + 1, line, col - 1), me, board, 0)) {
                 array[index] = move_create(line, col + 1, line, col - 1);
                 index++;
             }
-            // on vérifie si le déplacement en ligne 2 pions vers le haut
+            /* We check that the move is in line with 2 pawns to the top */
             if (line > 0 && move_line_two(move_create(line + 1, col, line - 1, col), me, board, 0)) {
                 array[index] = move_create(line + 1, col, line - 1, col);
                 index++;
             }
-            // latéralle
-            // on vérifie si le déplacement en ligne 2 pions horizontale vers le haut
+            /* lateral move */
+            /* We check that the move is in line with 2 pawns horizontal to the top */
             if (col < BOARD_SIZE - 1 && line > 0 && board_get_cell(board, line, col + 1) == me && move_lateral_two(move_create(line, col, line - 1, col + 1), me, board, 0)) {
                 array[index] = move_create(line, col, line - 1, col + 1);
                 index++;
             }
-            // on vérifie si le déplacement en ligne 2 pions horizontale vers le bas
+            /* We check that the move is in line with 2 pawns horizontal to the bottom */
             if (col < BOARD_SIZE - 1 && line < BOARD_SIZE - 1 && board_get_cell(board, line, col + 1) == me && move_lateral_two(move_create(line, col, line + 1, col + 1), me, board, 0)) {
                 array[index] = move_create(line, col, line + 1, col + 1);
                 index++;
             }
-            // on vérifie si le déplacement en ligne 2 pions verticale vers la gauche
+            /* We check that the move is in line with 2 pawns horizontal to the left */
             if (col > 0 && line < BOARD_SIZE - 1 && board_get_cell(board, line + 1, col) == me && move_lateral_two(move_create(line, col, line + 1, col - 1), me, board, 0)) {
                 array[index] = move_create(line, col, line + 1, col - 1);
                 index++;
             }
-            // on vérifie si le déplacement en ligne 2 pions verticale vers la droite
+            /* We check that the move is in line with 2 pawns vertical to the right */
             if (col < BOARD_SIZE - 1 && line < BOARD_SIZE - 1 && board_get_cell(board, line + 1, col) == me && move_lateral_two(move_create(line, col, line + 1, col + 1), me, board, 0)) {
                 array[index] = move_create(line, col, line + 1, col + 1);
                 index++;
             }
 
-            // déplacement 3 pions
-            // en ligne
-            // on vérifie si le déplacement en ligne 3 pions vers la droite (libre ou pion ennemi)
+            /* Three pawns move */
+            /* In line move */
+            /* We check that the move is in line with 3 pawns to the right (empty or enemy pawns) */
             if (col < BOARD_SIZE - 3 && move_line_three(move_create(line, col, line, col + 3), me, board, 0)) {
                 array[index] = move_create(line, col, line, col + 3);
                 index++;
             }
-            // on vérifie si le déplacement en ligne 3 pions vers le bas
+            /* We check that the move is in line with 3 pawns to the bottom */
             if (line < BOARD_SIZE - 3 && move_line_three(move_create(line, col, line + 3, col), me, board, 0)) {
                 array[index] = move_create(line, col, line + 3, col);
                 index++;
             }
-            // on vérifie si le déplacement en ligne 3 pions vers la gauche
+            /* We check that the move is in line with 3 pawns to the left */
             if (col > 0 && move_line_three(move_create(line, col + 2, line, col - 1), me, board, 0)) {
                 array[index] = move_create(line, col + 2, line, col - 1);
                 index++;
             }
-            // on vérifie si le déplacement en ligne 3 pions vers le haut
+            /* We check that the move is in line with 3 pawns to the top */
             if (line > 0 && move_line_three(move_create(line + 2, col, line - 1, col), me, board, 0)) {
                 array[index] = move_create(line + 2, col, line - 1, col);
                 index++;
             }
-            // latéralle
-            // on vérifie si le déplacement en ligne 3 pions horizontale vers le haut
+            /* lateral move */
+            /* We check that the move is in line with 3 pawns horizontal to the top */
             if (col < BOARD_SIZE - 2 && line > 0 && move_lateral_three(move_create(line, col, line - 1, col + 2), me, board, 0)) {
                 array[index] = move_create(line, col, line - 1, col + 2);
                 index++;
             }
-            // on vérifie si le déplacement en ligne 3 pions horizontale vers le bas
+            /* We check that the move is in line with 3 pawns horizontal to the bottom */
             if (col < BOARD_SIZE - 2 && line < BOARD_SIZE - 1 && move_lateral_three(move_create(line, col, line + 1, col + 2), me, board, 0)) {
                 array[index] = move_create(line, col, line + 1, col + 2);
                 index++;
             }
-            // on vérifie si le déplacement en ligne 3 pions verticale vers la gauche
+            /* We check that the move is in line with 3 pawns vertically to the left */
             if (col > 0 && line < BOARD_SIZE - 2 && move_lateral_three(move_create(line, col, line + 2, col - 1), me, board, 0)) {
                 array[index] = move_create(line, col, line + 2, col - 1);
                 index++;
             }
-            // on vérifie si le déplacement en ligne 3 pions verticale vers la droite
+            /* We check that the move is in line with 3 pawns vertical to the right */
             if (col < BOARD_SIZE - 1 && line < BOARD_SIZE - 2 && move_lateral_three(move_create(line, col, line + 2, col + 1), me, board, 0)) {
                 array[index] = move_create(line, col, line + 2, col + 1);
                 index++;
@@ -449,6 +450,5 @@ void move_available(Cell me, Board board, Move array[MOVE_LIST_SIZE]) {
     }
 
     /* End of array */
-    // printf("nombre de coup dispo : %i \n", index);
     array[index] = MOVE_NONE;
 }

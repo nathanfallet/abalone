@@ -3,13 +3,13 @@
 
 /**
  * \file state.h
- * \brief Statut de la partie
+ * \brief The state of the game
  */
 
 /**
- * \brief Statut de la partie
+ * \brief The state of the game
  * 
- * Il vaut soit STATE_PLAYING, soit STATE_WIN_BLACK, soit STATE_WIN_WHITE.
+ * Values taken: STATE_PLAYING, STATE_WIN_BLACK,  STATE_WIN_WHITE.
  */
 typedef char State;
 
