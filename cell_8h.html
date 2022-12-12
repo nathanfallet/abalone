@@ -74,7 +74,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Cellule de plateau.  
+<p>Board cell.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &quot;<a class="el" href="constants_8h_source.html">constants.h</a>&quot;</code><br />
 </div>
@@ -83,18 +83,18 @@ $(function() {
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
 <tr class="memitem:a53efbb3b59542e13799bdf1fd8607c44"><td class="memItemLeft" align="right" valign="top">typedef unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cell_8h.html#a53efbb3b59542e13799bdf1fd8607c44">Cell</a></td></tr>
-<tr class="memdesc:a53efbb3b59542e13799bdf1fd8607c44"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cellule de plateau.  <a href="cell_8h.html#a53efbb3b59542e13799bdf1fd8607c44">More...</a><br /></td></tr>
+<tr class="memdesc:a53efbb3b59542e13799bdf1fd8607c44"><td class="mdescLeft">&#160;</td><td class="mdescRight">Board cell.  <a href="cell_8h.html#a53efbb3b59542e13799bdf1fd8607c44">More...</a><br /></td></tr>
 <tr class="separator:a53efbb3b59542e13799bdf1fd8607c44"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:abe42a3aa76ef7f8e1ae66e7b290ed6ce"><td class="memItemLeft" align="right" valign="top"><a class="el" href="cell_8h.html#a53efbb3b59542e13799bdf1fd8607c44">Cell</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cell_8h.html#abe42a3aa76ef7f8e1ae66e7b290ed6ce">cell_opposite</a> (<a class="el" href="cell_8h.html#a53efbb3b59542e13799bdf1fd8607c44">Cell</a> cell)</td></tr>
-<tr class="memdesc:abe42a3aa76ef7f8e1ae66e7b290ed6ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vérifie si la cellule est occupée par un pion de couleur opposée.  <a href="cell_8h.html#abe42a3aa76ef7f8e1ae66e7b290ed6ce">More...</a><br /></td></tr>
+<tr class="memdesc:abe42a3aa76ef7f8e1ae66e7b290ed6ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if the cell is taken by an oponent pawn.  <a href="cell_8h.html#abe42a3aa76ef7f8e1ae66e7b290ed6ce">More...</a><br /></td></tr>
 <tr class="separator:abe42a3aa76ef7f8e1ae66e7b290ed6ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Cellule de plateau. </p>
-<p>Gestion des cellules de plateau. Une cellule représente aussi un joueur. </p>
+<div class="textblock"><p>Board cell. </p>
+<p>Board cells management. Cell also represent a player. </p>
 </div><h2 class="groupheader">Typedef Documentation</h2>
 <a id="a53efbb3b59542e13799bdf1fd8607c44"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a53efbb3b59542e13799bdf1fd8607c44">&#9670;&nbsp;</a></span>Cell</h2>
@@ -108,8 +108,8 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Cellule de plateau. </p>
-<p>Une cellule est soit vide, soit noire, soit blanche. Elle représente aussi un joueur. Elle vaut CELL_EMPTY, CELL_BLACK ou CELL_WHITE. </p>
+<p>Board cell. </p>
+<p>Cell is either empty, black or white. It also represent a player. It is worth CELL_EMPTY, CELL_BLACK or CELL_WHITE. </p>
 
 </div>
 </div>
@@ -130,14 +130,14 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Vérifie si la cellule est occupée par un pion de couleur opposée. </p>
+<p>Check if the cell is taken by an oponent pawn. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">cell</td><td>couleur ou état de la cellule (CELL_BLACK ou CELL_WHITE ou CELL_EMPTY) </td></tr>
+    <tr><td class="paramname">color</td><td>or state cell (CELL_BLACK or CELL_WHITE or CELL_EMPTY) </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>la couleur noir/blanc/vide </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>the color black/white/empty </dd></dl>
 
 </div>
 </div>

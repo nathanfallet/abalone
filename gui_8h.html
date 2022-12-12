@@ -73,7 +73,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Affichage graphique.  
+<p>Graphic display.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;stdlib.h&gt;</code><br />
 <code>#include &lt;stdio.h&gt;</code><br />
@@ -87,15 +87,15 @@ $(function() {
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a7584f77c92fad8a7d9fe5c6048f04887"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gui_8h.html#a7584f77c92fad8a7d9fe5c6048f04887">gui_init</a> (<a class="el" href="cell_8h.html#a53efbb3b59542e13799bdf1fd8607c44">Cell</a> owner, int ia_override, void(*refresh_opponent)(<a class="el" href="structGame.html">Game</a> *game, <a class="el" href="cell_8h.html#a53efbb3b59542e13799bdf1fd8607c44">Cell</a> me, <a class="el" href="state_8h.html#a923fb9080b37d642c98cbc0159c9fd0e">State</a> state), char address[<a class="el" href="constants_8h.html#a8beaa5b28cf9a48a1df357d25ec9704e">ADDRESS_LENGTH</a>], int port)</td></tr>
-<tr class="memdesc:a7584f77c92fad8a7d9fe5c6048f04887"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialise l'affichage GTK.  <a href="gui_8h.html#a7584f77c92fad8a7d9fe5c6048f04887">More...</a><br /></td></tr>
+<tr class="memdesc:a7584f77c92fad8a7d9fe5c6048f04887"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize GTK display.  <a href="gui_8h.html#a7584f77c92fad8a7d9fe5c6048f04887">More...</a><br /></td></tr>
 <tr class="separator:a7584f77c92fad8a7d9fe5c6048f04887"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0e467464710c3f9f6f0f89a5db7007a8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gui_8h.html#a0e467464710c3f9f6f0f89a5db7007a8">gui_update</a> (<a class="el" href="structGame.html">Game</a> *game, <a class="el" href="cell_8h.html#a53efbb3b59542e13799bdf1fd8607c44">Cell</a> me, <a class="el" href="state_8h.html#a923fb9080b37d642c98cbc0159c9fd0e">State</a> state)</td></tr>
-<tr class="memdesc:a0e467464710c3f9f6f0f89a5db7007a8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Actualise l'affichage dans GTK.  <a href="gui_8h.html#a0e467464710c3f9f6f0f89a5db7007a8">More...</a><br /></td></tr>
+<tr class="memdesc:a0e467464710c3f9f6f0f89a5db7007a8"><td class="mdescLeft">&#160;</td><td class="mdescRight">GTK Refesh GTK display.  <a href="gui_8h.html#a0e467464710c3f9f6f0f89a5db7007a8">More...</a><br /></td></tr>
 <tr class="separator:a0e467464710c3f9f6f0f89a5db7007a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Affichage graphique. </p>
-<p>Affichage graphique avec GTK. </p>
+<div class="textblock"><p>Graphic display. </p>
+<p>Graphic display whith GTK. </p>
 </div><h2 class="groupheader">Function Documentation</h2>
 <a id="a7584f77c92fad8a7d9fe5c6048f04887"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7584f77c92fad8a7d9fe5c6048f04887">&#9670;&nbsp;</a></span>gui_init()</h2>
@@ -141,12 +141,12 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Initialise l'affichage GTK. </p>
+<p>Initialize GTK display. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">owner</td><td>Le joueur qui créé la partie (CELL_BLACK ou CELL_WHITE) </td></tr>
-    <tr><td class="paramname">ia_override</td><td>Si l'IA doit jouer à la place du joueur </td></tr>
-    <tr><td class="paramname">refresh_opponent</td><td>Le callback pour actualiser l'adversaire </td></tr>
+    <tr><td class="paramname">owner</td><td>The palyer who must create thge game (CELL_BLACK or CELL_WHITE) </td></tr>
+    <tr><td class="paramname">ia_override</td><td>If the AI must play instead of player </td></tr>
+    <tr><td class="paramname">refresh_opponent</td><td>The callback to refresh opponent </td></tr>
   </table>
   </dd>
 </dl>
@@ -185,12 +185,12 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Actualise l'affichage dans GTK. </p>
+<p>GTK Refesh GTK display. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">game</td><td>La partie </td></tr>
-    <tr><td class="paramname">me</td><td>Le joueur </td></tr>
-    <tr><td class="paramname">state</td><td>L'état de la partie </td></tr>
+    <tr><td class="paramname">game</td><td>The game </td></tr>
+    <tr><td class="paramname">me</td><td>The player </td></tr>
+    <tr><td class="paramname">state</td><td>the state of game </td></tr>
   </table>
   </dd>
 </dl>

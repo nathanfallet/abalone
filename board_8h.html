@@ -74,7 +74,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Gestion d'un plateau.  
+<p>Board management.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &quot;<a class="el" href="constants_8h_source.html">constants.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="cell_8h_source.html">cell.h</a>&quot;</code><br />
@@ -85,30 +85,30 @@ $(function() {
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
 <tr class="memitem:abf0efda810e3e4bfc5686b70abe6bfb2"><td class="memItemLeft" align="right" valign="top">typedef unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="board_8h.html#abf0efda810e3e4bfc5686b70abe6bfb2">Board</a>[2]</td></tr>
-<tr class="memdesc:abf0efda810e3e4bfc5686b70abe6bfb2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Plateau de jeu.  <a href="board_8h.html#abf0efda810e3e4bfc5686b70abe6bfb2">More...</a><br /></td></tr>
+<tr class="memdesc:abf0efda810e3e4bfc5686b70abe6bfb2"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="structGame.html" title="Game structure.">Game</a> board.  <a href="board_8h.html#abf0efda810e3e4bfc5686b70abe6bfb2">More...</a><br /></td></tr>
 <tr class="separator:abf0efda810e3e4bfc5686b70abe6bfb2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a1b09fd139ef7dabc39cd96cd830f6edc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="board_8h.html#a1b09fd139ef7dabc39cd96cd830f6edc">board_create</a> (<a class="el" href="board_8h.html#abf0efda810e3e4bfc5686b70abe6bfb2">Board</a> board)</td></tr>
-<tr class="memdesc:a1b09fd139ef7dabc39cd96cd830f6edc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Crée un plateau par défaut.  <a href="board_8h.html#a1b09fd139ef7dabc39cd96cd830f6edc">More...</a><br /></td></tr>
+<tr class="memdesc:a1b09fd139ef7dabc39cd96cd830f6edc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a default board.  <a href="board_8h.html#a1b09fd139ef7dabc39cd96cd830f6edc">More...</a><br /></td></tr>
 <tr class="separator:a1b09fd139ef7dabc39cd96cd830f6edc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a21fb9902e439daa082b9951019b33693"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="board_8h.html#a21fb9902e439daa082b9951019b33693">board_clone</a> (<a class="el" href="board_8h.html#abf0efda810e3e4bfc5686b70abe6bfb2">Board</a> board, <a class="el" href="board_8h.html#abf0efda810e3e4bfc5686b70abe6bfb2">Board</a> target)</td></tr>
-<tr class="memdesc:a21fb9902e439daa082b9951019b33693"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clone un plateau.  <a href="board_8h.html#a21fb9902e439daa082b9951019b33693">More...</a><br /></td></tr>
+<tr class="memdesc:a21fb9902e439daa082b9951019b33693"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clone a board.  <a href="board_8h.html#a21fb9902e439daa082b9951019b33693">More...</a><br /></td></tr>
 <tr class="separator:a21fb9902e439daa082b9951019b33693"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3ff80887a4d89d2673e9101d297d3286"><td class="memItemLeft" align="right" valign="top"><a class="el" href="cell_8h.html#a53efbb3b59542e13799bdf1fd8607c44">Cell</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="board_8h.html#a3ff80887a4d89d2673e9101d297d3286">board_get_cell</a> (<a class="el" href="board_8h.html#abf0efda810e3e4bfc5686b70abe6bfb2">Board</a> board, int line, int column)</td></tr>
-<tr class="memdesc:a3ff80887a4d89d2673e9101d297d3286"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retourne la cellule à la position donnée.  <a href="board_8h.html#a3ff80887a4d89d2673e9101d297d3286">More...</a><br /></td></tr>
+<tr class="memdesc:a3ff80887a4d89d2673e9101d297d3286"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the cell of desired position.  <a href="board_8h.html#a3ff80887a4d89d2673e9101d297d3286">More...</a><br /></td></tr>
 <tr class="separator:a3ff80887a4d89d2673e9101d297d3286"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1ba08fe6590fb7e30f47ed18d5c25de2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="board_8h.html#a1ba08fe6590fb7e30f47ed18d5c25de2">board_set_cell</a> (<a class="el" href="board_8h.html#abf0efda810e3e4bfc5686b70abe6bfb2">Board</a> board, int line, int column, <a class="el" href="cell_8h.html#a53efbb3b59542e13799bdf1fd8607c44">Cell</a> cell)</td></tr>
-<tr class="memdesc:a1ba08fe6590fb7e30f47ed18d5c25de2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Modifie la cellule à la position donnée.  <a href="board_8h.html#a1ba08fe6590fb7e30f47ed18d5c25de2">More...</a><br /></td></tr>
+<tr class="memdesc:a1ba08fe6590fb7e30f47ed18d5c25de2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Modified the cell of desired position.  <a href="board_8h.html#a1ba08fe6590fb7e30f47ed18d5c25de2">More...</a><br /></td></tr>
 <tr class="separator:a1ba08fe6590fb7e30f47ed18d5c25de2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ada110c8050fb1fba66d0a75619d77c9e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="state_8h.html#a923fb9080b37d642c98cbc0159c9fd0e">State</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="board_8h.html#ada110c8050fb1fba66d0a75619d77c9e">board_state</a> (<a class="el" href="board_8h.html#abf0efda810e3e4bfc5686b70abe6bfb2">Board</a> board)</td></tr>
-<tr class="memdesc:ada110c8050fb1fba66d0a75619d77c9e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retourne l'état du plateau.  <a href="board_8h.html#ada110c8050fb1fba66d0a75619d77c9e">More...</a><br /></td></tr>
+<tr class="memdesc:ada110c8050fb1fba66d0a75619d77c9e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the board state.  <a href="board_8h.html#ada110c8050fb1fba66d0a75619d77c9e">More...</a><br /></td></tr>
 <tr class="separator:ada110c8050fb1fba66d0a75619d77c9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Gestion d'un plateau. </p>
-<p>Gestion d'un plateau de jeu via l'objet Board. </p>
+<div class="textblock"><p>Board management. </p>
+<p>Management of a game board via the Board object. </p>
 </div><h2 class="groupheader">Typedef Documentation</h2>
 <a id="abf0efda810e3e4bfc5686b70abe6bfb2"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#abf0efda810e3e4bfc5686b70abe6bfb2">&#9670;&nbsp;</a></span>Board</h2>
@@ -122,11 +122,11 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Plateau de jeu. </p>
-<p>Un plateau de jeu est un tableau de 2 entiers non signés.</p>
-<p>Le premier entier représente les pions noirs. Le second entier représente les pions blans.</p>
-<p>Chaque bit représente une cellule du plateau.</p>
-<p>0 = Cellule vide 1 = Cellule pleine </p>
+<p><a class="el" href="structGame.html" title="Game structure.">Game</a> board. </p>
+<p><a class="el" href="structGame.html" title="Game structure.">Game</a> board is a board of 2 unsigned intergres.</p>
+<p>The first integer represents the black pawns. The second integer represents the white pawns.</p>
+<p>Chaque bit représente une cellule du plateau. Each bit represents a board cell.</p>
+<p>0 = Empty cell 1 = full cell </p>
 
 </div>
 </div>
@@ -157,11 +157,11 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Clone un plateau. </p>
+<p>Clone a board. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">board</td><td>Le plateau à cloner </td></tr>
-    <tr><td class="paramname">target</td><td>Le plateau cible </td></tr>
+    <tr><td class="paramname">board</td><td>The board to clone </td></tr>
+    <tr><td class="paramname">target</td><td>The target board </td></tr>
   </table>
   </dd>
 </dl>
@@ -184,10 +184,10 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Crée un plateau par défaut. </p>
+<p>Create a default board. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">board</td><td>Le plateau à créer </td></tr>
+    <tr><td class="paramname">board</td><td>The board to create </td></tr>
   </table>
   </dd>
 </dl>
@@ -226,16 +226,16 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Retourne la cellule à la position donnée. </p>
+<p>Return the cell of desired position. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">board</td><td>Le plateau </td></tr>
-    <tr><td class="paramname">line</td><td>La ligne </td></tr>
-    <tr><td class="paramname">column</td><td>La colonne </td></tr>
+    <tr><td class="paramname">board</td><td>The board </td></tr>
+    <tr><td class="paramname">line</td><td>The line </td></tr>
+    <tr><td class="paramname">column</td><td>The column </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>La cellule </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The cell </dd></dl>
 
 </div>
 </div>
@@ -277,13 +277,13 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Modifie la cellule à la position donnée. </p>
+<p>Modified the cell of desired position. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">board</td><td>Le plateau </td></tr>
-    <tr><td class="paramname">line</td><td>La ligne </td></tr>
-    <tr><td class="paramname">column</td><td>La colonne </td></tr>
-    <tr><td class="paramname">cell</td><td>La cellule </td></tr>
+    <tr><td class="paramname">board</td><td>The board </td></tr>
+    <tr><td class="paramname">line</td><td>The line </td></tr>
+    <tr><td class="paramname">column</td><td>The column </td></tr>
+    <tr><td class="paramname">cell</td><td>The cell </td></tr>
   </table>
   </dd>
 </dl>
@@ -306,14 +306,14 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Retourne l'état du plateau. </p>
+<p>Return the board state. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">board</td><td>Le plateau </td></tr>
+    <tr><td class="paramname">board</td><td>The board </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>L'état du plateau </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The board state </dd></dl>
 
 </div>
 </div>
