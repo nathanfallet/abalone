@@ -1,9 +1,6 @@
 var searchData=
 [
-  ['weight_5fcenter_80',['WEIGHT_CENTER',['../constants_8h.html#a9ca1c49478b466bb3fba5c9a2c97e363',1,'constants.h']]],
-  ['weight_5fneighbour_81',['WEIGHT_NEIGHBOUR',['../constants_8h.html#a92a42ed6ebcd76a79c68750ba5093191',1,'constants.h']]],
-  ['weight_5fopposite_82',['WEIGHT_OPPOSITE',['../constants_8h.html#af2627a5556cc2d249662cecc9c34a98c',1,'constants.h']]],
-  ['weight_5fproximity_83',['WEIGHT_PROXIMITY',['../constants_8h.html#aed61705bbbae8d187a2159ffe18a1e50',1,'constants.h']]],
-  ['weight_5fwin_84',['WEIGHT_WIN',['../constants_8h.html#ab5d35a30ec6ebb33819b3bc2257dbbe3',1,'constants.h']]],
-  ['weight_5fwin_5fdirect_85',['WEIGHT_WIN_DIRECT',['../constants_8h.html#a789c90d10eec95f24d8324db2853ede9',1,'constants.h']]]
+  ['terminal_2eh_78',['terminal.h',['../terminal_8h.html',1,'']]],
+  ['terminal_5finit_79',['terminal_init',['../terminal_8h.html#a498ffc0845fea56aa3ae906aa7309b12',1,'terminal.c']]],
+  ['terminal_5fupdate_80',['terminal_update',['../terminal_8h.html#a4b7ebb96c84de3a2eb907b0fde59138d',1,'terminal.c']]]
 ];

@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['fdclient_21',['fdclient',['../structGame.html#a5b0b03c4f6407a2f1c22a86b17255f40',1,'Game']]],
-  ['fdsocket_22',['fdsocket',['../structGame.html#a5a5459df0f0132f46c5c58d769902de7',1,'Game']]]
+  ['deepness_21',['DEEPNESS',['../constants_8h.html#ab4de6a271947e7899963fa099a9b106d',1,'constants.h']]]
 ];

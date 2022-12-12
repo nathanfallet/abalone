@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['ia_5fminimax_109',['ia_minimax',['../ia_8h.html#a78e55f6e0f85d690aad4906c290c24ea',1,'ia.c']]],
-  ['ia_5fupdate_110',['ia_update',['../ia_8h.html#ab7ae547153183fd30b75a0df4eaed715',1,'ia.c']]]
+  ['ia_5fminimax_110',['ia_minimax',['../ia_8h.html#a05360c3888d6891873f5a7615b8c9daa',1,'ia.c']]],
+  ['ia_5fupdate_111',['ia_update',['../ia_8h.html#ab7ae547153183fd30b75a0df4eaed715',1,'ia.c']]]
 ];

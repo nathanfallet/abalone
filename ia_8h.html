@@ -88,16 +88,16 @@ Functions</h2></td></tr>
 <tr class="memitem:ab7ae547153183fd30b75a0df4eaed715"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ia_8h.html#ab7ae547153183fd30b75a0df4eaed715">ia_update</a> (<a class="el" href="structGame.html">Game</a> *game, <a class="el" href="cell_8h.html#a53efbb3b59542e13799bdf1fd8607c44">Cell</a> me, <a class="el" href="state_8h.html#a923fb9080b37d642c98cbc0159c9fd0e">State</a> state)</td></tr>
 <tr class="memdesc:ab7ae547153183fd30b75a0df4eaed715"><td class="mdescLeft">&#160;</td><td class="mdescRight">Execute the next game round of IA.  <a href="ia_8h.html#ab7ae547153183fd30b75a0df4eaed715">More...</a><br /></td></tr>
 <tr class="separator:ab7ae547153183fd30b75a0df4eaed715"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a78e55f6e0f85d690aad4906c290c24ea"><td class="memItemLeft" align="right" valign="top"><a class="el" href="move_8h.html#ab9f77aa389af7f0da89bdcb6ae41a897">Move</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ia_8h.html#a78e55f6e0f85d690aad4906c290c24ea">ia_minimax</a> (<a class="el" href="cell_8h.html#a53efbb3b59542e13799bdf1fd8607c44">Cell</a> me, <a class="el" href="board_8h.html#abf0efda810e3e4bfc5686b70abe6bfb2">Board</a> board, int profondeur)</td></tr>
-<tr class="memdesc:a78e55f6e0f85d690aad4906c290c24ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the best Move for the IA.  <a href="ia_8h.html#a78e55f6e0f85d690aad4906c290c24ea">More...</a><br /></td></tr>
-<tr class="separator:a78e55f6e0f85d690aad4906c290c24ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a05360c3888d6891873f5a7615b8c9daa"><td class="memItemLeft" align="right" valign="top"><a class="el" href="move_8h.html#ab9f77aa389af7f0da89bdcb6ae41a897">Move</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ia_8h.html#a05360c3888d6891873f5a7615b8c9daa">ia_minimax</a> (<a class="el" href="cell_8h.html#a53efbb3b59542e13799bdf1fd8607c44">Cell</a> me, <a class="el" href="board_8h.html#abf0efda810e3e4bfc5686b70abe6bfb2">Board</a> board, int deepness)</td></tr>
+<tr class="memdesc:a05360c3888d6891873f5a7615b8c9daa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the best Move for the IA.  <a href="ia_8h.html#a05360c3888d6891873f5a7615b8c9daa">More...</a><br /></td></tr>
+<tr class="separator:a05360c3888d6891873f5a7615b8c9daa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>IA management. </p>
 <p>IA management and his reflection. </p>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="a78e55f6e0f85d690aad4906c290c24ea"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a78e55f6e0f85d690aad4906c290c24ea">&#9670;&nbsp;</a></span>ia_minimax()</h2>
+<a id="a05360c3888d6891873f5a7615b8c9daa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a05360c3888d6891873f5a7615b8c9daa">&#9670;&nbsp;</a></span>ia_minimax()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -118,7 +118,7 @@ Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>profondeur</em>&#160;</td>
+          <td class="paramname"><em>deepness</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -133,7 +133,7 @@ Functions</h2></td></tr>
   <table class="params">
     <tr><td class="paramname">me</td><td>The player </td></tr>
     <tr><td class="paramname">board</td><td>The board </td></tr>
-    <tr><td class="paramname">profondeur</td><td>The deep of the tree </td></tr>
+    <tr><td class="paramname">deepness</td><td>The deepness of the tree </td></tr>
   </table>
   </dd>
 </dl>
