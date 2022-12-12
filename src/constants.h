@@ -87,6 +87,13 @@
 #define PAWN_TOT 14
 
 /**
+ * \brief Deepness of IA
+ */
+#ifndef DEEPNESS
+#define DEEPNESS 4
+#endif
+
+/**
  * \brief Initialization constant (none)
  */
 #define INIT_NONE -1

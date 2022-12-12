@@ -26,9 +26,9 @@ void ia_update(Game *game, Cell me, State state);
  * \brief Return the best Move for the IA
  * \param me The player
  * \param board The board
- * \param profondeur The deep of the tree
+ * \param deepness The deepness of the tree
  * \return The best Move
  */
-Move ia_minimax(Cell me, Board board, int profondeur);
+Move ia_minimax(Cell me, Board board, int deepness);
 
 #endif

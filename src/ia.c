@@ -8,7 +8,7 @@
 
 /* Minimax algorithm. It returns a decision (move) and takes the player who plays and the actual board into account */
 
-ScoredMove ia_minimax_compare(Cell me, Board board, Move root, int profondeur, int max, int threshold) {
+ScoredMove ia_minimax_compare(Cell me, Board board, Move root, int deepness, int max, int threshold) {
     /* Recovering available Move */
     Move moves[MOVE_LIST_SIZE];
     move_available(max ? me : cell_opposite(me), board, moves);
@@ -43,13 +43,13 @@ ScoredMove ia_minimax_compare(Cell me, Board board, Move root, int profondeur, i
                 return sc;
             }
         }
-        else if (profondeur > 1) {
+        else if (deepness > 1) {
             /* We go deeper */
             int child_threshold = max ? INT_MIN : INT_MAX;
             if (move_selected != MOVE_NONE) {
                 child_threshold = scored_move_score(move_selected);
             }
-            sc = ia_minimax_compare(me, copy, move, profondeur - 1, max == 0, child_threshold);
+            sc = ia_minimax_compare(me, copy, move, deepness - 1, max == 0, child_threshold);
             if (root != MOVE_NONE) {
                 sc = scored_move_new(
                     scored_move_move(sc),
@@ -91,15 +91,15 @@ void ia_update(Game *game, Cell me, State state) {
 
     /* If it's my turn : */
     if (game->playing == me) {
-        Move move = ia_minimax(me, game->board, 4);
+        Move move = ia_minimax(me, game->board, DEEPNESS);
         game_turn(game, move);
     }
 }
 
-Move ia_minimax(Cell me, Board board, int profondeur) {
+Move ia_minimax(Cell me, Board board, int deepness) {
     /* Get a move */
     time_t start = time(NULL);
-    ScoredMove move = ia_minimax_compare(me, board, MOVE_NONE, profondeur, 1, INT_MAX);
+    ScoredMove move = ia_minimax_compare(me, board, MOVE_NONE, deepness, 1, INT_MAX);
     time_t end = time(NULL);
 
     /* Sleep if we responded too quickly */
