@@ -69,6 +69,7 @@ $(function() {
 <div class="textblock"><h1><a class="anchor" id="autotoc_md17"></a>
 Démarrage de la partie</h1>
 <p>Au démarrage de la partie, le serveur et le client se connectent au moyen d'un socket en TCP.</p>
+<p>On utilise par défaut le port <code>6969</code>, sauf si un port est précisé en ligne de commande (via l'option <code>-s PORT</code>).</p>
 <blockquote class="doxtable">
 <p>⚠️ On garde le même socket ouvert tout le long de la partie, il n'est pas nécessaire d'en créer un nouveau (surtout qu'une coupure de connexion pourrait casser la partie) </p>
 </blockquote>
