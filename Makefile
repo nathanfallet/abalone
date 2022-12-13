@@ -31,8 +31,8 @@ INC_FLAGS := $(addprefix -I,$(INC_DIRS))
 CPPFLAGS := $(INC_FLAGS) -MMD -MP
 
 # Default task (Test and compile)
-all: clean tests $(TARGET_EXEC)
-nogui: clean tests $(TARGET_EXEC)_nogui
+all: clean tests coverage $(TARGET_EXEC) doc
+nogui: clean tests coverage $(TARGET_EXEC)_nogui doc
 
 # The final build step
 $(TARGET_EXEC): $(OBJS)
@@ -58,11 +58,17 @@ $(BUILD_DIR)/%.c.o: %.c
 coverage: tests
 	gcov -pb $(OBJS)
 
+# Generate documentation
+doc:
+	doxygen Doxyfile
+
+# Clean up
 .PHONY: clean
 clean:
 	-rm abalone
 	-rm abalone_tests
-	-rm -r $(BUILD_DIR)
+	-rm -rf $(BUILD_DIR)
+	-rm -rf html
 	-rm *.gcov
 
 # Include the .d makefiles. The - at the front suppresses the errors of missing
