@@ -84,7 +84,7 @@ int scored_move_compute(Cell me, Board board) {
                     distance = 0;
                     // checks if 3 pawns are aligned vertically
                     if (board_get_cell(board, i + 2, j) == me) {
-                        score += 2 * WEIGHT_NEIGHBOUR;
+                        score += WEIGHT_NEIGHBOUR;
                         // checks up on the same column if there's an opponent
                         for (int k = i + 2; k < BOARD_SIZE; k++) {
                             // counts the number of opponents' pawns on the same column
@@ -115,7 +115,7 @@ int scored_move_compute(Cell me, Board board) {
                         }
                         // checks if it's possible to push the opponents' pawns on the column
                         if (count <= 2) {
-                            score += 3 * WEIGHT_OPPOSITE;
+                            score += 3 * WEIGHT_OPPOSITE / (distance + 1);
                         }
                         count = 0;
                         distance = 0;
@@ -166,7 +166,7 @@ int scored_move_compute(Cell me, Board board) {
                     distance = 0;
                     // checks if 3 of our pawns are aligned horizontally
                     if (board_get_cell(board, i, j + 2) == me) {
-                        score += 2 * WEIGHT_NEIGHBOUR;
+                        score += WEIGHT_NEIGHBOUR;
                         // looks to the right if opponents' pawns are on the same line as ours
                         for (int k = j + 2; k < BOARD_SIZE; k++) {
                             // counts the number of opponents' pawns on the same line
