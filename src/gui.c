@@ -57,6 +57,13 @@ void play_sound(char *path) {
     system(command);
 }
 
+gboolean easter_egg(GtkWidget *widget, GdkEventButton *event, gpointer user_data) {
+    if (event->type == GDK_DOUBLE_BUTTON_PRESS) {
+        gtk_show_uri(NULL, "https://www.youtube.com/watch?v=dQw4w9WgXcQ", GDK_CURRENT_TIME, NULL);
+    }
+    return TRUE;
+}
+
 void *gui_game_start(void *game) {
     game_start((Game *) game);
     return NULL;
@@ -303,11 +310,20 @@ void gui_init_window() {
     gtk_widget_set_valign(image2, GTK_ALIGN_CENTER);
     gtk_widget_set_halign(image3, GTK_ALIGN_CENTER);
     gtk_widget_set_valign(image3, GTK_ALIGN_CENTER);
+    GtkWidget *image_box = gtk_event_box_new();
+    GtkWidget *image_box2 = gtk_event_box_new();
+    GtkWidget *image_box3 = gtk_event_box_new();
+    gtk_container_add(GTK_CONTAINER(image_box), image);
+    gtk_container_add(GTK_CONTAINER(image_box2), image2);
+    gtk_container_add(GTK_CONTAINER(image_box3), image3);
+    g_signal_connect(G_OBJECT(image_box), "button_press_event", G_CALLBACK(easter_egg), NULL);
+    g_signal_connect(G_OBJECT(image_box2), "button_press_event", G_CALLBACK(easter_egg), NULL);
+    g_signal_connect(G_OBJECT(image_box3), "button_press_event", G_CALLBACK(easter_egg), NULL);
 
     // Colonne, ligne, largeur, hauteur
-    gtk_grid_attach(GTK_GRID(container), image, 0, 0, 14, 1);
-    gtk_grid_attach(GTK_GRID(container), image2, 0, 1, 1, 14);
-    gtk_grid_attach(GTK_GRID(container), image3, 13, 1, 1, 14);
+    gtk_grid_attach(GTK_GRID(container), image_box, 0, 0, 14, 1);
+    gtk_grid_attach(GTK_GRID(container), image_box2, 0, 1, 1, 14);
+    gtk_grid_attach(GTK_GRID(container), image_box3, 13, 1, 1, 14);
     gtk_grid_attach(GTK_GRID(container), header, 0, 1, 14, 1);
     gtk_grid_attach(GTK_GRID(container), event_box, 1, 2, 12, 12);
     gtk_grid_attach(GTK_GRID(container), footer, 1, 14, 12, 1);
