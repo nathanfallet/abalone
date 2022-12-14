@@ -61,7 +61,7 @@ int scored_move_compute(Cell me, Board board) {
                                 count += 1;
                                 /* Save the distance to the first opponents' pawn */
                                 if (distance == 0) {
-                                    distance = dk * k;
+                                    distance = k;
                                 }
                             }
                         }
