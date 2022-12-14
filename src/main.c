@@ -48,12 +48,10 @@ int main(int argc, char *argv[]) {
         case 'l':
             if (strcmp(argv[i + 1], "noir") == 0) {
                 init = INIT_DEFAULT;
-            }
-            else if (strcmp(argv[i + 1], "blanc") == 0) {
+            } else if (strcmp(argv[i + 1], "blanc") == 0) {
                 init = INIT_DEFAULT;
                 me = CELL_WHITE;
-            }
-            else {
+            } else {
                 print_help();
                 return 1;
             }
@@ -71,11 +69,9 @@ int main(int argc, char *argv[]) {
         case 'm':
             if (strcmp(argv[i + 1], "me") == 0) {
                 ia_override = 0;
-            }
-            else if (strcmp(argv[i + 1], "ia") == 0) {
+            } else if (strcmp(argv[i + 1], "ia") == 0) {
                 ia_override = 1;
-            }
-            else {
+            } else {
                 print_help();
                 return 1;
             }

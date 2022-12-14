@@ -140,8 +140,7 @@ gboolean gui_click_callback(GtkWidget *widget, GdkEventButton *event, gpointer u
         gtk_entry_set_text(GTK_ENTRY(entry), move_to_string(gui_last_move));
         gui_button_callback();
         has_clicked = 0;
-    }
-    else {
+    } else {
         i1 = i;
         j1 = j;
         gtk_entry_set_text(GTK_ENTRY(entry), chars_to_string('A' + i1, '1' + j1));

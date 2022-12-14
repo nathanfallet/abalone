@@ -68,8 +68,7 @@ void *terminal_background_turn() {
     if (terminal_last_game->ia_override) {
         // Ask IA
         ia_update(terminal_last_game, terminal_last_me, terminal_last_state);
-    }
-    else {
+    } else {
         // Ask player
         Move move = MOVE_NONE;
         do {

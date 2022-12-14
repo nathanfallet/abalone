@@ -19,196 +19,75 @@ int scored_move_score(ScoredMove scored_move) {
 
 int scored_move_compute(Cell me, Board board) {
     int score = 0;
-    int pawn_me = 0;
-    int pawn_opponent = 0;
+    int pawns = 0;
 
+    /* Iterate board */
     for (int i = 0; i < BOARD_SIZE; i++) {
         for (int j = 0; j < BOARD_SIZE; j++) {
+            /* Get current cell, and check things on it */
             Cell current = board_get_cell(board, i, j);
-            int distance = 0;
-            int count = 0;
-            //position of a point compared to the center
-            if (current == me)
-                score += WEIGHT_CENTER * (20 - abs(4 - i) - abs(4 - j) - abs(3 - i) - abs(3 - j));
-            if (current == cell_opposite(me))
-                score -= 2 * WEIGHT_CENTER * (20 - abs(4 - i) - abs(4 - j) - abs(3 - i) - abs(3 - j));
-            // Count the number of pawns
-            if (current == me)
-                pawn_me += 1;
-            if (current == cell_opposite(me))
-                pawn_opponent += 1;
-            // Looks the proximity to other pawns
-            if (current == me) {
-                // checks if 2 pawns are aligned vertically
-                if (board_get_cell(board, i + 1, j) == me) {
-                    score += WEIGHT_NEIGHBOUR;
-                    // checks down on the same column if there's an opponent
-                    for (int k = i + 1; k < BOARD_SIZE; k++) {
-                        // counts the number of opponents' pawns on the same column
-                        if (board_get_cell(board, i + k, j) == cell_opposite(me)) {
-                            count += 1;
-                            // saves the distance to the first opponents' pawn
-                            if (distance == 0) {
-                                distance = k;
-                            }
-                        }
-                    }
-                    // checks if it's possible to push the opponents' pawns on the column
-                    if (count == 1) {
-                        score += 3 * WEIGHT_OPPOSITE / (distance + 1);
-                    }
-                    else {
-                        score -= WEIGHT_OPPOSITE - distance;
-                    }
-                    count = 0;
-                    distance = 0;
-                    // checks down on the same column if there's an opponent
-                    for (int k = i; k > 0; k--) {
-                        // counts the number of opponents' pawns on the same column
-                        if (board_get_cell(board, i + k, j) == cell_opposite(me)) {
-                            count += 1;
-                            // saves the distance to the first opponents' pawn
-                            if (distance == 0) {
-                                distance = k;
-                            }
-                        }
-                    }
-                    // checks if it's possible to push the opponents' pawns on the column
-                    if (count == 1) {
-                        score += 3 * WEIGHT_OPPOSITE / (distance + 1);
-                    }
-                    else {
-                        score -= WEIGHT_OPPOSITE - distance;
-                    }
-                    count = 0;
-                    distance = 0;
-                    // checks if 3 pawns are aligned vertically
-                    if (board_get_cell(board, i + 2, j) == me) {
-                        score += WEIGHT_NEIGHBOUR;
-                        // checks up on the same column if there's an opponent
-                        for (int k = i + 2; k < BOARD_SIZE; k++) {
-                            // counts the number of opponents' pawns on the same column
-                            if (board_get_cell(board, i + k, j) == cell_opposite(me)) {
+            if (current == CELL_EMPTY) {
+                /* Skip in case of empty cell */
+                continue;
+            }
+
+            /* Checks */
+            int sign = current == me ? 1 : -1;
+
+            /* Count the number of pawns */
+            pawns += sign;
+
+            /* Position of a point compared to the center */
+            score += sign * WEIGHT_CENTER * (20 - abs(4 - i) - abs(4 - j) - abs(3 - i) - abs(3 - j));
+
+            /* Looks the proximity to other pawns */
+            for (int dir = 0; dir < 2; dir++) {
+                int di = dir == 0 ? 1 : 0;
+                int dj = dir == 1 ? 1 : 0;
+
+                /* Checks if d pawns are aligned */
+                int d = 1;
+                while (d < 3 && board_get_cell(board, i + d * di, j + d * dj) == current) {
+                    score += sign * WEIGHT_NEIGHBOUR;
+                    for (int kdir = 0; kdir < 2; kdir++) {
+                        int dk = kdir == 0 ? +1 : -1;
+                        int count = 0;
+                        int distance = 0;
+
+                        /* Checks down on the same line/column if there's an opponent */
+                        for (int k = d; k < BOARD_SIZE; k++) {
+                            /* Counts the number of opponents' pawns on the same line/column */
+                            if (board_get_cell(board, i + k * dk * di, j + k * dk * dj) == cell_opposite(current)) {
                                 count += 1;
-                                // saves the distance to the first opponents' pawn
+                                /* Save the distance to the first opponents' pawn */
                                 if (distance == 0) {
-                                    distance = k;
+                                    distance = dk * k;
                                 }
                             }
                         }
-                        // checks if it's possible to push the opponents' pawns on the column
-                        if (count <= 2) {
-                            score += 3 * WEIGHT_OPPOSITE / (distance + 1);
-                        }
-                        count = 0;
-                        distance = 0;
-                        // checks up if opponents' pawns are on the same column as ours
-                        for (int k = i - 2; k > 0; k--) {
-                            // counts the number of opponents' pawns on the same column
-                            if (board_get_cell(board, i + k, j) == cell_opposite(me)) {
-                                count += 1;
-                                // saves the distance to the first opponents' pawn
-                                if (distance == 0) {
-                                    distance = k;
-                                }
+
+                        /* Checks if it's possible to push the opponents' pawns */
+                        if (d == 1) {
+                            if (count == 1) {
+                                score += sign * 3 * WEIGHT_OPPOSITE / (distance + 1);
+                            } else {
+                                score -= sign * (WEIGHT_OPPOSITE - distance);
                             }
-                        }
-                        // checks if it's possible to push the opponents' pawns on the column
-                        if (count <= 2) {
-                            score += 3 * WEIGHT_OPPOSITE / (distance + 1);
-                        }
-                        count = 0;
-                        distance = 0;
-                    }
-                }
-                // checks if 2 of our pawns are aligned horizontally
-                if (board_get_cell(board, i, j + 1) == me) {
-                    score += WEIGHT_NEIGHBOUR;
-                    // looks to the right if opponents' pawns are on the same line as ours
-                    for (int k = j; k < BOARD_SIZE; k++) {
-                        // counts the number of opponents' pawns on the same line
-                        if (board_get_cell(board, i, j + k) == cell_opposite(me)) {
-                            count += 1;
-                            // saves the distance to the first opponents' pawn
-                            if (distance == 0) {
-                                distance = k;
+                        } else {
+                            if (count <= 2) {
+                                score += sign * 3 * WEIGHT_OPPOSITE / (distance + 1);
                             }
                         }
                     }
-                    // checks if it's possible to push the opponents' pawns on the line
-                    if (count == 1) {
-                        score += 3 * WEIGHT_OPPOSITE / (distance + 1);
-                    }
-                    else {
-                        score -= WEIGHT_OPPOSITE - distance;
-                    }
-                    count = 0;
-                    distance = 0;
-                    /// looks to the left if opponents' pawns are on the same line as ours
-                    for (int k = j; k > 0; k--) {
-                        // counts the number of opponents' pawns on the same line
-                        if (board_get_cell(board, i, j + k) == cell_opposite(me)) {
-                            count += 1;
-                            // saves the distance to the first opponents' pawn
-                            if (distance == 0) {
-                                distance = k;
-                            }
-                        }
-                    }
-                    // checks if it's possible to push the opponents' pawns on the line
-                    if (count == 1) {// counts the number of opponents' pawns on the same column
-                        score += 3 * WEIGHT_OPPOSITE / (distance + 1);
-                    }
-                    else {
-                        score -= WEIGHT_OPPOSITE - distance;
-                    }
-                    count = 0;
-                    distance = 0;
-                    // checks if 3 of our pawns are aligned horizontally
-                    if (board_get_cell(board, i, j + 2) == me) {
-                        score += WEIGHT_NEIGHBOUR;
-                        // looks to the right if opponents' pawns are on the same line as ours
-                        for (int k = j + 2; k < BOARD_SIZE; k++) {
-                            // counts the number of opponents' pawns on the same line
-                            if (board_get_cell(board, i, j + k) == cell_opposite(me)) {
-                                count += 1;
-                                // saves the distance to the first opponents' pawn
-                                if (distance == 0) {
-                                    distance = k;
-                                }
-                            }
-                        }
-                        // checks if it's possible to push the opponents' pawns on the line
-                        if (count <= 2) {
-                            score += 3 * WEIGHT_OPPOSITE / (distance + 1);
-                        }
-                        count = 0;
-                        distance = 0;
-                        // looks to the left if opponents' pawns are on the same line as ours
-                        for (int k = j - 2; k > 0; k--) {
-                            // counts the number of opponents' pawns on the same line
-                            if (board_get_cell(board, i, j + k) == cell_opposite(me)) {
-                                count += 1;
-                                // saves the distance to the first opponents' pawn
-                                if (distance == 0) {
-                                    distance = k;
-                                }
-                            }
-                        }
-                        // checks if it's possible to push the opponents' pawns on the line
-                        if (count <= 2) {
-                            score += 3 * WEIGHT_OPPOSITE / (distance + 1);
-                        }
-                    }
+                    d++;
                 }
             }
         }
     }
 
-    if (pawn_me < PAWN_TOT) {
+    if (pawns < 0) {
         score -= WEIGHT_WIN;
-    }
-    if (pawn_opponent < PAWN_TOT) {
+    } else if (pawns > 0) {
         score += WEIGHT_WIN;
     }
 

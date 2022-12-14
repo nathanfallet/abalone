@@ -42,8 +42,7 @@ ScoredMove ia_minimax_compare(Cell me, Board board, Move root, int deepness, int
             if (winner == (max ? me : cell_opposite(me))) {
                 return sc;
             }
-        }
-        else if (deepness > 1) {
+        } else if (deepness > 1) {
             /* We go deeper */
             int child_threshold = max ? INT_MIN : INT_MAX;
             if (move_selected != MOVE_NONE) {
@@ -56,8 +55,7 @@ ScoredMove ia_minimax_compare(Cell me, Board board, Move root, int deepness, int
                     root,
                     scored_move_score(sc));
             }
-        }
-        else {
+        } else {
             /* We have reached maximum deep, we compute the score */
             sc = scored_move_new(
                 move,

@@ -47,8 +47,7 @@ void network_connect(Game *game) {
             printf("Could not accept client on socket: %s\n", strerror(errno));
             exit(1);
         }
-    }
-    else {
+    } else {
         // We are the client
         game->fdclient = socket(AF_INET, SOCK_STREAM, 0);
         if (game->fdclient == -1) {

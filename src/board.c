@@ -37,8 +37,7 @@ void board_set_cell(Board board, int line, int column, Cell cell) {
     /* Apply correct cell */
     if (cell == CELL_BLACK) {
         board[0] |= 1UL << (line * 8 + column);
-    }
-    else if (cell == CELL_WHITE) {
+    } else if (cell == CELL_WHITE) {
         board[1] |= 1UL << (line * 8 + column);
     }
 }
