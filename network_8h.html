@@ -73,7 +73,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Gestion du réseau.  
+<p>Network management.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &quot;<a class="el" href="game_8h_source.html">game.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="cell_8h_source.html">cell.h</a>&quot;</code><br />
@@ -84,15 +84,15 @@ $(function() {
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:ac2aae596e4555665715ef6dbf76b52a9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="network_8h.html#ac2aae596e4555665715ef6dbf76b52a9">network_init</a> (<a class="el" href="cell_8h.html#a53efbb3b59542e13799bdf1fd8607c44">Cell</a> owner, int ia_override, void(*init)(<a class="el" href="cell_8h.html#a53efbb3b59542e13799bdf1fd8607c44">Cell</a> owner, int ia_override, void(*refresh_opponent)(<a class="el" href="structGame.html">Game</a> *game, <a class="el" href="cell_8h.html#a53efbb3b59542e13799bdf1fd8607c44">Cell</a> me, <a class="el" href="state_8h.html#a923fb9080b37d642c98cbc0159c9fd0e">State</a> state), char address[<a class="el" href="constants_8h.html#a8beaa5b28cf9a48a1df357d25ec9704e">ADDRESS_LENGTH</a>], int port), char address[<a class="el" href="constants_8h.html#a8beaa5b28cf9a48a1df357d25ec9704e">ADDRESS_LENGTH</a>], int port)</td></tr>
-<tr class="memdesc:ac2aae596e4555665715ef6dbf76b52a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialise la connexion réseau.  <a href="network_8h.html#ac2aae596e4555665715ef6dbf76b52a9">More...</a><br /></td></tr>
+<tr class="memdesc:ac2aae596e4555665715ef6dbf76b52a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize game in network mode.  <a href="network_8h.html#ac2aae596e4555665715ef6dbf76b52a9">More...</a><br /></td></tr>
 <tr class="separator:ac2aae596e4555665715ef6dbf76b52a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae820e5359e94527c9ce5128062981d9b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="network_8h.html#ae820e5359e94527c9ce5128062981d9b">network_update</a> (<a class="el" href="structGame.html">Game</a> *game, <a class="el" href="cell_8h.html#a53efbb3b59542e13799bdf1fd8607c44">Cell</a> me, <a class="el" href="state_8h.html#a923fb9080b37d642c98cbc0159c9fd0e">State</a> state)</td></tr>
-<tr class="memdesc:ae820e5359e94527c9ce5128062981d9b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exécute le prochain tour de jeu de la connexion réseau.  <a href="network_8h.html#ae820e5359e94527c9ce5128062981d9b">More...</a><br /></td></tr>
+<tr class="memdesc:ae820e5359e94527c9ce5128062981d9b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Execute the next turn of the network game Exécute le prochain tour de jeu de la connexion réseau.  <a href="network_8h.html#ae820e5359e94527c9ce5128062981d9b">More...</a><br /></td></tr>
 <tr class="separator:ae820e5359e94527c9ce5128062981d9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Gestion du réseau. </p>
-<p>Gestion du réseau, et de la communication client/serveur. </p>
+<div class="textblock"><p>Network management. </p>
+<p>Network management and comunication server/client </p>
 </div><h2 class="groupheader">Function Documentation</h2>
 <a id="ac2aae596e4555665715ef6dbf76b52a9"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac2aae596e4555665715ef6dbf76b52a9">&#9670;&nbsp;</a></span>network_init()</h2>
@@ -138,14 +138,14 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Initialise la connexion réseau. </p>
+<p>Initialize game in network mode. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">owner</td><td>La cellule du joueur </td></tr>
-    <tr><td class="paramname">ia_override</td><td>Si l'IA doit être désactivée </td></tr>
-    <tr><td class="paramname">init</td><td>La fonction d'initialisation </td></tr>
-    <tr><td class="paramname">address</td><td>L'adresse du serveur </td></tr>
-    <tr><td class="paramname">port</td><td>Le port du serveur </td></tr>
+    <tr><td class="paramname">owner</td><td>The player </td></tr>
+    <tr><td class="paramname">ia_override</td><td>If the AI should play instead of the player </td></tr>
+    <tr><td class="paramname">init</td><td>Initialization function </td></tr>
+    <tr><td class="paramname">address</td><td>Server adress </td></tr>
+    <tr><td class="paramname">port</td><td>Server port </td></tr>
   </table>
   </dd>
 </dl>
@@ -184,12 +184,12 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Exécute le prochain tour de jeu de la connexion réseau. </p>
+<p>Execute the next turn of the network game Exécute le prochain tour de jeu de la connexion réseau. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">game</td><td>La partie </td></tr>
-    <tr><td class="paramname">me</td><td>La cellule du joueur </td></tr>
-    <tr><td class="paramname">state</td><td>L'état de la partie </td></tr>
+    <tr><td class="paramname">game</td><td>The game </td></tr>
+    <tr><td class="paramname">me</td><td>The player </td></tr>
+    <tr><td class="paramname">state</td><td>State of the game </td></tr>
   </table>
   </dd>
 </dl>

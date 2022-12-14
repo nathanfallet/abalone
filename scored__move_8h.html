@@ -74,7 +74,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Gestion du score des mouvements.  
+<p>Management of movement's score.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &quot;<a class="el" href="move_8h_source.html">move.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="cell_8h_source.html">cell.h</a>&quot;</code><br />
@@ -84,50 +84,33 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
-<tr class="memitem:a0c64b28e777ce6dc8cde0b146d65c218"><td class="memItemLeft" align="right" valign="top">typedef unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="scored__move_8h.html#a0c64b28e777ce6dc8cde0b146d65c218">ScoredMove</a></td></tr>
-<tr class="memdesc:a0c64b28e777ce6dc8cde0b146d65c218"><td class="mdescLeft">&#160;</td><td class="mdescRight">Représente un déplacement associé à un score.  <a href="scored__move_8h.html#a0c64b28e777ce6dc8cde0b146d65c218">More...</a><br /></td></tr>
+<tr class="memitem:a0c64b28e777ce6dc8cde0b146d65c218"><td class="memItemLeft" align="right" valign="top"><a id="a0c64b28e777ce6dc8cde0b146d65c218"></a>
+typedef unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="scored__move_8h.html#a0c64b28e777ce6dc8cde0b146d65c218">ScoredMove</a></td></tr>
+<tr class="memdesc:a0c64b28e777ce6dc8cde0b146d65c218"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represent a deplacement asociated to a score A move associated with a score is represented with an integer on 64-bits, with 16 least significant bits for the move, the next 16 bits for the start move, and the 32 most significant bits for the score. <br /></td></tr>
 <tr class="separator:a0c64b28e777ce6dc8cde0b146d65c218"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:adca98ab2406da13d68d198a6dbceb3d4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="scored__move_8h.html#a0c64b28e777ce6dc8cde0b146d65c218">ScoredMove</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="scored__move_8h.html#adca98ab2406da13d68d198a6dbceb3d4">scored_move_new</a> (<a class="el" href="move_8h.html#ab9f77aa389af7f0da89bdcb6ae41a897">Move</a> move, <a class="el" href="move_8h.html#ab9f77aa389af7f0da89bdcb6ae41a897">Move</a> root, int score)</td></tr>
-<tr class="memdesc:adca98ab2406da13d68d198a6dbceb3d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Crée un nouveau déplacement associé à un score et sauvegarde le déplacement de départ.  <a href="scored__move_8h.html#adca98ab2406da13d68d198a6dbceb3d4">More...</a><br /></td></tr>
+<tr class="memdesc:adca98ab2406da13d68d198a6dbceb3d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new move associated with a score et save the start move.  <a href="scored__move_8h.html#adca98ab2406da13d68d198a6dbceb3d4">More...</a><br /></td></tr>
 <tr class="separator:adca98ab2406da13d68d198a6dbceb3d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a12c2003e0919af5304b285dfa6a5d7ae"><td class="memItemLeft" align="right" valign="top"><a class="el" href="move_8h.html#ab9f77aa389af7f0da89bdcb6ae41a897">Move</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="scored__move_8h.html#a12c2003e0919af5304b285dfa6a5d7ae">scored_move_move</a> (<a class="el" href="scored__move_8h.html#a0c64b28e777ce6dc8cde0b146d65c218">ScoredMove</a> scored_move)</td></tr>
-<tr class="memdesc:a12c2003e0919af5304b285dfa6a5d7ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Renvoi le déplacement associé au score.  <a href="scored__move_8h.html#a12c2003e0919af5304b285dfa6a5d7ae">More...</a><br /></td></tr>
+<tr class="memdesc:a12c2003e0919af5304b285dfa6a5d7ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the move associated with a the score.  <a href="scored__move_8h.html#a12c2003e0919af5304b285dfa6a5d7ae">More...</a><br /></td></tr>
 <tr class="separator:a12c2003e0919af5304b285dfa6a5d7ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a391be547829d80583eed26b0b799f532"><td class="memItemLeft" align="right" valign="top"><a class="el" href="move_8h.html#ab9f77aa389af7f0da89bdcb6ae41a897">Move</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="scored__move_8h.html#a391be547829d80583eed26b0b799f532">scored_move_root</a> (<a class="el" href="scored__move_8h.html#a0c64b28e777ce6dc8cde0b146d65c218">ScoredMove</a> scored_move)</td></tr>
-<tr class="memdesc:a391be547829d80583eed26b0b799f532"><td class="mdescLeft">&#160;</td><td class="mdescRight">Renvoi le déplacement de départ.  <a href="scored__move_8h.html#a391be547829d80583eed26b0b799f532">More...</a><br /></td></tr>
+<tr class="memdesc:a391be547829d80583eed26b0b799f532"><td class="mdescLeft">&#160;</td><td class="mdescRight">Renvoi The starting move.  <a href="scored__move_8h.html#a391be547829d80583eed26b0b799f532">More...</a><br /></td></tr>
 <tr class="separator:a391be547829d80583eed26b0b799f532"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a32928ced64e427560cbb194864da366e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="scored__move_8h.html#a32928ced64e427560cbb194864da366e">scored_move_score</a> (<a class="el" href="scored__move_8h.html#a0c64b28e777ce6dc8cde0b146d65c218">ScoredMove</a> scored_move)</td></tr>
-<tr class="memdesc:a32928ced64e427560cbb194864da366e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Renvoi le score associé au déplacement.  <a href="scored__move_8h.html#a32928ced64e427560cbb194864da366e">More...</a><br /></td></tr>
+<tr class="memdesc:a32928ced64e427560cbb194864da366e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the score associated with the move.  <a href="scored__move_8h.html#a32928ced64e427560cbb194864da366e">More...</a><br /></td></tr>
 <tr class="separator:a32928ced64e427560cbb194864da366e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1fa412b56a742e2e995428ca8dc6a154"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="scored__move_8h.html#a1fa412b56a742e2e995428ca8dc6a154">scored_move_compute</a> (<a class="el" href="cell_8h.html#a53efbb3b59542e13799bdf1fd8607c44">Cell</a> me, <a class="el" href="board_8h.html#abf0efda810e3e4bfc5686b70abe6bfb2">Board</a> board)</td></tr>
-<tr class="memdesc:a1fa412b56a742e2e995428ca8dc6a154"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calcul le score d'un déplacement.  <a href="scored__move_8h.html#a1fa412b56a742e2e995428ca8dc6a154">More...</a><br /></td></tr>
+<tr class="memdesc:a1fa412b56a742e2e995428ca8dc6a154"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the score of a move.  <a href="scored__move_8h.html#a1fa412b56a742e2e995428ca8dc6a154">More...</a><br /></td></tr>
 <tr class="separator:a1fa412b56a742e2e995428ca8dc6a154"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Gestion du score des mouvements. </p>
-<p>Gestion du score des mouvements, avec leur calcul. </p>
-</div><h2 class="groupheader">Typedef Documentation</h2>
-<a id="a0c64b28e777ce6dc8cde0b146d65c218"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0c64b28e777ce6dc8cde0b146d65c218">&#9670;&nbsp;</a></span>ScoredMove</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef unsigned long <a class="el" href="scored__move_8h.html#a0c64b28e777ce6dc8cde0b146d65c218">ScoredMove</a></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Représente un déplacement associé à un score. </p>
-<p>Un déplacement associé à un score est représenté par un entier sur 64 bits, avec les 16 bits de poids faible pour le déplacement, les 16 bits suivants pour le déplacement de départ, et les 32 bits de poids fort pour le score. </p>
-
-</div>
-</div>
-<h2 class="groupheader">Function Documentation</h2>
+<div class="textblock"><p>Management of movement's score. </p>
+<p>Management of movement's score, with calcul. </p>
+</div><h2 class="groupheader">Function Documentation</h2>
 <a id="a1fa412b56a742e2e995428ca8dc6a154"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1fa412b56a742e2e995428ca8dc6a154">&#9670;&nbsp;</a></span>scored_move_compute()</h2>
 
@@ -154,16 +137,16 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Calcul le score d'un déplacement. </p>
+<p>Compute the score of a move. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">scored_move</td><td>Le déplacement associé au score </td></tr>
-    <tr><td class="paramname">me</td><td>Le joueur </td></tr>
-    <tr><td class="paramname">board</td><td>Le plateau </td></tr>
+    <tr><td class="paramname">scored_move</td><td>The move associated with score </td></tr>
+    <tr><td class="paramname">me</td><td>The player </td></tr>
+    <tr><td class="paramname">board</td><td>The plate </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Le score </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The score </dd></dl>
 
 </div>
 </div>
@@ -183,14 +166,14 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Renvoi le déplacement associé au score. </p>
+<p>Return the move associated with a the score. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">scored_move</td><td>Le déplacement associé au score </td></tr>
+    <tr><td class="paramname">scored_move</td><td>The move associated with the score </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Le déplacement </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The move </dd></dl>
 
 </div>
 </div>
@@ -226,16 +209,16 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Crée un nouveau déplacement associé à un score et sauvegarde le déplacement de départ. </p>
+<p>Create a new move associated with a score et save the start move. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">move</td><td>Le déplacement </td></tr>
-    <tr><td class="paramname">root</td><td>Le déplacement de départ </td></tr>
-    <tr><td class="paramname">score</td><td>Le score </td></tr>
+    <tr><td class="paramname">move</td><td>The movement </td></tr>
+    <tr><td class="paramname">root</td><td>The starting move </td></tr>
+    <tr><td class="paramname">score</td><td>The score </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Le déplacement associé au score </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The move associated with the score </dd></dl>
 
 </div>
 </div>
@@ -255,14 +238,14 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Renvoi le déplacement de départ. </p>
+<p>Renvoi The starting move. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">scored_move</td><td>Le déplacement associé au score </td></tr>
+    <tr><td class="paramname">scored_move</td><td>The move associated with the score </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Le déplacement de départ </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The starting move </dd></dl>
 
 </div>
 </div>
@@ -282,14 +265,14 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Renvoi le score associé au déplacement. </p>
+<p>Return the score associated with the move. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">scored_move</td><td>Le déplacement associé au score </td></tr>
+    <tr><td class="paramname">scored_move</td><td>The move associated with the score </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Le score </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The score </dd></dl>
 
 </div>
 </div>
