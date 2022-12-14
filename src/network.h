@@ -3,9 +3,9 @@
 
 /**
  * \file network.h
- * \brief Gestion du réseau
+ * \brief Network management
  * 
- * Gestion du réseau, et de la communication client/serveur.
+ * Network management and comunication server/client
  */
 
 #include "game.h"
@@ -13,20 +13,20 @@
 #include "state.h"
 
 /**
- * \brief Initialise la connexion réseau
- * \param owner La cellule du joueur
- * \param ia_override Si l'IA doit être désactivée
- * \param init La fonction d'initialisation
- * \param address L'adresse du serveur
- * \param port Le port du serveur
+ * \brief Initialize game in network mode
+ * \param owner  The player
+ * \param ia_override If the AI should play instead of the player
+ * \param init Initialization function 
+ * \param address Server adress
+ * \param port Server port
  */
 void network_init(Cell owner, int ia_override, void (*init)(Cell owner, int ia_override, void (*refresh_opponent)(Game *game, Cell me, State state), char address[ADDRESS_LENGTH], int port), char address[ADDRESS_LENGTH], int port);
 
 /**
- * \brief Exécute le prochain tour de jeu de la connexion réseau
- * \param game La partie
- * \param me La cellule du joueur
- * \param state L'état de la partie
+ * \brief Execute the next turn of the network game Exécute le prochain tour de jeu de la connexion réseau
+ * \param game The game
+ * \param me The player
+ * \param state State of the game
  */
 void network_update(Game *game, Cell me, State state);
 

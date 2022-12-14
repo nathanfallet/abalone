@@ -3,9 +3,9 @@
 
 /**
  * \file scored_move.h
- * \brief Gestion du score des mouvements
+ * \brief Management of movement's score
  * 
- * Gestion du score des mouvements, avec leur calcul.
+ * Management of movement's score, with calcul.
  */
 
 #include "move.h"
@@ -13,51 +13,50 @@
 #include "constants.h"
 
 /**
- * \brief Représente un déplacement associé à un score
- * 
- * Un déplacement associé à un score est représenté par un entier sur 64 bits,
- * avec les 16 bits de poids faible pour le déplacement,
- * les 16 bits suivants pour le déplacement de départ,
- * et les 32 bits de poids fort pour le score.
+ * \brief Represent a deplacement asociated to a score 
+ *  A move associated with a score is represented with an integer on 64-bits,
+ *  with 16 least significant bits for the move,
+ * the next 16 bits for the start move, 
+ * and the 32 most significant bits for the score.
  */
 typedef unsigned long ScoredMove;
 
 /**
- * \brief Crée un nouveau déplacement associé à un score et sauvegarde le déplacement de départ
- * \param move Le déplacement
- * \param root Le déplacement de départ
- * \param score Le score
- * \return Le déplacement associé au score
+ * \brief Create a new move associated with a score et save the start move. 
+ * \param move The movement
+ * \param root The starting move
+ * \param score The score
+ * \return The move associated with the score
  */
 ScoredMove scored_move_new(Move move, Move root, int score);
 
 /**
- * \brief Renvoi le déplacement associé au score
- * \param scored_move Le déplacement associé au score
- * \return Le déplacement
+ * \brief Return the move associated with a the score 
+ * \param scored_move The move associated with the score 
+ * \return The move
  */
 Move scored_move_move(ScoredMove scored_move);
 
 /**
- * \brief Renvoi le déplacement de départ
- * \param scored_move Le déplacement associé au score
- * \return Le déplacement de départ
+ * \brief Renvoi The starting move 
+ * \param scored_move The move associated with the score
+ * \return The starting move
  */
 Move scored_move_root(ScoredMove scored_move);
 
 /**
- * \brief Renvoi le score associé au déplacement
- * \param scored_move Le déplacement associé au score
- * \return Le score
+ * \brief Return the score associated with the move
+ * \param scored_move The move associated with the score
+ * \return The score
  */
 int scored_move_score(ScoredMove scored_move);
 
 /**
- * \brief Calcul le score d'un déplacement
- * \param scored_move Le déplacement associé au score
- * \param me Le joueur
- * \param board Le plateau
- * \return Le score
+ * \brief Compute the score of a move 
+ * \param scored_move The move associated with score
+ * \param me The player
+ * \param board The plate
+ * \return The score
  */
 int scored_move_compute(Cell me, Board board);
 

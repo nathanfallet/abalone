@@ -122,7 +122,7 @@ void network_update(Game *game, Cell me, State state) {
             if (move_apply(result, me, game->board, 0) == 0) {
                 result = MOVE_NONE;
             }
-        } while (game->fdclient == -1 || result == MOVE_NONE);
+        } while (game->fdclient == -1 || bytes < 6 || result == MOVE_NONE);
         game_turn(game, result);
     }
 }
