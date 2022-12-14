@@ -50,7 +50,7 @@ Game *game_new(Cell owner, int ia_override);
 void game_turn(Game *game, Move move);
 
 /**
- * \brief Star game
+ * \brief Start game
  * \param game The game
  */
 void game_start(Game *game);

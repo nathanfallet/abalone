@@ -96,7 +96,7 @@
 /**
  * \brief Sleep time of IA
  */
-#define IA_SLEEP 3
+#define IA_SLEEP 1
 
 /**
  * \brief Initialization constant (none)
