@@ -49,7 +49,7 @@ void network_connect(Game *game) {
         }
     } else {
         // We are the client
-        game->fdclient = socket(AF_INET, SOCK_STREAM, 0);
+        game->fdclient = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
         if (game->fdclient == -1) {
             printf("Could not create socket: %s\n", strerror(errno));
             exit(1);
