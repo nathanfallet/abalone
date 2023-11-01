@@ -1,4 +1,4 @@
-# Abalone {#mainpage}
+# abalone {#mainpage}
 
 ## Project structure
 
